@@ -40,9 +40,9 @@ else
     if s:uname == "Darwin\n"
         " in mac-terminal
         silent exec 'language en_US'
-    else
-        " in linux-terminal
-        silent exec 'language en_US.utf8'
+    " else
+    "     " in linux-terminal
+    "     silent exec 'language en_US.utf8'
     endif
 endif
 
