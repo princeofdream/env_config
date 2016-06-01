@@ -9,11 +9,10 @@ call vundle#rc(cwd.'/vimfiles/bundle/')
 
 " =======================================================
 
-"Plugin 'princeofdream/vim_plugins'
+Plugin 'princeofdream/vim_plugins'
 Plugin 'princeofdream/vim-colors-solarized'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'upsuper/vim-colorschemes'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'morhetz/gruvbox'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
