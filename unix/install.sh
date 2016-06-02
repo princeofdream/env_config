@@ -1,7 +1,10 @@
 #!/bin/bash
 
 export ORIGINAL_PATH=`pwd`
+VIMFILES_PATH=$ORIGINAL_PATH/vimfiles
+BUNDLE_PATH=$VIMFILES_PATH/bundle
 
+echo "Current Path: $ORIGINAL_PATH"
 echo "Check and install Vundle."
 
 # if we don't have folder vimfiles, create it.
@@ -28,6 +31,27 @@ vim -u .vimrc.mini --cmd "set rtp=./vimfiles,\$VIMRUNTIME,./vimfiles/after" +Plu
 
 # go back
 cd ${ORIGINAL_PATH}
+
+
+# Set pathogen
+mkdir -p "$VIMFILES_PATH/autoload"
+cd "$VIMFILES_PATH/autoload"
+if [ -f "$VIMFILES_PATH/bundle/vim-pathogen/autoload/pathogen.vim" ]
+then
+  ln -sf ../bundle/vim-pathogen/autoload/pathogen.vim ./
+fi
+cd ${ORIGINAL_PATH}
+
+# link vim_plugins out to enable it by default
+cd $BUNDLE_PATH
+ALL_EXT_PLUGINS=`ls vim_plugins`
+for ext_plugins in $ALL_EXT_PLUGINS;
+do
+  ln -sf vim_plugins/$ext_plugins
+done
+
+cd ${ORIGINAL_PATH}
+
 
 #
 echo "|"

@@ -8,10 +8,12 @@ exec 'set rtp+=' . fnameescape ( cwd . '/vimfiles/bundle/Vundle.vim/' )
 call vundle#rc(cwd.'/vimfiles/bundle/')
 
 " =======================================================
+Plugin 'gmarik/Vundle.vim'
+Plugin 'tpope/vim-pathogen'
 
 Plugin 'princeofdream/vim_plugins'
 Plugin 'princeofdream/vim-colors-solarized'
-Plugin 'gmarik/Vundle.vim'
+
 Plugin 'upsuper/vim-colorschemes'
 Plugin 'morhetz/gruvbox'
 Plugin 'kien/ctrlp.vim'

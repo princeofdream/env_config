@@ -2,6 +2,8 @@
 " basic
 "/////////////////////////////////////////////////////////////////////////////
 
+call pathogen#infect()
+
 set nocompatible " be iMproved, required
 
 function! OSX()
