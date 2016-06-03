@@ -11,13 +11,20 @@ echo "Check and install Vundle."
 if [ ! -d "./vimfiles/" ]; then
     mkdir ./vimfiles/
 fi
-cd ./vimfiles/
+cd $VIMFILES_PATH
 
 # if we don't have bundle, create it.
 if [ ! -d "./bundle/" ]; then
     mkdir ./bundle/
 fi
-cd ./bundle/
+cd $BUNDLE_PATH
+
+# remove link vim_plugins out to enable it by default
+ALL_EXT_PLUGINS=`ls vim_plugins`
+for ext_plugins in $ALL_EXT_PLUGINS;
+do
+  rm $ext_plugins
+done
 
 # download or update vundle in ./vimfiles/bundle/
 if [ ! -d "./Vundle.vim/" ]; then
@@ -49,7 +56,11 @@ for ext_plugins in $ALL_EXT_PLUGINS;
 do
   ln -sf vim_plugins/$ext_plugins
 done
+cd ${ORIGINAL_PATH}
 
+
+cd $BUNDLE_PATH/YouCompleteMe
+./install --clang-completer --omnisharp-completer
 cd ${ORIGINAL_PATH}
 
 

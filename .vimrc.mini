@@ -37,6 +37,8 @@ Plugin 'groenewege/vim-less'
 Plugin 'wavded/vim-stylus'
 Plugin 'plasticboy/vim-markdown'
 
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'Valloric/YouCompleteMe'
 " =======================================================
 
 filetype plugin indent on " required

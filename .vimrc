@@ -296,11 +296,11 @@ function! g:MyDiff()
     silent execute '!' .  'diff ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3
 endfunction
 
-set cindent shiftwidth=2 " set cindent on to autoinent when editing c/c++ file, with 4 shift width
-set tabstop=2 " set tabstop to 4 characters
+set cindent shiftwidth=4 " set cindent on to autoinent when editing c/c++ file, with 4 shift width
+set tabstop=4 " set tabstop to 4 characters
 set expandtab " set expandtab on, the tab will be change to space automaticaly
 set ve=block " in visual block mode, cursor can be positioned where there is no actual character
-
+set softtabstop=4
 " set Number format to null(default is octal) , when press CTRL-A on number
 " like 007, it would not become 010
 set nf=
@@ -482,14 +482,6 @@ vnoremap > >gv
 " map Up & Down to gj & gk, helpful for wrap text edit
 noremap <Up> gk
 noremap <Down> gj
-
-" TODO: I should write a better one, make it as plugin exvim/swapword
-" VimTip 329: A map for swapping words
-" http://vim.sourceforge.net/tip_view.php?tip_id=
-" Then when you put the cursor on or in a word, press "\sw", and
-" the word will be swapped with the next word.  The words may
-" even be separated by punctuation (such as "abc = def").
-nnoremap <silent> <leader>sw "_yiw:s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/<cr><c-o>
 
 "/////////////////////////////////////////////////////////////////////////////
 " local setup
