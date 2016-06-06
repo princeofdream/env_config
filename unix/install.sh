@@ -23,7 +23,10 @@ cd $BUNDLE_PATH
 ALL_EXT_PLUGINS=`ls vim_plugins`
 for ext_plugins in $ALL_EXT_PLUGINS;
 do
-  rm $ext_plugins
+    if [ -f "$ext_plugins" ]
+    then
+        rm $ext_plugins
+    fi
 done
 
 # download or update vundle in ./vimfiles/bundle/
@@ -52,21 +55,41 @@ cd ${ORIGINAL_PATH}
 # link vim_plugins out to enable it by default
 cd $BUNDLE_PATH
 ALL_EXT_PLUGINS=`ls vim_plugins`
+BLACK_LIST="omnicppcomplete \
+	list"
+link_flag="yes"
 for ext_plugins in $ALL_EXT_PLUGINS;
 do
-  ln -sf vim_plugins/$ext_plugins
+    for b_list in $BLACK_LIST
+    do
+        if [ "$ext_plugins" == "$b_list" ]
+        then
+            link_flag="no"
+            break
+        fi
+    done
+    if [ "$link_flag" == "yes" ]
+    then
+        # echo "ln -sf vim_plugins/$ext_plugins"
+        ln -sf vim_plugins/$ext_plugins
+    else
+        link_flag="yes"
+    fi
+
 done
 cd ${ORIGINAL_PATH}
 
 
 cd $BUNDLE_PATH/YouCompleteMe
-./install --clang-completer --omnisharp-completer
+#./install.py --all
+./install.py --clang-completer \
+    # --omnisharp-completer
 cd ${ORIGINAL_PATH}
 
 
 #
-echo "|"
-echo "exVim installed successfully!"
-echo "|"
+echo "|					|"
+echo "|	exVim installed successfully!	|"
+echo "|					|"
 echo "You can run 'sh unix/gvim.sh' to preview exVim."
 echo "You can also run 'sh unix/replace-my-vim.sh' to replace exVim with your Vim."
