@@ -23,7 +23,7 @@ cd $BUNDLE_PATH
 ALL_EXT_PLUGINS=`ls vim_plugins`
 for ext_plugins in $ALL_EXT_PLUGINS;
 do
-    if [ -f "$ext_plugins" ]
+    if [ -d "$ext_plugins" ]
     then
         rm $ext_plugins
     fi
