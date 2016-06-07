@@ -38,7 +38,8 @@ Plugin 'wavded/vim-stylus'
 Plugin 'plasticboy/vim-markdown'
 
 Plugin 'tmhedberg/SimpylFold'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
+Plugin 'Rip-Rip/clang_complete'
 " =======================================================
 
 filetype plugin indent on " required

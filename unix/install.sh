@@ -56,6 +56,7 @@ cd ${ORIGINAL_PATH}
 cd $BUNDLE_PATH
 ALL_EXT_PLUGINS=`ls vim_plugins`
 BLACK_LIST="omnicppcomplete \
+    vim-autocomplpop
 	list"
 link_flag="yes"
 for ext_plugins in $ALL_EXT_PLUGINS;
@@ -82,7 +83,7 @@ cd ${ORIGINAL_PATH}
 
 cd $BUNDLE_PATH/YouCompleteMe
 #./install.py --all
-./install.py --clang-completer \
+# ./install.py --clang-completer \
     # --omnisharp-completer
 cd ${ORIGINAL_PATH}
 
