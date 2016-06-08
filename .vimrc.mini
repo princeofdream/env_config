@@ -46,6 +46,9 @@ Plugin 'ggreer/the_silver_searcher'
 " Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
+Plugin 'powerline/powerline'
+" Plugin 'Lokaltog/vim-powerline'
+Plugin 'powerline/fonts'
 " =======================================================
 
 filetype plugin indent on " required
