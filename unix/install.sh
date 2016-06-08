@@ -28,6 +28,7 @@ do
         rm $ext_plugins
     fi
 done
+rm powerline-vim
 
 # download or update vundle in ./vimfiles/bundle/
 if [ ! -d "./Vundle.vim/" ]; then
