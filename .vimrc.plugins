@@ -475,6 +475,9 @@ let g:ackprg = 'ag --vimgrep'
 Plugin 'sjl/gundo.vim'
 nnoremap <F5> :GundoToggle<CR>
 
+Plugin 'dyng/ctrlsf.vim'
+nnoremap <F6> :CtrlSFToggle<CR>
+
 "}}}
 
 " TEST {{{

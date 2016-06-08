@@ -50,6 +50,7 @@ Plugin 'powerline/powerline'
 " Plugin 'Lokaltog/vim-powerline'
 Plugin 'powerline/fonts'
 Plugin 'sjl/gundo.vim'
+Plugin 'dyng/ctrlsf.vim'
 " =======================================================
 
 filetype plugin indent on " required
