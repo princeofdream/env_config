@@ -43,6 +43,9 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'ggreer/the_silver_searcher'
+" Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
 " =======================================================
 
 filetype plugin indent on " required
