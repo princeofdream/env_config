@@ -298,7 +298,7 @@ endfunction
 
 set cindent shiftwidth=4 " set cindent on to autoinent when editing c/c++ file, with 4 shift width
 set tabstop=4 " set tabstop to 4 characters
-set expandtab " set expandtab on, the tab will be change to space automaticaly
+" set expandtab " set expandtab on, the tab will be change to space automaticaly
 set ve=block " in visual block mode, cursor can be positioned where there is no actual character
 set softtabstop=4
 " set Number format to null(default is octal) , when press CTRL-A on number
