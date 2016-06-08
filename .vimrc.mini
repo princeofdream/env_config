@@ -24,6 +24,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 Plugin 'mbbill/undotree'
 Plugin 'godlygeek/tabular'
+" Plugin 'easymotion/vim-easymotion'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/LargeFile'
 Plugin 'ntpeters/vim-better-whitespace'
@@ -51,6 +52,8 @@ Plugin 'powerline/powerline'
 Plugin 'powerline/fonts'
 Plugin 'sjl/gundo.vim'
 Plugin 'dyng/ctrlsf.vim'
+Plugin 'chrisbra/NrrwRgn'
+Plugin 'msanders/snipmate.vim'
 " =======================================================
 
 filetype plugin indent on " required
