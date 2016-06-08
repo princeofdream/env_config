@@ -88,6 +88,9 @@ cd $BUNDLE_PATH/YouCompleteMe
     # --omnisharp-completer
 cd ${ORIGINAL_PATH}
 
+cd $BUNDLE_PATH
+ln -sf powerline/powerline/bindings/vim powerline-vim
+cd ${ORIGINAL_PATH}
 
 #
 sh ./unix/Info.sh
