@@ -54,6 +54,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'chrisbra/NrrwRgn'
 Plugin 'msanders/snipmate.vim'
+Plugin 'fholgado/minibufexpl.vim'
 " =======================================================
 
 filetype plugin indent on " required
