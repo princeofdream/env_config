@@ -62,6 +62,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'ervandew/supertab'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'davidhalter/jedi'
 " =======================================================
 
 filetype plugin indent on " required
