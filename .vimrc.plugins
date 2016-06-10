@@ -475,8 +475,10 @@ let g:ackprg = 'ag --vimgrep'
 Plugin 'sjl/gundo.vim'
 nnoremap <F5> :GundoToggle<CR>
 
-Plugin 'dyng/ctrlsf.vim'
-nnoremap <F6> :CtrlSFToggle<CR>
+" Plugin 'dyng/ctrlsf.vim'
+" nnoremap <F6> :CtrlSFToggle<CR>
+" nnoremap <F6> :UndotreeToggle<CR>
+
 
 set completeopt=menu,longest
 
@@ -484,6 +486,9 @@ set completeopt=menu,longest
 " let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline#extensions#tabline#left_alt_sep = '|'
+
+Plugin 'ervandew/supertab'
+let g:SuperTabDefaultCompletionType="context"
 
 "}}}
 
