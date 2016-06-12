@@ -127,6 +127,7 @@ JRE_HOME=$JAVA_HOME/jre
 CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
 
 
+PATH_TMP=$PATH
 
 PATH+=":/sbin:/usr/sbin"
 
@@ -136,7 +137,13 @@ PATH+=":$HOME/Enviroment/env_rootfs/bin/sbin"
 PATH+=":$HOME/Enviroment/env_rootfs/bin/bin"
 PATH+=":$HOME/Enviroment/env_rootfs/bin/man"
 
-PATH+=":$HOME/rootfs/bin"
+PATH+=":$HOME/Enviroment/tmp_rootfs/bin"
+PATH+=":$HOME/Enviroment/tmp_rootfs/bin/etc"
+PATH+=":$HOME/Enviroment/tmp_rootfs/bin/sbin"
+PATH+=":$HOME/Enviroment/tmp_rootfs/bin/bin"
+PATH+=":$HOME/Enviroment/tmp_rootfs/bin/man"
+
+PATH+="$PATH_TMP"
 
 
 PATH+=":$HOME/Enviroment/toolchain/toolchain-arm_cortex-a9+vfpv3_gcc-4.8-linaro_eglibc-2.19_eabi/bin"
@@ -155,8 +162,8 @@ PATH+=":$HOME/Enviroment/Android_Env/android-studio/bin"
 ##JAVA
 PATH="$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH"
 
-#s3c2451
-PATH+=":$HOME/share_projects/2451/opt/Embedsky/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/tq-linaro-toolchain/bin"
+# s3c2451
+# PATH+=":$HOME/share_projects/2451/opt/Embedsky/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/tq-linaro-toolchain/bin"
 
 
 #PS1='\u@\h:\[\033[01;36m\]\w\[\033[00m\] $\n'
@@ -177,9 +184,10 @@ fi
 alias sudo='sudo env PATH=$PATH'
 
 ## powerline for bash
-# POWERLINE_BASH_CONTINUATION=1
-# POWERLINE_BASH_SELECT=1
-# . $HOME/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh
+powerline-daemon -q
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
+. $HOME/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh
 
 TERM="screen-256color"
 TMUX_POWERLINE_SEG_WEATHER_LOCATION=2161838
