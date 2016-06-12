@@ -9,4 +9,5 @@ rm -rf ~/.vim
 cp -r vimfiles ~/.vim
 
 cp .tmux.conf ~/
+cp .bashrc ~/
 
