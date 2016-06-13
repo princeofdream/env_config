@@ -184,10 +184,39 @@ fi
 alias sudo='sudo env PATH=$PATH'
 
 ## powerline for bash
-powerline-daemon -q
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
-. $HOME/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh
+# powerline-daemon -q
+# POWERLINE_BASH_CONTINUATION=1
+# POWERLINE_BASH_SELECT=1
+# . $HOME/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh
+
+function _update_ps1() {
+    PS1="$(~/powerline-shell.py $? 2> /dev/null)"
+}
+
+# for bash
+if [ "$TERM" != "linux" ]; then
+	PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
+
+# for zsh
+# function powerline_precmd() {
+#     PS1="$(~/powerline-shell.py $? --shell zsh 2> /dev/null)"
+# }
+
+# function install_powerline_precmd() {
+#     for s in "${precmd_functions[@]}"; do
+#         if [ "$s" = "powerline_precmd" ]; then
+#             return
+#         fi
+#     done
+#     precmd_functions+=(powerline_precmd)
+# }
+
+#     if [ "$TERM" != "linux" ]; then
+#         install_powerline_precmd
+#     fi
+
+
 
 TERM="screen-256color"
 TMUX_POWERLINE_SEG_WEATHER_LOCATION=2161838

@@ -63,6 +63,7 @@ Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'ervandew/supertab'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'davidhalter/jedi'
+Plugin 'milkbikis/powerline-shell'
 " =======================================================
 
 filetype plugin indent on " required

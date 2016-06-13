@@ -1,0 +1,56 @@
+diff --git a/config.py.dist b/config.py.dist
+index a1e7627..d191ee9 100644
+--- a/config.py.dist
++++ b/config.py.dist
+@@ -42,15 +42,18 @@ SEGMENTS = [
+ # Show the current fossil branch and status
+     'fossil',
+ 
+-# Show number of running jobs
+-    'jobs',
+-
+ # Show the last command's exit code if it was non-zero
+ #    'exit_code',
+ 
+ # Shows a '#' if the current user is root, '$' otherwise
+ # Also, changes color if the last command exited with a non-zero error code
+     'root',
++
++# Show number of running jobs
++    'jobs',
++
++# Start a new line
++	'idle',
+ ]
+ 
+ # Change the colors used to draw individual segments in your prompt
+diff --git a/segments/idle.py b/segments/idle.py
+new file mode 100644
+index 0000000..9fd7c57
+--- /dev/null
++++ b/segments/idle.py
+@@ -0,0 +1,9 @@
++def add_idle_segment(powerline):
++    idle_indicators = {
++        'bash': '\n ',
++        'zsh': ' \n ',
++        'bare': ' \n ',
++    }
++    fg = Color.PATH_FG
++    bg = Color.PATH_BG
++    powerline.append(idle_indicators[powerline.args.shell], fg, bg)
+diff --git a/themes/default.py b/themes/default.py
+index 08b1ff4..c6feb75 100644
+--- a/themes/default.py
++++ b/themes/default.py
+@@ -29,8 +29,8 @@ class DefaultColor:
+     REPO_DIRTY_BG = 161  # pink/red
+     REPO_DIRTY_FG = 15  # white
+ 
+-    JOBS_FG = 39
+-    JOBS_BG = 238
++    JOBS_FG = 230
++    JOBS_BG = 166
+ 
+     CMD_PASSED_BG = 236
+     CMD_PASSED_FG = 15
