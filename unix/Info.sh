@@ -12,9 +12,8 @@ echo " | sudo https://github.com/ggreer/the_silver_searcher                     
 echo " | for ex. Debian :                                                                 | "
 echo " | apt-get install silversearcher-ag                                                | "
 echo " | ================================================================================ | "
-echo " | Align.vba                                                                        | "
-echo " | vim ~/.vim/bundle/vim_plugins/Align/Align.vba                                    | "
-echo " | :%so                                                                             | "
+echo " | yum install python-pip                                                           | "
+echo " | pip install argparse                                                             | "
 echo " | ================================================================================ | "
 
 echo "You can run 'sh unix/gvim.sh' to preview exVim."

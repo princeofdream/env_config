@@ -1,8 +1,24 @@
 diff --git a/config.py.dist b/config.py.dist
-index a1e7627..d191ee9 100644
+index a1e7627..e810d80 100644
 --- a/config.py.dist
 +++ b/config.py.dist
-@@ -42,15 +42,18 @@ SEGMENTS = [
+@@ -13,12 +13,12 @@ SEGMENTS = [
+ # Show current virtual environment (see http://www.virtualenv.org/)
+     'virtual_env',
+ 
+-# Show the current user's username as in ordinary prompts
+-    'username',
+-
+ # Show the machine's hostname. Mostly used when ssh-ing into other machines
+     'hostname',
+ 
++# Show the current user's username as in ordinary prompts
++    'username',
++
+ # Show a padlock when ssh-ing from another machine
+     'ssh',
+ 
+@@ -42,15 +42,19 @@ SEGMENTS = [
  # Show the current fossil branch and status
      'fossil',
  
@@ -19,8 +35,9 @@ index a1e7627..d191ee9 100644
 +# Show number of running jobs
 +    'jobs',
 +
-+# Start a new line
++# Add new line in command window
 +	'idle',
++
  ]
  
  # Change the colors used to draw individual segments in your prompt
@@ -40,9 +57,20 @@ index 0000000..9fd7c57
 +    bg = Color.PATH_BG
 +    powerline.append(idle_indicators[powerline.args.shell], fg, bg)
 diff --git a/themes/default.py b/themes/default.py
-index 08b1ff4..c6feb75 100644
+index 08b1ff4..3a6b074 100644
 --- a/themes/default.py
 +++ b/themes/default.py
+@@ -7,8 +7,8 @@ class DefaultColor:
+     USERNAME_BG = 240
+     USERNAME_ROOT_BG = 124
+ 
+-    HOSTNAME_FG = 250
+-    HOSTNAME_BG = 238
++    HOSTNAME_FG = 0
++    HOSTNAME_BG = 148
+ 
+     HOME_SPECIAL_DISPLAY = True
+     HOME_BG = 31  # blueish
 @@ -29,8 +29,8 @@ class DefaultColor:
      REPO_DIRTY_BG = 161  # pink/red
      REPO_DIRTY_FG = 15  # white
