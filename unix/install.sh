@@ -97,6 +97,8 @@ cd ${ORIGINAL_PATH}
 cd $BUNDLE_PATH
 cp ${ORIGINAL_PATH}/patch/powerline-shell.patch $BUNDLE_PATH/powerline-shell/
 cd $BUNDLE_PATH/powerline-shell
+rm -rf segments/idle.py
+git reset --hard
 patch -p1 < powerline-shell.patch
 python install.py
 cd ${ORIGINAL_PATH}

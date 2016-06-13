@@ -190,12 +190,15 @@ alias sudo='sudo env PATH=$PATH'
 # . $HOME/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh
 
 function _update_ps1() {
-    PS1="$(~/powerline-shell.py $? 2> /dev/null)"
+    PS1="$($HOME/.vim/bundle/powerline-shell/powerline-shell.py $? 2> /dev/null)"
 }
 
 # for bash
-if [ "$TERM" != "linux" ]; then
-	PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+if [ -f "$HOME/.vim/bundle/powerline-shell/powerline-shell.py" ]
+then
+	if [ "$TERM" != "linux" ]; then
+		PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+	fi
 fi
 
 # for zsh

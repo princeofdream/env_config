@@ -14,9 +14,4 @@ sed -i "s/\$WHOAMI/$WHOAMI/" ~/.tmux.conf
 cp .bashrc ~/
 cp .zshrc ~/
 
-# for powerline-shell
-if [ -f "$HOME/.vim/bundle/powerline-shell/powerline-shell.py" ]
-then
-	ln -sf $HOME/.vim/bundle/powerline-shell/powerline-shell.py $HOME/powerline-shell.py
-fi
 
