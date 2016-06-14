@@ -57,7 +57,7 @@ index 0000000..f110948
 +    bg = Color.CMD_LINE_BG
 +    powerline.append(idle_indicators[powerline.args.shell], fg, bg)
 diff --git a/themes/default.py b/themes/default.py
-index 08b1ff4..35fa523 100644
+index 08b1ff4..f7ccd8c 100644
 --- a/themes/default.py
 +++ b/themes/default.py
 @@ -3,20 +3,20 @@ class DefaultColor:
@@ -99,3 +99,13 @@ index 08b1ff4..35fa523 100644
  
      CMD_PASSED_BG = 236
      CMD_PASSED_FG = 15
+@@ -56,6 +56,9 @@ class DefaultColor:
+     VIRTUAL_ENV_BG = 35  # a mid-tone green
+     VIRTUAL_ENV_FG = 00
+ 
++    CMD_LINE_BG=237
++    CMD_LINE_FG=250
++
+ class Color(DefaultColor):
+     """
+     This subclass is required when the user chooses to use 'default' theme.
