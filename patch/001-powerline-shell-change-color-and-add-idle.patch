@@ -80,23 +80,27 @@ index 0000000..3c9ee5e
 +fi
 diff --git a/segments/git_ext.py b/segments/git_ext.py
 new file mode 100644
-index 0000000..24eafcd
+index 0000000..f9186f8
 --- /dev/null
 +++ b/segments/git_ext.py
-@@ -0,0 +1,14 @@
+@@ -0,0 +1,18 @@
 +
 +import os
 +import subprocess
++import string
++import sys
 +
 +def add_git_ext_segment(powerline):
-+    get_info = subprocess.Popen(["/home/vjames/.vim/bundle/powerline-shell/segments/get_git_info.sh",""], stdout=subprocess.PIPE)
-+    branch = get_info.stdout.read()
-+    fg = Color.REPO_CLEAN_FG
-+    bg = Color.REPO_CLEAN_BG
-+    powerline.append(' %s ' % branch, fg, bg)
-+
-+
-+
++	get_info = subprocess.Popen(["/home/vjames/.vim/bundle/powerline-shell/segments/get_git_info.sh",""], stdout=subprocess.PIPE)
++	branch = get_info.stdout.read()
++	g_st = string.find(branch,"*")
++	fg = Color.REPO_CLEAN_FG
++	bg = Color.REPO_CLEAN_BG
++	if g_st >= 0:
++		## can not find * in branch
++		fg = Color.REPO_DIRTY_FG
++		bg = Color.REPO_DIRTY_BG
++	powerline.append(' %s ' % branch, fg, bg)
 +
 diff --git a/segments/idle.py b/segments/idle.py
 new file mode 100644
