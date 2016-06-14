@@ -1,11 +1,5 @@
-commit 773e5359fdd1143a9b0fd8b69fe7d4d5388d1aff
-Author: jin.li <jin.li@nufront.com>
-Date:   Tue Jun 14 23:34:30 2016 +0800
-
-    powershell add ext function
-
 diff --git a/config.py.dist b/config.py.dist
-index a1e7627..f7bfe3f 100644
+index a1e7627..0b841d2 100644
 --- a/config.py.dist
 +++ b/config.py.dist
 @@ -13,12 +13,12 @@ SEGMENTS = [
@@ -24,59 +18,46 @@ index a1e7627..f7bfe3f 100644
  # Show a padlock when ssh-ing from another machine
      'ssh',
  
-@@ -31,7 +31,8 @@ SEGMENTS = [
+@@ -26,12 +26,17 @@ SEGMENTS = [
+ # replaced with ellipsis ('...')
+     'cwd',
+ 
++# Shows a '#' if the current user is root, '$' otherwise
++# Also, changes color if the last command exited with a non-zero error code
++    'root',
++
+ # Show a padlock if the current user has no write access to the current
+ # directory
      'read_only',
  
  # Show the current git branch and status
 -    'git',
 +	# 'git',
-+	'ext_git',
++	'git_ext',
  
  # Show the current mercurial branch and status
      'hg',
-@@ -42,15 +43,19 @@ SEGMENTS = [
+@@ -42,15 +47,15 @@ SEGMENTS = [
  # Show the current fossil branch and status
      'fossil',
  
--# Show number of running jobs
--    'jobs',
--
- # Show the last command's exit code if it was non-zero
- #    'exit_code',
++# Show the last command's exit code if it was non-zero
++#    'exit_code',
++
+ # Show number of running jobs
+     'jobs',
  
- # Shows a '#' if the current user is root, '$' otherwise
- # Also, changes color if the last command exited with a non-zero error code
-     'root',
-+
-+# Show number of running jobs
-+    'jobs',
-+
+-# Show the last command's exit code if it was non-zero
+-#    'exit_code',
 +# Add new line in command window
 +	'idle',
-+
+ 
+-# Shows a '#' if the current user is root, '$' otherwise
+-# Also, changes color if the last command exited with a non-zero error code
+-    'root',
  ]
  
  # Change the colors used to draw individual segments in your prompt
-diff --git a/segments/ext_git.py b/segments/ext_git.py
-new file mode 100644
-index 0000000..3ccbe96
---- /dev/null
-+++ b/segments/ext_git.py
-@@ -0,0 +1,14 @@
-+
-+import os
-+import subprocess
-+
-+def add_ext_git_segment(powerline):
-+    get_info = subprocess.Popen(["/home/vjames/.vim/bundle/powerline-shell/segments/get_git_info.sh",""], stdout=subprocess.PIPE)
-+    branch = get_info.stdout.read()
-+    fg = Color.REPO_CLEAN_FG
-+    bg = Color.REPO_CLEAN_BG
-+    powerline.append(' %s ' % branch, fg, bg)
-+
-+
-+
-+
 diff --git a/segments/get_git_info.sh b/segments/get_git_info.sh
 new file mode 100755
 index 0000000..3c9ee5e
@@ -97,6 +78,26 @@ index 0000000..3c9ee5e
 +		source ~/.vim/bundle/powerline-shell/segments/info.sh
 +	fi
 +fi
+diff --git a/segments/git_ext.py b/segments/git_ext.py
+new file mode 100644
+index 0000000..24eafcd
+--- /dev/null
++++ b/segments/git_ext.py
+@@ -0,0 +1,14 @@
++
++import os
++import subprocess
++
++def add_git_ext_segment(powerline):
++    get_info = subprocess.Popen(["/home/vjames/.vim/bundle/powerline-shell/segments/get_git_info.sh",""], stdout=subprocess.PIPE)
++    branch = get_info.stdout.read()
++    fg = Color.REPO_CLEAN_FG
++    bg = Color.REPO_CLEAN_BG
++    powerline.append(' %s ' % branch, fg, bg)
++
++
++
++
 diff --git a/segments/idle.py b/segments/idle.py
 new file mode 100644
 index 0000000..f110948

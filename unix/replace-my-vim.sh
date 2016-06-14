@@ -13,11 +13,11 @@ cd $BUNDLE_PATH/powerline-shell
 if [ -d "segments" ]
 then
 	echo "Do reset!!!!!"
-	rm -rf segments/idle.py segments/get_git_info.sh segments/info.sh segments/ext_git.py
+	rm -rf segments/idle.py segments/get_git_info.sh segments/info.sh segments/git_ext.py
 	rm -rf config.py*
 	git reset --hard
 	patch -p1 < 001-powerline-shell-change-color-and-add-idle.patch
-	sed -i "s/\$WHOAMI/$WHOAMI/" segments/ext_git.py
+	sed -i "s/\$WHOAMI/$WHOAMI/" segments/git_ext.py
 	chmod a+x segments/get_git_info.sh
 	python install.py
 fi
