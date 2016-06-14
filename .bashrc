@@ -203,12 +203,12 @@ function _update_ps1() {
 }
 
 # for bash
-# if [ -f "$HOME/.vim/bundle/powerline-shell/powerline-shell.py" ]
-# then
-#     if [ "$TERM" != "linux" ]; then
-#         PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-#     fi
-# fi
+if [ -f "$HOME/.vim/bundle/powerline-shell/powerline-shell.py" ]
+then
+	if [ "$TERM" != "linux" ]; then
+		PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+	fi
+fi
 
 # for zsh
 # function powerline_precmd() {
