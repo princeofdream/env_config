@@ -7,15 +7,18 @@ BUNDLE_PATH=$VIMFILES_PATH/bundle
 
 ## for powerline-shell
 cd $BUNDLE_PATH
-cp ${ORIGINAL_PATH}/patch/powerline-shell.patch $BUNDLE_PATH/powerline-shell/
+cp ${ORIGINAL_PATH}/patch/*powerline-shell*.patch $BUNDLE_PATH/powerline-shell/
 cd $BUNDLE_PATH/powerline-shell
-rm -rf segments/idle.py
 if [ -d "segments" ]
 then
 	echo "Do reset!!!!!"
+	rm -rf segments/idle.py segments/get_git_info.sh segments/info.sh segments/ext_git.py
+	rm -rf config.py*
 	git reset --hard
-	patch -p1 < powerline-shell.patch
+	patch -p1 < 001-powerline-shell-change-color-and-add-idle.patch
+	patch -p1 < 002-powerline-shell-add-ext_git.patch
 	python install.py
+	chmod a+x segments/get_git_info.sh
 fi
 cd ${ORIGINAL_PATH}
 
