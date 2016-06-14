@@ -4,6 +4,7 @@ export ORIGINAL_PATH=`pwd`
 VIMFILES_PATH=$ORIGINAL_PATH/vimfiles
 BUNDLE_PATH=$VIMFILES_PATH/bundle
 
+WHOAMI=`whoami`
 
 ## for powerline-shell
 cd $BUNDLE_PATH
@@ -17,8 +18,9 @@ then
 	git reset --hard
 	patch -p1 < 001-powerline-shell-change-color-and-add-idle.patch
 	patch -p1 < 002-powerline-shell-add-ext_git.patch
-	python install.py
+	sed -i "s/\$WHOAMI/$WHOAMI/" segments/ext_git.py
 	chmod a+x segments/get_git_info.sh
+	python install.py
 fi
 cd ${ORIGINAL_PATH}
 
@@ -31,7 +33,6 @@ rm -rf ~/.vim
 cp -r vimfiles ~/.vim
 
 cp .tmux.conf ~/
-WHOAMI=`whoami`
 sed -i "s/\$WHOAMI/$WHOAMI/" ~/.tmux.conf
 cp .bashrc ~/
 cp .zshrc ~/

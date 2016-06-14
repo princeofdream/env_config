@@ -23,7 +23,7 @@ index 0000000..4647601
 +import subprocess
 +
 +def add_ext_git_segment(powerline):
-+    get_info = subprocess.Popen(["/home/lijin/.vim/bundle/powerline-shell/segments/get_git_info.sh",""], stdout=subprocess.PIPE)
++    get_info = subprocess.Popen(["/home/$WHOAMI/.vim/bundle/powerline-shell/segments/get_git_info.sh",""], stdout=subprocess.PIPE)
 +    branch = get_info.stdout.read()
 +    fg = Color.REPO_DIRTY_FG
 +    bg = Color.REPO_DIRTY_BG
