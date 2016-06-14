@@ -30,7 +30,7 @@ index 0000000..4647601
 +    powerline.append(' %s ' % branch, fg, bg)
 +
 +
-+add_ext_git_segment(powerline)
++
 +
 diff --git a/segments/get_git_info.sh b/segments/get_git_info.sh
 new file mode 100755
