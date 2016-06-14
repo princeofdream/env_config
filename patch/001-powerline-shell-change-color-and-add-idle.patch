@@ -80,10 +80,10 @@ index 0000000..3c9ee5e
 +fi
 diff --git a/segments/git_ext.py b/segments/git_ext.py
 new file mode 100644
-index 0000000..f9186f8
+index 0000000..1632a82
 --- /dev/null
 +++ b/segments/git_ext.py
-@@ -0,0 +1,18 @@
+@@ -0,0 +1,20 @@
 +
 +import os
 +import subprocess
@@ -100,7 +100,9 @@ index 0000000..f9186f8
 +		## can not find * in branch
 +		fg = Color.REPO_DIRTY_FG
 +		bg = Color.REPO_DIRTY_BG
-+	powerline.append(' %s ' % branch, fg, bg)
++	s_len = len(branch)
++	if s_len > 0:
++		powerline.append(' %s ' % branch, fg, bg)
 +
 diff --git a/segments/idle.py b/segments/idle.py
 new file mode 100644
