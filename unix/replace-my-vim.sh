@@ -17,7 +17,6 @@ then
 	rm -rf config.py*
 	git reset --hard
 	patch -p1 < 001-powerline-shell-change-color-and-add-idle.patch
-	patch -p1 < 002-powerline-shell-add-ext_git.patch
 	sed -i "s/\$WHOAMI/$WHOAMI/" segments/ext_git.py
 	chmod a+x segments/get_git_info.sh
 	python install.py

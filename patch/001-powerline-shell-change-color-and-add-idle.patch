@@ -1,5 +1,11 @@
+commit 773e5359fdd1143a9b0fd8b69fe7d4d5388d1aff
+Author: jin.li <jin.li@nufront.com>
+Date:   Tue Jun 14 23:34:30 2016 +0800
+
+    powershell add ext function
+
 diff --git a/config.py.dist b/config.py.dist
-index a1e7627..e810d80 100644
+index a1e7627..f7bfe3f 100644
 --- a/config.py.dist
 +++ b/config.py.dist
 @@ -13,12 +13,12 @@ SEGMENTS = [
@@ -18,7 +24,17 @@ index a1e7627..e810d80 100644
  # Show a padlock when ssh-ing from another machine
      'ssh',
  
-@@ -42,15 +42,19 @@ SEGMENTS = [
+@@ -31,7 +31,8 @@ SEGMENTS = [
+     'read_only',
+ 
+ # Show the current git branch and status
+-    'git',
++	# 'git',
++	'ext_git',
+ 
+ # Show the current mercurial branch and status
+     'hg',
+@@ -42,15 +43,19 @@ SEGMENTS = [
  # Show the current fossil branch and status
      'fossil',
  
@@ -41,6 +57,46 @@ index a1e7627..e810d80 100644
  ]
  
  # Change the colors used to draw individual segments in your prompt
+diff --git a/segments/ext_git.py b/segments/ext_git.py
+new file mode 100644
+index 0000000..3ccbe96
+--- /dev/null
++++ b/segments/ext_git.py
+@@ -0,0 +1,14 @@
++
++import os
++import subprocess
++
++def add_ext_git_segment(powerline):
++    get_info = subprocess.Popen(["/home/vjames/.vim/bundle/powerline-shell/segments/get_git_info.sh",""], stdout=subprocess.PIPE)
++    branch = get_info.stdout.read()
++    fg = Color.REPO_CLEAN_FG
++    bg = Color.REPO_CLEAN_BG
++    powerline.append(' %s ' % branch, fg, bg)
++
++
++
++
+diff --git a/segments/get_git_info.sh b/segments/get_git_info.sh
+new file mode 100755
+index 0000000..3c9ee5e
+--- /dev/null
++++ b/segments/get_git_info.sh
+@@ -0,0 +1,14 @@
++#!/usr/bin/env bash
++
++if [ -f "/etc/bash_completion.d/git-prompt" ]
++then
++	source /etc/bash_completion.d/git-prompt
++	source ~/.vim/bundle/powerline-shell/segments/info.sh
++else
++	if [ -f "/etc/bash_completion.d/git" ]
++	then
++		source /etc/bash_completion.d/git
++		source /usr/share/git-core/contrib/completion/git-prompt.sh
++		source ~/.vim/bundle/powerline-shell/segments/info.sh
++	fi
++fi
 diff --git a/segments/idle.py b/segments/idle.py
 new file mode 100644
 index 0000000..f110948
@@ -56,6 +112,16 @@ index 0000000..f110948
 +    fg = Color.CMD_LINE_FG
 +    bg = Color.CMD_LINE_BG
 +    powerline.append(idle_indicators[powerline.args.shell], fg, bg)
+diff --git a/segments/info.sh b/segments/info.sh
+new file mode 100644
+index 0000000..2091b6a
+--- /dev/null
++++ b/segments/info.sh
+@@ -0,0 +1,4 @@
++#!/usr/bin/env bash
++__git_ps1
++
++
 diff --git a/themes/default.py b/themes/default.py
 index 08b1ff4..f7ccd8c 100644
 --- a/themes/default.py
