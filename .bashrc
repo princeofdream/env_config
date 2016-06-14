@@ -165,11 +165,20 @@ PATH="$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH"
 # s3c2451
 # PATH+=":$HOME/share_projects/2451/opt/Embedsky/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/tq-linaro-toolchain/bin"
 
-
-#PS1='\u@\h:\[\033[01;36m\]\w\[\033[00m\] $\n'
-PS1='\u@\h:\[\033[01;36m\]\w\[\033[00m\] $\[\033[01;32m\]$(__git_ps1) \[\033[00m\]\n'
-#PS1='[\u@\h:\[\033[01;36m\]\w\[\033[00m\] $\[\033[01;32m\]$(__git_ps1 " (%s)") \[\033[00m\]\n'
-#PS1='${debian_chroot:+($debian_chroot)}\u@\h:\[\033[01;36m\]\w\[\033[00m\]\n'
+if [ -f "/etc/bash_completion.d/git-prompt" ]
+then
+	source /etc/bash_completion.d/git-prompt
+	source ~/.vim/bundle/powerline-shell/segments/info.sh
+else
+	if [ -f "/etc/bash_completion.d/git" ]
+	then
+		source /etc/bash_completion.d/git
+		source /usr/share/git-core/contrib/completion/git-prompt.sh
+		source ~/.vim/bundle/powerline-shell/segments/info.sh
+	fi
+fi
+# PS1='\u@\h:\[\033[01;36m\]\w\[\033[00m\] $\[\033[01;32m\]$(__git_ps1) \[\033[00m\]\n'
+PS1='\u@\h:\[\033[01;36m\]\w\[\033[00m\] $\[\033[01;32m\]$(__git_ps1 " (%s)") \[\033[00m\]\n'
 
 if [ -n $TMUX ]
 then
@@ -194,12 +203,12 @@ function _update_ps1() {
 }
 
 # for bash
-if [ -f "$HOME/.vim/bundle/powerline-shell/powerline-shell.py" ]
-then
-	if [ "$TERM" != "linux" ]; then
-		PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
-	fi
-fi
+# if [ -f "$HOME/.vim/bundle/powerline-shell/powerline-shell.py" ]
+# then
+#     if [ "$TERM" != "linux" ]; then
+#         PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+#     fi
+# fi
 
 # for zsh
 # function powerline_precmd() {
