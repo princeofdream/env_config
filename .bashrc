@@ -92,6 +92,8 @@ alias ll='ls -l'
 #alias la='ls -A'
 alias l='ls -CF'
 
+alias sudo='sudo env PATH=$PATH'
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -190,43 +192,37 @@ fi
 
 
 
-alias sudo='sudo env PATH=$PATH'
 
-## powerline for bash
-# powerline-daemon -q
-# POWERLINE_BASH_CONTINUATION=1
-# POWERLINE_BASH_SELECT=1
-# . $HOME/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh
 
-function _update_ps1() {
-    PS1="$($HOME/.vim/bundle/powerline-shell/powerline-shell.py $? 2> /dev/null)"
-}
 
-# for bash
-if [ -f "$HOME/.vim/bundle/powerline-shell/powerline-shell.py" ]
+
+# powerline and powerline-shell
+ENABLE_POWERLINE="powerline"
+
+if [ "$ENABLE_POWERLINE" = "powerline" ]
 then
-	if [ "$TERM" != "linux" ]; then
-		PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+	## powerline for bash
+	powerline-daemon -q
+	POWERLINE_BASH_CONTINUATION=1
+	POWERLINE_BASH_SELECT=1
+	. $HOME/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh
+else
+	if [ "$ENABLE_POWERLINE" = "powerline-shell" ]
+	then
+		function _update_ps1() {
+			PS1="$($HOME/.vim/bundle/powerline-shell/powerline-shell.py $? 2> /dev/null)"
+		}
+
+		# powerline-shell for bash
+		if [ -f "$HOME/.vim/bundle/powerline-shell/powerline-shell.py" ]
+		then
+			if [ "$TERM" != "linux" ]; then
+				PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+			fi
+		fi
 	fi
+
 fi
-
-# for zsh
-# function powerline_precmd() {
-#     PS1="$(~/powerline-shell.py $? --shell zsh 2> /dev/null)"
-# }
-
-# function install_powerline_precmd() {
-#     for s in "${precmd_functions[@]}"; do
-#         if [ "$s" = "powerline_precmd" ]; then
-#             return
-#         fi
-#     done
-#     precmd_functions+=(powerline_precmd)
-# }
-
-#     if [ "$TERM" != "linux" ]; then
-#         install_powerline_precmd
-#     fi
 
 
 GIT_PS1_SHOWDIRTYSTATE=enabled
@@ -236,7 +232,7 @@ TMUX_POWERLINE_SEG_WEATHER_LOCATION=2161838
 
 #export PATH
 export TERM
-export TMUX_POWERLINE_SEG_WEATHER_LOCATION 
+export TMUX_POWERLINE_SEG_WEATHER_LOCATION
 export JAVA_HOME
 export JRE_HOME
 export CLASSPATH
