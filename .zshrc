@@ -5,7 +5,7 @@ SAVEHIST=5000
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/vjames/.zshrc'
+zstyle :compinstall filename '/home/$WHOAMI/.zshrc'
 
 autoload -Uz compinit
 compinit

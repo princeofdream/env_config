@@ -35,5 +35,8 @@ cp .tmux.conf ~/
 sed -i "s/\$WHOAMI/$WHOAMI/" ~/.tmux.conf
 cp .bashrc ~/
 cp .zshrc ~/
+sed -i "s/\$WHOAMI/$WHOAMI/" ~/.zshrc
+cp .bashrc ~/
 
+echo "install DONE!"
 

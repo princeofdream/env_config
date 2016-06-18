@@ -170,13 +170,11 @@ PATH="$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH"
 if [ -f "/etc/bash_completion.d/git-prompt" ]
 then
 	source /etc/bash_completion.d/git-prompt
-	source ~/.vim/bundle/powerline-shell/segments/info.sh
 else
 	if [ -f "/etc/bash_completion.d/git" ]
 	then
 		source /etc/bash_completion.d/git
 		source /usr/share/git-core/contrib/completion/git-prompt.sh
-		source ~/.vim/bundle/powerline-shell/segments/info.sh
 	fi
 fi
 # PS1='\u@\h:\[\033[01;36m\]\w\[\033[00m\] $\[\033[01;32m\]$(__git_ps1) \[\033[00m\]\n'
