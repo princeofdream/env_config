@@ -454,7 +454,7 @@ let g:vim_markdown_initial_foldlevel=9999
 
 " YourCompleteMe
 " ---------------------------------------------------
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 " Plugin 'Rip-Rip/clang_complete'
 let g:clang_complete_copen=1
 let g:clang_periodic_quickfix=1
