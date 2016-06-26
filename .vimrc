@@ -310,7 +310,7 @@ set nf=
 " ------------------------------------------------------------------
 
 set foldmethod=marker foldmarker={,} foldlevel=9999
-set diffopt=filler,context:9999
+" set diffopt=filler,context:9999
 
 " ------------------------------------------------------------------
 " Desc: Search
@@ -472,8 +472,8 @@ if !hasmapto(':EXbp<CR>') && mapcheck('<C-h>','n') == ''
 endif
 
 " easy diff goto
-noremap <C-k> [c
-noremap <C-j> ]c
+" noremap <C-k> [c
+" noremap <C-j> ]c
 
 " enhance '<' '>' , do not need to reselect the block after shift it.
 vnoremap < <gv
