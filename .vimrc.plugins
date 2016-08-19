@@ -520,10 +520,10 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=237
 " vim:ts=4:sw=4:sts=4 et fdm=marker:
 
 
-if has("cscope")
-	set cscopetag
-	set csto=1
-endif
+" if has("cscope")
+"     set cscopetag
+"     set csto=1
+" endif
 
 
 
