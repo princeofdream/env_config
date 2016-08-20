@@ -58,6 +58,60 @@ index a1e7627..0b841d2 100644
  ]
  
  # Change the colors used to draw individual segments in your prompt
+diff --git a/segments/android_prj.py b/segments/android_prj.py
+new file mode 100644
+index 0000000..24d38e2
+--- /dev/null
++++ b/segments/android_prj.py
+@@ -0,0 +1,28 @@
++
++import os
++import subprocess
++import string
++import sys
++
++def add_android_prj_segment(powerline):
++	get_info = subprocess.Popen(["/home/$WHOAMI/.vim/bundle/powerline-shell/segments/get_android_prj.sh",""], stdout=subprocess.PIPE)
++	branch = get_info.stdout.read()
++	#  g_st = string.find(branch,"*")
++
++        #  get_tmp=subprocess.Popen('/home/$WHOAMI/1.sh',stdout=subprocess.PIPE,shell=True)
++        #  print(get_tmp.stdout.readlines())
++        #  out,err = p.communicate()
++        #  print out
++        #  print err
++
++
++	fg = Color.REPO_CLEAN_FG
++	bg = Color.REPO_CLEAN_BG
++	#  if g_st >= 0:
++	#          ## can not find * in branch
++	#          fg = Color.REPO_DIRTY_FG
++	#          bg = Color.REPO_DIRTY_BG
++	s_len = len(branch)
++	if s_len > 0:
++		powerline.append(' %s ' % branch, fg, bg)
++
+diff --git a/segments/get_android_prj.sh b/segments/get_android_prj.sh
+new file mode 100644
+index 0000000..70aa52b
+--- /dev/null
++++ b/segments/get_android_prj.sh
+@@ -0,0 +1,14 @@
++#!/usr/bin/env bash
++
++
++get_pwd=$(pwd)
++
++# echo "get produce: $TARGET_PRODUCT"
++
++if [ "$TARGET_PRODUCT" != "" ]
++then
++	echo -n "$TARGET_PRODUCT-$TARGET_BUILD_VARIANT"
++	# source ~/.vim/bundle/powerline-shell/segments/android_info.sh
++fi
++
++
 diff --git a/segments/get_git_info.sh b/segments/get_git_info.sh
 new file mode 100755
 index 0000000..3c9ee5e
@@ -80,10 +134,10 @@ index 0000000..3c9ee5e
 +fi
 diff --git a/segments/git_ext.py b/segments/git_ext.py
 new file mode 100644
-index 0000000..1632a82
+index 0000000..8a378ab
 --- /dev/null
 +++ b/segments/git_ext.py
-@@ -0,0 +1,20 @@
+@@ -0,0 +1,21 @@
 +
 +import os
 +import subprocess
@@ -91,8 +145,9 @@ index 0000000..1632a82
 +import sys
 +
 +def add_git_ext_segment(powerline):
-+	get_info = subprocess.Popen(["/home/$WHOAMI/.vim/bundle/powerline-shell/segments/get_git_info.sh",""], stdout=subprocess.PIPE)
-+	branch = get_info.stdout.read()
++	#  get_info = subprocess.Popen(["/home/$WHOAMI/.vim/bundle/powerline-shell/segments/get_git_info.sh",""], stdout=subprocess.PIPE)
++	#  branch = get_info.stdout.read()
++        branch = ""
 +	g_st = string.find(branch,"*")
 +	fg = Color.REPO_CLEAN_FG
 +	bg = Color.REPO_CLEAN_BG
