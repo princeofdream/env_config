@@ -1,5 +1,5 @@
 diff --git a/config.py.dist b/config.py.dist
-index a1e7627..0b841d2 100644
+index a1e7627..e84ff95 100644
 --- a/config.py.dist
 +++ b/config.py.dist
 @@ -13,12 +13,12 @@ SEGMENTS = [
@@ -18,7 +18,7 @@ index a1e7627..0b841d2 100644
  # Show a padlock when ssh-ing from another machine
      'ssh',
  
-@@ -26,12 +26,17 @@ SEGMENTS = [
+@@ -26,12 +26,18 @@ SEGMENTS = [
  # replaced with ellipsis ('...')
      'cwd',
  
@@ -33,11 +33,12 @@ index a1e7627..0b841d2 100644
  # Show the current git branch and status
 -    'git',
 +	# 'git',
-+	'git_ext',
++	# 'git_ext',
++	'android_prj',
  
  # Show the current mercurial branch and status
      'hg',
-@@ -42,15 +47,15 @@ SEGMENTS = [
+@@ -42,15 +48,15 @@ SEGMENTS = [
  # Show the current fossil branch and status
      'fossil',
  
@@ -113,7 +114,7 @@ index 0000000..70aa52b
 +
 +
 diff --git a/segments/get_git_info.sh b/segments/get_git_info.sh
-new file mode 100755
+new file mode 100644
 index 0000000..3c9ee5e
 --- /dev/null
 +++ b/segments/get_git_info.sh
@@ -134,7 +135,7 @@ index 0000000..3c9ee5e
 +fi
 diff --git a/segments/git_ext.py b/segments/git_ext.py
 new file mode 100644
-index 0000000..8a378ab
+index 0000000..31ccd85
 --- /dev/null
 +++ b/segments/git_ext.py
 @@ -0,0 +1,21 @@
@@ -145,9 +146,9 @@ index 0000000..8a378ab
 +import sys
 +
 +def add_git_ext_segment(powerline):
-+	#  get_info = subprocess.Popen(["/home/$WHOAMI/.vim/bundle/powerline-shell/segments/get_git_info.sh",""], stdout=subprocess.PIPE)
-+	#  branch = get_info.stdout.read()
-+        branch = ""
++        get_info = subprocess.Popen(["/home/$WHOAMI/.vim/bundle/powerline-shell/segments/get_git_info.sh",""], stdout=subprocess.PIPE)
++        branch = get_info.stdout.read()
++        #  branch = ""
 +	g_st = string.find(branch,"*")
 +	fg = Color.REPO_CLEAN_FG
 +	bg = Color.REPO_CLEAN_BG

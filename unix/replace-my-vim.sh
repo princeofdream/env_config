@@ -20,6 +20,7 @@ then
 	sed -i "s/\$WHOAMI/$WHOAMI/" segments/git_ext.py
 	sed -i "s/\$WHOAMI/$WHOAMI/" segments/android_prj.py
 	chmod a+x segments/get_git_info.sh
+	chmod a+x segments/get_android_prj.sh
 	python install.py
 fi
 cd ${ORIGINAL_PATH}
