@@ -24,9 +24,10 @@ then
 	git branch -D by_James
 	git branch by_James
 	git checkout by_James
-	git am 0001-powerline-shell-Segments-Add-Segments.patch
-	git am 0002-powerline-shell-Add-segment-git_branch.patch
-	git am 0003-powerline-shell-Fix-no-branch-mistake.patch
+	git am *.patch
+	# git am 0001-powerline-shell-Segments-Add-Segments.patch
+	# git am 0002-powerline-shell-Add-segment-git_branch.patch
+	# git am 0003-powerline-shell-Fix-no-branch-mistake.patch
 
 	#git reset --hard
 	#patch -p1 < 0001-Segments-Add-Segments.patch
