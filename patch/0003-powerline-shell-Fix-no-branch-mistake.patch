@@ -1,0 +1,30 @@
+From a3af420de74fa2c0bd083a8a38984107fa75e6ac Mon Sep 17 00:00:00 2001
+From: "jin.li" <jin.li@nufront.com>
+Date: Sun, 21 Aug 2016 21:54:42 +0800
+Subject: [PATCH] powerline-shell Fix no branch mistake
+
+---
+ segments/get_git_branch.sh | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+ mode change 100644 => 100755 segments/get_git_branch.sh
+
+diff --git a/segments/get_git_branch.sh b/segments/get_git_branch.sh
+old mode 100644
+new mode 100755
+index e69ae9a..e4274a0
+--- a/segments/get_git_branch.sh
++++ b/segments/get_git_branch.sh
+@@ -4,6 +4,9 @@
+ get_branch=`git branch 2>/dev/null |grep '\*'`
+ 
+ branch=${get_branch:2}
+-echo -n "($branch)"
+ 
++if [ "$branch" != "" ]
++then
++	echo -n "($branch)"
++fi
+ 
+-- 
+1.8.3.1
+
