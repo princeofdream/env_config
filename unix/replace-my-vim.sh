@@ -13,10 +13,21 @@ cd $BUNDLE_PATH/powerline-shell
 if [ -d "segments" ]
 then
 	echo "Do reset!!!!!"
+
+
 	rm -rf segments/idle.py segments/get_git_info.sh segments/info.sh segments/git_ext.py segments/android_prj.py segments/get_android_prj.sh
 	rm -rf config.py*
+
+	git checkout master
 	git reset --hard
-	patch -p1 < 001-powerline-shell-change-color-and-add-idle.patch
+	git branch -D by_James
+	git branch by_James
+	git checkout by_James
+	git am 0001-Segments-Add-Segments.patch
+
+	#git reset --hard
+	#patch -p1 < 0001-Segments-Add-Segments.patch
+
 	sed -i "s/\$WHOAMI/$WHOAMI/" segments/git_ext.py
 	sed -i "s/\$WHOAMI/$WHOAMI/" segments/android_prj.py
 	chmod a+x segments/get_git_info.sh
