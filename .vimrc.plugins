@@ -407,8 +407,24 @@ autocmd FileType html,css EmmetInstall
 " DISABLE:
 " " vim-indent-guides: invoke by <leader>ig
 " " ---------------------------------------------------
-" Plugin 'nathanaelkane/vim-indent-guides'
-" let g:indent_guides_guide_size = 1
+Plugin 'nathanaelkane/vim-indent-guides'
+"{{{
+let g:indent_guides_guide_size = 1
+" let g:indent_guides_start_level = 1
+let g:indent_guides_auto_colors = 0
+" let g:indent_guides_space_guides = 0
+let g:indent_guides_soft_pattern = ' '
+let g:indent_guides_enable_on_vim_startup = 1
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=black
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=237
+
+" hi IndentGuidesOdd  guibg=red   ctermbg=3
+" hi IndentGuidesEven guibg=green ctermbg=4
+" hi IndentGuidesOdd  ctermbg=black
+" hi IndentGuidesEven ctermbg=darkgrey
+" hi IndentGuidesOdd  ctermbg=white
+" hi IndentGuidesEven ctermbg=lightgrey
+"}}}
 
 " Yggdroot/indentLine: invoke by <leader>ig
 " ---------------------------------------------------
@@ -495,19 +511,6 @@ Plugin 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType="context"
 
 
-Plugin 'nathanaelkane/vim-indent-guides'
-"{{{
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=black
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=237
-
-" hi IndentGuidesOdd  guibg=red   ctermbg=3
-" hi IndentGuidesEven guibg=green ctermbg=4
-" hi IndentGuidesOdd  ctermbg=black
-" hi IndentGuidesEven ctermbg=darkgrey
-" hi IndentGuidesOdd  ctermbg=white
-" hi IndentGuidesEven ctermbg=lightgrey
-"}}}
 
 "}}}
 
