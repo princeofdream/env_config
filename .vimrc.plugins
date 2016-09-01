@@ -514,6 +514,11 @@ let g:SuperTabDefaultCompletionType="context"
 
 "}}}
 
+
+
+set cursorline
+
+
 " TEST {{{
 " " test-loading
 " echomsg "test-loading: .vimrc"
