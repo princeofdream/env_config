@@ -196,7 +196,7 @@ fi
 
 # powerline and powerline-shell
 # ENABLE_POWERLINE="powerline-none"
-# ENABLE_POWERLINE="powerline-none"
+# ENABLE_POWERLINE="powerline"
 ENABLE_POWERLINE="powerline-shell"
 
 if [ "$ENABLE_POWERLINE" = "powerline" ]

@@ -50,6 +50,11 @@ cp .vimrc.plugins.local ~/.vimrc.plugins.local
 rm -rf ~/.vim
 cp -r vimfiles ~/.vim
 
+# cd ~/.vim/bundle/YouCompleteMe
+# ./install.py --clang-completer
+# # ./install.py --all
+# cd $ORIGINAL_PATH
+
 cp .tmux.conf ~/
 sed -i "s/\$WHOAMI/$WHOAMI/" ~/.tmux.conf
 cp .bashrc ~/
