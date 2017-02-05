@@ -122,9 +122,9 @@ fi
 ############# #By James ##################
 
 JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64"
-#JAVA_HOME="$HOME/Enviroment/toolchain/jdk1.8.0_73"
-#JAVA_HOME="$HOME/Enviroment/toolchain/jdk1.7.0_80"
-#JAVA_HOME="$HOME/Enviroment/toolchain/jdk1.6.0_45"
+#JAVA_HOME="$HOME/Environment/toolchain/jdk1.8.0_73"
+#JAVA_HOME="$HOME/Environment/toolchain/jdk1.7.0_80"
+#JAVA_HOME="$HOME/Environment/toolchain/jdk1.6.0_45"
 JRE_HOME=$JAVA_HOME/jre
 CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
 
@@ -133,32 +133,32 @@ PATH_TMP=$PATH
 
 PATH+=":/sbin:/usr/sbin"
 
-PATH+=":$HOME/Enviroment/env_rootfs/bin"
-PATH+=":$HOME/Enviroment/env_rootfs/bin/etc"
-PATH+=":$HOME/Enviroment/env_rootfs/bin/sbin"
-PATH+=":$HOME/Enviroment/env_rootfs/bin/bin"
-PATH+=":$HOME/Enviroment/env_rootfs/bin/man"
+PATH+=":$HOME/Environment/env_rootfs/bin"
+PATH+=":$HOME/Environment/env_rootfs/bin/etc"
+PATH+=":$HOME/Environment/env_rootfs/bin/sbin"
+PATH+=":$HOME/Environment/env_rootfs/bin/bin"
+PATH+=":$HOME/Environment/env_rootfs/bin/man"
 
-PATH+=":$HOME/Enviroment/tmp_rootfs/bin"
-PATH+=":$HOME/Enviroment/tmp_rootfs/bin/etc"
-PATH+=":$HOME/Enviroment/tmp_rootfs/bin/sbin"
-PATH+=":$HOME/Enviroment/tmp_rootfs/bin/bin"
-PATH+=":$HOME/Enviroment/tmp_rootfs/bin/man"
+PATH+=":$HOME/Environment/tmp_rootfs/bin"
+PATH+=":$HOME/Environment/tmp_rootfs/bin/etc"
+PATH+=":$HOME/Environment/tmp_rootfs/bin/sbin"
+PATH+=":$HOME/Environment/tmp_rootfs/bin/bin"
+PATH+=":$HOME/Environment/tmp_rootfs/bin/man"
 
 PATH+="$PATH_TMP"
 
 
-PATH+=":$HOME/Enviroment/toolchain/toolchain-arm_cortex-a9+vfpv3_gcc-4.8-linaro_eglibc-2.19_eabi/bin"
-PATH+=":$HOME/Enviroment/toolchain/arm-2009q1/bin"
-PATH+=":$HOME/Enviroment/toolchain/arm-2009q3/bin"
+PATH+=":$HOME/Environment/toolchain/toolchain-arm_cortex-a9+vfpv3_gcc-4.8-linaro_eglibc-2.19_eabi/bin"
+PATH+=":$HOME/Environment/toolchain/arm-2009q1/bin"
+PATH+=":$HOME/Environment/toolchain/arm-2009q3/bin"
 
 
-PATH+=":$HOME/Enviroment/toolchain/arm-eabi-4.8/bin"
-PATH+=":$HOME/Enviroment/toolchain/arm-linux-androideabi-4.8/bin"
+PATH+=":$HOME/Environment/toolchain/arm-eabi-4.8/bin"
+PATH+=":$HOME/Environment/toolchain/arm-linux-androideabi-4.8/bin"
 
 
-PATH+=":$HOME/Enviroment/Android/Sdk/platform-tools"
-PATH+=":$HOME/Enviroment/Android_Env/android-studio/bin"
+PATH+=":$HOME/Environment/Android/Sdk/platform-tools"
+PATH+=":$HOME/Environment/Android_Env/android-studio/bin"
 
 
 ##JAVA
