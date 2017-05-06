@@ -42,6 +42,8 @@ then
 fi
 cd ${ORIGINAL_PATH}
 
+cp vimfiles/bundle/vim_plugins/a.vim/plugin/ -r vimfiles/
+
 cp ./dist/ctags_lang ~/.ctags
 cp .vimrc ~/.vimrc
 cp .vimrc.plugins ~/.vimrc.plugins
