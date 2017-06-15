@@ -518,6 +518,7 @@ let g:SuperTabDefaultCompletionType="context"
 
 
 set cursorline
+set wrap
 
 
 " TEST {{{
