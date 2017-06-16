@@ -122,6 +122,7 @@ fi
 ############# #By James ##################
 
 JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64"
+# JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
 #JAVA_HOME="$HOME/Environment/toolchain/jdk1.8.0_73"
 #JAVA_HOME="$HOME/Environment/toolchain/jdk1.7.0_80"
 #JAVA_HOME="$HOME/Environment/toolchain/jdk1.6.0_45"
@@ -139,33 +140,20 @@ PATH+=":$HOME/Environment/env_rootfs/bin/sbin"
 PATH+=":$HOME/Environment/env_rootfs/bin/bin"
 PATH+=":$HOME/Environment/env_rootfs/bin/man"
 
-PATH+=":$HOME/Environment/tmp_rootfs/bin"
-PATH+=":$HOME/Environment/tmp_rootfs/bin/etc"
-PATH+=":$HOME/Environment/tmp_rootfs/bin/sbin"
-PATH+=":$HOME/Environment/tmp_rootfs/bin/bin"
-PATH+=":$HOME/Environment/tmp_rootfs/bin/man"
-
 PATH+="$PATH_TMP"
 
 
-PATH+=":$HOME/Environment/toolchain/toolchain-arm_cortex-a9+vfpv3_gcc-4.8-linaro_eglibc-2.19_eabi/bin"
-PATH+=":$HOME/Environment/toolchain/arm-2009q1/bin"
-PATH+=":$HOME/Environment/toolchain/arm-2009q3/bin"
-
-
-PATH+=":$HOME/Environment/toolchain/arm-eabi-4.8/bin"
-PATH+=":$HOME/Environment/toolchain/arm-linux-androideabi-4.8/bin"
-
+PATH+=":$HOME/Environment/toolchain/toolchain-openwrt-arm/bin"
+# PATH+=":$HOME/Environment/arm-linux-androideabi/bin"
 
 PATH+=":$HOME/Environment/Android/Sdk/platform-tools"
-PATH+=":$HOME/Environment/Android_Env/android-studio/bin"
-
+PATH+=":$HOME/Environment/Android/android-ndk-r13b"
 
 ##JAVA
 PATH="$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH"
 
-# s3c2451
-# PATH+=":$HOME/share_projects/2451/opt/Embedsky/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/tq-linaro-toolchain/bin"
+
+
 
 if [ -f "/etc/bash_completion.d/git-prompt" ]
 then
