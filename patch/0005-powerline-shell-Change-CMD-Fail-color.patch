@@ -1,0 +1,27 @@
+From 203940370d0250b4ae544ac4c502e392f02883f3 Mon Sep 17 00:00:00 2001
+From: "jin.li" <jin.li@nufront.com>
+Date: Sun, 21 Aug 2016 22:54:23 +0800
+Subject: [PATCH 5/7] powerline-shell Change CMD Fail color
+
+---
+ themes/default.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/themes/default.py b/themes/default.py
+index 3019843..b4564c0 100644
+--- a/themes/default.py
++++ b/themes/default.py
+@@ -39,8 +39,8 @@ class DefaultColor:
+ 
+     CMD_PASSED_BG = 236
+     CMD_PASSED_FG = 15
+-    CMD_FAILED_BG = 161
+-    CMD_FAILED_FG = 15
++    CMD_FAILED_BG = 188
++    CMD_FAILED_FG = 16
+ 
+     SVN_CHANGES_BG = 148
+     SVN_CHANGES_FG = 22  # dark green
+-- 
+1.8.3.1
+

@@ -1,0 +1,52 @@
+From d48df7069000449f14c7324be7e9d83ec4555ede Mon Sep 17 00:00:00 2001
+From: Li jin <lijin@hgrica.com>
+Date: Sat, 3 Sep 2016 23:48:33 +0800
+Subject: [PATCH 7/7] powerline-shell add branch unicode support
+
+---
+ segments/git_branch.py | 31 ++++++++++++++++---------------
+ 1 file changed, 16 insertions(+), 15 deletions(-)
+
+diff --git a/segments/git_branch.py b/segments/git_branch.py
+index ee22c6a..a61c20a 100644
+--- a/segments/git_branch.py
++++ b/segments/git_branch.py
+@@ -5,19 +5,20 @@ import string
+ import sys
+ 
+ def add_git_branch_segment(powerline):
+-	get_info = subprocess.Popen(["/home/$WHOAMI/.vim/bundle/powerline-shell/segments/get_git_branch.sh",""], stdout=subprocess.PIPE)
+-	branch = get_info.stdout.read()
+-	#  branch = ""
+-	#  g_st = string.find(branch,"*")
+-	#  fg = Color.REPO_CLEAN_FG
+-	#  bg = Color.REPO_CLEAN_BG
+-	#  if g_st >= 0:
+-	#      ## can not find * in branch
+-	#      fg = Color.REPO_DIRTY_FG
+-	#      bg = Color.REPO_DIRTY_BG
+-	fg = Color.REPO_DIRTY_FG
+-	bg = Color.REPO_DIRTY_BG
+-	s_len = len(branch)
+-	if s_len > 0:
+-		powerline.append(' %s ' % branch, fg, bg)
++    get_info = subprocess.Popen(["/home/$WHOAMI/.vim/bundle/powerline-shell/segments/get_git_branch.sh",""], stdout=subprocess.PIPE)
++    branch = get_info.stdout.read()
++    #  branch = ""
++    #  g_st = string.find(branch,"*")
++    #  fg = Color.REPO_CLEAN_FG
++    #  bg = Color.REPO_CLEAN_BG
++    #  if g_st >= 0:
++    #      ## can not find * in branch
++    #      fg = Color.REPO_DIRTY_FG
++    #      bg = Color.REPO_DIRTY_BG
++    fg = Color.REPO_DIRTY_FG
++    bg = Color.REPO_DIRTY_BG
++    s_len = len(branch)
++    s1 = unicode(branch, 'utf-8')
++    if s_len > 0:
++        powerline.append(' %s ' % s1, fg, bg)
+ 
+-- 
+1.8.3.1
+
