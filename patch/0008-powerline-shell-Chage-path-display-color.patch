@@ -1,0 +1,27 @@
+From cd85faa52c89a7b9793f11dbabe3d9637e2ecfb8 Mon Sep 17 00:00:00 2001
+From: "jin.li" <jin.li@nufront.com>
+Date: Sun, 25 Jun 2017 23:10:31 +0800
+Subject: [PATCH 8/8] [powerline-shell] Chage path display color
+
+---
+ themes/default.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/themes/default.py b/themes/default.py
+index b4564c0..9e498f5 100644
+--- a/themes/default.py
++++ b/themes/default.py
+@@ -18,8 +18,8 @@ class DefaultColor:
+     HOME_SPECIAL_DISPLAY = True
+     HOME_BG = 31  # blueish
+     HOME_FG = 15  # white
+-    PATH_BG = 237  # dark grey
+-    PATH_FG = 250  # light grey
++    PATH_BG = 13  # dark grey
++    PATH_FG = 16  # light grey
+     CWD_FG = 254  # nearly-white grey
+     SEPARATOR_FG = 237
+ 
+-- 
+1.8.3.1
+
