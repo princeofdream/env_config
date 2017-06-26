@@ -122,6 +122,7 @@ fi
 ############# #By James ##################
 
 JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64"
+# JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
 #JAVA_HOME="$HOME/Environment/toolchain/jdk1.8.0_73"
 #JAVA_HOME="$HOME/Environment/toolchain/jdk1.7.0_80"
 #JAVA_HOME="$HOME/Environment/toolchain/jdk1.6.0_45"
@@ -139,11 +140,8 @@ PATH+=":$HOME/Environment/env_rootfs/bin/sbin"
 PATH+=":$HOME/Environment/env_rootfs/bin/bin"
 PATH+=":$HOME/Environment/env_rootfs/bin/man"
 
-PATH+=":$HOME/Environment/my_c_program/debug_src_full/fake_rootfs/bin"
-PATH+=":$HOME/Environment/my_c_program/debug_src_full/fake_rootfs/bin/etc"
-PATH+=":$HOME/Environment/my_c_program/debug_src_full/fake_rootfs/bin/sbin"
-PATH+=":$HOME/Environment/my_c_program/debug_src_full/fake_rootfs/bin/bin"
-PATH+=":$HOME/Environment/my_c_program/debug_src_full/fake_rootfs/bin/man"
+PATH+=":$HOME/Environment/my_c_program/debug_src_full/env_rootfs/bin"
+PATH+=":$HOME/Environment/my_c_program/debug_src_full/env_rootfs/sbin"
 
 PATH+="$PATH_TMP"
 
@@ -155,9 +153,12 @@ PATH+=":$HOME/Environment/toolchain/gcc-linaro-arm-linux-gnueabi/bin"
 
 
 PATH+=":$HOME/Environment/Android/Sdk/platform-tools"
+PATH+=":$HOME/Environment/Android/android-ndk"
 
 ##JAVA
 PATH="$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH"
+
+
 
 
 if [ -f "/etc/bash_completion.d/git-prompt" ]
