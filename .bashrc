@@ -132,7 +132,11 @@ CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
 
 PATH_TMP=$PATH
 
-PATH+=":/sbin:/usr/sbin"
+PATH=""
+
+##JAVA
+PATH="$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH"
+
 
 PATH+=":$HOME/Environment/env_rootfs/bin"
 PATH+=":$HOME/Environment/env_rootfs/bin/etc"
@@ -145,18 +149,13 @@ PATH+=":$HOME/Environment/my_c_program/debug_src_full/env_rootfs/sbin"
 
 PATH+="$PATH_TMP"
 
-
 PATH+=":$HOME/Environment/toolchain/toolchain-openwrt-arm/bin"
 PATH+=":$HOME/Environment/toolchain/arm-linux-androideabi/bin"
 PATH+=":$HOME/Environment/toolchain/gcc-linaro-arm-eabi/bin"
 PATH+=":$HOME/Environment/toolchain/gcc-linaro-arm-linux-gnueabi/bin"
 
-
 PATH+=":$HOME/Environment/Android/Sdk/platform-tools"
 PATH+=":$HOME/Environment/Android/android-ndk"
-
-##JAVA
-PATH="$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH"
 
 
 
@@ -227,10 +226,14 @@ TMUX_POWERLINE_SEG_WEATHER_LOCATION=2161838
 #export PATH
 export TERM
 export TMUX_POWERLINE_SEG_WEATHER_LOCATION
+export GIT_PS1_SHOWDIRTYSTATE
+
 export JAVA_HOME
 export JRE_HOME
 export CLASSPATH
-export GIT_PS1_SHOWDIRTYSTATE
+# export LANG='C'
+# unset CLASSPATH
+# unset JAVA_HOME
 
 
 
