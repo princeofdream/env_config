@@ -153,6 +153,7 @@ PATH+=":$HOME/Environment/toolchain/toolchain-openwrt-arm/bin"
 PATH+=":$HOME/Environment/toolchain/arm-linux-androideabi/bin"
 PATH+=":$HOME/Environment/toolchain/gcc-linaro-arm-eabi/bin"
 PATH+=":$HOME/Environment/toolchain/gcc-linaro-arm-linux-gnueabi/bin"
+PATH+=":$HOME/Environment/toolchain/gcc-linaro-arm-linux-gnueabihf/bin"
 
 PATH+=":$HOME/Environment/Android/Sdk/platform-tools"
 PATH+=":$HOME/Environment/Android/android-ndk"
