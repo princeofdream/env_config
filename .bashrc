@@ -121,11 +121,12 @@ fi
 
 ############# #By James ##################
 
-JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64"
+# JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64"
 # JAVA_HOME="/usr/lib/jvm/java-8-openjdk"
 #JAVA_HOME="$HOME/Environment/toolchain/jdk1.8.0_73"
 #JAVA_HOME="$HOME/Environment/toolchain/jdk1.7.0_80"
 #JAVA_HOME="$HOME/Environment/toolchain/jdk1.6.0_45"
+JAVA_HOME="/usr/lib/jvm/default-java"
 JRE_HOME=$JAVA_HOME/jre
 CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
 
@@ -199,23 +200,27 @@ then
 	powerline-daemon -q
 	POWERLINE_BASH_CONTINUATION=1
 	POWERLINE_BASH_SELECT=1
-	. $HOME/.vim/bundle/powerline/powerline/bindings/bash/powerline.sh
-else
-	if [ "$ENABLE_POWERLINE" = "powerline-shell" ]
+
+	if [ -f "$HOME/.exvim/bundle/powerline/powerline/bindings/bash/powerline.sh" ]
+	then
+		. $HOME/.exvim/bundle/powerline/powerline/bindings/bash/powerline.sh
+	fi
+elif [ "$ENABLE_POWERLINE" = "powerline-shell" ]
+then
+    if [ -f "$HOME/.exvim/bundle/powerline-shell/powerline-shell.py" ]
 	then
 		function _update_ps1() {
-			PS1="$($HOME/.vim/bundle/powerline-shell/powerline-shell.py $? 2> /dev/null)"
+			PS1="$($HOME/.exvim/bundle/powerline-shell/powerline-shell.py $? 2> /dev/null)"
 		}
 
-		# powerline-shell for bash
-		if [ -f "$HOME/.vim/bundle/powerline-shell/powerline-shell.py" ]
+        # powerline-shell for bash
+		if [ -f "$HOME/.exvim/bundle/powerline-shell/powerline-shell.py" ]
 		then
 			if [ "$TERM" != "linux" ]; then
 				PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 			fi
 		fi
 	fi
-
 fi
 
 

@@ -51,7 +51,7 @@ index 0000000..ee22c6a
 +import sys
 +
 +def add_git_branch_segment(powerline):
-+	get_info = subprocess.Popen(["/home/$WHOAMI/.vim/bundle/powerline-shell/segments/get_git_branch.sh",""], stdout=subprocess.PIPE)
++	get_info = subprocess.Popen(["/home/$WHOAMI/.exvim/bundle/powerline-shell/segments/get_git_branch.sh",""], stdout=subprocess.PIPE)
 +	branch = get_info.stdout.read()
 +	#  branch = ""
 +	#  g_st = string.find(branch,"*")

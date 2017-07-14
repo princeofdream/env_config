@@ -93,11 +93,11 @@ endif
 
 " load .vimrc.plugins & .vimrc.plugins.local
 if exists('g:exvim_custom_path')
-    let vimrc_plugins_path = g:exvim_custom_path.'/.vimrc.plugins'
-    let vimrc_plugins_local_path = g:exvim_custom_path.'/.vimrc.plugins.local'
+    let vimrc_plugins_path = g:exvim_custom_path.'/.exvimrc.plugins'
+    let vimrc_plugins_local_path = g:exvim_custom_path.'/.exvimrc.plugins.local'
 else
-    let vimrc_plugins_path = '~/.vimrc.plugins'
-    let vimrc_plugins_local_path = '~/.vimrc.plugins.local'
+    let vimrc_plugins_path = '~/.exvimrc.plugins'
+    let vimrc_plugins_local_path = '~/.exvimrc.plugins.local'
 endif
 if filereadable(expand(vimrc_plugins_path))
     exec 'source ' . fnameescape(vimrc_plugins_path)
@@ -487,9 +487,9 @@ noremap <Down> gj
 " local setup
 "/////////////////////////////////////////////////////////////////////////////
 
-let vimrc_local_path = '~/.vimrc.local'
+let vimrc_local_path = '~/.exvimrc.local'
 if exists('g:exvim_custom_path')
-    let vimrc_local_path = g:exvim_custom_path.'/.vimrc.local'
+    let vimrc_local_path = g:exvim_custom_path.'/.exvimrc.local'
 endif
 
 if filereadable(expand(vimrc_local_path))
