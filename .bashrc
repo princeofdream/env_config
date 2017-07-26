@@ -225,7 +225,9 @@ fi
 
 
 GIT_PS1_SHOWDIRTYSTATE=enabled
-TERM="screen-256color"
+# TERM="screen-256color"
+TERM="st-256color"
+
 TMUX_POWERLINE_SEG_WEATHER_LOCATION=2161838
 
 
