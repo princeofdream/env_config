@@ -64,6 +64,9 @@ Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'davidhalter/jedi'
 Plugin 'milkbikis/powerline-shell'
+Plugin 'rakr/vim-one'
+Plugin 'joshdick/onedark.vim'
+
 " =======================================================
 
 filetype plugin indent on " required
