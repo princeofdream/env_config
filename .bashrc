@@ -92,8 +92,6 @@ alias ll='ls -l'
 #alias la='ls -A'
 alias l='ls -CF'
 
-alias sudo='sudo env PATH=$PATH'
-
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -136,7 +134,7 @@ PATH_TMP=$PATH
 PATH=""
 
 ##JAVA
-PATH="$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH"
+PATH+="$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH"
 
 
 PATH+=":$HOME/Environment/env_rootfs/bin"
@@ -224,9 +222,16 @@ then
 fi
 
 
+
+alias sudo='sudo env PATH=$PATH'
+
+
+
+
 GIT_PS1_SHOWDIRTYSTATE=enabled
-# TERM="screen-256color"
-TERM="st-256color"
+TERM="screen-256color"
+# TERM="xterm-256color"
+# TERM="st-256color"
 
 TMUX_POWERLINE_SEG_WEATHER_LOCATION=2161838
 
