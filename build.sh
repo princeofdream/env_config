@@ -38,7 +38,6 @@ function setup_env()
     --with-tlib=tinfo \
     --enable-cscope \
     --enable-pythoninterp \
-    --with-python-config-dir=/usr/lib64/python2.7/ \
     --enable-rubyinterp \
     --enable-perlinterp=yes \
     --enable-tclinterp=yes \
