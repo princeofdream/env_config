@@ -32,24 +32,24 @@ function setup_env()
 
 
 ./configure \
-	--prefix=$PREFIX_PATH \
-	-enable-multibyte \
-	--with-features=huge \
-	--with-tlib=tinfo \
-	--enable-cscope \
-   	--enable-pythoninterp \
-	--with-python-config-dir=/usr/lib64/python2.7/ \
-	--enable-rubyinterp \
+    --prefix=$PREFIX_PATH \
+    --enable-multibyte \
+    --with-features=huge \
+    --with-tlib=tinfo \
+    --enable-cscope \
+    --enable-pythoninterp \
+    --with-python-config-dir=/usr/lib64/python2.7/ \
+    --enable-rubyinterp \
     --enable-perlinterp=yes \
-	--enable-tclinterp=yes \
-	--enable-gpm \
-	--enable-sysmouse \
+    --enable-tclinterp=yes \
+    --enable-gpm \
+    --enable-sysmouse \
     --enable-luainterp=yes \
 
 
-	# --with-python-config-dir=/usr/lib64/python2.7/config
-	# --enable-python3interp=yes
-    # --with-python3-config-dir=/usr/lib64/python3.4/
+# --with-python-config-dir=/usr/lib64/python2.7/config
+# --enable-python3interp=yes
+# --with-python3-config-dir=/usr/lib64/python3.4/
 
 
 
