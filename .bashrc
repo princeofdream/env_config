@@ -222,18 +222,27 @@ then
 fi
 
 
+# ENABLE_TRUE_COLOR="tmux"
+ENABLE_TRUE_COLOR="none"
+
+if [ "$ENABLE_TRUE_COLOR" = "tmux" ]
+then
+TERM="xterm-256color"
+# TERM="st-256color"
+else
+	TERM="screen-256color"
+fi
+
+
+#set tmux powerlineweather Guangzhou
+TMUX_POWERLINE_SEG_WEATHER_LOCATION=2161838
+GIT_PS1_SHOWDIRTYSTATE=enabled
 
 alias sudo='sudo env PATH=$PATH'
 
 
 
 
-GIT_PS1_SHOWDIRTYSTATE=enabled
-TERM="screen-256color"
-# TERM="xterm-256color"
-# TERM="st-256color"
-
-TMUX_POWERLINE_SEG_WEATHER_LOCATION=2161838
 
 
 #export PATH
