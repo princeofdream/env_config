@@ -8,7 +8,7 @@ WHOAMI=`whoami`
 
 ## for powerline-shell
 cd $BUNDLE_PATH
-cp ${ORIGINAL_PATH}/patch/*.patch $BUNDLE_PATH/powerline-shell/
+cp ${ORIGINAL_PATH}/patch/powerline-shell/*.patch $BUNDLE_PATH/powerline-shell/
 cd $BUNDLE_PATH/powerline-shell
 if [ -d "segments" ]
 then
