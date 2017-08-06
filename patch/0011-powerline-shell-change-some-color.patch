@@ -1,0 +1,39 @@
+From 2bd62f55158ab3772e105b899e39800e0938d093 Mon Sep 17 00:00:00 2001
+From: James <howpigcanfly@outlook.com>
+Date: Sun, 6 Aug 2017 13:00:33 +0800
+Subject: [PATCH 11/12] [powerline-shell] change some color
+
+---
+ themes/default.py | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/themes/default.py b/themes/default.py
+index 24249e4..5bb05bf 100644
+--- a/themes/default.py
++++ b/themes/default.py
+@@ -18,8 +18,8 @@ class DefaultColor:
+     HOME_SPECIAL_DISPLAY = True
+     HOME_BG = 31  # blueish
+     HOME_FG = 15  # white
+-    PATH_BG = 13  # dark grey
+-    PATH_FG = 16  # light grey
++    PATH_BG = 129  # dark grey
++    PATH_FG = 234  # light grey
+     CWD_FG = 157  # nearly-white grey
+     SEPARATOR_FG = 237
+ 
+@@ -64,6 +64,11 @@ class DefaultColor:
+     CMD_LINE_BG=237
+     CMD_LINE_FG=250
+ 
++
++    IDLE_FG = 199
++    IDLE_BG = 243
++
++
+ class Color(DefaultColor):
+     """
+     This subclass is required when the user chooses to use 'default' theme.
+-- 
+1.8.3.1
+
