@@ -45,20 +45,15 @@ cd ${ORIGINAL_PATH}
 cp vimfiles/bundle/vim_plugins/a.vim/plugin/ -r vimfiles/
 
 rm -rf $HOME/.exvim
-rm -rf $HOME/.vim
-rm -rf $HOME/.vimrc*
+mv $HOME/.vim $HOME/.vim_bk
+mv $HOME/.vimrc $HOME/.vimrc_bk
 rm -rf $HOME/.exvim*
 
 cp ./dist/ctags_lang      $HOME/.ctags
-cp .vimrc                 $HOME/.exvimrc
-cp .vimrc.plugins         $HOME/.exvimrc.plugins
-cp .vimrc.local           $HOME/.exvimrc.local
-cp .vimrc.plugins.local   $HOME/.exvimrc.plugins.local
 
 cp -r vimfiles          $HOME/.exvim
 
 ln -s $HOME/.exvim $HOME/.vim
-ln -s $HOME/.exvimrc $HOME/.vimrc
 
 # cd ~/.vim/bundle/YouCompleteMe
 # ./install.py --clang-completer
