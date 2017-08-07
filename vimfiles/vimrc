@@ -96,8 +96,8 @@ if exists('g:exvim_custom_path')
     let vimrc_plugins_path = g:exvim_custom_path.'/vimrc.plugins'
     let vimrc_plugins_local_path = g:exvim_custom_path.'/vimrc.plugins.local'
 else
-    let vimrc_plugins_path = '~/vimrc.plugins'
-    let vimrc_plugins_local_path = '~/vimrc.plugins.local'
+    let vimrc_plugins_path = '~/.vim/vimrc.plugins'
+    let vimrc_plugins_local_path = '~/.vim/vimrc.plugins.local'
 endif
 if filereadable(expand(vimrc_plugins_path))
     exec 'source ' . fnameescape(vimrc_plugins_path)

@@ -1,0 +1,9 @@
+" This file will be loaded at the end of .vimrc.
+" This file is designed to add your own vim scripts or override the exVim's .vimrc settings.
+
+" set list
+" set listchars=tab:>-,trail:-
+
+
+set wrap
+
