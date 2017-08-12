@@ -1,0 +1,45 @@
+From 4a2cc0557065c739d0a9abc9c94697d84e338581 Mon Sep 17 00:00:00 2001
+From: James <howpigcanfly@outlook.com>
+Date: Sat, 12 Aug 2017 14:21:41 +0800
+Subject: [PATCH] Change default theme color, remove hostname
+
+---
+ config.py.dist    | 2 +-
+ themes/default.py | 8 ++++----
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/config.py.dist b/config.py.dist
+index fba75c1..ae34623 100644
+--- a/config.py.dist
++++ b/config.py.dist
+@@ -17,7 +17,7 @@ SEGMENTS = [
+ #   'rbenv',
+ 
+ # Show the machine's hostname. Mostly used when ssh-ing into other machines
+-    'hostname',
++    # 'hostname',
+ 
+ # Show the current user's username as in ordinary prompts
+     'username',
+diff --git a/themes/default.py b/themes/default.py
+index d9a0e41..a720fab 100644
+--- a/themes/default.py
++++ b/themes/default.py
+@@ -37,10 +37,10 @@ class DefaultColor:
+     JOBS_FG = 230
+     JOBS_BG = 166
+ 
+-    CMD_PASSED_BG = 236
+-    CMD_PASSED_FG = 15
+-    CMD_FAILED_BG = 188
+-    CMD_FAILED_FG = 16
++    CMD_PASSED_BG = 148
++    CMD_PASSED_FG = 235
++    CMD_FAILED_BG = 231
++    CMD_FAILED_FG = 235
+ 
+     SVN_CHANGES_BG = 148
+     SVN_CHANGES_FG = 22  # dark green
+-- 
+1.8.3.1
+
