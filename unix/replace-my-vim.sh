@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export ORIGINAL_PATH=`pwd`
-VIMFILES_PATH=$ORIGINAL_PATH/vimfiles
+export TOP=`pwd`
+VIMFILES_PATH=$TOP/vimfiles
 BUNDLE_PATH=$VIMFILES_PATH/bundle
 
 WHOAMI=`whoami`
@@ -47,7 +47,7 @@ then
 	chmod a+x segments/get_git_branch.sh
 	python install.py
 fi
-cd ${ORIGINAL_PATH}
+cd ${TOP}
 
 cp vimfiles/bundle/vim_plugins/a.vim/plugin/ -r vimfiles/
 
@@ -68,20 +68,34 @@ then
 fi
 
 cp ./dist/ctags_lang      $HOME/.ctags
-
-cp -r vimfiles          $HOME/.exvim
-
+# cp -r vimfiles          $HOME/.exvim
+ln -s $TOP/vimfiles $HOME/.exvim
 ln -s $HOME/.exvim $HOME/.vim
 
 # cd ~/.vim/bundle/YouCompleteMe
 # ./install.py --clang-completer
 # # ./install.py --all
-# cd $ORIGINAL_PATH
+# cd $TOP
 
-cp .tmux.conf ~/
-cp .bashrc ~/
-cp .zshrc ~/
-cp .bashrc ~/
+if [ -d $HOME/.tmux.conf ]
+then
+	rm -rf $HOME/.tmux.conf
+fi
+ln -s $TOP/.tmux.conf $HOME/.tmux.conf
+
+if [ -d $HOME/.bashrc ]
+then
+	rm -rf $HOME/.bashrc
+fi
+ln -s $TOP/.bashrc $HOME/.bashrc
+
+if [ -d $HOME/.zshrc ]
+then
+	rm -rf $HOME/.zshrc
+fi
+ln -s $TOP/.zshrc $HOME/.zshrc
+
+
 if [ "$WHOAMI" == "root" ]
 then
     sed -i "s/\/home\/\$WHOAMI/\/$WHOAMI/" ~/.tmux.conf

@@ -158,6 +158,9 @@ PATH+=":$HOME/Environment/Android/Sdk/platform-tools"
 PATH+=":$HOME/Environment/Android/android-ndk"
 
 
+PATH+=":$HOME/Environment/toolchain/gcc-linaro-aarch64-linux-gnu-4.9-2014.09_linux/bin"
+PATH+=":$HOME/Environment/toolchain/gcc-linaro-aarch64-none-elf-4.8-2013.11_linux/bin"
+PATH+=":$HOME/Environment/toolchain/arm-2010q1/bin"
 
 
 if [ -f "/etc/bash_completion.d/git-prompt" ]
@@ -166,9 +169,9 @@ then
 else
 	if [ -f "/etc/bash_completion.d/git" ]
 	then
-		source /usr/share/git-core/contrib/completion/git-prompt.sh
+		source /etc/bash_completion.d/git
 	fi
-	if [ -f "/etc/bash_completion.d/git" ]
+	if [ -f "/usr/share/git-core/contrib/completion/git-prompt.sh" ]
 	then
 		source /usr/share/git-core/contrib/completion/git-prompt.sh
 	fi
