@@ -166,7 +166,10 @@ then
 else
 	if [ -f "/etc/bash_completion.d/git" ]
 	then
-		source /etc/bash_completion.d/git
+		source /usr/share/git-core/contrib/completion/git-prompt.sh
+	fi
+	if [ -f "/etc/bash_completion.d/git" ]
+	then
 		source /usr/share/git-core/contrib/completion/git-prompt.sh
 	fi
 fi
