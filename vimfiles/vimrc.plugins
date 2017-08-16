@@ -513,8 +513,13 @@ Plugin 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType="context"
 
 
+Plugin 'ggreer/the_silver_searcher'
+let g:ackprg = 'ag --vimgrep'
+
+
 
 "}}}
+
 
 
 
