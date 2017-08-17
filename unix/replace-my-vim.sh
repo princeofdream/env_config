@@ -51,58 +51,64 @@ cd ${TOP}
 
 cp vimfiles/bundle/vim_plugins/a.vim/plugin/ -r vimfiles/
 
-rm -rf $HOME/.exvim
-if [ -f $HOME/.vim ]
+if [ -e $HOME/.vim ]
 then
+	echo "Backing up $HOME/.vim"
+	rm -rf $HOME/.vim_bk
 	mv $HOME/.vim $HOME/.vim_bk
 fi
 
-if [ -f $HOME/.vimrc ]
+if [ -e $HOME/.vimrc ]
 then
+	echo "Backing up $HOME/.vimrc"
 	mv $HOME/.vimrc $HOME/.vimrc_bk
 fi
 
-if [ -d $HOME/.exvim ]
+if [ -e $HOME/.exvim ]
 then
+	echo "Remove $HOME/.exvim"
 	rm -rf $HOME/.exvim*
 fi
 
-cp ./dist/ctags_lang      $HOME/.ctags
-# cp -r vimfiles          $HOME/.exvim
+if [ -e $HOME/.ctags ]
+then
+	echo "Backing up $HOME/.ctags"
+	mv $HOME/.ctags $HOME/.ctags_bk
+fi
+
+ln -s $TOP/dist/ctags_lang  $HOME/.ctags
 ln -s $TOP/vimfiles $HOME/.exvim
 ln -s $HOME/.exvim $HOME/.vim
 
-# cd ~/.vim/bundle/YouCompleteMe
-# ./install.py --clang-completer
-# # ./install.py --all
-# cd $TOP
 
-if [ -d $HOME/.tmux.conf ]
+if [ -e $HOME/.tmux.conf ]
 then
-	rm -rf $HOME/.tmux.conf
+	echo "Backing up $HOME/.tmux.conf"
+	mv $HOME/.tmux.conf $HOME/.tmux.conf_bk
 fi
-ln -s $TOP/.tmux.conf $HOME/.tmux.conf
+if [ -e $HOME/.bashrc ]
+then
+	echo "Backing up $HOME/.bashrc"
+	mv $HOME/.bashrc $HOME/.bashrc_bk
+fi
+if [ -e $HOME/.zshrc ]
+then
+	echo "Backing up $HOME/.zshrc"
+	mv $HOME/.zshrc $HOME/.zshrc_bk
+fi
 
-if [ -d $HOME/.bashrc ]
-then
-	rm -rf $HOME/.bashrc
-fi
-ln -s $TOP/.bashrc $HOME/.bashrc
-
-if [ -d $HOME/.zshrc ]
-then
-	rm -rf $HOME/.zshrc
-fi
-ln -s $TOP/.zshrc $HOME/.zshrc
+cp $TOP/.tmux.conf $HOME/.tmux.conf
+cp $TOP/.bashrc $HOME/.bashrc
+cp $TOP/.zshrc $HOME/.zshrc
 
 
 if [ "$WHOAMI" == "root" ]
 then
-    sed -i "s/\/home\/\$WHOAMI/\/$WHOAMI/" ~/.tmux.conf
-    sed -i "s/\/home\/\$WHOAMI/\/$WHOAMI/" ~/.zshrc
+    sed -i "s/\/home\/\$WHOAMI/\/$WHOAMI/" $HOME/.tmux.conf
+    sed -i "s/\/home\/\$WHOAMI/\/$WHOAMI/" $HOME/.zshrc
 else
-    sed -i "s/\/home\/\$WHOAMI/\/home\/$WHOAMI/" ~/.tmux.conf
-    sed -i "s/\/home\/\$WHOAMI/\/home\/$WHOAMI/" ~/.zshrc
+    sed -i "s/\/home\/\$WHOAMI/\/home\/$WHOAMI/" $HOME/.tmux.conf
+    sed -i "s/\/home\/\$WHOAMI/\/home\/$WHOAMI/" $HOME/.zshrc
 fi
 echo "install DONE!"
 

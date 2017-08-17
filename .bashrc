@@ -138,10 +138,14 @@ PATH+="$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH"
 
 
 PATH+=":$HOME/Environment/env_rootfs/bin"
-PATH+=":$HOME/Environment/env_rootfs/bin/etc"
-PATH+=":$HOME/Environment/env_rootfs/bin/sbin"
-PATH+=":$HOME/Environment/env_rootfs/bin/bin"
-PATH+=":$HOME/Environment/env_rootfs/bin/man"
+PATH+=":$HOME/Environment/env_rootfs/sbin"
+PATH+=":$HOME/Environment/env_rootfs/man"
+PATH+=":$HOME/Environment/env_rootfs/usr/bin"
+PATH+=":$HOME/Environment/env_rootfs/usr/sbin"
+PATH+=":$HOME/Environment/env_rootfs/usr/man"
+PATH+=":$HOME/Environment/env_rootfs/usr/local/bin"
+PATH+=":$HOME/Environment/env_rootfs/usr/local/sbin"
+PATH+=":$HOME/Environment/env_rootfs/usr/local/man"
 
 PATH+=":$HOME/Environment/my_c_program/debug_src_full/env_rootfs/bin"
 PATH+=":$HOME/Environment/my_c_program/debug_src_full/env_rootfs/sbin"
