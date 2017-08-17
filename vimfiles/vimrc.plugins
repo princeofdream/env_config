@@ -315,6 +315,8 @@ let g:syntastic_javascript_checkers = ['eslint']
 Plugin 'mbbill/undotree'
 
 nnoremap <leader>u :UndotreeToggle<CR>
+nnoremap <F6> :UndotreeToggle<CR>
+
 let g:undotree_SetFocusWhenToggle=1
 let g:undotree_WindowLayout = 4
 
@@ -490,6 +492,8 @@ let g:clang_hl_errors=1
 map ff :FufFile<cr>
 map fb :FufBuffer<cr>
 
+Plugin 'ggreer/the_silver_searcher'
+
 Plugin 'mileszs/ack.vim'
 " let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ackprg = 'ag --vimgrep'
@@ -497,9 +501,8 @@ let g:ackprg = 'ag --vimgrep'
 Plugin 'sjl/gundo.vim'
 nnoremap <F5> :GundoToggle<CR>
 
-" Plugin 'dyng/ctrlsf.vim'
-" nnoremap <F6> :CtrlSFToggle<CR>
-" nnoremap <F6> :UndotreeToggle<CR>
+Plugin 'dyng/ctrlsf.vim'
+nnoremap <F7> :CtrlSFToggle<CR>
 
 
 set completeopt=menu,longest
@@ -512,9 +515,6 @@ set completeopt=menu,longest
 Plugin 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType="context"
 
-
-Plugin 'ggreer/the_silver_searcher'
-let g:ackprg = 'ag --vimgrep'
 
 
 

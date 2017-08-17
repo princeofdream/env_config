@@ -67,15 +67,25 @@ function build_ack2()
 		then
 			make clean
 		fi
-		if [ -f ack222 ]
+		if [ -f ack-standalone ]
 		then
 			echo "ack exist, skip build!"
 		else
+			if [ ! -f ack-standalone ]
+			then
+				curl -o cpanminus -L http://cpanmin.us
+				chmod 755 cpanminus
+			fi
+			./cpanminus -l extlib File::Next
+			export PERL5LIB=extlib/lib/perl5
 			perl Makefile.PL
 			make
-			# make ack-standalone
-			make install DESTDIR=$FAKE_ROOT
+			make ack-standalone
+			# make install DESTDIR=$FAKE_ROOT
 			get_result $?
+			cp ack-standalone $BIN_PATH/
+			cd $BIN_PATH
+			ln -s ack-standalone ack
 		fi
 	else
 		echo "Do not have plugin YouCompleteMe"
