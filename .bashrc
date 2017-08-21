@@ -254,6 +254,9 @@ alias sudo='sudo env PATH=$PATH'
 
 
 
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH
+LD_LIBRARY_PATH+=":$HOME/Environment/env_rootfs/lib"
+LD_LIBRARY_PATH+=":$HOME/Environment/env_rootfs/usr/local/lib64"
 
 #export PATH
 export TERM
@@ -263,6 +266,7 @@ export GIT_PS1_SHOWDIRTYSTATE
 export JAVA_HOME
 export JRE_HOME
 export CLASSPATH
+export LD_LIBRARY_PATH
 # export LANG='C'
 # unset CLASSPATH
 # unset JAVA_HOME
