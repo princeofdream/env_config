@@ -488,6 +488,9 @@ endif
 " noremap <C-k> [c
 " noremap <C-j> ]c
 
+nnoremap <C-k> :set mouse=a<CR>
+nnoremap <C-o> :set mouse=c<CR>
+
 " enhance '<' '>' , do not need to reselect the block after shift it.
 vnoremap < <gv
 vnoremap > >gv

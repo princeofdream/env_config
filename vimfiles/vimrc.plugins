@@ -506,7 +506,8 @@ Plugin 'dyng/ctrlsf.vim'
 nnoremap <F7> :CtrlSFToggle<CR>
 
 
-set completeopt=menu,longest
+set completeopt=longest,menuone,preview
+" set completeopt=menu,longest
 
 " Plugin 'vim-airline/vim-airline'
 " let g:airline#extensions#tabline#enabled = 1
