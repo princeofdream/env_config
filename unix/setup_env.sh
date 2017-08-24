@@ -94,7 +94,14 @@ function build_ack2()
 	wait
 }
 
-
+function build_powerline()
+{
+	cd $BUNDLE_PATH/powerline
+	./setup.py build
+	# ./setup.py install --root=$FAKE_ROOT
+	sudo ./setup.py install
+	cd $TOP
+}
 
 
 
@@ -106,6 +113,7 @@ echo $BUNDLE_PATH
 build_the_silver_searcher $1 $2
 build_ycm $1 $2
 build_ack2 $1 $2
+build_powerline $1 $2
 
 echo "install sucess!"
 
