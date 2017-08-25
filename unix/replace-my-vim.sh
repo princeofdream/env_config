@@ -6,6 +6,12 @@ BUNDLE_PATH=$VIMFILES_PATH/bundle
 
 WHOAMI=`whoami`
 
+
+cd $BUNDLE_PATH/vim_plugins
+./install.sh
+cd $TOP
+
+
 ## for powerline-shell
 cd $BUNDLE_PATH
 cp ${TOP}/patch/powerline-shell/*.patch $BUNDLE_PATH/powerline-shell/

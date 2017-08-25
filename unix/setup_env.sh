@@ -98,8 +98,8 @@ function build_powerline()
 {
 	cd $BUNDLE_PATH/powerline
 	./setup.py build
-	# ./setup.py install --root=$FAKE_ROOT
-	sudo ./setup.py install
+	./setup.py install --root=$FAKE_ROOT
+	# sudo ./setup.py install
 	cd $TOP
 }
 
