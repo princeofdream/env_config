@@ -2,7 +2,7 @@
 " basic
 "/////////////////////////////////////////////////////////////////////////////
 
-call pathogen#infect()
+" call pathogen#infect()
 
 set nocompatible " be iMproved, required
 
@@ -136,6 +136,7 @@ if empty($TMUX)
 colorscheme gruvbox
 else
 colorscheme one
+" colorscheme gruvbox
 endif
 
 "/////////////////////////////////////////////////////////////////////////////

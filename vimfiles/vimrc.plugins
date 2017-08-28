@@ -17,7 +17,7 @@ Plugin 'gmarik/Vundle.vim'
 
 " ex-taglist: invoke by <F4>
 " ---------------------------------------------------
-Plugin 'exvim/ex-taglist'
+" Plugin 'exvim/ex-taglist'
 
 " F4:  Switch on/off TagList
 nnoremap <unique> <silent> <F4> :TlistToggle<CR>
@@ -135,6 +135,7 @@ let tlist_actionscript_settings = 'actionscript;c:class;f:method;p:property;v:va
 " ex-minibufexpl
 " ---------------------------------------------------
 " Plugin 'exvim/ex-minibufexpl'
+Plugin 'fholgado/minibufexpl.vim'
 " let g:miniBufExplBuffersNeeded = 0
 " let g:miniBufExplUseSingleClick = 1 " If you would like to single click on tabs rather than double clicking on them to goto the selected buffer.
 let g:miniBufExplMaxSize = 1 " <max lines: default 0> setting this to 0 will mean the window gets as big as needed to fit all your buffers.
@@ -148,50 +149,44 @@ let g:miniBufExplModSelTarget = 1
 
 " ex-autocomplpop: invoke when you input text
 " ---------------------------------------------------
-Plugin 'exvim/ex-autocomplpop'
+" Plugin 'exvim/ex-autocomplpop'
 
 " ex-showmarks: invoke by m... or <leader>mm, <leader>ma
 " ---------------------------------------------------
-Plugin 'exvim/ex-showmarks'
+" Plugin 'exvim/ex-showmarks'
 
-" TODO: bootleq/ShowMarks on github is well organized in code, but have lots
-" bugs, consider merge his code and fixes the bugs
-let g:showmarks_enable = 1
-let g:showmarks_include = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-let g:showmarks_ignore_type = 'hqm' " Ignore help, quickfix, non-modifiable buffers
-" Hilight lower & upper marks
-let g:showmarks_hlline_lower = 1
-let g:showmarks_hlline_upper = 0
+" " TODO: bootleq/ShowMarks on github is well organized in code, but have lots
+" " bugs, consider merge his code and fixes the bugs
+" let g:showmarks_enable = 1
+" let g:showmarks_include = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+" let g:showmarks_ignore_type = 'hqm' " Ignore help, quickfix, non-modifiable buffers
+" " Hilight lower & upper marks
+" let g:showmarks_hlline_lower = 1
+" let g:showmarks_hlline_upper = 0
 
 " ex-visincr: invoke when select text and type ':II'
 " ---------------------------------------------------
-Plugin 'exvim/ex-visincr'
+" Plugin 'exvim/ex-visincr'
 
 " ex-matchit: invoke by %
 " ---------------------------------------------------
-Plugin 'exvim/ex-matchit'
+" Plugin 'exvim/ex-matchit'
 
 " ex-easyhl:
 " ---------------------------------------------------
-Plugin 'exvim/ex-easyhl'
+" Plugin 'exvim/ex-easyhl'
 
 " searchcompl: invoke by /
 " ---------------------------------------------------
-Plugin 'exvim/ex-searchcompl'
+" Plugin 'exvim/ex-searchcompl'
 
 " ex-colorschemes
 " ---------------------------------------------------
-Plugin 'exvim/ex-colorschemes'
+" Plugin 'exvim/ex-colorschemes'
 
 " vim-color-solarized
 " ---------------------------------------------------
 Plugin 'altercation/vim-colors-solarized'
-
-" vim-color-gruvbox
-" ---------------------------------------------------
-Plugin 'morhetz/gruvbox'
-
-" let g:gruvbox_contrast_dark = 'soft'
 
 " DISABLE: vim-airline makes Vim editing slow when there are too many buffers opened
 "          if you don't mind, and love this plugin, uncomment the script below
@@ -301,7 +296,7 @@ let g:syntastic_javascript_checkers = ['eslint']
 " " ---------------------------------------------------
 
 " TODO: choose a snippet plugin
-" Plugin 'Shougo/neosnippet.vim'
+Plugin 'Shougo/neosnippet.vim'
 " " ---------------------------------------------------
 
 " Plugin 'msanders/snipmate.vim'
@@ -379,13 +374,13 @@ let g:LargeFile= 5 " files >= 5MB will use LargeFile rules
 
 " ex-cref: invoke by <leader>cr
 " ---------------------------------------------------
-Plugin 'exvim/ex-cref'
+" Plugin 'exvim/ex-cref'
 
-" this is modified for default c syntax highlight settings
-" make it don't highlight error pattern
-let c_gnu = 1
-let c_no_curly_error = 1
-let c_no_bracket_error = 1
+" " this is modified for default c syntax highlight settings
+" " make it don't highlight error pattern
+" let c_gnu = 1
+" let c_no_curly_error = 1
+" let c_no_bracket_error = 1
 
 "}}}
 
@@ -396,7 +391,7 @@ nnoremap <unique> <leader>w :StripWhitespace<CR>
 
 " ex-typescript
 " ---------------------------------------------------
-Plugin 'exvim/ex-typescript'
+" Plugin 'exvim/ex-typescript'
 
 " emmet-vim
 " ---------------------------------------------------
@@ -446,7 +441,7 @@ Plugin 'kchmck/vim-coffee-script'
 
 " vim-html
 " ---------------------------------------------------
-Plugin 'exvim/ex-indenthtml.vim'
+" Plugin 'exvim/ex-indenthtml.vim'
 
 
 " DISABLE: Slow to open big css file
@@ -478,16 +473,16 @@ let g:vim_markdown_initial_foldlevel=9999
 " ---------------------------------------------------
 " Plugin 'Valloric/YouCompleteMe'
 " Plugin 'Rip-Rip/clang_complete'
-let g:clang_complete_copen=0
-let g:clang_periodic_quickfix=1
-let g:clang_snippets=1
-let g:clang_close_preview=1
-let g:clang_use_library=1
-" let g:clang_user_options='-stdlib=libc++ -std=c++11 -IIncludePath'
-" let g:clang_library_path='/usr/local/lib'
-" let g:clang_library_path='/usr/lib/llvm-3.8/lib'
-let g:clang_library_path='/home/lijin/Environment/env_rootfs/lib/'
-let g:clang_hl_errors=1
+" let g:clang_complete_copen=0
+" " let g:clang_periodic_quickfix=1
+" " let g:clang_snippets=1
+" " let g:clang_close_preview=1
+" let g:clang_use_library=1
+" " let g:clang_user_options='-stdlib=libc++ -std=c++11 -IIncludePath'
+" " let g:clang_library_path='/usr/local/lib'
+" " let g:clang_library_path='/usr/lib/llvm-3.8/lib'
+" let g:clang_library_path='/home/lijin/Environment/env_rootfs/lib/'
+" let g:clang_hl_errors=1
 
 " Plugin 'vim-fuzzyfinder'
 map ff :FufFile<cr>
@@ -495,7 +490,10 @@ map fb :FufBuffer<cr>
 
 Plugin 'ggreer/the_silver_searcher'
 
-Plugin 'mileszs/ack.vim'
+" Plugin 'mileszs/ack.vim'
+Plugin 'beyondgrep/ack2'
+Plugin 'rking/ag.vim'
+
 " let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ackprg = 'ag --vimgrep'
 
@@ -518,6 +516,59 @@ Plugin 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType="context"
 
 
+
+""""" Vim colorschemes
+Plugin 'rakr/vim-one'
+Plugin 'joshdick/onedark.vim'
+Plugin 'upsuper/vim-colorschemes'
+
+" vim-color-gruvbox
+" ---------------------------------------------------
+Plugin 'morhetz/gruvbox'
+" let g:gruvbox_contrast_dark = 'soft'
+
+
+
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'ternjs/tern_for_vim'
+
+Plugin 'jlanzarotta/bufexplorer'
+" Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'powerline/powerline'
+" Plugin 'Lokaltog/vim-powerline'
+Plugin 'powerline/fonts'
+Plugin 'chrisbra/NrrwRgn'
+Plugin 'tpope/vim-commentary'
+Plugin 'terryma/vim-multiple-cursors'
+" Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline-themes'
+Plugin 'dhruvasagar/vim-table-mode'
+" Plugin 'ervandew/supertab'
+Plugin 'davidhalter/jedi'
+Plugin 'milkbikis/powerline-shell'
+
+
+
+Plugin 'princeofdream/AfterColors'
+Plugin 'princeofdream/Align'
+Plugin 'princeofdream/calendar-vim'
+Plugin 'princeofdream/CountJump'
+Plugin 'princeofdream/cvim'
+Plugin 'princeofdream/fencview'
+Plugin 'princeofdream/FindMate'
+Plugin 'princeofdream/mark.vim'
+Plugin 'princeofdream/matchit'
+" Plugin 'princeofdream/omnicppcomplete'
+Plugin 'princeofdream/project'
+Plugin 'princeofdream/python_match'
+Plugin 'princeofdream/repeat'
+Plugin 'princeofdream/showmarks'
+Plugin 'princeofdream/surround'
+Plugin 'princeofdream/taglist'
+Plugin 'princeofdream/vim-autocomplpop'
+Plugin 'princeofdream/vim-fuzzyfinder'
+Plugin 'princeofdream/vim-l9'
+Plugin 'princeofdream/ZoomWin'
 
 
 "}}}
