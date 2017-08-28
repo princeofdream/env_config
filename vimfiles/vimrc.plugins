@@ -421,15 +421,16 @@ Plugin 'davidhalter/jedi'
 Plugin 'milkbikis/powerline-shell'
 
 Plugin 'MattesGroeger/vim-bookmarks'
-highlight BookmarkSign ctermbg=NONE ctermfg=160
-highlight BookmarkLine ctermbg=194 ctermfg=NONE
+" let g:bookmark_no_default_key_mappings = 1
+" highlight BookmarkSign ctermbg=NONE ctermfg=160
+" highlight BookmarkLine ctermbg=194 ctermfg=NONE
 " let g:bookmark_sign = '♥'
 let g:bookmark_sign = '♥'
 let g:bookmark_highlight_lines = 1
-let g:bookmark_disable_ctrlp = 0
+let g:bookmark_disable_ctrlp = 1
 let g:bookmark_auto_save = 1
-
-
+let g:bookmark_annotation_sign = '>>'
+let g:bookmark_auto_close = 1
 
 
 
