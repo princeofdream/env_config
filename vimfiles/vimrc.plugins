@@ -21,7 +21,6 @@ Plugin 'gmarik/Vundle.vim'
 "          to enable it
 " ex-minibufexpl
 " ---------------------------------------------------
-" Plugin 'exvim/ex-minibufexpl'
 Plugin 'fholgado/minibufexpl.vim'
 " let g:miniBufExplBuffersNeeded = 0
 " let g:miniBufExplUseSingleClick = 1 " If you would like to single click on tabs rather than double clicking on them to goto the selected buffer.
@@ -33,34 +32,6 @@ let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
-
-" ex-autocomplpop: invoke when you input text
-" ---------------------------------------------------
-" Plugin 'exvim/ex-autocomplpop'
-
-" ex-visincr: invoke when select text and type ':II'
-" ---------------------------------------------------
-" Plugin 'exvim/ex-visincr'
-
-" ex-matchit: invoke by %
-" ---------------------------------------------------
-" Plugin 'exvim/ex-matchit'
-
-" ex-easyhl:
-" ---------------------------------------------------
-" Plugin 'exvim/ex-easyhl'
-
-" searchcompl: invoke by /
-" ---------------------------------------------------
-" Plugin 'exvim/ex-searchcompl'
-
-" ex-colorschemes
-" ---------------------------------------------------
-" Plugin 'exvim/ex-colorschemes'
-
-" vim-color-solarized
-" ---------------------------------------------------
-" Plugin 'altercation/vim-colors-solarized'
 
 " DISABLE: vim-airline makes Vim editing slow when there are too many buffers opened
 "          if you don't mind, and love this plugin, uncomment the script below
@@ -84,6 +55,8 @@ let g:miniBufExplModSelTarget = 1
 " " let g:airline_section_warning = airline#section#create(['whitespace']) " NOTE: airline#section#create has no effect in .vimrc initialize pahse
 " " let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#whitespace#check(),0)}'
 " let g:airline_section_warning = ''
+
+
 
 " ctrlp: invoke by <ctrl-p>
 Plugin 'kien/ctrlp.vim'
@@ -242,7 +215,7 @@ let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 " LargeFile
 " ---------------------------------------------------
 Plugin 'vim-scripts/LargeFile'
-let g:LargeFile= 5 " files >= 5MB will use LargeFile rules
+let g:LargeFile= 20 " files >= 5MB will use LargeFile rules
 
 "}}}
 
@@ -270,10 +243,6 @@ let g:LargeFile= 5 " files >= 5MB will use LargeFile rules
 
 Plugin 'ntpeters/vim-better-whitespace'
 nnoremap <unique> <leader>w :StripWhitespace<CR>
-
-" ex-typescript
-" ---------------------------------------------------
-" Plugin 'exvim/ex-typescript'
 
 " emmet-vim
 " ---------------------------------------------------
@@ -320,11 +289,6 @@ Plugin 'pangloss/vim-javascript'
 " vim-coffee-script
 " ---------------------------------------------------
 Plugin 'kchmck/vim-coffee-script'
-
-" vim-html
-" ---------------------------------------------------
-" Plugin 'exvim/ex-indenthtml.vim'
-
 
 " DISABLE: Slow to open big css file
 " vim-css-color
@@ -446,12 +410,6 @@ let g:bookmark_auto_close = 1
 set cursorline
 set wrap
 
-
-" TEST {{{
-" " test-loading
-" echomsg "test-loading: .vimrc"
-" Plugin 'exvim/test-loading'
-"}}}
 
 " vim:ts=4:sw=4:sts=4 et fdm=marker:
 
