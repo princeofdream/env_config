@@ -95,15 +95,21 @@ endif
 if exists('g:exvim_custom_path')
     let vimrc_plugins_path = g:exvim_custom_path.'/vimrc.plugins'
     let vimrc_plugins_local_path = g:exvim_custom_path.'/vimrc.plugins.local'
+    let vimrc_plugins_custom_path = g:exvim_custom_path.'/vimrc.plugins.custom'
 else
     let vimrc_plugins_path = '~/.vim/vimrc.plugins'
     let vimrc_plugins_local_path = '~/.vim/vimrc.plugins.local'
+    let vimrc_plugins_custom_path = '~/.vim/vimrc.plugins.custom'
 endif
+
 if filereadable(expand(vimrc_plugins_path))
     exec 'source ' . fnameescape(vimrc_plugins_path)
 endif
 if filereadable(expand(vimrc_plugins_local_path))
     exec 'source ' . fnameescape(vimrc_plugins_local_path)
+endif
+if filereadable(expand(vimrc_plugins_custom_path))
+    exec 'source ' . fnameescape(vimrc_plugins_custom_path)
 endif
 
 " vundle#end
@@ -462,7 +468,7 @@ nnoremap <silent> <leader>y2 :let @*=fnamemodify(bufname('%'),":p:t")<CR>
 nnoremap <silent> <leader>y3 :let @*=fnamemodify(bufname('%'),":p")<CR>
 
 " F8 or <leader>/:  Set Search pattern highlight on/off
-nnoremap <F8> :let @/=""<CR>
+" nnoremap <F8> :let @/=""<CR>
 nnoremap <leader>/ :let @/=""<CR>
 " DISABLE: though nohlsearch is standard way in Vim, but it will not erase the
 "          search pattern, which is not so good when use it with exVim's <leader>r
