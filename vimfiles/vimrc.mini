@@ -52,16 +52,13 @@ Plugin 'powerline/fonts'
 Plugin 'sjl/gundo.vim'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'chrisbra/NrrwRgn'
-Plugin 'Shougo/neosnippet.vim'
-" Plugin 'msanders/snipmate.vim'
-" Plugin 'spf13/snipmate-snippets'
 " Plugin 'vim-airline/vim-airline'
 " Plugin 'vim-airline/vim-airline-themes'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'dhruvasagar/vim-table-mode'
-Plugin 'ervandew/supertab'
+" Plugin 'dhruvasagar/vim-table-mode'
+" Plugin 'ervandew/supertab'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'davidhalter/jedi'
 
@@ -73,6 +70,24 @@ Plugin 'upsuper/vim-colorschemes'
 Plugin 'morhetz/gruvbox'
 
 Plugin 'MattesGroeger/vim-bookmarks'
+
+
+"""" vim snippets
+""" neosnippet
+" Plugin 'Shougo/neosnippet-snippets'
+" Plugin 'honza/vim-snippets.git'
+" Plugin 'Shougo/neosnippet.vim'
+"""""
+" Plugin 'msanders/snipmate.vim'
+"""""
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+"""""
+" Plugin 'spf13/snipmate-snippets'
+
+
 Plugin 'princeofdream/vim_plugins'
 " Plugin 'princeofdream/vim-colors-solarized'
 " =======================================================

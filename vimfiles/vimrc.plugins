@@ -60,7 +60,7 @@ let g:miniBufExplModSelTarget = 1
 
 " vim-color-solarized
 " ---------------------------------------------------
-Plugin 'altercation/vim-colors-solarized'
+" Plugin 'altercation/vim-colors-solarized'
 
 " DISABLE: vim-airline makes Vim editing slow when there are too many buffers opened
 "          if you don't mind, and love this plugin, uncomment the script below
@@ -170,10 +170,18 @@ let g:syntastic_javascript_checkers = ['eslint']
 " " ---------------------------------------------------
 
 " TODO: choose a snippet plugin
-Plugin 'Shougo/neosnippet.vim'
+" Plugin 'Shougo/neosnippet-snippets'
+" Plugin 'honza/vim-snippets.git'
+" Plugin 'Shougo/neosnippet.vim'
 " " ---------------------------------------------------
 
 " Plugin 'msanders/snipmate.vim'
+" " ---------------------------------------------------
+
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
 " " ---------------------------------------------------
 
 " Plugin 'spf13/snipmate-snippets'
@@ -386,8 +394,8 @@ set completeopt=longest,menuone,preview
 " let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline#extensions#tabline#left_alt_sep = '|'
 
-Plugin 'ervandew/supertab'
-let g:SuperTabDefaultCompletionType="context"
+" Plugin 'ervandew/supertab'
+" let g:SuperTabDefaultCompletionType="context"
 
 
 
@@ -416,7 +424,7 @@ Plugin 'powerline/fonts'
 Plugin 'chrisbra/NrrwRgn'
 Plugin 'tpope/vim-commentary'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'dhruvasagar/vim-table-mode'
+" Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'davidhalter/jedi'
 Plugin 'milkbikis/powerline-shell'
 
