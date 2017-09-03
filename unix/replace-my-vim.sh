@@ -16,6 +16,20 @@ cd $TOP
 cd $BUNDLE_PATH
 cp ${TOP}/patch/powerline-shell/*.patch $BUNDLE_PATH/powerline-shell/
 cd $BUNDLE_PATH/powerline-shell
+
+## check git config
+git_user_name=`git config --get user.name`
+git_user_email=`git config --get user.email`
+if [ "$git_user_name" == "" ]
+then
+	 git config --global user.name "James Lee"
+fi
+
+if [ "$git_user_email" == "" ]
+then
+	 git config --global user.email "princetemp@outlook.com"
+fi
+
 if [ -d "segments" ]
 then
 	echo "in $(pwd) Do reset!!!!!"
@@ -85,7 +99,7 @@ fi
 ln -s $TOP/dist/ctags_lang  $HOME/.ctags
 ln -s $TOP/vimfiles $HOME/.exvim
 ln -s $HOME/.exvim $HOME/.vim
-if[ ! -d $HOME/.config ]
+if [ ! -d $HOME/.config ]
 then
 	mkdir -p $HOME/.config
 fi
