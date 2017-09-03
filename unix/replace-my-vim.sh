@@ -85,6 +85,11 @@ fi
 ln -s $TOP/dist/ctags_lang  $HOME/.ctags
 ln -s $TOP/vimfiles $HOME/.exvim
 ln -s $HOME/.exvim $HOME/.vim
+if[ ! -d $HOME/.config ]
+then
+	mkdir -p $HOME/.config
+fi
+ln -s $HOME/.exvim $HOME/.config/nvim
 
 
 if [ -e $HOME/.tmux.conf ]

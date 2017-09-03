@@ -90,6 +90,19 @@ Plugin 'honza/vim-snippets'
 
 Plugin 'princeofdream/vim_plugins'
 " Plugin 'princeofdream/vim-colors-solarized'
+
+
+"" git status
+" Plugin 'mhinz/vim-signify'
+Plugin 'airblade/vim-gitgutter'
+"" show buffer
+Plugin 'bling/vim-bufferline'
+
+"" python IDE
+Plugin 'ivanov/vim-ipython'
+""""for nvim
+"""Plugin 'bfredl/nvim-ipy'
+
 " =======================================================
 
 filetype plugin indent on " required
