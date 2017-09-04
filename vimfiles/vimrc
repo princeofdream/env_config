@@ -520,3 +520,6 @@ if filereadable(expand(vimrc_local_path))
 endif
 
 " vim:ts=4:sw=4:sts=4 et fdm=marker:
+
+hi VertSplit guibg=grey guifg=#181A1F
+
