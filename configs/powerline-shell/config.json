@@ -1,0 +1,14 @@
+{
+  "segments": [
+    "virtual_env",
+    "username",
+    "ssh",
+    "cwd",
+	"git_branch",
+	"android_target",
+    "hg",
+    "jobs",
+    "root",
+    "newline"
+  ]
+}

@@ -1,0 +1,20 @@
+§ =============================================================
+§  Personal Information
+§ =============================================================
+
+SetMacro( 'AUTHOR',       'James Lee' )
+SetMacro( 'AUTHORREF',    'JamesL' )
+SetMacro( 'EMAIL',        'princeofdream@outlook.com' )
+SetMacro( 'ORGANIZATION', 'BookCL' )
+SetMacro( 'COMPANY',      'BookCL' )
+SetMacro( 'COPYRIGHT',    'Copyright (c) |YEAR|, |AUTHOR|' )
+SetMacro( 'LICENSE',      'GNU General Public License' )
+
+§ =============================================================
+§  Date and Time Format
+§ =============================================================
+
+§SetFormat( 'DATE', '%x' )
+§SetFormat( 'TIME', '%H:%M' )
+§SetFormat( 'YEAR', '%Y' )
+

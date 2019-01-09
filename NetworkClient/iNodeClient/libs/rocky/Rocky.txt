@@ -1,0 +1,16 @@
+﻿凝思磐石系统的32位lib库在其操作系统安装盘中。可以从操作系统安装盘中拷贝，也可以做成镜像文件从镜像文件拷贝。
+32位lib库位置：
+rocky.iso/Rocky/install_lib_32
+
+## rocky.iso是操作系统安装盘的镜像文件##
+
+
+系统安装说明文档：
+rocky.iso/Rocky/document
+里面有安装操作系统的详细步骤
+
+
+1. 拷贝install_lib_32文件夹及其内容到凝思磐石系统根目录下。
+2. 拷贝32位lib库解压脚本unpack_lib32.sh到凝思磐石系统。
+3. Shell终端中运行unpack_lib32.sh，解压32位lib库。
+4. 安装iNode

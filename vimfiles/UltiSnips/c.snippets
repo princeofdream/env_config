@@ -1,0 +1,44 @@
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+
+priority -50
+
+snippet spr "sprintf ..."
+sprintf(${1:value}, "${2:%s}\n"${2/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$3${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+
+snippet prk "printk ..."
+printk(${1:KERN_CRIT} "${2:%s}\n"${2/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$3${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+
+snippet ppr "printk ..."
+printf("--<%s:%d>--[${1:%s}]\n", __FILE__,__LINE__,${2:value});
+endsnippet
+
+snippet un "unsigned ..."
+unsigned ${1:int} ${2:value}
+endsnippet
+
+# snippet st "struct"
+# struct ${1:`!p snip.rv = (snip.basename or "name") + "_t"`} {
+#     ${0:/* data */}
+# };
+# endsnippet
+
+snippet func "function" b
+/*
+ * ===  FUNCTION  ======================================================================
+ *         Name:  $2
+ *       return:  $1
+ *    paramters:  $3
+ *  Description:  ${4:desc}
+ * =====================================================================================
+*/
+${1:void} ${2:function_name}(${3:void})
+{
+	${VISUAL}$0
+}
+endsnippet
+
+# vim:ft=snippets:
