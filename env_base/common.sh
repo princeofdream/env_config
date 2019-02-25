@@ -110,9 +110,22 @@ append_path_env ()
 	fi
 }	# ----------  end of function append_path_env  ----------
 
+append_classpath_env ()
+{
+	add_path=$1
+	# str1 not contain str2
+	if [[ ! $ORIGIN_CLASSPATH =~ $add_path ]]; then
+		if [[ $CLASSPATH != "" ]]; then
+			CLASSPATH+=":"
+		fi
+		CLASSPATH+="$add_path"
+	fi
+}	# ----------  end of function append_path_env  ----------
+
 ####################################################################
 
 ORIGIN_PATH=$PATH
+ORIGIN_CLASSPATH=$CLASSPATH
 PATH=""
 
 if [[ $SYSTEM_TYPE == "mac" ]]; then
@@ -124,13 +137,11 @@ if [[ "$USE_EXTERN_JAVA_ENV" == "true" ]]; then
 	# JAVA_HOME="/usr/lib/jvm/default-java"
 	JAVA_HOME="$PATH_TOOLCHAIN_JDK_BASE/default-java"
 	JRE_HOME=$JAVA_HOME/jre
-	if [[ $CLASSPATH"x" == "x" ]]; then
-		TMP_CLASSPATH=""
-	else
-		TMP_CLASSPATH=":$CLASSPATH"
-	fi
-	CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$PATH_ENV_ROOTFS_BASE/lib
-	CLASSPATH+=$TMP_CLASSPATH
+
+	append_classpath_env "."
+	append_classpath_env "$JAVA_HOME/lib:$JRE_HOME/lib"
+	append_classpath_env "$PATH_ENV_ROOTFS_BASE/lib"
+
 	append_path_env "$JAVA_HOME/bin:$JAVA_HOME/jre/bin"
 fi
 
@@ -138,6 +149,8 @@ fi
 if [[ "$USE_EXTERN_ANT_ENV" == "true" ]]; then
 	# ANT_HOME="$PATH_ENV_ROOTFS_BASE"
 	ANT_HOME="$PATH_TOOLCHAIN_JDK_BASE/apache-ant"
+
+	append_classpath_env "$ANT_HOME/lib"
 	append_path_env "$ANT_HOME/bin"
 fi
 
@@ -145,14 +158,19 @@ fi
 if [[ "$USE_EXTERN_MAVEN_ENV" == "true" ]]; then
 	# M2_HOME="$PATH_ENV_ROOTFS_BASE"
 	M2_HOME="$PATH_TOOLCHAIN_JDK_BASE/apache-maven"
+
+	append_classpath_env "$M2_HOME/lib"
 	append_path_env "$M2_HOME/bin"
 fi
 
 ############# #tomcat Environment ##################
 if [[ "$USE_EXTERN_TOMCAT_ENV" == "true" ]]; then
-	CATALINA_HOME="$PATH_WEB_BASE/tomcat/bin"
-	CATALINA_BASE="$PATH_WEB_BASE/tomcat"
+	CATALINA_BASE="$PATH_WEB_BASE/apache-tomcat"
+	CATALINA_HOME="$CATALINA_BASE/"
 	CATALINA_PID="$CATALINA_BASE/tomcat.pid"
+
+	append_classpath_env "$CATALINA_BASE/lib"
+	append_path_env "$CATALINA_BASE/bin"
 fi
 
 ############# #tomcat Environment ##################
@@ -209,6 +227,7 @@ if [[ $PATH != "" ]]; then
 	PATH+=":"
 fi
 PATH+="$ORIGIN_PATH"
+CLASSPATH+="$ORIGIN_CLASSPATH"
 
 ############# #Extern toolchain Environment ##################
 if [[ "$USE_EXTERN_TOOLCHAIN_ENV" == "true" ]]; then
@@ -317,6 +336,7 @@ else
 fi
 
 ORIGIN_PATH=$PATH
+ORIGIN_CLASSPATH=$CLASSPATH
 SNAPDRAGON_PATH=$PATH_TOOLCHAIN_GCC_BASE/snapdragon-llvm/bin:$PATH
 
 ############# #sudo Environment ##################
@@ -329,6 +349,7 @@ alias s_openjdk_9='switch_java_sdk "openjdk" "9"'
 alias s_jdk_6='switch_java_sdk "jdk" "6"'
 
 alias s_path_origin='export PATH=$ORIGIN_PATH'
+alias s_classpath_origin='export CLASSPATH=$ORIGIN_CLASSPATH'
 alias s_path_snapdragon='export PATH=$SNAPDRAGON_PATH && export LLVMROOT=$LLVM_ARM_ROOT && export LLVMBIN=$LLVMROOT/bin'
 
 alias ncdu='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
