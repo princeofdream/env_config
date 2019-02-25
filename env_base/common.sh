@@ -23,6 +23,7 @@ USE_LLVM_FOR_ARM=false
 
 USE_EXTERN_JAVA_ENV=true
 USE_EXTERN_ANT_ENV=true
+USE_EXTERN_MAVEN_ENV=true
 USE_EXTERN_TOMCAT_ENV=true
 USE_EXTERN_OPENGROK_ENV=true
 USE_EXTERN_WEB_BASE_ENV=true
@@ -39,6 +40,16 @@ USE_EXTERN_PKG_PATH_USR_ENV=true
 
 ############# !!!! ###############
 USE_SYSTEM_LD_PKG_CONFIG_FIRST=false
+
+
+############ Basic PATH variable #############
+PATH_TOOLCHAIN_BASE=$HOME/Environment/toolchain
+PATH_TOOLCHAIN_GCC_BASE=$PATH_TOOLCHAIN_BASE/gcc
+PATH_TOOLCHAIN_JDK_BASE=$PATH_TOOLCHAIN_BASE/jdk
+
+PATH_WEB_BASE=$HOME/Environment/web_base
+
+PATH_ENV_ROOTFS_BASE=$HOME/Environment/env_rootfs
 
 ############# #Select  Terminal Color support ##################
 # Select --> tmux / tmux-xterm / tmux-screen / tmux-st / none
@@ -81,9 +92,9 @@ switch_java_sdk ()
 	TYPE=$1
 	VERSION=$2
 
-	export JAVA_HOME="$HOME/Environment/toolchain/jdk/$TYPE-$VERSION"
+	export JAVA_HOME="$PATH_TOOLCHAIN_JDK_BASE/$TYPE-$VERSION"
 	export JRE_HOME="$JAVA_HOME/jre"
-	export CLASSPATH=".:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH"
+	export CLASSPATH=".:$JAVA_HOME/lib:$JRE_HOME/lib:$PATH_ENV_ROOTFS_BASE/lib:$CLASSPATH"
 	PATH="$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH"
 }	# ----------  end of function switch_java_sdk  ----------
 
@@ -111,21 +122,36 @@ fi
 ############# #Jave Environment ##################
 if [[ "$USE_EXTERN_JAVA_ENV" == "true" ]]; then
 	# JAVA_HOME="/usr/lib/jvm/default-java"
-	JAVA_HOME="$HOME/Environment/toolchain/jdk/default-java"
+	JAVA_HOME="$PATH_TOOLCHAIN_JDK_BASE/default-java"
 	JRE_HOME=$JAVA_HOME/jre
-	CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
+	if [[ $CLASSPATH"x" == "x" ]]; then
+		TMP_CLASSPATH=""
+	else
+		TMP_CLASSPATH=":$CLASSPATH"
+	fi
+	CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$PATH_ENV_ROOTFS_BASE/lib
+	CLASSPATH+=$TMP_CLASSPATH
 	append_path_env "$JAVA_HOME/bin:$JAVA_HOME/jre/bin"
 fi
 
 ############# #ant Environment ##################
 if [[ "$USE_EXTERN_ANT_ENV" == "true" ]]; then
-	ANT_HOME="$HOME/Environment/env_rootfs/bin"
+	# ANT_HOME="$PATH_ENV_ROOTFS_BASE"
+	ANT_HOME="$PATH_TOOLCHAIN_JDK_BASE/apache-ant"
+	append_path_env "$ANT_HOME/bin"
+fi
+
+############# #mvn Environment ##################
+if [[ "$USE_EXTERN_MAVEN_ENV" == "true" ]]; then
+	# M2_HOME="$PATH_ENV_ROOTFS_BASE"
+	M2_HOME="$PATH_TOOLCHAIN_JDK_BASE/apache-maven"
+	append_path_env "$M2_HOME/bin"
 fi
 
 ############# #tomcat Environment ##################
 if [[ "$USE_EXTERN_TOMCAT_ENV" == "true" ]]; then
-	CATALINA_HOME="$HOME/Environment/web_base/tomcat/bin"
-	CATALINA_BASE="$HOME/Environment/web_base/tomcat"
+	CATALINA_HOME="$PATH_WEB_BASE/tomcat/bin"
+	CATALINA_BASE="$PATH_WEB_BASE/tomcat"
 	CATALINA_PID="$CATALINA_BASE/tomcat.pid"
 fi
 
@@ -133,12 +159,12 @@ fi
 if [[ "$USE_EXTERN_OPENGROK_ENV" == "true" ]]; then
 	export OPENGROK_TOMCAT_BASE=$CATALINA_BASE
 	export OPENGROK_APP_SERVER=Tomcat
-	export OPENGROK_INSTANCE_BASE=$HOME/Environment/web_base/opengrok
+	export OPENGROK_INSTANCE_BASE=$PATH_WEB_BASE/opengrok
 fi
 
 
-LLVM_ARM_ROOT=$HOME/Environment/toolchain/gcc/snapdragon-llvm
-LLVM_ORIGIN_ROOT=$HOME/Environment/env_rootfs
+LLVM_ARM_ROOT=$PATH_TOOLCHAIN_GCC_BASE/snapdragon-llvm
+LLVM_ORIGIN_ROOT=$PATH_ENV_ROOTFS_BASE
 LLVMROOT=$LLVM_ARM_ROOT
 LLVMBIN=$LLVMROOT/bin
 
@@ -151,31 +177,31 @@ fi
 ############# #Web_Base Environment ##################
 if [[ "$USE_EXTERN_WEB_BASE_ENV" == "true" ]]; then
 	##### web_base runtime #####
-	append_path_env "$HOME/Environment/web_base/bin"
-	append_path_env "$HOME/Environment/web_base/sbin"
-	append_path_env "$HOME/Environment/web_base/man"
+	append_path_env "$PATH_WEB_BASE/bin"
+	append_path_env "$PATH_WEB_BASE/sbin"
+	append_path_env "$PATH_WEB_BASE/man"
 fi
 
 ############# #Fake rootfs Environment ##################
 if [[ "$USE_EXTERN_ROOTFS_ENV" == "true" ]]; then
 	##### env_rootfs runtime #####
-	append_path_env "$HOME/Environment/env_rootfs/bin"
-	append_path_env "$HOME/Environment/env_rootfs/sbin"
-	append_path_env "$HOME/Environment/env_rootfs/man"
+	append_path_env "$PATH_ENV_ROOTFS_BASE/bin"
+	append_path_env "$PATH_ENV_ROOTFS_BASE/sbin"
+	append_path_env "$PATH_ENV_ROOTFS_BASE/man"
 fi
 
 ############# #Fake rootfs usr Environment ##################
 if [[ "$USE_EXTERN_ROOTFS_USR_ENV" == "true" ]]; then
-	append_path_env "$HOME/Environment/env_rootfs/usr/bin"
-	append_path_env "$HOME/Environment/env_rootfs/usr/sbin"
-	append_path_env "$HOME/Environment/env_rootfs/usr/man"
+	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/bin"
+	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/sbin"
+	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/man"
 fi
 
 ############# #Fake rootfs usr local Environment ##################
 if [[ "$USE_EXTERN_ROOTFS_USR_LOCAL_ENV" == "true" ]]; then
-	append_path_env "$HOME/Environment/env_rootfs/usr/local/bin"
-	append_path_env "$HOME/Environment/env_rootfs/usr/local/sbin"
-	append_path_env "$HOME/Environment/env_rootfs/usr/local/man"
+	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/local/bin"
+	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/local/sbin"
+	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/local/man"
 fi
 
 ############# #Origin PATH Environment ##################
@@ -186,22 +212,22 @@ PATH+="$ORIGIN_PATH"
 
 ############# #Extern toolchain Environment ##################
 if [[ "$USE_EXTERN_TOOLCHAIN_ENV" == "true" ]]; then
-	append_path_env "$HOME/Environment/toolchain/gcc/toolchain-openwrt-arm/bin"
-	append_path_env "$HOME/Environment/toolchain/gcc/toolchain-openwrt-aarch64/bin"
-	append_path_env "$HOME/Environment/toolchain/gcc/arm-linux-androideabi/bin"
-	append_path_env "$HOME/Environment/toolchain/gcc/gcc-linaro-arm-eabi/bin"
-	append_path_env "$HOME/Environment/toolchain/gcc/gcc-linaro-arm-linux-gnueabi/bin"
-	append_path_env "$HOME/Environment/toolchain/gcc/gcc-linaro-arm-linux-gnueabihf/bin"
-	append_path_env "$HOME/Environment/toolchain/gcc/gcc-linaro-aarch64-linux-gnu/bin"
-	append_path_env "$HOME/Environment/toolchain/gcc/gcc-linaro-aarch64-none-elf/bin"
-	append_path_env "$HOME/Environment/toolchain/gcc/devkitA64/bin"
-	append_path_env "$HOME/Environment/toolchain/gcc/devkitPPC/bin"
-	append_path_env "$HOME/Environment/toolchain/gcc/devkitARM/bin"
+	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/toolchain-openwrt-arm/bin"
+	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/toolchain-openwrt-aarch64/bin"
+	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/arm-linux-androideabi/bin"
+	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-arm-eabi/bin"
+	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-arm-linux-gnueabi/bin"
+	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-arm-linux-gnueabihf/bin"
+	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-aarch64-linux-gnu/bin"
+	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-aarch64-none-elf/bin"
+	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/devkitA64/bin"
+	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/devkitPPC/bin"
+	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/devkitARM/bin"
 fi
 
 ############# #Extern Android Environment ##################
 if [[ "$USE_EXTERN_ANDROID_ENV" == "true" ]]; then
-	append_path_env "$HOME/Environment/toolchain/gcc/arm-2010q1/bin"
+	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/arm-2010q1/bin"
 	append_path_env "$HOME/Environment/Android/Sdk/platform-tools"
 	append_path_env "$HOME/Environment/Android/android-ndk"
 fi
@@ -231,17 +257,17 @@ else
 	SYSTEM_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 fi
 if [[ "$USE_EXTERN_LD_PATH_ENV" == "true" ]]; then
-	EXTERN_LD_LIBRARY_PATH="$HOME/Environment/env_rootfs/lib"
-	EXTERN_LD_LIBRARY_PATH+=":$HOME/Environment/env_rootfs/lib64"
+	EXTERN_LD_LIBRARY_PATH="$PATH_ENV_ROOTFS_BASE/lib"
+	EXTERN_LD_LIBRARY_PATH+=":$PATH_ENV_ROOTFS_BASE/lib64"
 fi
 if [[ "$USE_EXTERN_LD_PATH_USR_ENV" == "true" ]]; then
 	if [[ "$EXTERN_LD_LIBRARY_PATH" == "" ]]; then
-		EXTERN_LD_LIBRARY_PATH="$HOME/Environment/env_rootfs/usr/lib"
+		EXTERN_LD_LIBRARY_PATH="$PATH_ENV_ROOTFS_BASE/usr/lib"
 	else
-		EXTERN_LD_LIBRARY_PATH+=":$HOME/Environment/env_rootfs/usr/lib"
+		EXTERN_LD_LIBRARY_PATH+=":$PATH_ENV_ROOTFS_BASE/usr/lib"
 	fi
-	EXTERN_LD_LIBRARY_PATH+=":$HOME/Environment/env_rootfs/usr/lib"
-	EXTERN_LD_LIBRARY_PATH+=":$HOME/Environment/env_rootfs/usr/lib64"
+	EXTERN_LD_LIBRARY_PATH+=":$PATH_ENV_ROOTFS_BASE/usr/lib"
+	EXTERN_LD_LIBRARY_PATH+=":$PATH_ENV_ROOTFS_BASE/usr/lib64"
 fi
 
 ## Set LD_LIBRARY_PATH
@@ -265,16 +291,16 @@ else
 	SYSTEM_PKG_CONFIG_PATH=$PKG_CONFIG_PATH
 fi
 if [[ "$USE_EXTERN_PKG_PATH_ENV" == "true" ]]; then
-	EXTERN_PKG_CONFIG_PATH="$HOME/Environment/env_rootfs/lib"
-	EXTERN_PKG_CONFIG_PATH+=":$HOME/Environment/env_rootfs/lib64"
+	EXTERN_PKG_CONFIG_PATH="$PATH_ENV_ROOTFS_BASE/lib"
+	EXTERN_PKG_CONFIG_PATH+=":$PATH_ENV_ROOTFS_BASE/lib64"
 fi
 if [[ "$USE_EXTERN_PKG_PATH_USR_ENV" == "true" ]]; then
 	if [[ "$EXTERN_PKG_CONFIG_PATH" == "" ]]; then
-		EXTERN_PKG_CONFIG_PATH="$HOME/Environment/env_rootfs/usr/lib"
+		EXTERN_PKG_CONFIG_PATH="$PATH_ENV_ROOTFS_BASE/usr/lib"
 	else
-		EXTERN_PKG_CONFIG_PATH+=":$HOME/Environment/env_rootfs/usr/lib"
+		EXTERN_PKG_CONFIG_PATH+=":$PATH_ENV_ROOTFS_BASE/usr/lib"
 	fi
-	EXTERN_PKG_CONFIG_PATH+=":$HOME/Environment/env_rootfs/usr/lib64"
+	EXTERN_PKG_CONFIG_PATH+=":$PATH_ENV_ROOTFS_BASE/usr/lib64"
 fi
 
 ## Set PKG_CONFIG_PATH
@@ -291,7 +317,7 @@ else
 fi
 
 ORIGIN_PATH=$PATH
-SNAPDRAGON_PATH=$HOME/Environment/toolchain/gcc/snapdragon-llvm/bin:$PATH
+SNAPDRAGON_PATH=$PATH_TOOLCHAIN_GCC_BASE/snapdragon-llvm/bin:$PATH
 
 ############# #sudo Environment ##################
 alias sudo='sudo env PATH=$PATH LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SYSTEM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_SYSTEM_FIRST'
@@ -314,9 +340,9 @@ export PATH
 export TERM
 export ENABLE_TRUE_COLOR
 
-export DEVKITA64="$HOME/Environment/toolchain/gcc/devkitA64"
-export DEVKITPPC="$HOME/Environment/toolchain/gcc/devkitPPC"
-export DEVKITARM="$HOME/Environment/toolchain/gcc/devkitARM"
+export DEVKITA64="$PATH_TOOLCHAIN_GCC_BASE/devkitA64"
+export DEVKITPPC="$PATH_TOOLCHAIN_GCC_BASE/devkitPPC"
+export DEVKITARM="$PATH_TOOLCHAIN_GCC_BASE/devkitARM"
 
 export JAVA_HOME
 export JRE_HOME
