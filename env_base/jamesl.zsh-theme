@@ -337,7 +337,7 @@ prompt_ssh() {
 	local bg_color=166
 
 	if [[ -n "$SSH_CONNECTION" ]]; then
-		prompt_segment_main "${mode}x" $bg_color $fg_color "➿➿"
+		prompt_segment_main "${mode}x" $bg_color $fg_color " ⌁ "
 	fi
 }
 

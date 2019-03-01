@@ -305,8 +305,9 @@
 
 	" Plug 'Valloric/YouCompleteMe'
 	" Plug 'Rip-Rip/clang_complete'
-	Plug 'artur-shaik/vim-javacomplete2'
-	autocmd FileType java setlocal omnifunc=javacomplete#Complete
+	" Plug 'artur-shaik/vim-javacomplete2'
+	" autocmd FileType java setlocal omnifunc=javacomplete#Complete
+	" let g:JavaComplete_MavenRepositoryDisable = 1
 	" let g:JavaComplete_EnableDefaultMappings = 0
 
 	if g:use_complete_tool == "YCM"
