@@ -98,7 +98,7 @@ setup_env_base ()
 {
 	INSTALL_BASE_PATH=$TOP_DIR/env_base
 	# vim_plug_get_packages $INSTALL_BASE_PATH "quite"
-	vim_plug_get_packages $INSTALL_BASE_PATH
+	vim_plug_get_packages $INSTALL_BASE_PATH "quite"
 
 	if [[ ! -d $HOME/.config ]]; then
 		mkdir -p $HOME/.config

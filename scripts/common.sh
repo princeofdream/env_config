@@ -145,6 +145,7 @@ install_env_config()
 {
 	echo "=========== install_env_config ==============="
 	replace_config $TOP_DIR/env_base/common.sh $HOME/.common.sh
+	replace_config $TOP_DIR/env_base/env_tools.sh $HOME/.env_tools.sh
 	replace_config $TOP_DIR/env_base/bashrc $HOME/.bashrc
 	replace_config $TOP_DIR/env_base/bashrc-extern.sh $HOME/.bashrc-extern.sh
 	replace_config $TOP_DIR/env_base/zshrc $HOME/.zshrc
