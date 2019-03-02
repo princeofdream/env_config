@@ -122,6 +122,12 @@ append_classpath_env ()
 	fi
 }	# ----------  end of function append_path_env  ----------
 
+get_message_length ()
+{
+	SRC_PARAM="$@"
+	echo "${#SRC_PARAM}"
+}	# ----------  end of function get_message_length  ----------
+
 ####################################################################
 
 ORIGIN_PATH=$PATH
