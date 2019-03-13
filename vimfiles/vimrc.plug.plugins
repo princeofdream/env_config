@@ -484,13 +484,18 @@
 " "----------------------------------------------------------------------- "
 	Plug 'tpope/vim-repeat'
 	Plug 'ntpeters/vim-better-whitespace'
+		"" remove end whitespace
+		"":s/\s\+$//
+		nnoremap <unique> <leader>w :s/\s\+$//<CR>
+		nnoremap <unique> <leader>W :%s/\s\+$//<CR>
+		let g:better_whitespace_enabled=1
+		let g:strip_whitespace_on_save=0
+		let g:better_whitespace_ctermcolor='62'
+		let g:better_whitespace_guicolor='#5f5fd7'
+		let g:strip_whitespace_confirm=1
 		" nnoremap <unique> <leader>w :StripWhitespace<CR>
 		" Plugin 'bronson/vim-trailing-whitespace'
 		"nnoremap <unique> <leader>w :FixWhitespace<CR>
-		"" remove end whitespace
-		nnoremap <unique> <leader>w :s/\s\+$//<CR>
-		nnoremap <unique> <leader>W :%s/\s\+$//<CR>
-		"":s/\s\+$//
 	" Plug 'yonchu/accelerated-smooth-scroll'
 	" Plug 'terryma/vim-smooth-scroll'
 	" Plug 'tpope/vim-surround'
