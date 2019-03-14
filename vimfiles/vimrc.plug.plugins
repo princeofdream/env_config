@@ -528,6 +528,9 @@
 	Plug 'yonchu/accelerated-smooth-scroll'
 		nmap <silent> <C-i> <Plug>(ac-smooth-scroll-c-d)
 
+	Plug 'danro/rename.vim'
+		" :rename {xxx}
+
 " "----------------------------------------------------------------------- "
 " "--- commenter"
 " "----------------------------------------------------------------------- "
