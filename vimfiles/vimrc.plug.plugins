@@ -530,6 +530,17 @@
 
 	Plug 'danro/rename.vim'
 		" :rename {xxx}
+	Plug 'gcmt/wildfire.vim'
+		let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "ip", "it"]
+		let g:wildfire_objects = {
+		    \ "*" : ["i'", 'i"', "i)", "i]", "i}"],
+		    \ "html,xml" : ["at", "it"],
+			\ }
+		nmap <leader>e <Plug>(wildfire-quick-select)
+		" This selects the next closest text object.
+		map <SPACE> <Plug>(wildfire-fuel)
+		" This selects the previous closest text object.
+		vmap <C-SPACE> <Plug>(wildfire-water)
 
 " "----------------------------------------------------------------------- "
 " "--- commenter"
