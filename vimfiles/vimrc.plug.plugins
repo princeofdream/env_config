@@ -126,8 +126,8 @@
 		map <C-n> :NERDTreeToggle<CR>
 		" autocmd vimenter * exe 'NERDTree'
 		autocmd StdinReadPre * let s:std_in=1
-		autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-		autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'NERDTree' | endif
+		" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+		" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'NERDTree' | endif
 		" close vim if the only window left open is a NERDTree
 		autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 		let g:NERDTreeDirArrowExpandable = '▸'
@@ -476,6 +476,11 @@
 	Plug 'mhartington/oceanic-next'
 	Plug 'romainl/flattened'
 	Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
+	Plug 'jaxbot/semantic-highlight.vim'
+		nnoremap <Leader>s :SemanticHighlightToggle<cr>
+		let s:semanticGUIColors = [ '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80', '#ffab91', '#bcaaa4', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb', '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#c5cae9', '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8' , '#f0f4c3', '#ffb74d' ]
+		let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,19]
+	Plug 'mhinz/vim-startify'
 
 
 
