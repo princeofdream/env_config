@@ -99,6 +99,11 @@ Plug 'NLKNguyen/easy-navigate.vim'
 """" tabular must comes before markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+" if you don't have nodejs and yarn
+" use pre build
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+" have nodejs and yarn
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 
 " "----------------------------------------------------------------------- "
@@ -155,6 +160,7 @@ Plug 'garbas/vim-snipmate'
 
 "" automatic closing of quotes, parenthesis, brackets, etc.
 Plug 'Raimondi/delimitMate'
+Plug 'Shougo/echodoc.vim'
 
 
 " "----------------------------------------------------------------------- "
@@ -183,6 +189,7 @@ Plug 'romainl/flattened'
 Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
 Plug 'jaxbot/semantic-highlight.vim'
 Plug 'mhinz/vim-startify'
+Plug 'ryanoasis/vim-devicons'
 
 
 " "----------------------------------------------------------------------- "
@@ -260,6 +267,7 @@ Plug 'groenewege/vim-less'
 " "----------------------------------------------------------------------- "
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
 
