@@ -362,6 +362,9 @@ alias ncdu='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
 
 ####################################################################
 
+if [[ $SYSTEM_TYPE == "msys" || $SYSTEM_TYPE == "mingw" || $SYSTEM_TYPE == "ms-linux" ]]; then
+	PATH=${PATH//\ /_}
+fi
 
 export PATH
 export TERM
