@@ -589,17 +589,17 @@
 	" Plug 'terryma/vim-multiple-cursors'
 	" " Plug 'dhruvasagar/vim-table-mode'
 	" " Plug 'ervandew/supertab'
-	" Plug 'MattesGroeger/vim-bookmarks'
-	"     " let g:bookmark_no_default_key_mappings = 1
-	"     " highlight BookmarkSign ctermbg=NONE ctermfg=160
-	"     " highlight BookmarkLine ctermbg=194 ctermfg=NONE
-	"     " let g:bookmark_sign = '♥'
-	"     let g:bookmark_sign = '♥'
-	"     let g:bookmark_highlight_lines = 1
-	"     let g:bookmark_disable_ctrlp = 1
-	"     let g:bookmark_auto_save = 1
-	"     let g:bookmark_annotation_sign = '>>'
-	"     let g:bookmark_auto_close = 1
+	Plug 'MattesGroeger/vim-bookmarks'
+		" let g:bookmark_no_default_key_mappings = 1
+		" highlight BookmarkSign ctermbg=NONE ctermfg=160
+		" highlight BookmarkLine ctermbg=194 ctermfg=NONE
+		" let g:bookmark_sign = '♥'
+		let g:bookmark_sign = '♥'
+		let g:bookmark_highlight_lines = 1
+		let g:bookmark_disable_ctrlp = 1
+		let g:bookmark_auto_save = 1
+		let g:bookmark_annotation_sign = '>>'
+		let g:bookmark_auto_close = 1
 	Plug 'Valloric/ListToggle'
 		" <leader>l <leader>q
 		let g:lt_location_ulist_toggle_map = '<leader>l'
