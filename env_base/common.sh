@@ -197,6 +197,7 @@ if [[ "$USE_LLVM_FOR_ARM" == "true" ]]; then
 	append_path_env "$LLVM_ARM_ROOT/bin"
 fi
 
+append_path_env "$HOME/.cargo/bin"
 
 ############# #Web_Base Environment ##################
 if [[ "$USE_EXTERN_WEB_BASE_ENV" == "true" ]]; then
