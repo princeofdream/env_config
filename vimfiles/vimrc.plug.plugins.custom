@@ -173,6 +173,7 @@ function! ToggleMouse()
 endfunc
 
 nnoremap <C-g> :call ToggleMouse()<CR>
+map <C-v> <C-a>
 " set clipboard=unnamed
 
 nnoremap <S-k> :tabp<CR>
