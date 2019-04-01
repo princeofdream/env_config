@@ -749,6 +749,7 @@
 " "--- VCS control"
 " "----------------------------------------------------------------------- "
 	Plug 'airblade/vim-gitgutter'
+		let g:gitgutter_max_signs=2048
 	Plug 'tpope/vim-fugitive'
 		" git status --> :Gstatus
 		"	- to add/reset
