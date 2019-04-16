@@ -38,12 +38,12 @@ ANDROID_DIR=${SCRIPT_PATH}
 # Set defaults
 TARGET=e28
 VARIANT="eng"
-JOBS=8
+JOBS=12
 CCACHE="true"
 BUILD_TYPE="msm8996"
 CHIPSET=msm8996
 
-CHIPCODE_DIR=${TOP_DIR}/vendor/chipcode/$TARGET
+CHIPCODE_DIR=${TOP_DIR}/vendor/chipcode/xmart
 ROM_BUILD_TIME="$(date +%Y%m%d%H%M)"
 
 COPY_PATH_IMAGES_DEST=${ANDROID_DIR}/out/target/product/msm8996/
@@ -75,7 +75,7 @@ OPTIONS:
     -h, --help
         Display this help message
     -i, --image
-        Specify image to be build/re-build (android/boot/bootimg/sysimg/usrimg/lk/vendor)
+        Specify image to be build/re-build (android/boot/bootimg/sysimg/usrimg/lk/vendor/vbmeta)
     -j, --jobs
         Specifies the number of jobs to run simultaneously (Default: 8)
     -k, --kernel_defconf
@@ -137,6 +137,13 @@ build_bootimg() {
 build_sysimg() {
     echo -e "\nINFO: Build systemimage for $TARGET\n"
     make systemimage $@ | tee $LOG_FILE.log
+	ret=$?
+	return $ret
+}
+
+build_vbmeta() {
+	echo -e "\nINFO: Build vbmetaimage for $TARGET\n"
+	make vbmetaimage $@ | tee $LOG_FILE.log
 	ret=$?
 	return $ret
 }
