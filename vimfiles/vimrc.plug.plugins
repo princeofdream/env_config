@@ -370,6 +370,7 @@
 	" let g:use_complete_tool = "depolete"
 	" let g:use_complete_tool = "clang_complete"
 	" let g:use_complete_tool = "YCM"
+	set completeopt-=preview
 
 	"" " Check omnifunc and completefunc"
 	"" check command will be : ":set omnifunc? completefunc?"

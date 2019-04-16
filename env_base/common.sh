@@ -313,20 +313,26 @@ fi
 ############# #PKG_CONFIG_PATH Environment ##################
 if [[ "$PKG_CONFIG_PATH" == "" || $PKG_CONFIG_PATH == "/home"* ]]; then
 	SYSTEM_PKG_CONFIG_PATH="/lib:/lib64:/usr/lib:/usr/lib64"
+	SYSTEM_PKG_CONFIG_PATH+=":/lib/pkgconfig:/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/lib64/pkgconfig"
 else
 	SYSTEM_PKG_CONFIG_PATH=$PKG_CONFIG_PATH
 fi
 if [[ "$USE_EXTERN_PKG_PATH_ENV" == "true" ]]; then
 	EXTERN_PKG_CONFIG_PATH="$PATH_ENV_ROOTFS_BASE/lib"
+	EXTERN_PKG_CONFIG_PATH+=":$PATH_ENV_ROOTFS_BASE/lib/pkgconfig"
 	EXTERN_PKG_CONFIG_PATH+=":$PATH_ENV_ROOTFS_BASE/lib64"
+	EXTERN_PKG_CONFIG_PATH+=":$PATH_ENV_ROOTFS_BASE/lib64/pkgconfig"
 fi
 if [[ "$USE_EXTERN_PKG_PATH_USR_ENV" == "true" ]]; then
 	if [[ "$EXTERN_PKG_CONFIG_PATH" == "" ]]; then
 		EXTERN_PKG_CONFIG_PATH="$PATH_ENV_ROOTFS_BASE/usr/lib"
+		EXTERN_PKG_CONFIG_PATH+=":$PATH_ENV_ROOTFS_BASE/usr/lib/pkgconfig"
 	else
 		EXTERN_PKG_CONFIG_PATH+=":$PATH_ENV_ROOTFS_BASE/usr/lib"
+		EXTERN_PKG_CONFIG_PATH+=":$PATH_ENV_ROOTFS_BASE/usr/lib/pkgconfig"
 	fi
 	EXTERN_PKG_CONFIG_PATH+=":$PATH_ENV_ROOTFS_BASE/usr/lib64"
+	EXTERN_PKG_CONFIG_PATH+=":$PATH_ENV_ROOTFS_BASE/usr/lib64/pkgconfig"
 fi
 
 ## Set PKG_CONFIG_PATH
@@ -348,6 +354,7 @@ SNAPDRAGON_PATH=$PATH_TOOLCHAIN_GCC_BASE/snapdragon-llvm/bin:$PATH
 
 ############# #sudo Environment ##################
 alias sudo='sudo env PATH=$PATH LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SYSTEM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_SYSTEM_FIRST'
+alias sdo='sudo env PATH=$PATH LD_LIBRARY_PATH=$LD_LIBRARY_PATH_CUSTOM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_CUSTOM_FIRST'
 alias yum='env LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SYSTEM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_SYSTEM_FIRST yum'
 
 alias rq='PROMPT_COMMAND="_update_ps1"'
