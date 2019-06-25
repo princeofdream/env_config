@@ -367,6 +367,16 @@ alias s_classpath_origin='export CLASSPATH=$ORIGIN_CLASSPATH'
 alias s_path_snapdragon='export PATH=$SNAPDRAGON_PATH && export LLVMROOT=$LLVM_ARM_ROOT && export LLVMBIN=$LLVMROOT/bin'
 
 alias ncdu='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
+alias a_brackets="awk '{print \"\\\"\"\$0\"\\\"\"}'"
+alias f_c='find -type f -iname "*.c"'
+alias f_cpp='find -type f -iname "*.cpp"'
+alias f_cxx='find -type f -iname "*.c" -o -iname "*.cpp"'
+alias f_java='find -type f -iname "*.java"'
+alias f_mk='find -type f -iname "*.mk"'
+alias f_tf='find -type f'
+alias vv='env DISPLAY="" vim -p'
+alias a2='aria2c --conf-path=$HOME/.config/aria2/aria2.conf'
+
 
 ####################################################################
 

@@ -563,6 +563,7 @@
 	" Plug 'ryanoasis/vim-devicons'
 	"     set encoding=UTF-8
 
+	Plug 'rubberduck203/aosp-vim'
 
 
 " "----------------------------------------------------------------------- "

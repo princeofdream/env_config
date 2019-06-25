@@ -159,6 +159,8 @@ install_env_config()
 	replace_config $TOP_DIR/env_base/base/fonts $HOME/.fonts/truetype
 	## for powerline segment config
 	replace_config $TOP_DIR/configs/powerline-shell/config.json $HOME/.config/powerline-shell/config.json
+	## for aria2
+	replace_config $TOP_DIR/configs/aria2 $HOME/.config/aria2
 }
 
 install_tmux_config()
