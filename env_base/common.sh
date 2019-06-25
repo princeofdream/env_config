@@ -375,7 +375,7 @@ alias f_java='find -type f -iname "*.java"'
 alias f_mk='find -type f -iname "*.mk"'
 alias f_tf='find -type f'
 alias vv='env DISPLAY="" vim -p'
-alias a2='aria2c --conf-path=$HOME/.config/aria2/aria2.conf'
+alias a2='echo "aria2c --conf-path=$HOME/.config/aria2/aria2.conf" && aria2c --conf-path=$HOME/.config/aria2/aria2.conf'
 
 
 ####################################################################
