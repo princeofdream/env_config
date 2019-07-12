@@ -1,0 +1,54 @@
+diff --git a/libs/libuhttpd/Makefile b/libs/libuhttpd/Makefile
+index 12b1d7d..74d3efb 100644
+--- a/libs/libuhttpd/Makefile
++++ b/libs/libuhttpd/Makefile
+@@ -66,7 +66,7 @@ define Package/libuhttpd-mbedtls
+ endef
+ 
+ ifeq ($(BUILD_VARIANT),nossl)
+-  CMAKE_OPTIONS += -DUHTTPD_SSL_SUPPORT=off
++  CMAKE_OPTIONS += -DUHTTPD_SSL_SUPPORT=off -lm
+ endif
+ 
+ define Package/libuhttpd/default/install
+diff --git a/libs/tcp_wrappers/Makefile b/libs/tcp_wrappers/Makefile
+index 3bfa9d4..bd10aa7 100644
+--- a/libs/tcp_wrappers/Makefile
++++ b/libs/tcp_wrappers/Makefile
+@@ -20,6 +20,9 @@ PKG_LICENE_FILES:=DISCLAIMER
+ 
+ PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)_$(PKG_VERSION)
+ 
++TARGET_LDFLAGS += -L$(STAGING_DIR)/root-brcm2708/lib
++TARGET_LDFLAGS += -L$(STAGING_DIR)/lib
++
+ include $(INCLUDE_DIR)/package.mk
+ 
+ define Package/libwrap
+@@ -33,7 +36,7 @@ endef
+ TARGET_CFLAGS += $(FPIC) -Wall
+ 
+ ifeq ($(CONFIG_USE_MUSL),)
+-TARGET_EXTRA_LIBS:=LIBS=-lnsl
++TARGET_EXTRA_LIBS:=LIBS="-lnsl $(TARGET_LDFLAGS)"
+ endif
+ 
+ define Build/Compile	
+diff --git a/net/vsftpd/Makefile b/net/vsftpd/Makefile
+index 696ad36..d4fd9de 100644
+--- a/net/vsftpd/Makefile
++++ b/net/vsftpd/Makefile
+@@ -22,6 +22,13 @@ PKG_CPE_ID:=cpe:/a:beasts:vsftpd
+ 
+ include $(INCLUDE_DIR)/package.mk
+ 
++$(warning "byJames ---> staging dir: ${STAGING_DIR}")
++$(warning "byJames ---> pkg build dir: ${PKG_BUILD_DIR}")
++
++# TARGET_CFLAGS += -I$(STAGING_DIR)/usr/include/libnl3
++TARGET_LDFLAGS += -L$(STAGING_DIR)/root-brcm2708/lib
++TARGET_LDFLAGS += -L$(STAGING_DIR)/lib
++
+ define Package/vsftpd/Default
+   SUBMENU:=File Transfer
+   SECTION:=net
