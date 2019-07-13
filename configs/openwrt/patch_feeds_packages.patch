@@ -1,8 +1,19 @@
 diff --git a/libs/libuhttpd/Makefile b/libs/libuhttpd/Makefile
-index 12b1d7d..74d3efb 100644
+index 12b1d7d..aaef600 100644
 --- a/libs/libuhttpd/Makefile
 +++ b/libs/libuhttpd/Makefile
-@@ -66,7 +66,7 @@ define Package/libuhttpd-mbedtls
+@@ -24,6 +24,10 @@ PKG_LICENSE_FILES:=LICENSE
+ 
+ PKG_MAINTAINER:=Jianhui Zhao <jianhuizhao329@gmail.com>
+ 
++TARGET_CFLAGS += -I$(STAGING_DIR)/usr/include/libnl3
++TARGET_LDFLAGS += -L$(STAGING_DIR)/root-brcm2708/lib
++TARGET_LDFLAGS += -L$(STAGING_DIR)/lib -lm
++
+ include $(INCLUDE_DIR)/package.mk
+ include $(INCLUDE_DIR)/cmake.mk
+ 
+@@ -66,7 +70,7 @@ define Package/libuhttpd-mbedtls
  endef
  
  ifeq ($(BUILD_VARIANT),nossl)
@@ -34,6 +45,32 @@ index 3bfa9d4..bd10aa7 100644
  endif
  
  define Build/Compile	
+diff --git a/net/lftp/Makefile b/net/lftp/Makefile
+index 1dfe105..e91fa4d 100644
+--- a/net/lftp/Makefile
++++ b/net/lftp/Makefile
+@@ -20,6 +20,10 @@ PKG_HASH:=4ebc271e9e5cea84a683375a0f7e91086e5dac90c5d51bb3f169f75386107a62
+ PKG_LICENSE:=GPL-3.0+
+ PKG_LICENSE_FILES:=COPYING
+ 
++EXPAT_CFLAGS = ""
++TARGET_LDFLAGS += -L$(STAGING_DIR)/usr/lib
++TARGET_LDFLAGS += -I$(STAGING_DIR)/usr/include
++
+ include $(INCLUDE_DIR)/uclibc++.mk
+ include $(INCLUDE_DIR)/package.mk
+ 
+@@ -51,7 +55,9 @@ CONFIGURE_ARGS += \
+ 	--with-openssl="$(STAGING_DIR)/usr" \
+ 	--with-readline="$(STAGING_DIR)/usr" \
+ 	--with-zlib="$(STAGING_DIR)/usr" \
+-	--disable-static
++	--disable-static \
++	--with-expat="$(STAGING_DIR)/usr" \
++	--oldincludedir="$(STAGING_DIR)/usr/include"
+ 
+ TARGET_CXXFLAGS+= -std=c++11
+ 
 diff --git a/net/vsftpd/Makefile b/net/vsftpd/Makefile
 index 696ad36..d4fd9de 100644
 --- a/net/vsftpd/Makefile
