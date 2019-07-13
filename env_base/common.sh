@@ -130,7 +130,7 @@ get_message_length ()
 
 ####################################################################
 
-ORIGIN_PATH=$PATH
+ORIGIN_PATH=$PATH:/sbin:/bin:/usr/bin:/usr/sbin:/usr/sbin:/usr/local/sbin
 ORIGIN_CLASSPATH=$CLASSPATH
 PATH=""
 
