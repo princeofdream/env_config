@@ -58,13 +58,14 @@ setup_locale ()
 	sed -i "s/#zh_CN.UTF-8\ UTF-8/zh_CN.UTF-8 UTF-8/g" ${LOCALE_FILE}
 	sed -i "s/#en_US.UTF-8\ UTF-8/en_US.UTF-8 UTF-8/g" ${LOCALE_FILE}
 
-	locale-gen
-
 	ln -sf /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
 	loge "tzselect"
 	tzselect
 
 	echo "LANG=en_US.UTF-8" > /etc/default/locale
+
+	locale-gen
+
 }	# ----------  end of function setup_locale  ----------
 
 setup_network_base ()
