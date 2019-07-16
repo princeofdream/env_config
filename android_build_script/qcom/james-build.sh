@@ -37,6 +37,7 @@ ANDROID_DIR=${SCRIPT_PATH}
 
 # Set defaults
 TARGET=e28
+FLASH_TYPE="none"
 VARIANT="eng"
 JOBS=12
 CCACHE="true"
@@ -48,11 +49,14 @@ GET_BY_DATE=""
 CHIPCODE_DIR=${TOP_DIR}/vendor/chipcode/xmart
 ROM_BUILD_TIME="$(date +%Y%m%d%H%M)"
 
-COPY_PATH_IMAGES_DEST=${ANDROID_DIR}/out/target/product/msm8996/
+COPY_PATH_IMAGES_DEST=${ANDROID_DIR}/${TARGET}_${VARIANT}_${ROM_BUILD_TIME}
 COPY_PATH_IMAGES_BOOT=${CHIPCODE_DIR}/boot_images/QcomPkg/Msm8996Pkg/Bin64/
 COPY_PATH_IMAGES_TRUSTZONE=${CHIPCODE_DIR}/trustzone_images/build/ms/bin/IADAANAA/
 COPY_PATH_IMAGES_RPMPROC=${CHIPCODE_DIR}/rpm_proc/build/ms/bin/AAAAANAAR/
+COPY_PATH_IMAGES_COMMON=${CHIPCODE_DIR}/common/build/
+COPY_PATH_IMAGES_CONFIG=${CHIPCODE_DIR}/common/config/
 COPY_PATH_IMAGES_EMMC=${CHIPCODE_DIR}/common/build/emmc/
+COPY_PATH_IMAGES_UFS=${CHIPCODE_DIR}/common/build/ufs/
 COPY_PATH_IMAGES_ADSPROC=${CHIPCODE_DIR}/adsp_proc/build/dynamic_signed/
 COPY_PATH_IMAGES_RESOURCES=${CHIPCODE_DIR}/common/sectools/resources/build/fileversion2/
 
@@ -102,6 +106,10 @@ OPTIONS:
         Copy and zip files
     -a, --all
         Build All and pack
+    -t, --target
+		Build target, for ex, e28/d21 (Default: $TARGET)
+    -f, --flash
+		Pack flash type, for ex, emmc/ufs (Default: $FLASH_TYPE)
     -g, --get
         Get manifest.xml by date
 
@@ -210,34 +218,65 @@ create_ccache() {
 
 copy_images_to_out ()
 {
-	cp   $COPY_PATH_IMAGES_BOOT/xbl.elf                           $COPY_PATH_IMAGES_DEST/
-	cp   $COPY_PATH_IMAGES_BOOT/prog_emmc_firehose_8996_ddr.elf   $COPY_PATH_IMAGES_DEST/
-	cp   $COPY_PATH_IMAGES_BOOT/JtagProgrammer.elf                $COPY_PATH_IMAGES_DEST/
-	cp   $COPY_PATH_IMAGES_BOOT/pmic.elf                          $COPY_PATH_IMAGES_DEST/
-	cp   $COPY_PATH_IMAGES_BOOT/DeviceProgrammerDDR.elf           $COPY_PATH_IMAGES_DEST/
-	cp   $COPY_PATH_IMAGES_BOOT/pmic.elf                          $COPY_PATH_IMAGES_DEST/
+	STORAGE_DIR="$FLASH_TYPE"
+	COPY_PATH_IMAGES_DEST=${ANDROID_DIR}/${TARGET}_${VARIANT}_${ROM_BUILD_TIME}
+	echo "copying for $TARGET $FLASH_TYPE ... to $COPY_PATH_IMAGES_DEST"
+	if [[ ! -d "$COPY_PATH_IMAGES_DEST" ]]; then
+		mkdir -p $COPY_PATH_IMAGES_DEST
+	fi
 
-	#cp $COPY_PATH_IMAGES_DEST/emmc_appsboot.mbn $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_BOOT/xbl.elf                                       $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_BOOT/prog_${STORAGE_DIR}_firehose_8996_ddr.elf     $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_BOOT/JtagProgrammer.elf                            $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_BOOT/pmic.elf                                      $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_BOOT/DeviceProgrammerDDR.elf                       $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_BOOT/pmic.elf                                      $COPY_PATH_IMAGES_DEST/
 
-	cp    $COPY_PATH_IMAGES_TRUSTZONE/tz.mbn                  $COPY_PATH_IMAGES_DEST/
-	cp    $COPY_PATH_IMAGES_TRUSTZONE/hyp.mbn                 $COPY_PATH_IMAGES_DEST/
-	cp    $COPY_PATH_IMAGES_TRUSTZONE/keymaster.mbn           $COPY_PATH_IMAGES_DEST/
-	cp    $COPY_PATH_IMAGES_TRUSTZONE/cmnlib.mbn              $COPY_PATH_IMAGES_DEST/
-	cp    $COPY_PATH_IMAGES_TRUSTZONE/cmnlib64.mbn            $COPY_PATH_IMAGES_DEST/
-	cp    $COPY_PATH_IMAGES_TRUSTZONE/lksecapp.mbn            $COPY_PATH_IMAGES_DEST/
-	cp    $COPY_PATH_IMAGES_TRUSTZONE/devcfg_auto.mbn         $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_TRUSTZONE/tz.mbn                                   $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_TRUSTZONE/hyp.mbn                                  $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_TRUSTZONE/km4.mbn                                  $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_TRUSTZONE/cmnlib.mbn                               $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_TRUSTZONE/cmnlib64.mbn                             $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_TRUSTZONE/lksecapp.mbn                             $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_TRUSTZONE/devcfg_auto.mbn                          $COPY_PATH_IMAGES_DEST/
 
-	cp    $COPY_PATH_IMAGES_RESOURCES/sec.dat                 $COPY_PATH_IMAGES_DEST/
-	cp    $COPY_PATH_IMAGES_EMMC/gpt_backup0.bin              $COPY_PATH_IMAGES_DEST/
-	cp    $COPY_PATH_IMAGES_EMMC/gpt_main0.bin                $COPY_PATH_IMAGES_DEST/
-	cp    $COPY_PATH_IMAGES_EMMC/rawprogram0.xml              $COPY_PATH_IMAGES_DEST/
-	cp    $COPY_PATH_IMAGES_EMMC/patch0.xml                   $COPY_PATH_IMAGES_DEST/
-	cp    $COPY_PATH_IMAGES_EMMC/bin/BTFM.bin                 $COPY_PATH_IMAGES_DEST/
-	cp    $COPY_PATH_IMAGES_EMMC/bin/asic/NON-HLOS.bin        $COPY_PATH_IMAGES_DEST/ASIC-NON-HLOS.bin
-	#cp   $COPY_PATH_IMAGES_EMMC/bin/modemlite/NON-HLOS.bin   $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_RPMPROC/rpm.mbn                                    $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_ADSPROC/adspso.bin                                 $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_RESOURCES/sec.dat                                  $COPY_PATH_IMAGES_DEST/
 
-	cp    $COPY_PATH_IMAGES_RPMPROC/rpm.mbn                   $COPY_PATH_IMAGES_DEST/
-	cp    $COPY_PATH_IMAGES_ADSPROC/adspso.bin                $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_COMMON/${STORAGE_DIR}/bin/modemlite/NON-HLOS.bin   $COPY_PATH_IMAGES_DEST/
+	cp   $COPY_PATH_IMAGES_COMMON/${STORAGE_DIR}/bin/BTFM.bin                 $COPY_PATH_IMAGES_DEST/
+
+	if [[ "ufs" == "$2" ]];then
+		cp   $COPY_PATH_IMAGES_COMMON/${STORAGE_DIR}/gpt_backup*.bin                   $COPY_PATH_IMAGES_DEST/
+		cp   $COPY_PATH_IMAGES_COMMON/${STORAGE_DIR}/gpt_main*.bin                     $COPY_PATH_IMAGES_DEST/
+		cp   $COPY_PATH_IMAGES_COMMON/${STORAGE_DIR}/rawprogram*.xml                   $COPY_PATH_IMAGES_DEST/
+		cp   $COPY_PATH_IMAGES_COMMON/${STORAGE_DIR}/patch*.xml                        $COPY_PATH_IMAGES_DEST/
+		cp   $COPY_PATH_IMAGES_CONFIG/${STORAGE_DIR}/provision/provision_toshiba.xml   $COPY_PATH_IMAGES_DEST/
+	else
+		cp   $COPY_PATH_IMAGES_COMMON/${STORAGE_DIR}/gpt_backup0.bin   $COPY_PATH_IMAGES_DEST/
+		cp   $COPY_PATH_IMAGES_COMMON/${STORAGE_DIR}/gpt_main0.bin     $COPY_PATH_IMAGES_DEST/
+		cp   $COPY_PATH_IMAGES_COMMON/${STORAGE_DIR}/rawprogram0.xml   $COPY_PATH_IMAGES_DEST/
+		cp   $COPY_PATH_IMAGES_COMMON/${STORAGE_DIR}/patch0.xml        $COPY_PATH_IMAGES_DEST/
+	fi
+
+	COPY_PATH_IMAGES_OUT=${ANDROID_DIR}/out/target/product/$TARGET/
+
+	cp $COPY_PATH_IMAGES_OUT/userdata_emmc.img      $COPY_PATH_IMAGES_DEST/
+	cp $COPY_PATH_IMAGES_OUT/vbmeta.img             $COPY_PATH_IMAGES_DEST/
+	cp $COPY_PATH_IMAGES_OUT/vendor.img             $COPY_PATH_IMAGES_DEST/
+	cp $COPY_PATH_IMAGES_OUT/vmap_emmc.img          $COPY_PATH_IMAGES_DEST/
+	cp $COPY_PATH_IMAGES_OUT/boot.img               $COPY_PATH_IMAGES_DEST/
+	cp $COPY_PATH_IMAGES_OUT/dtbo.img               $COPY_PATH_IMAGES_DEST/
+	cp $COPY_PATH_IMAGES_OUT/emmc_appsboot.mbn      $COPY_PATH_IMAGES_DEST/
+	cp $COPY_PATH_IMAGES_OUT/mdtp.img               $COPY_PATH_IMAGES_DEST/
+	cp $COPY_PATH_IMAGES_OUT/persist.img            $COPY_PATH_IMAGES_DEST/
+	cp $COPY_PATH_IMAGES_OUT/prebuilt_dtbo.img      $COPY_PATH_IMAGES_DEST/
+	cp $COPY_PATH_IMAGES_OUT/ramdisk.img            $COPY_PATH_IMAGES_DEST/
+	cp $COPY_PATH_IMAGES_OUT/ramdisk-recovery.img   $COPY_PATH_IMAGES_DEST/
+	cp $COPY_PATH_IMAGES_OUT/splash_emmc.img        $COPY_PATH_IMAGES_DEST/
+	cp $COPY_PATH_IMAGES_OUT/system.img             $COPY_PATH_IMAGES_DEST/
+
 }	# ----------  end of function copy_images_to_out  ----------
 
 build_pack ()
@@ -265,7 +304,7 @@ build_pack ()
 
 build_zip_files ()
 {
-	zip -vj  ./LINUX/android/out/target/product/msm8996/S820A_$2_$1_$3_$4.zip ./LINUX/android/out/target/product/msm8996/*.elf ./LINUX/android/out/target/product/msm8996/*.mbn ./LINUX/android/out/target/product/msm8996/*.bin ./LINUX/android/out/target/product/msm8996/*.img ./LINUX/android/out/target/product/msm8996/*.xml ./LINUX/android/out/target/product/msm8996/sec.dat
+	zip -vj  ./LINUX/android/out/target/product/$TARGET/S820A_$2_$1_$3_$4.zip ./LINUX/android/out/target/product/$TARGET/*.elf ./LINUX/android/out/target/product/msm8996/*.mbn ./LINUX/android/out/target/product/msm8996/*.bin ./LINUX/android/out/target/product/msm8996/*.img ./LINUX/android/out/target/product/msm8996/*.xml ./LINUX/android/out/target/product/msm8996/sec.dat
 	ret=$?
 	return $ret
 }	# ----------  end of function build_zip_files  ----------
@@ -296,6 +335,14 @@ main_func ()
 	# # TARGET="$1"; shift
 
 	cd $ANDROID_DIR
+
+	if [[ ! $FLASH_TYPE == "none" ]]; then
+		if [[ ! $FLASH_TYPE == "ufs" ]]; then
+			FLASH_TYPE="emmc"
+		fi
+		copy_images_to_out
+		exit 0
+	fi
 
 	## force delete dtb files to make build update
 	if [[ -d ${ANDROID_DIR}/out/target/product/$TARGET_PRODUCT/obj/KERNEL_OBJ/arch/arm64/boot/ ]]; then
@@ -390,8 +437,8 @@ fi
 # Setup getopt.
 long_opts="clean_build,debug,help,image:,jobs:,kernel_defconf:,log_file:,module:,"
 long_opts+="project:,setup_ccache:,update-api,build_variant:,"
-long_opts+="boot,pack,zip,all,target:get:"
-getopt_cmd=$(getopt -o cdhi:j:k:l:m:p:s:uv:brzat:g: --long "$long_opts" \
+long_opts+="boot,pack,zip,all,target:,get:,flash:"
+getopt_cmd=$(getopt -o cdhi:j:k:l:m:p:s:uv:brzat:g:f: --long "$long_opts" \
             -n $(basename $0) -- "$@") || \
             { echo -e "\nERROR: Getopt failed. Extra args\n"; usage; exit 1;}
 
@@ -417,6 +464,7 @@ while true; do
 		-z|--zip) BUILD_TYPE="zip" ;;
 		-a|--all) BUILD_TYPE="all" ;;
 		-t|--target) TARGET="$2" ;;
+        -f|--flash) FLASH_TYPE="$2"; shift;;
 		-g|--get) GET_BY_DATE="$2" ;;
         --) shift; break;;
     esac
