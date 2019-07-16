@@ -1,32 +1,23 @@
-#!/bin/bash
+#!/bin/bash -
+#===============================================================================
 #
-# Copyright (c) 2012, The Linux Foundation. All rights reserved.
+#          FILE: james-build.sh
 #
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are
-# met:
-#     * Redistributions of source code must retain the above copyright
-#       notice, this list of conditions and the following disclaimer.
-#     * Redistributions in binary form must reproduce the above
-#       copyright notice, this list of conditions and the following
-#       disclaimer in the documentation and/or other materials provided
-#       with the distribution.
-#     * Neither the name of The Linux Foundation nor the names of its
-#       contributors may be used to endorse or promote products derived
-#       from this software without specific prior written permission.
+#         USAGE: ./james-build.sh
 #
-# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
-# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
-# ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
-# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
-# BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
-# OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
-# IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#   DESCRIPTION: android build for qualcomm
 #
+#       OPTIONS: ---
+#  REQUIREMENTS: ---
+#          BUGS: ---
+#         NOTES: ---
+#        AUTHOR: James Lee (JamesL), princeofdream@outlook.com
+#  ORGANIZATION: BookCL
+#       CREATED: 07/16/2019 04:52:32 PM
+#      REVISION:  ---
+#===============================================================================
+
+# set -o nounset                                  # Treat unset variables as an error
 
 set -o errexit
 set -o pipefail
@@ -63,6 +54,23 @@ COPY_PATH_IMAGES_RESOURCES=${CHIPCODE_DIR}/common/sectools/resources/build/filev
 NEED_LUNCH_ANDROID_ENV="true"
 
 FIRMWARE_VERSION=""
+
+logd ()
+{
+	if [[ $DEBUG == 0 ]]; then
+		return 0
+	fi
+	CURRENT_TIME=`date +%H:%M:%S`
+	echo -e "[0;31;1m[ ${CURRENT_TIME} ]\t[0m[0;32;1m$@ [0m"
+	return 0
+}	# ----------  end of function logd  ----------
+
+loge ()
+{
+	CURRENT_TIME=`date +%H:%M:%S`
+	echo -e "[0;31;1m[ ${CURRENT_TIME} ]\t[0m[0;32;1m$@ [0m"
+	return 0
+}	# ----------  end of function loge  ----------
 
 usage() {
 cat <<USAGE
@@ -117,12 +125,12 @@ USAGE
 }
 
 clean_build() {
-    echo -e "\nINFO: Removing entire out dir. . .\n"
+    loge "\nINFO: Removing entire out dir. . .\n"
     make clobber
 }
 
 build_android() {
-    echo -e "\nINFO: Build Android tree for $TARGET\n"
+    loge "\nINFO: Build Android tree for $TARGET\n"
     make $@ | tee $LOG_FILE.log
 	ret=$?
 	return $ret
@@ -130,66 +138,66 @@ build_android() {
 
 build_lk ()
 {
-    echo -e "\nINFO: Build lk\n"
+    loge "\nINFO: Build lk\n"
 	make aboot $@
 	ret=$?
-	echo "Usage: fastboot flash aboot emmc_appsboot.mbn"
+	loge "Usage: fastboot flash aboot emmc_appsboot.mbn"
 	return $ret
 }	# ----------  end of function build_lk  ----------
 
 build_bootimg() {
-    echo -e "\nINFO: Build bootimage for $TARGET\n"
+    loge "\nINFO: Build bootimage for $TARGET\n"
 	cd $ANDROID_DIR
     make bootimage $@ | tee $LOG_FILE.log
 	ret=$?
-	echo "Usage: fastboot flash boot_a boot.img"
+	loge "Usage: fastboot flash boot_a boot.img"
 	return $ret
 }
 
 build_sysimg() {
-    echo -e "\nINFO: Build systemimage for $TARGET\n"
+    loge "\nINFO: Build systemimage for $TARGET\n"
     make systemimage $@ | tee $LOG_FILE.log
 	ret=$?
 	return $ret
 }
 
 build_vbmeta() {
-	echo -e "\nINFO: Build vbmetaimage for $TARGET\n"
+	loge "\nINFO: Build vbmetaimage for $TARGET\n"
 	make vbmetaimage $@ | tee $LOG_FILE.log
 	ret=$?
 	return $ret
 }
 
 build_vendor() {
-    echo -e "\nINFO: Build vendorimage for $TARGET\n"
+    loge "\nINFO: Build vendorimage for $TARGET\n"
     make vendorimage $@ | tee $LOG_FILE.log
 	ret=$?
 	return $ret
 }
 
 build_usrimg() {
-    echo -e "\nINFO: Build userdataimage for $TARGET\n"
+    loge "\nINFO: Build userdataimage for $TARGET\n"
     make userdataimage $@ | tee $LOG_FILE.log
 	ret=$?
 	return $ret
 }
 
 build_module() {
-    echo -e "\nINFO: Build $MODULE for $TARGET\n"
+    loge "\nINFO: Build $MODULE for $TARGET\n"
     make $MODULE $@ | tee $LOG_FILE.log
 	ret=$?
 	return $ret
 }
 
 build_project() {
-    echo -e "\nINFO: Build $PROJECT for $TARGET\n"
+    loge "\nINFO: Build $PROJECT for $TARGET\n"
     mmm $PROJECT | tee $LOG_FILE.log
 	ret=$?
 	return $ret
 }
 
 update_api() {
-    echo -e "\nINFO: Updating APIs\n"
+    loge "\nINFO: Updating APIs\n"
     make update-api | tee $LOG_FILE.log
 }
 
@@ -207,7 +215,7 @@ delete_ccache() {
 }
 
 create_ccache() {
-    echo -e "\nINFO: Setting CCACHE with 10 GB\n"
+    loge "\nINFO: Setting CCACHE with 10 GB\n"
     setup_ccache
     delete_ccache
     echo "${ANDROID_DIR}/prebuilts/misc/linux-x86/ccache/ccache -M 10G"
@@ -220,11 +228,17 @@ copy_images_to_out ()
 {
 	STORAGE_DIR="$FLASH_TYPE"
 	COPY_PATH_IMAGES_DEST=${ANDROID_DIR}/${TARGET}_${VARIANT}_${ROM_BUILD_TIME}
-	echo "copying for $TARGET $FLASH_TYPE ... to $COPY_PATH_IMAGES_DEST"
+	COPY_PATH_IMAGES_OUT=${ANDROID_DIR}/out/target/product/$TARGET/
+
+	loge "copying for $TARGET $FLASH_TYPE ... to $COPY_PATH_IMAGES_DEST"
+	if [[ ! -d $COPY_PATH_IMAGES_OUT ]]; then
+		loge "Can not find target $TARGET out directory $COPY_PATH_IMAGES_OUT"
+		return -1
+	fi
+
 	if [[ ! -d "$COPY_PATH_IMAGES_DEST" ]]; then
 		mkdir -p $COPY_PATH_IMAGES_DEST
 	fi
-
 	cp   $COPY_PATH_IMAGES_BOOT/xbl.elf                                       $COPY_PATH_IMAGES_DEST/
 	cp   $COPY_PATH_IMAGES_BOOT/prog_${STORAGE_DIR}_firehose_8996_ddr.elf     $COPY_PATH_IMAGES_DEST/
 	cp   $COPY_PATH_IMAGES_BOOT/JtagProgrammer.elf                            $COPY_PATH_IMAGES_DEST/
@@ -259,8 +273,6 @@ copy_images_to_out ()
 		cp   $COPY_PATH_IMAGES_COMMON/${STORAGE_DIR}/rawprogram0.xml   $COPY_PATH_IMAGES_DEST/
 		cp   $COPY_PATH_IMAGES_COMMON/${STORAGE_DIR}/patch0.xml        $COPY_PATH_IMAGES_DEST/
 	fi
-
-	COPY_PATH_IMAGES_OUT=${ANDROID_DIR}/out/target/product/$TARGET/
 
 	cp $COPY_PATH_IMAGES_OUT/userdata_emmc.img      $COPY_PATH_IMAGES_DEST/
 	cp $COPY_PATH_IMAGES_OUT/vbmeta.img             $COPY_PATH_IMAGES_DEST/
@@ -322,13 +334,13 @@ main_func ()
 {
 	# Mandatory argument
 	# if [ $# -eq 0 ]; then
-	#     echo -e "\nERROR: Missing mandatory argument: TARGET_PRODUCT\n"
+	#     loge "\nERROR: Missing mandatory argument: TARGET_PRODUCT\n"
 	#     usage
 	#     exit 1
 	# fi
 
 	# if [ $# -gt 1 ]; then
-	#     echo -e "\nERROR: Extra inputs. Need TARGET_PRODUCT only\n"
+	#     loge "\nERROR: Extra inputs. Need TARGET_PRODUCT only\n"
 	#     usage
 	#     exit 1
 	# fi
@@ -429,7 +441,7 @@ main_func ()
 
 
 if [ $# -eq 0 ]; then
-	echo -e "\nERROR: No arguments Found!\n"
+	loge "\nERROR: No arguments Found!\n"
 	usage
 	exit 1
 fi
@@ -444,7 +456,7 @@ getopt_cmd=$(getopt -o cdhi:j:k:l:m:p:s:uv:brzat:g:f: --long "$long_opts" \
 
 eval set -- "$getopt_cmd"
 
-echo "args: $@"
+loge "args: $@"
 while true; do
     case "$1" in
         -c|--clean_build) CLEAN_BUILD="true";;
@@ -471,13 +483,13 @@ while true; do
 	shift
 done
 
-echo "--- Start Build: $(date +%Y/%m/%d-%H:%M:%S) ---"
+loge "Start Build: $(date +%Y/%m/%d-%H:%M:%S)"
 
 main_func $@
 
 if [[ $? == 0 ]]; then
-	echo "--- Build Success: $(date +%Y/%m/%d-%H:%M:%S) ---"
+	loge "Build Success: $(date +%Y/%m/%d-%H:%M:%S)"
 else
-	echo "--- Build Fail: $(date +%Y/%m/%d-%H:%M:%S) ---"
+	loge "Build Fail: $(date +%Y/%m/%d-%H:%M:%S)"
 fi
 
