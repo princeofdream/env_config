@@ -37,6 +37,7 @@ patch_vim_plugins ()
 	#     git checkout $DEST_PATH
 	#     patch -p1 < $TOP_DIR/patch/vimfiles/c-support/*.patch
 	# fi
+	echo "patch vim plugins"
 }	# ----------  end of function patch_vim_plugins  ----------
 
 setup_vim_vundle_env ()
