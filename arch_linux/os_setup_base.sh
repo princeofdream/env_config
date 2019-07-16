@@ -93,6 +93,11 @@ setup_grub ()
 	grub-mkconfig -o /boot/grub/grub.cfg
 }
 
+setup_language ()
+{
+	pacman -S ttf-roboto noto-fonts noto-fonts-cjk adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts ttf-dejavu
+}	# ----------  end of function setup_language  ----------
+
 setup_local_system ()
 {
 	ret=0
@@ -106,6 +111,8 @@ setup_local_system ()
 	setup_local_hw_time
 
 	setup_grub
+
+	setup_language
 
 	ret=$?
 
