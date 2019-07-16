@@ -29,14 +29,14 @@ source $SCRIPT_PATH/common.sh
 
 patch_vim_plugins ()
 {
-	DEST_PATH=`realpath $TOP_DIR/vimfiles/base/c-support/`
-	cd $DEST_PATH
-	CUR_PWD=`pwd`
-	CUR_PWD=`realpath $CUR_PWD`
-	if [[ $CUR_PWD == "$DEST_PATH" ]]; then
-		git checkout $DEST_PATH
-		patch -p1 < $TOP_DIR/patch/vimfiles/c-support/*.patch
-	fi
+	# DEST_PATH=`realpath $TOP_DIR/vimfiles/base/c-support/`
+	# cd $DEST_PATH
+	# CUR_PWD=`pwd`
+	# CUR_PWD=`realpath $CUR_PWD`
+	# if [[ $CUR_PWD == "$DEST_PATH" ]]; then
+	#     git checkout $DEST_PATH
+	#     patch -p1 < $TOP_DIR/patch/vimfiles/c-support/*.patch
+	# fi
 }	# ----------  end of function patch_vim_plugins  ----------
 
 setup_vim_vundle_env ()
