@@ -161,7 +161,8 @@ install_env_config()
 	replace_config $TOP_DIR/configs/powerline-shell/config.json $HOME/.config/powerline-shell/config.json
 	## for aria2
 	WHO_AM_I=$(whoami)
-	sed -i "s/\$HOME/\/home\/$WHO_AM_I/g" $TOP_DIR/configs/aria2/aria2.conf
+	cp $TOP_DIR/configs/aria2/aria2.conf_org $TOP_DIR/configs/aria2/aria2.conf_${WHO_AM_I}
+	sed -i "s/\$HOME/\/home\/$WHO_AM_I/g" $TOP_DIR/configs/aria2/aria2.conf_${WHO_AM_I}
 	replace_config $TOP_DIR/configs/aria2 $HOME/.config/aria2
 }
 
