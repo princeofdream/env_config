@@ -253,9 +253,10 @@ fi
 
 ############# #Extern Android Environment ##################
 if [[ "$USE_EXTERN_ANDROID_ENV" == "true" ]]; then
-	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/arm-2010q1/bin"
-	append_path_env "$HOME/Environment/Android/Sdk/platform-tools"
-	append_path_env "$HOME/Environment/Android/android-ndk"
+	# append_path_env "$PATH_TOOLCHAIN_GCC_BASE/arm-2010q1/bin"
+	append_path_env "$HOME/Environment/android/sdk/platform-tools"
+	append_path_env "$HOME/Environment/android/android-ndk"
+	ANDROID_HOME="$HOME/Environment/android/sdk"
 fi
 
 ############# #Terminal Color Support ##################
@@ -414,5 +415,6 @@ export EDITOR="$VISUAL"
 export LLVMROOT
 export LLVMBIN
 export ANT_HOME
+export PSH_LEFT=true
 
 
