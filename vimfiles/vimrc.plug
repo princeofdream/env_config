@@ -191,6 +191,8 @@ if has('gui_running')
 		if has('gui_gtk2')
 			if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
 				set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
+			elseif getfontname( 'DejaVu Sans Mono for Powerline Book' ) != ''
+				set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Book\ 12
 			elseif getfontname( 'DejaVu Sans Mono' ) != ''
 				set guifont=DejaVu\ Sans\ Mono\ 11
 			else
@@ -198,16 +200,29 @@ if has('gui_running')
 			endif
 		elseif has('x11')
 			" Also for GTK 1
-			set guifont=*-lucidatypewriter-medium-r-normal-*-*-180-*-*-m-*-*
+			" set guifont=*-lucidatypewriter-medium-r-normal-*-*-180-*-*-m-*-*
+			if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
+				set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
+			elseif getfontname( 'DejaVu Sans Mono for Powerline Book' ) != ''
+				set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Book\ 12
+			elseif getfontname( 'DejaVu Sans Mono' ) != ''
+				set guifont=DejaVu\ Sans\ Mono\ 11
+			else
+				set guifont=Luxi\ Mono\ 11
+			endif
 		elseif OSX()
 			if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
 				set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15
+			elseif getfontname( 'DejaVu Sans Mono for Powerline Book' ) != ''
+				set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Book\ 12
 			elseif getfontname( 'DejaVu Sans Mono' ) != ''
 				set guifont=DejaVu\ Sans\ Mono:h15
 			endif
 		elseif WINDOWS()
 			if getfontname( 'DejaVu Sans Mono for Powerline' ) != ''
 				set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h11:cANSI
+			elseif getfontname( 'DejaVu Sans Mono for Powerline Book' ) != ''
+				set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ Book\ 12
 			elseif getfontname( 'DejaVu Sans Mono' ) != ''
 				set guifont=DejaVu\ Sans\ Mono:h11:cANSI
 			elseif getfontname( 'Consolas' ) != ''
