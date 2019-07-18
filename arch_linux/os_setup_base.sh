@@ -80,12 +80,15 @@ setup_local_hw_time ()
 {
 	loge "hwclock --systohc --utc"
 	hwclock --systohc --utc
+	loge "Do not use UTC"
+	timedatectl set-local-rtc true
+
 }
 
 setup_grub ()
 {
 	loge "Enter Setup grub to EFI..."
-	pacman -S dosfstools grub efibootmgr
+	pacman -S dosfstools grub efibootmgr os-prober
 
 	mkinitcpio -p linux
 

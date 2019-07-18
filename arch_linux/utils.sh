@@ -22,7 +22,7 @@
 
 setup_gnome ()
 {
-	pacman -S gnome gdm gnome-extra gnome-tweak-tool
+	pacman -S gnome gdm gnome-extra gnome-tweak-tool gvfs-mtp
 }	# ----------  end of function setup_gnome  ----------
 
 
@@ -34,7 +34,7 @@ setup_wayland ()
 
 setup_common_utils ()
 {
-	pacman -S vim git iw wpa_supplicant dhcpcd dialog openssh
+	pacman -S vim git iw wpa_supplicant dhcpcd dialog openssh alsa-utils libreoffice
 
 	enable_system_service wpa_supplicant
 	# enable_system_service dhcpcd
