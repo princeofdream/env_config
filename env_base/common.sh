@@ -416,5 +416,7 @@ export LLVMROOT
 export LLVMBIN
 export ANT_HOME
 export PSH_LEFT=true
+export PSH_LEFT=true
+export NAME_COLOR_SSH=true
 
 
