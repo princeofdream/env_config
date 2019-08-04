@@ -20,10 +20,10 @@
 # set -o nounset                                  # Treat unset variables as an error
 
 
-setup_gnome ()
+setup_gui_desktop ()
 {
-	pacman -S gnome gdm gnome-extra gnome-tweak-tool gvfs-mtp
-}	# ----------  end of function setup_gnome  ----------
+	pacman -S gnome gdm gnome-extra gnome-tweak-tool gvfs-mtp plasma konsole kdeutils
+}	# ----------  end of function setup_gui_desktop  ----------
 
 
 setup_wayland ()
@@ -70,7 +70,7 @@ setup_base_utils ()
 	fix_ssh_transfer_err
 	setup_common_utils
 	setup_wayland
-	setup_gnome
+	setup_gui_desktop
 	return $ret
 }
 
