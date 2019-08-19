@@ -28,6 +28,9 @@ ANDROID_DIR=${SCRIPT_PATH}
 
 # Set defaults
 TARGET=e28
+GET_TARGET=""
+TARGET_SETUP_FILE="${TOP_DIR}/android.target"
+
 FLASH_TYPE="none"
 VARIANT="eng"
 JOBS=12
@@ -61,14 +64,22 @@ logd ()
 		return 0
 	fi
 	CURRENT_TIME=`date +%H:%M:%S`
-	echo -e "[0;31;1m[ ${CURRENT_TIME} ]\t[0m[0;32;1m$@ [0m"
+	if [[ "${LOG_FILE}x" != "x" ]]; then
+		echo -e "[0;31;1m[ ${CURRENT_TIME} ]\t[0m[0;32;1m$@ [0m" | tee ${LOG_FILE}.log
+	else
+		echo -e "[0;31;1m[ ${CURRENT_TIME} ]\t[0m[0;32;1m$@ [0m"
+	fi
 	return 0
 }	# ----------  end of function logd  ----------
 
 loge ()
 {
 	CURRENT_TIME=`date +%H:%M:%S`
-	echo -e "[0;31;1m[ ${CURRENT_TIME} ]\t[0m[0;32;1m$@ [0m"
+	if [[ "${LOG_FILE}x" != "x" ]]; then
+		echo -e "[0;31;1m[ ${CURRENT_TIME} ]\t[0m[0;32;1m$@ [0m" |tee ${LOG_FILE}.log
+	else
+		echo -e "[0;31;1m[ ${CURRENT_TIME} ]\t[0m[0;32;1m$@ [0m"
+	fi
 	return 0
 }	# ----------  end of function loge  ----------
 
@@ -330,6 +341,12 @@ checkout_git_by_xml ()
 	return $ret
 }
 
+
+update_env ()
+{
+	COPY_PATH_IMAGES_DEST=${ANDROID_DIR}/${TARGET}_${VARIANT}_${ROM_BUILD_TIME}
+}	# ----------  end of function update_env  ----------
+
 main_func ()
 {
 	# Mandatory argument
@@ -345,6 +362,28 @@ main_func ()
 	#     exit 1
 	# fi
 	# # TARGET="$1"; shift
+
+	if [[ "${GET_TARGET}x" == "x" && -f ${TARGET_SETUP_FILE} ]]; then
+		loge "Try to get TARGET from file ${TARGET_SETUP_FILE}"
+		i0=0;
+		while read line ;
+		do
+			loge "read [${i0}]: ${line}"
+			if [[ "${line}x" != "x" ]]; then
+				TARGET=${line}
+				break;
+			fi
+			i0=$((i0+1))
+		done < ${TARGET_SETUP_FILE}
+	fi
+
+	loge ""
+	loge "## ================================================ ##"
+	loge "Build target ${TARGET}"
+	loge "## ================================================ ##"
+	loge ""
+
+	update_env
 
 	cd $ANDROID_DIR
 
@@ -475,7 +514,7 @@ while true; do
 		-r|--pack) BUILD_TYPE="pack" ; NEED_LUNCH_ANDROID_ENV="false" ;;
 		-z|--zip) BUILD_TYPE="zip" ;;
 		-a|--all) BUILD_TYPE="all" ;;
-		-t|--target) TARGET="$2" ;;
+		-t|--target) GET_TARGET="$2" ;;
         -f|--flash) FLASH_TYPE="$2"; shift;;
 		-g|--get) GET_BY_DATE="$2" ;;
         --) shift; break;;
