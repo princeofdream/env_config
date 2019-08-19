@@ -64,22 +64,14 @@ logd ()
 		return 0
 	fi
 	CURRENT_TIME=`date +%H:%M:%S`
-	if [[ "${LOG_FILE}x" != "x" ]]; then
-		echo -e "[0;31;1m[ ${CURRENT_TIME} ]\t[0m[0;32;1m$@ [0m" | tee ${LOG_FILE}.log
-	else
-		echo -e "[0;31;1m[ ${CURRENT_TIME} ]\t[0m[0;32;1m$@ [0m"
-	fi
+	echo -e "[0;31;1m[ ${CURRENT_TIME} ]\t[0m[0;32;1m$@ [0m"
 	return 0
 }	# ----------  end of function logd  ----------
 
 loge ()
 {
 	CURRENT_TIME=`date +%H:%M:%S`
-	if [[ "${LOG_FILE}x" != "x" ]]; then
-		echo -e "[0;31;1m[ ${CURRENT_TIME} ]\t[0m[0;32;1m$@ [0m" |tee ${LOG_FILE}.log
-	else
-		echo -e "[0;31;1m[ ${CURRENT_TIME} ]\t[0m[0;32;1m$@ [0m"
-	fi
+	echo -e "[0;31;1m[ ${CURRENT_TIME} ]\t[0m[0;32;1m$@ [0m"
 	return 0
 }	# ----------  end of function loge  ----------
 
