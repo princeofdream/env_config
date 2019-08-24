@@ -487,19 +487,34 @@
 		Plug 'itchyny/lightline.vim'
 			" [ 'gitbranch', 'readonly', 'filename', 'modified', 'buffers' ] ]
 			let g:lightline = {
-						\ 'colorscheme': 'wombat',
-						\ 'separator': { 'left': '', 'right': '' },
-						\ 'subseparator': { 'left': '', 'right': '' },
-						\ 'active': {
-						\   'left': [ [ 'mode', 'paste' ], [ 'gitbranch' ],
-						\             [ 'buffers' ] ]
-						\ },
-						\ 'component_function': {
-						\   'gitbranch': 'fugitive#head',
-						\   'filename': 'LightlineFilename',
-						\   'buffers': 'LightlineBuffers',
-						\ },
-					\ }
+					\ 'colorscheme': 'one',
+					\ 'separator': { 'left': '', 'right': '' },
+					\ 'subseparator': { 'left': '', 'right': '' },
+					\ 'active': {
+					\     'left': [
+					\             [ 'mode', 'paste' ],
+					\             [ 'gitbranch' ],
+					\             [ 'modified', 'readonly' ],
+					\             [ 'buffers' ] ]
+					\ },
+					\ 'inactive': {
+					\     'left': [['filename']],
+					\     'right': [['lineinfo'], ['percent']]
+					\   },
+					\ 'tabline': {
+					\     'left': [['tabs']],
+					\     'right': [['close']]
+					\ },
+					\ 'tab': {
+					\     'active': ['tabnum', 'filename', 'modified'],
+					\     'inactive': ['tabnum', 'filename', 'modified']
+					\ },
+					\ 'component_function': {
+					\     'gitbranch': 'fugitive#head',
+					\     'filename': 'LightlineFilename',
+					\     'buffers': 'LightlineBuffers',
+					\ },
+			\ }
 			function! LightlineFilename()
 				let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
 				let modified = &modified ? ' +' : ''
