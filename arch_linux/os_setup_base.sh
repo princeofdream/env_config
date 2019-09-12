@@ -88,8 +88,8 @@ setup_local_hw_time ()
 setup_grub ()
 {
 	loge "Enter Setup grub to EFI..."
-	pacman -S dosfstools grub efibootmgr os-prober
 
+	pacman -S dosfstools grub efibootmgr os-prober
 	mkinitcpio -p linux
 
 	grub-install --target=$TARGET --efi-directory=/boot/EFI/ --recheck

@@ -31,9 +31,7 @@ JOBS=12
 # GET_BY_DATE=`date +%Y%m%d`
 GET_BY_DATE=""
 
-OS_INSTALL="false"
-OS_SETUP="false"
-EXTRA_MODE=""
+BUILD_MODE=""
 
 DEBUG=0
 
@@ -58,16 +56,19 @@ OPTIONS:
         Enable debugging - captures all commands while doing the build
     -h, --help
         Display this help message
-    -i, --image
         Specify image to be build/re-build (android/boot/bootimg/sysimg/usrimg/lk/vendor/vbmeta)
     -j, --jobs
         Specifies the number of jobs to run simultaneously (Default: 8)
     -l, --log_file
         Log file to store build logs (Default: <TARGET_PRODUCT>.log)
+    -i, --install
+        Install Arch Linux
     -s, --setup
         Setup local OS
     -u, --utils
         Setup local utils
+    -o, --mode
+        Setup mode [install/setup/grub/utils/...]
 
 USAGE
 }
@@ -76,14 +77,15 @@ main_func ()
 {
 	ret=0
 
-	loge "install: $OS_INSTALL; setup: $OS_SETUP"
-	if [[ $OS_INSTALL == "true" ]]; then
+	loge "Mode: ${BUILD_MODE}"
+	if [[ ${BUILD_MODE} == "install" ]]; then
 		setup_install_system
-	elif [[ $OS_SETUP == "true" ]]; then
+	elif [[ ${BUILD_MODE} == "setup" ]]; then
 		setup_local_system
-	fi
-	if [[ $EXTRA_MODE == "utils" ]]; then
+	elif [[ ${BUILD_MODE} == "utils" ]]; then
 		setup_base_utils $@
+	elif [[ ${BUILD_MODE} == "grub" ]]; then
+		setup_grub $@
 	fi
 	ret=$?
 
@@ -98,8 +100,8 @@ main_func ()
 # fi
 # Setup getopt.
 long_opts="debug,help,install,jobs:,log_file:,"
-long_opts+="utils,setup"
-getopt_cmd=$(getopt -o cdhij:l:us --long "$long_opts" \
+long_opts+="utils,setup,mode:,"
+getopt_cmd=$(getopt -o cdhij:l:uso: --long "$long_opts" \
             -n $(basename $0) -- "$@") || \
             { echo -e "\nERROR: Getopt failed. Extra args\n"; usage; exit 1;}
 
@@ -110,11 +112,12 @@ while true; do
     case "$1" in
         -d|--debug) DEBUG="true";;
         -h|--help) usage; exit 0;;
-        -i|--install) OS_INSTALL="true";;
+        -i|--install) BUILD_MODE="install";;
         -j|--jobs) JOBS="$2"; shift;;
         -l|--log_file) LOG_FILE="$2"; shift;;
-        -s|--setup) OS_SETUP="true";;
-        -u|--utils) EXTRA_MODE="utils";;
+        -s|--setup) BUILD_MODE="setup";;
+        -u|--utils) BUILD_MODE="utils";;
+        -o|--mode) BUILD_MODE="$2"; shift;;
         --) shift; break;;
     esac
 	shift
