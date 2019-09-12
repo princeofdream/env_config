@@ -135,8 +135,6 @@
 	Plug 'jlanzarotta/bufexplorer'
 	Plug 'jeetsukumaran/vim-buffergator'
 	" Plug 'fholgado/minibufexpl.vim'
-	Plug 'bling/vim-bufferline'
-		let g:bufferline_echo = 0
 	Plug 'majutsushi/tagbar'
 		map <F3> :TagbarToggle<CR>
 		" let g:tagbar_sort = 0
@@ -482,6 +480,8 @@
 	let g:vim_custom_status_line = "lightline"
 	" let g:vim_custom_status_line = "airline"
 	" let g:vim_custom_status_line = "powerline"
+	" let g:vim_custom_status_line = "bufferline"
+	" let g:vim_custom_status_line = "none"
 
 	if g:vim_custom_status_line == "lightline"
 		Plug 'itchyny/lightline.vim'
@@ -495,7 +495,11 @@
 					\             [ 'mode', 'paste' ],
 					\             [ 'gitbranch' ],
 					\             [ 'modified', 'readonly' ],
-					\             [ 'buffers' ] ]
+					\             [ 'buffers' ] ],
+					\     'right': [
+					\			  ['lineinfo'],
+					\			  ['percent'],
+					\			  ['fileformat', 'fileencoding', 'filetype'] ]
 					\ },
 					\ 'inactive': {
 					\     'left': [['filename']],
@@ -511,34 +515,28 @@
 					\ },
 					\ 'component_function': {
 					\     'gitbranch': 'fugitive#head',
-					\     'filename': 'LightlineFilename',
-					\     'buffers': 'LightlineBuffers',
+					\     'filestat': 'LightlineFilestat'
 					\ },
 			\ }
-			function! LightlineFilename()
+			function! LightlineFilestat()
 				let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
 				let modified = &modified ? ' +' : ''
-				" return filename . modified . "---> " . bufname(2) . " -->total: " . bufnr('$')
 				return filename . modified
-			endfunction
-			function! LightlineBuffers()
-				let light_bufcount=bufnr('$')
-				let light_bufactive=bufnr('') - 1
-				let light_bufname= "" . light_bufactive . ":" . bufname(light_bufactive + 1) . " "
-				" for index in range(light_bufcount)
-				"     if index != light_bufactive
-				"         let light_bufname= light_bufname . " " . index . ":" . bufname(index + 1) . " "
-				"     endif
-				" endfor
-				let var=light_bufname
-				return var
 			endfunction
 	elseif g:vim_custom_status_line == "airline"
 		Plug 'vim-airline/vim-airline'
 			" highlight bufferline_selected gui=bold cterm=bold term=bold guibg=#c678dd guifg=#273074
-			let g:airline#extensions#tabline#enabled = 0 " NOTE: When you open lots of buffers and typing text, it is so slow.
+			let g:airline#extensions#tabline#enabled = 1 " NOTE: When you open lots of buffers and typing text, it is so slow.
 			let g:airline#extensions#tabline#left_sep = ''
 			let g:airline#extensions#tabline#left_alt_sep = ''
+			let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+			let g:airline#extensions#tabline#show_tab_nr = 1
+			let g:airline#extensions#tabline#formatter = 'default'
+			let g:airline#extensions#tabline#buffer_nr_show = 0
+			let g:airline#extensions#tabline#fnametruncate = 16
+			let g:airline#extensions#tabline#fnamecollapse = 2
+			let g:airline#extensions#tabline#buffer_idx_mode = 1
+
 		Plug 'vim-airline/vim-airline-themes'
 	elseif g:vim_custom_status_line == "powerline"
 		if (!has("nvim"))
@@ -549,6 +547,10 @@
 		else
 			Plug 'itchyny/lightline.vim'
 		endif
+	elseif g:vim_custom_status_line == "bufferline"
+		Plug 'bling/vim-bufferline'
+			" let g:bufferline_echo = 1
+			" let g:bufferline_show_bufnr = 0
 	endif
 	Plug 'upsuper/vim-colorschemes'
 	Plug 'rakr/vim-one'
