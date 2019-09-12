@@ -19,7 +19,35 @@
 
 # set -o nounset                              # Treat unset variables as an error
 
-SCRIPT_PATH=$(dirname $(readlink -f "$0"))
+cmd_readlink ()
+{
+	TARGET_FILE=$1
+
+	cd `dirname $TARGET_FILE`
+	TARGET_FILE=`basename $TARGET_FILE`
+
+	# Iterate down a (possible) chain of symlinks
+	while [ -L "$TARGET_FILE" ]
+	do
+		TARGET_FILE=`readlink $TARGET_FILE`
+		cd `dirname $TARGET_FILE`
+		TARGET_FILE=`basename $TARGET_FILE`
+	done
+
+	# Compute the canonicalized name by finding the physical path
+	# for the directory we're in and appending the target file.
+	PHYS_DIR=`pwd -P`
+	RESULT=$PHYS_DIR/$TARGET_FILE
+	echo $RESULT
+}	# ----------  end of function cmd_readlink  ----------
+
+CMD_READLINK="readlink -f"
+$CMD_READLINK $0 2> /dev/null
+if [[ $? != 0 ]]; then
+	CMD_READLINK="cmd_readlink"
+fi
+
+SCRIPT_PATH=$(dirname $($CMD_READLINK "$0"))
 if [[ $TOP_DIR == "" ]]; then
 	TOP_DIR=${SCRIPT_PATH}/..
 fi
@@ -28,7 +56,18 @@ if [[ $PLUG_MANAGER_BASE_PATH == "" ]]; then
 	PLUG_MANAGER_BASE_PATH=$TOP_DIR/common
 fi
 
-SYSTEM_TYPE="Unkonw"
+SYSTEM_NAME=`uname -a`
+SYSTEM_TYPE="linux"
+
+if [[ $SYSTEM_NAME == "MSYS"* ]]; then
+	SYSTEM_TYPE="msys"
+elif [[ $SYSTEM_NAME == "MINGW"* ]]; then
+	SYSTEM_TYPE="mingw"
+elif [[ $SYSTEM_NAME == *"Microsoft"*"Linux"* ]]; then
+	SYSTEM_TYPE="ms-linux"
+elif [[ $SYSTEM_NAME == *"Darwin"* ]]; then
+	SYSTEM_TYPE="mac"
+fi
 
 replace_config()
 {
@@ -79,14 +118,12 @@ replace_config()
 		fi
 	fi
 
-	if [ ! -e $SOURCE_FILE ]
-	then
+	if [ ! -e $SOURCE_FILE ]; then
 		echo "Do not have source file, Only backup target file"
 		return 0
 	fi
 	echo "Createing $TARGET_FILE"
-	if [[ "$SYSTEM_TYPE" == MSYS* || "$SYSTEM_TYPE" == MINGW* ]]
-	then
+	if [[ "$SYSTEM_TYPE" == msys || "$SYSTEM_TYPE" == mingw ]]; then
 		$SCRIPT_PATH/msys-ln.sh -s $SOURCE_FILE $TARGET_FILE
 	else
 		ln -sf $SOURCE_FILE $TARGET_FILE
@@ -118,6 +155,10 @@ powerline_shell_setup()
 {
 	echo "=========== powerline_shell_setup ==============="
 	POWERLINE_SHELL_PATH=$TOP_DIR/env_base/base/powerline-shell
+	if [[ ! -d $POWERLINE_SHELL_PATH ]]; then
+		return -1;
+	fi
+
 	cd $POWERLINE_SHELL_PATH
 	rm -rf 0*.patch
 	cp $SCRIPT_PATH/../patch/powerline-shell/*.patch $POWERLINE_SHELL_PATH
@@ -162,7 +203,11 @@ install_env_config()
 	## for aria2
 	WHO_AM_I=$(whoami)
 	cp $TOP_DIR/configs/aria2/aria2.conf_org $TOP_DIR/configs/aria2/aria2.conf_${WHO_AM_I}
-	sed -i "s/\$HOME/\/home\/$WHO_AM_I/g" $TOP_DIR/configs/aria2/aria2.conf_${WHO_AM_I}
+	if [[ $SYSTEM_TYPE == "mac" ]]; then
+		sed -i "" "s/\$HOME/\/home\/$WHO_AM_I/g" $TOP_DIR/configs/aria2/aria2.conf_${WHO_AM_I}
+	else
+		sed -i "s/\$HOME/\/home\/$WHO_AM_I/g" $TOP_DIR/configs/aria2/aria2.conf_${WHO_AM_I}
+	fi
 	replace_config $TOP_DIR/configs/aria2 $HOME/.config/aria2
 }
 
@@ -209,11 +254,17 @@ install_plug_manager ()
 		git clone https://github.com/junegunn/vim-plug.git
 	fi
 
-	sed -i "s/--depth 1//g" $PLUG_MANAGER_BASE_PATH/vim-plug/plug.vim
-	sed -i "s/--depth 99999999/--unshallow/g" $PLUG_MANAGER_BASE_PATH/vim-plug/plug.vim
-	sed -i "s/--depth 999999/--unshallow/g" $PLUG_MANAGER_BASE_PATH/vim-plug/plug.vim
+	if [[ $SYSTEM_TYPE == "mac" ]]; then
+		sed -i "" "s/--depth 1//g" $PLUG_MANAGER_BASE_PATH/vim-plug/plug.vim
+		sed -i "" "s/--depth 99999999/--unshallow/g" $PLUG_MANAGER_BASE_PATH/vim-plug/plug.vim
+		sed -i "" "s/--depth 999999/--unshallow/g" $PLUG_MANAGER_BASE_PATH/vim-plug/plug.vim
+	else
+		sed -i "s/--depth 1//g" $PLUG_MANAGER_BASE_PATH/vim-plug/plug.vim
+		sed -i "s/--depth 99999999/--unshallow/g" $PLUG_MANAGER_BASE_PATH/vim-plug/plug.vim
+		sed -i "s/--depth 999999/--unshallow/g" $PLUG_MANAGER_BASE_PATH/vim-plug/plug.vim
+	fi
 
-	cp -rL $PLUG_MANAGER_BASE_PATH/vim-plug/plug.vim $PLUG_MANAGER_BASE_PATH/autoload/
+	cp -L $PLUG_MANAGER_BASE_PATH/vim-plug/plug.vim $PLUG_MANAGER_BASE_PATH/autoload/
 }	# ----------  end of function install_plug_manager  ----------
 
 
