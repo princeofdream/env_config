@@ -117,7 +117,11 @@ check_git_config()
 powerline_shell_setup()
 {
 	echo "=========== powerline_shell_setup ==============="
-	POWERLINE_SHELL_PATH=$TOP_DIR/env_base/base/powerline-shell
+	POWERLINE_SHELL_PATH=$TOP_DIR/env_base/base/powerline-shel
+	if [[ ! -d $POWERLINE_SHELL_PATH ]]; then
+		return -1;
+	fi
+
 	cd $POWERLINE_SHELL_PATH
 	rm -rf 0*.patch
 	cp $SCRIPT_PATH/../patch/powerline-shell/*.patch $POWERLINE_SHELL_PATH
