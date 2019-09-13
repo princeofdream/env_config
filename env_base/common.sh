@@ -129,14 +129,13 @@ get_message_length ()
 }	# ----------  end of function get_message_length  ----------
 
 ####################################################################
+ORIGIN_CLASSPATH=$CLASSPATH
 
 ORIGIN_PATH=$PATH:/sbin:/bin:/usr/bin:/usr/sbin:/usr/sbin:/usr/local/sbin
-ORIGIN_CLASSPATH=$CLASSPATH
-PATH=""
-
 if [[ $SYSTEM_TYPE == "mac" ]]; then
-	PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+	ORIGIN_PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
+PATH=""
 
 ############# #Jave Environment ##################
 if [[ "$USE_EXTERN_JAVA_ENV" == "true" ]]; then
@@ -383,7 +382,9 @@ alias f_sh='find -type f -iname "*.sh" -o -iname "*.bash"'
 alias f_tf='find -type f'
 alias vv='env DISPLAY="" vim -p'
 alias a2='echo "aria2c --conf-path=$HOME/.config/aria2/aria2.conf" && aria2c --conf-path=$HOME/.config/aria2/aria2.conf'
-
+if [[ $SYSTEM_TYPE == "mac" ]]; then
+	alias ls='ls --color'
+fi
 
 ####################################################################
 
