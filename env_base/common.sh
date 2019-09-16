@@ -383,7 +383,12 @@ alias f_tf='find -type f'
 alias vv='env DISPLAY="" vim -p'
 alias a2='echo "aria2c --conf-path=$HOME/.config/aria2/aria2.conf" && aria2c --conf-path=$HOME/.config/aria2/aria2.conf'
 if [[ $SYSTEM_TYPE == "mac" ]]; then
-	alias ls='ls --color'
+	ls --color >/dev/null 2>/dev/null
+	if [[ $? == 0 ]]; then
+		alias ls='ls --color'
+	else
+		alias ls='ls -G'
+	fi
 fi
 
 ####################################################################
