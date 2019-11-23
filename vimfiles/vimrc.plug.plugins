@@ -686,7 +686,7 @@
 	Plug 'WolfgangMehner/verilog-support'
 
 	" syntastic check
-	let g:vim_custom_syntastic = "syntastic"
+	let g:vim_custom_syntastic = "ale"
 
 	if g:vim_custom_syntastic == "syntastic"
 		Plug 'vim-syntastic/syntastic'
