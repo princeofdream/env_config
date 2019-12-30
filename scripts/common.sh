@@ -48,7 +48,7 @@ if [[ $? != 0 ]]; then
 fi
 
 cmd_getopt=getopt
-${cmd_getopt} > /dev/null 2> /dev/null
+${cmd_getopt} --version > /dev/null 2> /dev/null
 if [[ $? != 0 ]]; then
    cmd_getopt="busybox getopt"
 fi
