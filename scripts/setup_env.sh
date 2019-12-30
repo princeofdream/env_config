@@ -75,10 +75,10 @@ build_ycm()
 	cd $PLUGIN_BASE_PATH/YouCompleteMe
 	if [ ! -f "$PLUGIN_BASE_PATH/YouCompleteMe/third_party/ycmd/ycm_core.so" ]
 	then
-		if [ -f "$HOME/Environment/env_rootfs/usr/local/bin/gcc" ]
-		then
-			sed -i "s#extra_cmake_args =#cmake_args.append( \'-DCMAKE_C_COMPILER=$BIN_PATH/gcc\' )\n  cmake_args.append( \'-DCMAKE_CXX_COMPILER=$BIN_PATH/g++\' )\n\n  extra_cmake_args =#g" $PLUGIN_BASE_PATH/YouCompleteMe/third_party/ycmd/build.py
-		fi
+		# if [ -f "$HOME/Environment/env_rootfs/usr/local/bin/gcc" ]
+		# then
+		#     sed -i "s#extra_cmake_args =#cmake_args.append( \'-DCMAKE_C_COMPILER=$BIN_PATH/gcc\' )\n  cmake_args.append( \'-DCMAKE_CXX_COMPILER=$BIN_PATH/g++\' )\n\n  extra_cmake_args =#g" $PLUGIN_BASE_PATH/YouCompleteMe/third_party/ycmd/build.py
+		# fi
 		./install.py --all --system-libclang --clang-completer --clang-tidy --java-complete
 		# ./install.py --all
 		# ./install.py --clang-completer

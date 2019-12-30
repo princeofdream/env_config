@@ -19,58 +19,75 @@
 
 set -o nounset                              # Treat unset variables as an error
 
+## start general setup curent script env
+## like script path, name etc.(source basic_env.sh may overwrite it)
 cmd_readlink ()
 {
-	TARGET_FILE=$1
+   target_file=$1
 
-	cd `dirname $TARGET_FILE`
-	TARGET_FILE=`basename $TARGET_FILE`
+   cd `dirname $target_file`
+   target_file=`basename $target_file`
 
-	# Iterate down a (possible) chain of symlinks
-	while [ -L "$TARGET_FILE" ]
-	do
-		TARGET_FILE=`readlink $TARGET_FILE`
-		cd `dirname $TARGET_FILE`
-		TARGET_FILE=`basename $TARGET_FILE`
-	done
+   # iterate down a (possible) chain of symlinks
+   while [ -l "$target_file" ]
+   do
+       target_file=`readlink $target_file`
+       cd `dirname $target_file`
+       target_file=`basename $target_file`
+   done
 
-	# Compute the canonicalized name by finding the physical path
-	# for the directory we're in and appending the target file.
-	PHYS_DIR=`pwd -P`
-	RESULT=$PHYS_DIR/$TARGET_FILE
-	echo $RESULT
-}	# ----------  end of function cmd_readlink  ----------
+   # compute the canonicalized name by finding the physical path
+   # for the directory we're in and appending the target file.
+   phys_dir=`pwd -p`
+   result=$phys_dir/$target_file
+   echo $result
+}  # ----------  end of function cmd_readlink  ----------
 
-CMD_READLINK="readlink -f"
-$CMD_READLINK $0 2> /dev/null
+cmd_readlink="readlink -f"
+$cmd_readlink $0 >/dev/null 2> /dev/null
 if [[ $? != 0 ]]; then
-	CMD_READLINK="cmd_readlink"
+   cmd_readlink="cmd_readlink"
 fi
 
-SCRIPT_PATH=$(dirname $($CMD_READLINK "$0"))
-TOP_DIR=$SCRIPT_PATH/..
+#########################################
+## TODO
+## define new parameters here
+#########################################
+script_basename=$(basename $0)
+script_path=$(dirname $($cmd_readlink "$0"))
 
-FILE_NAME="rc.tar.bz2"
-TMP_FILE_NAME="tmp.tar"
+## get current script path/name
+if [[ ${top_dir}"x" == "x" ]]; then
+	top_dir=${script_path}/..
+fi
 
-Compress_vimfiles ()
+source ${top_dir}/scripts/basic_env.sh
+#########################################
+## TODO
+## define overwrite parameters here
+#########################################
+
+## end of general setup curent script env
+
+file_name="rc.tar.bz2"
+tmp_file_name="tmp.tar"
+
+compress_vimfiles ()
 {
-	mv $TOP/vimfiles/bundle/YouCompleteMe ./YouCompleteMe
+	mv $top_dir/vimfiles/bundle/YouCompleteMe ./YouCompleteMe
 	tar jchf rc.tar.bz2 vimfiles/
-	mv $TOP/YouCompleteMe $TOP/vimfiles/bundle/YouCompleteMe
+	mv $top_dir/YouCompleteMe $top_dir/vimfiles/bundle/YouCompleteMe
 }	# ----------  end of function Compress_vimfiles  ----------
 
 
-Compress_part_vimfiles ()
+compress_part_vimfiles ()
 {
-	find ./vimfiles/ -maxdepth 1 -path ./vimfiles/bundle -prune -o -path ./vimfiles/ -o -print |awk -F, '{printf "\"%s\"\n",$1}'|xargs tar chf $TMP_FILE_NAME
-	find ./vimfiles/bundle/ -maxdepth 1 -path ./vimfiles/bundle/YouCompleteMe -prune -o -path ./vimfiles/bundle/ -o -print |awk -F, '{printf "\"%s\"\n",$1}'|xargs tar rhf $TMP_FILE_NAME
-	cat $TMP_FILE_NAME | bzip2 > $FILE_NAME
-	rm $TMP_FILE_NAME
+	find ./vimfiles/ -maxdepth 1 -path ./vimfiles/bundle -prune -o -path ./vimfiles/ -o -print |awk -F, '{printf "\"%s\"\n",$1}'|xargs tar chf $tmp_file_name
+	find ./vimfiles/bundle/ -maxdepth 1 -path ./vimfiles/bundle/YouCompleteMe -prune -o -path ./vimfiles/bundle/ -o -print |awk -F, '{printf "\"%s\"\n",$1}'|xargs tar rhf $tmp_file_name
+	cat $tmp_file_name | bzip2 > $file_name
+	rm $tmp_file_name
 }	# ----------  end of function Compress_part_vimfiles  ----------
 
-
-Compress_part_vimfiles $@
 
 
 
