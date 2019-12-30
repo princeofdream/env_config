@@ -73,13 +73,21 @@ vim_dest_path=$top_dir/vimfiles
 tmux_dest_path=$top_dir/tmux-config
 env_base_dest_path=$top_dir/env_base
 
+
+plugin_base_path=$top_dir/vimfiles/base
+fake_root=$HOME/Environment/env_rootfs
+bin_path=$HOME/Environment/env_rootfs/bin
+
 vim_install_config()
 {
 	echo "=========== install_vim_vundle_config ==============="
 	replace_config $top_dir/vimfiles $HOME/.vim
-	replace_config $top_dir/.vimrc $HOME/.vimrc
+	# replace_config $top_dir/.vimrc $HOME/.vimrc
+	if [[ -f $HOME/.vimrc ]]; then
+		rm -rf $HOME/.vimrc
+	fi
 
-	replace_config $top_dir/configs/vim/ycm_extra_conf.py $HOME/.ycm_extra_conf.py
+	replace_config $top_dir/ycm_extra_conf.py $HOME/.ycm_extra_conf.py
 	replace_config $top_dir/configs/vim/ctags_lang $HOME/.ctags
 
 	## for nvim
@@ -110,8 +118,10 @@ vim_setup_vundle_env ()
 
 vim_setup_env ()
 {
+	should_quite=$1
+
 	vim_dest_path=$top_dir/vimfiles
-	vim_plug_get_packages $vim_dest_path
+	vim_plug_get_packages $vim_dest_path ${should_quite}
 
 	if [[ ! -e $vim_dest_path/autoload/plug.vim && -e $vim_dest_path/base/vim-plug/plug.vim ]]; then
 		cp -r $vim_dest_path/base/vim-plug/plug.vim $vim_dest_path/autoload/
@@ -140,7 +150,9 @@ tmux_install_tpm_plugins ()
 
 tmux_setup_env ()
 {
-	vim_plug_get_packages $tmux_dest_path "quite"
+	should_quite=$1
+
+	vim_plug_get_packages $tmux_dest_path ${should_quite}
 
 	tmux_install_config
 	tmux_install_tpm_plugins
@@ -177,8 +189,9 @@ env_base_install_config()
 
 env_base_setup_env ()
 {
-	# vim_plug_get_packages $env_base_dest_path "quite"
-	vim_plug_get_packages $env_base_dest_path "quite"
+	should_quite=$1
+
+	vim_plug_get_packages $env_base_dest_path ${should_quite}
 
 	if [[ ! -d $HOME/.config ]]; then
 		mkdir -p $HOME/.config
@@ -189,5 +202,59 @@ env_base_setup_env ()
 	env_base_install_config
 }	# ----------  end of function setup_env_base  ----------
 
+build_install_py_pkgs()
+{
+	PKG_LIST=" \
+		ipython \
+		ipykernel \
+		Autopep8 \
+		pylint \
+		argparse \
+	"
 
+	log "install python dep"
+	for item in $PKG_LIST; do
+		log "pip[3] install $item"
+		pip install $item
+		pip3 install $item
+	done
+}
+
+build_ycm()
+{
+	if [ ! -d $plugin_base_path/YouCompleteMe ]
+	then
+		return 1
+	fi
+
+	log "Building YouCompleteMe"
+	cd $plugin_base_path/YouCompleteMe
+	if [ ! -f "$plugin_base_path/YouCompleteMe/third_party/ycmd/ycm_core.so" ]
+	then
+		# if [ -f "$HOME/Environment/env_rootfs/usr/local/bin/gcc" ]
+		# then
+		#     sed -i "s#extra_cmake_args =#cmake_args.append( \'-DCMAKE_C_COMPILER=$BIN_PATH/gcc\' )\n  cmake_args.append( \'-DCMAKE_CXX_COMPILER=$BIN_PATH/g++\' )\n\n  extra_cmake_args =#g" $PLUGIN_BASE_PATH/YouCompleteMe/third_party/ycmd/build.py
+		# fi
+		if [[ -e ${plugin_base_path}/YouCompleteMe/third_party/ycmd/go ]]; then
+			rm -rf ${plugin_base_path}/YouCompleteMe/third_party/ycmd/go
+		fi
+		./install.py --all --system-libclang --clang-completer --clang-tidy --java-complete
+		# ./install.py --all
+		# ./install.py --clang-completer
+	fi
+	# mkdir -p $plugin_base_path/YouCompleteMe/ycm_build
+	# cd $plugin_base_path/YouCompleteMe/ycm_build
+	# cmake -G "Unix Makefiles" . $plugin_base_path/YouCompleteMe/third_party/ycmd/cpp \
+		# -DPATH_TO_LLVM_ROOT=$HOME/Environment/env_rootfs
+	# cmake --build . --target ycm_core --config Release
+
+	cd $top_dir
+	wait
+}
+
+build_setup_env ()
+{
+	# build_install_py_pkgs $@
+	build_ycm $@
+}	# ----------  end of function build_setup_env  ----------
 

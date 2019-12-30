@@ -98,17 +98,15 @@ replace_config()
 
 		if [[ -e ${source_file} ]]; then
 			# if [[ ${target_real_path} == ${source_real_path} -a ${target_real_path}"x" != "x" ]]; then
-			if [[ ${target_real_path} == ${source_real_path} ]]; then
-				if [[ ${target_real_path}"x" != "x" ]]; then
-					log "target path <${target_real_path}> is the same as source, do nothing"
-					return 0
-				fi
+			if [[ ${target_real_path} == ${source_real_path} && ${target_real_path}"x" != "x" ]]; then
+				log "target path <${target_real_path}> is the same as source, do nothing"
+				return 0
 			fi
 		fi
 	fi
 
 	## if no bk file, bk as origin file
-	if [[ ! -e ${target_file}"_bk" ]]; then
+	if [[ ! -e ${target_file}"_bk" && -e ${target_file} ]]; then
 		log "backing up ${target_file} to "${target_file}"_org"
 		mv ${target_file} "${target_file}"_org
 	fi
@@ -132,7 +130,7 @@ replace_config()
 		fi
 	fi
 
-	if [ ! -e ${source_file} ]; then
+	if [[ ! -e ${source_file} && -e ${target_file} ]]; then
 		echo "do not have source file, only backup target file"
 		return 0
 	fi
@@ -238,7 +236,7 @@ vim_plug_get_packages ()
 
 	vim_plug_action="+PlugClean "
 	vim_plug_action+="+PlugUpdate "
-	if [[ ${quite_after_install} == "quite" ]]; then
+	if [[ ${quite_after_install} == "quit" ]]; then
 		vim_plug_action+="+qall "
 	fi
 

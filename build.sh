@@ -110,6 +110,12 @@ OPTIONS:
         Setup basic tmux env (work dir: tmux-config)
     -p, --path
         Setup path for pre env (work dir: env_base)
+    -b, --build
+        Build env
+    -x, --extra
+		Custom setup env (fox ex. $0 -x env_base / $0 -x vim)
+    -q, --quit
+		Quit after setup done
 
 example. $0 -e
 USAGE
@@ -119,10 +125,15 @@ setup_env=""
 setup_vim=""
 setup_tmux=""
 setup_path=""
+setup_compress=""
+setup_build=""
+setup_extra=""
+setup_quit="quit"
 
 # setup getopt.
-long_opts="debug,log,log_file:,help,no_color,env,vim,tmux,path:"
-getopt_cmd=$(${cmd_getopt} -o dhlf:cevtp: --long "$long_opts" \
+long_opts="debug,log,log_file:,help,no_color,env,vim,tmux,path:,build,extra:"
+long_opts+=",quit"
+getopt_cmd=$(${cmd_getopt} -o dhlf:cevtp:bx:q --long "$long_opts" \
             -n $(basename $0) -- "$@") || \
             { echo -e "\nerror: getopt failed. extra args\n"; usage; exit 1;}
 
@@ -133,6 +144,7 @@ getopt_cmd=$(${cmd_getopt} -o dhlf:cevtp: --long "$long_opts" \
 	while true; do
 		case "$1" in
 			-d|--debug) debug=1;;
+			-h|--help) usage; exit 0;;
 			-l|--log) script_log_name="$log_path/log_${script_basename}.log";;
 			-f|--log_file) script_log_name="$2/log_${script_basename}.log"; log_path=$2 shift;;
 			-c|--no_color) log_color="false";;
@@ -140,6 +152,9 @@ getopt_cmd=$(${cmd_getopt} -o dhlf:cevtp: --long "$long_opts" \
 			-v|--vim) setup_vim="vim";;
 			-t|--tmux) setup_tmux="tmux";;
 			-p|--path) setup_path="$2"; shift;;
+			-b|--build) setup_build="build"; shift;;
+			-x|--extra) setup_build="$2"; shift;;
+			-q|--quit) setup_quit="null"; shift;;
 			--) shift; break;;
 		esac
 		shift
@@ -157,22 +172,28 @@ main ()
 	if [[ $1 == "env" ]]; then
 		setup_env="env_base"
 	elif [[ $1 == "vim" ]]; then
-		setup_vim="vim";;
+		setup_vim="vim"
 	elif [[ $1 == "tmux" ]]; then
-		setup_tmux="tmux";;
+		setup_tmux="tmux"
 	fi
 
 	if [[ ${setup_env}"x" != "x" ]]; then
-		${setup_env}_setup_env
+		${setup_env}_setup_env ${setup_quit} $@
 	fi
 	if [[ ${setup_vim}"x" != "x" ]]; then
-		${setup_vim}_setup_env
+		${setup_vim}_setup_env ${setup_quit} $@
 	fi
 	if [[ ${setup_tmux}"x" != "x" ]]; then
-		${setup_tmux}_setup_env
+		${setup_tmux}_setup_env ${setup_quit} $@
 	fi
 	if [[ ${setup_compress}"x" != "x" ]]; then
 		compress_part_vimfiles $@
+	fi
+	if [[ ${setup_build}"x" != "x" ]]; then
+		${setup_build}_setup_env ${setup_quit} $@
+	fi
+	if [[ ${setup_extra}"x" != "x" ]]; then
+		${setup_extra}_setup_env ${setup_quit} $@
 	fi
 }	# ----------  end of function main  ----------
 
