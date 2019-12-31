@@ -177,6 +177,8 @@ main ()
 		setup_tmux="tmux"
 	fi
 
+	setup_plug_manager
+
 	if [[ ${setup_env}"x" != "x" ]]; then
 		${setup_env}_setup_env ${setup_quit} $@
 	fi
