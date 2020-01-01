@@ -68,11 +68,11 @@ fi
 system_name=`uname -a`
 system_type="linux"
 
-if [[ $system_name == "msys"* ]]; then
+if [[ $system_name == "MSYS"* ]]; then
 	system_type="msys"
-elif [[ $system_name == "mingw"* ]]; then
+elif [[ $system_name == "MINGW"* ]]; then
 	system_type="mingw"
-elif [[ $system_name == *"microsoft"*"linux"* ]]; then
+elif [[ $system_name == *"Microsoft"*"Linux"* ]]; then
 	system_type="ms-linux"
 elif [[ $system_name == *"darwin"* ]]; then
 	system_type="mac"

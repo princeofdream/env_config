@@ -80,7 +80,7 @@ bin_path=$HOME/Environment/env_rootfs/bin
 
 vim_install_config()
 {
-	echo "=========== install_vim_vundle_config ==============="
+	echo "=========== vim_install_config ==============="
 	replace_config $top_dir/vimfiles $HOME/.vim
 	# replace_config $top_dir/.vimrc $HOME/.vimrc
 	if [[ -f $HOME/.vimrc ]]; then

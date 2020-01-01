@@ -136,7 +136,7 @@ replace_config()
 	fi
 	echo "createing ${target_file}"
 	if [[ "${system_type}" == msys || "${system_type}" == mingw ]]; then
-		${script_path}/msys-ln.sh -s ${source_file} ${target_file}
+		${top_dir}/scripts/msys-ln.sh -s ${source_file} ${target_file}
 	else
 		ln -sf ${source_file} ${target_file}
 	fi
