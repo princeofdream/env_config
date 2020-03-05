@@ -21,20 +21,16 @@
 
 MOUNT_POINT_ROOT=/mnt
 ## rootfs will be ext4
-## bootfs will be ext4
 ## efifs will be fat32
-ROOTFS_PAR="/dev/sda7"
-BOOTFS_PAR=""
-EFIFS_PAR="/dev/sda1"
-HOMEFS_PAR="/dev/sda2"
+ROOTFS_PAR=""
+EFIFS_PAR=""
+HOMEFS_PAR=""
 
 ROOTFS_MOUNT_POINT=""
-BOOTFS_MOUNT_POINT=boot
 EFIFS_MOUNT_POINT=boot/EFI
 
-
-CREATE_NEW_PARTITION=y
-FORMAT_PARTITION=y
+CREATE_NEW_PARTITION=n
+FORMAT_PARTITION=n
 
 
 setup_pacman_mirror ()
@@ -55,6 +51,8 @@ sync_time_with_ntp ()
 
 create_new_partition ()
 {
+	NEW_DISK=$1
+
 	if [[ ! $CREATE_NEW_PARTITION == "y" ]]; then
 		logd "Do not create new partition!"
 		return 0;
@@ -67,7 +65,7 @@ create_new_partition ()
 
 	if [[ $ANSWER == "y" ]]; then
 		loge "Start to crerate new partitions...."
-		sleep 3
+		sleep 1
 	else
 		loge "Selection incorrect, will not create new partition!"
 	fi
@@ -90,7 +88,7 @@ format_partition ()
 	loge "select: $ANSWER"
 
 	if [[ $ANSWER == "y" ]]; then
-		loge "$ROOTFS_PAR & $BOOTFS_PAR & $EFIFS_PAR is going to format"
+		loge "$ROOTFS_PAR & $EFIFS_PAR is going to format"
 		read -p "Make sure to create and format disks: (y/n)" ANSWER_DOUBLE_CHECK
 
 		if [[ ! $ANSWER_DOUBLE_CHECK == "y" ]]; then
@@ -101,16 +99,14 @@ format_partition ()
 	fi
 
 	if [[ ! $ANSWER_DOUBLE_CHECK == "y" ]]; then
-		return 128;
+		return 101;
 	fi
 
 	loge "mkfs.fat -F32 $EFIFS_PAR"
-	loge "mkfs.ext4 $BOOTFS_PAR"
 	loge "mkfs.ext4 $ROOTFS_PAR"
 
-	# mkfs.fat -F32 $EFIFS_PAR
-	# mkfs.ext4 $BOOTFS_PAR
-	# mkfs.ext4 $ROOTFS_PAR
+	mkfs.fat -F32 $EFIFS_PAR
+	mkfs.ext4 $ROOTFS_PAR
 
 	return $ret
 }	# ----------  end of function format_partition  ----------
@@ -123,9 +119,6 @@ mount_partitions ()
 
 	mount $ROOTFS_PAR $MOUNT_POINT_ROOT/$ROOTFS_MOUNT_POINT
 
-	mkdir -p $MOUNT_POINT_ROOT/$BOOTFS_MOUNT_POINT
-	mount $BOOTFS_PAR $MOUNT_POINT_ROOT/$BOOTFS_MOUNT_POINT
-
 	mkdir -p $MOUNT_POINT_ROOT/$EFIFS_MOUNT_POINT
 	mount $EFIFS_PAR $MOUNT_POINT_ROOT/$EFIFS_MOUNT_POINT
 	"
@@ -136,17 +129,6 @@ mount_partitions ()
 	if [[ ! $ret -eq 0 ]]; then
 		loge "mount $ROOTFS_PAR to $MOUNT_POINT_ROOT Failed!"
 		return $ret
-	fi
-
-	if [[ ! $BOOTFS_PAR == "" ]]; then
-		loge "Mount bootfs ..."
-		mkdir -p $MOUNT_POINT_ROOT/boot
-		mount $BOOTFS_PAR $MOUNT_POINT_ROOT/boot
-		ret=$?
-		if [[ ! $ret -eq 0 ]]; then
-			loge "mount $BOOTFS_PAR to $MOUNT_POINT_ROOT/boot Failed!"
-			return $ret
-		fi
 	fi
 
 	loge "Mount efifs ..."
@@ -186,17 +168,49 @@ setup_mount_tables_fstab ()
 	cat $MOUNT_POINT_ROOT/etc/fstab
 }
 
+
+check_par_val_available ()
+{
+	PAR_VAL=$1
+
+	if [[ $PAR_VAL"x" == "x" ]]; then
+		loge "Partition value is empty!!"
+		exit
+	elif [[ $PAR_VAL == "/dev/"* ]]; then
+		logd "check $PAR_VAL Okay"
+	else
+		loge "Partition value illegal!!"
+		exit
+	fi
+}	# ----------  end of function check_par_val_available  ----------
+
 setup_install_system ()
 {
 	ret=0
 
 	loge "Start install system..."
 
+	CREATE_NEW_PARTITION=$1
+	FORMAT_PARTITION=$2
+
+	ROOTFS_PAR=$3
+	EFIFS_PAR=$4
+	HOMEFS_PAR=$5
+
+	check_par_val_available $ROOTFS_PAR
+	check_par_val_available $EFIFS_PAR
+
+	NEW_DISK=${ROOTFS_PAR%%[0-9]*}
+	check_par_val_available $NEW_DISK
+
 	setup_pacman_mirror $@
 	sync_time_with_ntp $@
 
-	# create_new_partition $@
-	# format_partition $@
+	loge "READY to CREATE new partition!!!"
+	create_new_partition $NEW_DISK
+	format_partition
+
+
 	mount_partitions $@
 	install_arch_linux $@
 
