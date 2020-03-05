@@ -65,7 +65,7 @@ create_new_partition ()
 
 	if [[ $ANSWER == "y" ]]; then
 		loge "Start to crerate new partitions...."
-		sleep 1
+		echo "g\nn\n1\n2048\n+500M\nn\n2\n\n\n\nw\n"|fdisk $NEW_DISK
 	else
 		loge "Selection incorrect, will not create new partition!"
 	fi
