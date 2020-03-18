@@ -22,19 +22,19 @@
 
 setup_gui_desktop ()
 {
-	pacman -S gnome gdm gnome-extra gnome-tweak-tool gvfs-mtp plasma konsole kdeutils
+	pacman -S --noconfirm gnome gdm gnome-extra gnome-tweak-tool gvfs-mtp plasma konsole kdeutils
 }	# ----------  end of function setup_gui_desktop  ----------
 
 
 setup_wayland ()
 {
-	pacman -S weston
+	pacman -S --noconfirm weston
 }	# ----------  end of function setup_wayland  ----------
 
 
 setup_common_utils ()
 {
-	pacman -S vim git iw wpa_supplicant dhcpcd dialog openssh alsa-utils libreoffice
+	pacman -S --noconfirm vim git iw wpa_supplicant dhcpcd dialog openssh alsa-utils libreoffice
 
 	enable_system_service wpa_supplicant
 	# enable_system_service dhcpcd

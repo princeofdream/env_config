@@ -62,8 +62,10 @@ SYSTEM_TYPE="linux"
 
 if [[ $SYSTEM_NAME == "MSYS"* ]]; then
 	SYSTEM_TYPE="msys"
-elif [[ $SYSTEM_NAME == "MINGW"* ]]; then
-	SYSTEM_TYPE="mingw"
+elif [[ $SYSTEM_NAME == "MINGW64"* ]]; then
+	SYSTEM_TYPE="mingw64"
+elif [[ $SYSTEM_NAME == "MINGW32"* ]]; then
+	SYSTEM_TYPE="mingw32"
 elif [[ $SYSTEM_NAME == *"Microsoft"*"Linux"* ]]; then
 	SYSTEM_TYPE="ms-linux"
 elif [[ $SYSTEM_NAME == *"Darwin"* ]]; then
@@ -77,7 +79,7 @@ if [[ $SYSTEM_TYPE == "linux" ]]; then
 elif [[ $SYSTEM_TYPE == "mac" ]]; then
 	USE_SIMPLE_COLOR=false
 else
-	if [[ $SYSTEM_TYPE == "msys" || $SYSTEM_TYPE == "mingw" || $SYSTEM_TYPE == "ms-linux" ]]; then
+	if [[ $SYSTEM_TYPE == "msys" || $SYSTEM_TYPE == "mingw"* || $SYSTEM_TYPE == "ms-linux" ]]; then
 		USE_SIMPLE_COLOR=false
 	fi
 fi
@@ -393,7 +395,7 @@ fi
 
 ####################################################################
 
-if [[ $SYSTEM_TYPE == "msys" || $SYSTEM_TYPE == "mingw" || $SYSTEM_TYPE == "ms-linux" ]]; then
+if [[ $SYSTEM_TYPE == "msys" || $SYSTEM_TYPE == "mingw"* || $SYSTEM_TYPE == "ms-linux" ]]; then
 	PATH=${PATH//\ /_}
 fi
 

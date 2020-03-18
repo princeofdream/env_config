@@ -38,7 +38,7 @@ enable_system_service ()
 
 setup_network_service ()
 {
-	pacman -S networkmanager
+	pacman -S --noconfirm networkmanager
 	enable_system_service NetworkManager.service
 
 	return $ret
@@ -46,7 +46,7 @@ setup_network_service ()
 
 setup_network_tools ()
 {
-	pacman -S net-tools dnsutils inetutils iproute2
+	pacman -S --noconfirm net-tools dnsutils inetutils iproute2
 
 	return $ret
 }	# ----------  end of function setup_network_tools  ----------
@@ -89,7 +89,7 @@ setup_grub ()
 {
 	loge "Enter Setup grub to EFI..."
 
-	pacman -S dosfstools grub efibootmgr os-prober
+	pacman -S --noconfirm dosfstools grub efibootmgr os-prober mkinitcpio linux vim
 	mkinitcpio -p linux
 
 	grub-install --target=$TARGET --efi-directory=/boot/EFI/ --recheck
@@ -98,7 +98,7 @@ setup_grub ()
 
 setup_language ()
 {
-	pacman -S ttf-roboto noto-fonts noto-fonts-cjk adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts ttf-dejavu
+	pacman -S --noconfirm ttf-roboto noto-fonts noto-fonts-cjk adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts ttf-dejavu
 }	# ----------  end of function setup_language  ----------
 
 setup_local_system ()

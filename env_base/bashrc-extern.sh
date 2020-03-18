@@ -33,7 +33,7 @@ common_PS1_env_setup ()
 	GIT_PS1_STAT=`__git_ps1 "%s" >/dev/null 2>/dev/null`
 	git_ps_ret=$?
 
-	if [[ "$SYSTEM_TYPE" == "msys" || "$SYSTEM_TYPE" == "mingw" ]]; then
+	if [[ "$SYSTEM_TYPE" == "msys" || "$SYSTEM_TYPE" == "mingw"* ]]; then
 		PS1='\u@\h:\[\033[01;36m\]\w\[\033[00m\] \$\[\033[01;32m\] \[\033[00m\]\n'
 	elif [[ $USE_SIMPLE_COLOR == "true" ]]; then
 		if [[ $git_ps_ret == 0 ]]; then
@@ -126,6 +126,19 @@ elif [[ $ENABLE_POWERLINE == "powerline-sh" ]]; then
 		}
 		if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
 			PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+		fi
+	else
+		if [[ $SYSTEM_TYPE == "mingw32" ]]; then
+			CHECK_CMD_STAT=`powerline-sh32 2>/dev/null`
+			CMD_STAT=$?
+			if [[ $CMD_STAT == 0 ]]; then
+				function _update_ps1() {
+					PS1=$(powerline-sh32 $?)
+				}
+				if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+					PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+				fi
+			fi
 		fi
 	fi
 fi

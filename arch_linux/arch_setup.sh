@@ -35,6 +35,13 @@ BUILD_MODE=""
 
 DEBUG=0
 
+ROOTFS_PAR=""
+EFIFS_PAR=""
+HOMEFS_PAR=""
+
+CREATE_NEW_PARTITION=n
+FORMAT_PARTITION=n
+
 source $TOP_DIR/debug_utils.sh
 
 source $TOP_DIR/os_install.sh
@@ -69,29 +76,17 @@ OPTIONS:
         Setup local utils
     -o, --mode
         Setup mode [install/setup/grub/utils/...]
+    -e, --efi
+        Setup efi partition
+    -r, --root
+        Setup root partition
+    -m, --home
+        Setup home partition
+    -f, --format
+        Format new disk
 
 USAGE
 }
-
-main_func ()
-{
-	ret=0
-
-	loge "Mode: ${BUILD_MODE}"
-	if [[ ${BUILD_MODE} == "install" ]]; then
-		setup_install_system
-	elif [[ ${BUILD_MODE} == "setup" ]]; then
-		setup_local_system
-	elif [[ ${BUILD_MODE} == "utils" ]]; then
-		setup_base_utils $@
-	elif [[ ${BUILD_MODE} == "grub" ]]; then
-		setup_grub $@
-	fi
-	ret=$?
-
-	return $ret
-}	# ----------  end of function main_func  ----------
-
 
 # if [ $# -eq 0 ]; then
 #     echo -e "\nERROR: No arguments Found!\n"
@@ -101,7 +96,8 @@ main_func ()
 # Setup getopt.
 long_opts="debug,help,install,jobs:,log_file:,"
 long_opts+="utils,setup,mode:,"
-getopt_cmd=$(getopt -o cdhij:l:uso: --long "$long_opts" \
+long_opts+="efi:,root:,home:,format"
+getopt_cmd=$(getopt -o cdhij:l:uso:e:r:m:f --long "$long_opts" \
             -n $(basename $0) -- "$@") || \
             { echo -e "\nERROR: Getopt failed. Extra args\n"; usage; exit 1;}
 
@@ -118,6 +114,10 @@ while true; do
         -s|--setup) BUILD_MODE="setup";;
         -u|--utils) BUILD_MODE="utils";;
         -o|--mode) BUILD_MODE="$2"; shift;;
+        -e|--efi) EFIFS_PAR="$2"; shift;;
+        -r|--root) ROOTFS_PAR="$2"; shift;;
+        -m|--home) HOMEFS_PAR="$2"; shift;;
+        -f|--format) FORMAT_PARTITION=y;;
         --) shift; break;;
     esac
 	shift
@@ -126,6 +126,27 @@ done
 
 BUILD_START_TIME=$(date +%Y/%m/%d-%H:%M:%S)
 loge "Start Build: ${BUILD_START_TIME}"
+
+main_func ()
+{
+	ret=0
+
+	loge "Mode: ${BUILD_MODE}"
+	if [[ ${BUILD_MODE} == "install" ]]; then
+		setup_install_system $CREATE_NEW_PARTITION $FORMAT_PARTITION $ROOTFS_PAR $EFIFS_PAR $HOMEFS_PAR
+	elif [[ ${BUILD_MODE} == "setup" ]]; then
+		setup_local_system
+	elif [[ ${BUILD_MODE} == "utils" ]]; then
+		setup_base_utils $@
+	elif [[ ${BUILD_MODE} == "grub" ]]; then
+		setup_grub $@
+	else
+		usage
+	fi
+	ret=$?
+
+	return $ret
+}	# ----------  end of function main_func  ----------
 
 main_func $@
 
