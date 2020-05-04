@@ -223,7 +223,7 @@ setup_plug_manager ()
 		sed -i "s/--depth 999999/--unshallow/g" ${vim_plug_manager_path}/vim-plug/plug.vim
 	fi
 
-	cp -l ${vim_plug_manager_path}/vim-plug/plug.vim ${vim_plug_manager_path}/autoload/
+	replace_config ${vim_plug_manager_path}/vim-plug/plug.vim ${vim_plug_manager_path}/autoload/plug.vim
 }	# ----------  end of function install_plug_manager  ----------
 
 vim_plug_get_packages ()

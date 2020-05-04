@@ -123,8 +123,10 @@ vim_setup_env ()
 	vim_dest_path=$top_dir/vimfiles
 	vim_plug_get_packages $vim_dest_path ${should_quite}
 
-	if [[ ! -e $vim_dest_path/autoload/plug.vim && -e $vim_dest_path/base/vim-plug/plug.vim ]]; then
-		cp -r $vim_dest_path/base/vim-plug/plug.vim $vim_dest_path/autoload/
+	if [[ ! -f $vim_dest_path/autoload/plug.vim ]]; then
+		if [[ -f $vim_dest_path/base/vim-plug/plug.vim ]]; then
+			cp -r $vim_dest_path/base/vim-plug/plug.vim $vim_dest_path/autoload/
+		fi
 	fi
 
 	vim_install_config
