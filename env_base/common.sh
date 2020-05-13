@@ -59,6 +59,8 @@ ENABLE_TRUE_COLOR="tmux-screen"
 
 SYSTEM_NAME=`uname -a`
 SYSTEM_TYPE="linux"
+SUB_SYSTEM_TYPE=""
+ARCH=""
 
 if [[ $SYSTEM_NAME == "MSYS"* ]]; then
 	SYSTEM_TYPE="msys"
@@ -70,6 +72,27 @@ elif [[ $SYSTEM_NAME == *"Microsoft"*"Linux"* ]]; then
 	SYSTEM_TYPE="ms-linux"
 elif [[ $SYSTEM_NAME == *"Darwin"* ]]; then
 	SYSTEM_TYPE="mac"
+fi
+
+if [[ $SYSTEM_NAME == *"ubuntu"* || $SYSTEM_NAME == *"kylin"* ]]; then
+	SUB_SYSTEM_TYPE="ubuntu"
+
+	ARCH=$SYSTEM_NAME
+	while true; do
+		GET_ARCH=${ARCH#* }
+		echo $GET_ARCH
+		if [[ $GET_ARCH"x" == $ARCH"x" ]]; then
+			ARCH=$PRE_ARCH
+			break
+		fi
+		PRE_ARCH=$ARCH
+		ARCH=$GET_ARCH
+
+		if [[ $ARCH"x" == "x" ]]; then
+			break
+		fi
+	done
+	ARCH=${ARCH% *}
 fi
 
 if [[ $SYSTEM_TYPE == "linux" ]]; then
@@ -287,6 +310,9 @@ fi
 ############# #LD_LIBRARY_PATH Environment ##################
 if [[ "$LD_LIBRARY_PATH" == "" || $LD_LIBRARY_PATH == "/home"* ]]; then
 	SYSTEM_LD_LIBRARY_PATH="/lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64"
+	if [[ $SUB_SYSTEM_TYPE"x" == "ubuntu" && ${ARCH}"x" != "x" ]]; then
+		SYSTEM_LD_LIBRARY_PATH="/lib/${ARCH}-gnu-linux:"$SYSTEM_LD_LIBRARY_PATH
+	fi
 else
 	SYSTEM_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 fi
