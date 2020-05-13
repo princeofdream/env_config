@@ -214,6 +214,8 @@ if [[ "$USE_EXTERN_ROOTFS_ENV" == "true" ]]; then
 	append_path_env "$PATH_ENV_ROOTFS_BASE/bin"
 	append_path_env "$PATH_ENV_ROOTFS_BASE/sbin"
 	append_path_env "$PATH_ENV_ROOTFS_BASE/man"
+	append_path_env "$PATH_ENV_ROOTFS_BASE/libexec"
+	append_path_env "$PATH_ENV_ROOTFS_BASE/libexec/git-core"
 fi
 
 ############# #Fake rootfs usr Environment ##################
@@ -221,6 +223,8 @@ if [[ "$USE_EXTERN_ROOTFS_USR_ENV" == "true" ]]; then
 	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/bin"
 	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/sbin"
 	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/man"
+	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/libexec"
+	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/libexec/git-core"
 fi
 
 ############# #Fake rootfs usr local Environment ##################
@@ -228,6 +232,8 @@ if [[ "$USE_EXTERN_ROOTFS_USR_LOCAL_ENV" == "true" ]]; then
 	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/local/bin"
 	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/local/sbin"
 	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/local/man"
+	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/local/libexec"
+	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/local/libexec/git-core"
 fi
 
 ############# #Origin PATH Environment ##################
@@ -412,7 +418,8 @@ export JRE_HOME
 export CLASSPATH
 export LD_LIBRARY_PATH
 export PKG_CONFIG_PATH
-export LANG="en_US.UTF-8"
+# export LANG="en_US.UTF-8"
+export LANG="zh_CN.UTF-8"
 # export LANG="zh_CN.GBK"
 # export LANG="en_US.UTF-8"
 # export LANG='C'
