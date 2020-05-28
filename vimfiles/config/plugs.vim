@@ -8,6 +8,7 @@
 " "----------------------------------------------------------------------- "
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 	Plug 'junegunn/fzf.vim'
+	" {{{
 		" Mapping selecting mappings
 		nmap <leader><tab> <plug>(fzf-maps-n)
 		xmap <leader><tab> <plug>(fzf-maps-x)
@@ -24,6 +25,7 @@
 		" Replace the default dictionary completion with fzf-based fuzzy
 		" completion
 		" inoremap <expr> <c-x><c-k> fzf#vim#complete('cat /usr/share/dict/words')
+	" }}}
 	Plug 'inkarkat/vim-ingo-library'
 	Plug 'vim-scripts/LargeFile'
 
@@ -31,12 +33,16 @@
 " "----------------------------------------------------------------------- "
 " "--- Search"
 " "----------------------------------------------------------------------- "
+" {{{
 	Plug 'asenac/vim-opengrok'
+	" {{{
 		let g:opengrok_jar = $HOME . '/Environment/web_base/opengrok/lib/opengrok.jar'
 		" let g:opengrok_config_file = $HOME . '/Environment/web_base/opengrok/etc/configuration.xml'
 		let g:opengrok_config_file = $HOME . '/.opengrok/conf.xml'
 		" let g:opengrok_ctags = '/path/to/ctags'
+	" }}}
 	Plug 'easymotion/vim-easymotion'
+	" {{{
 		map <leader><leader>/ <Plug>(easymotion-sn)
 		omap <leader><leader>/ <Plug>(easymotion-tn)
 
@@ -49,7 +55,10 @@
 		map <leader><leader>l <Plug>(easymotion-lineforward)
 		map <leader><leader>h <Plug>(easymotion-linebackward)
 		let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+	" }}}
 	Plug 'haya14busa/incsearch.vim'
+	Plug 'haya14busa/incsearch-easymotion.vim'
+	" {{{
 		map /  <Plug>(incsearch-forward)
 		map ?  <Plug>(incsearch-backward)
 		map g/ <Plug>(incsearch-stay
@@ -60,6 +69,7 @@
 		map #  <Plug>(incsearch-nohl-#)
 		map g* <Plug>(incsearch-nohl-g*)
 		map g# <Plug>(incsearch-nohl-g#)
+	" }}}
 	Plug 'dyng/ctrlsf.vim'
 		nnoremap <Leader>cf :CtrlSFToggle<CR>
 	" "vim plugin
@@ -68,15 +78,20 @@
 	" "command
 	Plug 'beyondgrep/ack2'
 	Plug 'ggreer/the_silver_searcher'
+	" {{{
 		if executable('ag')
 			let g:ackprg = 'ag --vimgrep'
 		endif
+	" }}}
+" }}}
 
 
 " "----------------------------------------------------------------------- "
 " "--- Buffer and files"
 " "----------------------------------------------------------------------- "
+" {{{
 	" Plug 'kien/ctrlp.vim'
+	"" {{{
 	"     nmap <unique> <leader>bf :CtrlPBuffer<CR>
 	"     let g:ctrlp_map = '<c-p>'
 	"     let g:ctrlp_cmd = 'CtrlP'
@@ -105,23 +120,29 @@
 	"         \ },
 	"         \ 'fallback': 'find %s -type f'
 	"     \ }
+	"" }}}
 
 	" Plug 'tacahiroy/ctrlp-funky'
+	" {{{
 	"     nnoremap tf :CtrlPFunky<Cr>
 	"     " narrow the list down with a word under cursor
 	"     nnoremap tu :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 	"     let g:ctrlp_funky_matchtype = 'path'
 	"     let g:ctrlp_funky_syntax_highlight = 1
 	"     let g:ctrlp_extensions = ['funky']
+	" }}}
 
 	Plug 'Yggdroot/LeaderF'
+	" {{{
 		let g:Lf_CommandMap = {'<Tab>': ['<ESC>']}
 		highlight Lf_hl_match gui=bold guifg=Blue cterm=bold ctermfg=21
 		highlight Lf_hl_matchRefine  gui=bold guifg=Magenta cterm=bold ctermfg=201
 		let g:Lf_ShortcutF = '<C-P>'
+	" }}}
 
 
 	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle', 'tag': '*' }
+	" {{{
 		map <unique> <F2> :NERDTreeToggle<CR>
 		map <C-n> :NERDTreeToggle<CR>
 		" autocmd vimenter * exe 'NERDTree'
@@ -132,10 +153,12 @@
 		autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 		let g:NERDTreeDirArrowExpandable = '▸'
 		let g:NERDTreeDirArrowCollapsible = '▾'
+	" }}}
 	Plug 'jlanzarotta/bufexplorer'
 	Plug 'jeetsukumaran/vim-buffergator'
 	" Plug 'fholgado/minibufexpl.vim'
 	Plug 'majutsushi/tagbar'
+	" {{{
 		map <F3> :TagbarToggle<CR>
 		" let g:tagbar_sort = 0
 		" let g:tagbar_map_preview = '<CR>'
@@ -191,8 +214,10 @@
 		"         \ 'v:variables:0:0',
 		"     \ ],
 		" \ }
+	" }}}
 
 	Plug 'NLKNguyen/easy-navigate.vim'
+	"{{{
 		" ]b	Go to next buffer	:bnext
 		" [b	Go to previous buffer	:bprevious
 		" ]B	Go to last buffer	:blast
@@ -203,6 +228,8 @@
 		" [T	Go to first tab		:tabfirst
 		" <leader>`	Open a new tab	:tabnew
 		" <leader>1	Go to tab #1	1gt
+	" }}}
+" }}}
 
 
 " "----------------------------------------------------------------------- "
@@ -224,6 +251,7 @@
 		endfunction
 	Plug 'plasticboy/vim-markdown'
 	" Plug 'iamcco/markdown-preview.nvim'
+	" {{{
 		" " set to 1, the nvim will open the preview window once enter the markdown buffer
 		" " default: 0
 		" let g:mkdp_auto_start = 0
@@ -299,12 +327,14 @@
 		" " preview page title
 		" " ${name} will be replace with the file name
 		" let g:mkdp_page_title = '「${name}」'
+	" }}}
 
 
 " "----------------------------------------------------------------------- "
 " "--- undo"
 " "----------------------------------------------------------------------- "
 	Plug 'mbbill/undotree'
+	" {{{
 		nnoremap <leader>u :UndotreeToggle<CR>
 		nnoremap <F6> :UndotreeToggle<CR>
 		let g:undotree_SetFocusWhenToggle=1
@@ -321,14 +351,18 @@
 				nnoremap <silent> <script> <buffer> <leader><ESC> :call g:CloseUndotree()<CR>
 			endif
 		endfunction
+	" }}}
 	" Plug 'sjl/gundo.vim'
 
 " "----------------------------------------------------------------------- "
 " "--- auto complete"
 " "----------------------------------------------------------------------- "
+" {{{
 	let g:vim_custom_snippets = "UltiSnips"
 	if g:vim_custom_snippets == "UltiSnips"
+		" {{{
 		Plug 'SirVer/UltiSnips' | Plug 'honza/vim-snippets'
+		" {{{
 			" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 			let g:UltiSnipsExpandTrigger="<tab>"
 			let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -336,39 +370,45 @@
 
 			" If you want :UltiSnipsEdit to split your window.
 			let g:UltiSnipsEditSplit="vertical"
+		" }}}
+	" }}}
 	endif
-	" Plug 'tenfyzhong/CompleteParameter.vim'
-	" " Plug 'Shougo/neocomplete.vim'
-	" Plug 'Shougo/deoplete.nvim'
-	" Plug 'zchee/deoplete-clang'
-	" Plug 'fatih/vim-go', { 'tag': '*', 'for': ['go', 'golang'] }
-	" Plug 'zchee/deoplete-jedi'
-	" Plug 'sebastianmarkow/deoplete-rust'
-	" Plug 'carlitux/deoplete-ternjs'
-	" Plug 'mhartington/nvim-typescript'
-	" Plug 'johnzeng/vim-erlang-omnicomplete'
+	" {{{
+		" Plug 'tenfyzhong/CompleteParameter.vim'
+		" " Plug 'Shougo/neocomplete.vim'
+		" Plug 'Shougo/deoplete.nvim'
+		" Plug 'zchee/deoplete-clang'
+		" Plug 'fatih/vim-go', { 'tag': '*', 'for': ['go', 'golang'] }
+		" Plug 'zchee/deoplete-jedi'
+		" Plug 'sebastianmarkow/deoplete-rust'
+		" Plug 'carlitux/deoplete-ternjs'
+		" Plug 'mhartington/nvim-typescript'
+		" Plug 'johnzeng/vim-erlang-omnicomplete'
 
-	" " vim snippets selete one of it
-	" " 1. neosnippet
-	" " Plug 'Shougo/neosnippet-snippets'
-	" " Plug 'honza/vim-snippets'
-	" " Plug 'Shougo/neosnippet.vim'
-	" " 2.
-	" " Plug 'msanders/snipmate.vim'
-	" " 3.
-	" Plug 'MarcWeber/vim-addon-mw-utils'
-	" Plug 'tomtom/tlib_vim'
-	" Plug 'garbas/vim-snipmate'
-	" " Plug 'honza/vim-snippets'
-	" "
-	" " Plug 'spf13/snipmate-snippets'
+		" " vim snippets selete one of it
+		" " 1. neosnippet
+		" " Plug 'Shougo/neosnippet-snippets'
+		" " Plug 'honza/vim-snippets'
+		" " Plug 'Shougo/neosnippet.vim'
+		" " 2.
+		" " Plug 'msanders/snipmate.vim'
+		" " 3.
+		" Plug 'MarcWeber/vim-addon-mw-utils'
+		" Plug 'tomtom/tlib_vim'
+		" Plug 'garbas/vim-snipmate'
+		" " Plug 'honza/vim-snippets'
+		" "
+		" " Plug 'spf13/snipmate-snippets'
+	" }}}
 
 	" ------- YCM clang_complete depolete
-	let g:use_complete_tool = "none"
-	" let g:use_complete_tool = "depolete"
-	" let g:use_complete_tool = "clang_complete"
-	" let g:use_complete_tool = "YCM"
-	set completeopt-=preview
+	" {{{
+		let g:use_complete_tool = "none"
+		" let g:use_complete_tool = "depolete"
+		" let g:use_complete_tool = "clang_complete"
+		" let g:use_complete_tool = "YCM"
+		set completeopt-=preview
+	" }}}
 
 	"" " Check omnifunc and completefunc"
 	"" check command will be : ":set omnifunc? completefunc?"
@@ -381,11 +421,14 @@
 	" Plug 'Valloric/YouCompleteMe'
 	" Plug 'Rip-Rip/clang_complete'
 	" Plug 'artur-shaik/vim-javacomplete2'
-	" autocmd FileType java setlocal omnifunc=javacomplete#Complete
-	" let g:JavaComplete_MavenRepositoryDisable = 1
-	" let g:JavaComplete_EnableDefaultMappings = 0
+	" {{{
+		" autocmd FileType java setlocal omnifunc=javacomplete#Complete
+		" let g:JavaComplete_MavenRepositoryDisable = 1
+		" let g:JavaComplete_EnableDefaultMappings = 0
+	" }}}
 
 	if g:use_complete_tool == "YCM"
+		" {{{
 		" "----------------------------- YourCompleteMe --------------------------"
 		" "YCM是vim的一款基于语义的智能补全插件。该插件的功能与以下插件相冲突："
 		" "- clang_complete"
@@ -393,37 +436,41 @@
 		" "- Supertab"
 		" "----------------------------------------------------------------------- "
 		Plug 'Valloric/YouCompleteMe'
-		let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
-		let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
-		let g:ycm_key_invoke_completion = '<C-e>'
+		" {{{
+			let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+			let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+			let g:ycm_key_invoke_completion = '<C-e>'
 
-		let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
-		let g:ycm_collect_identifiers_from_tags_files=1	" 开启 YCM 基于标签引擎
-		let g:ycm_min_num_of_chars_for_completion=2	" 从第2个键入字符就开始罗列匹配项
-		let g:ycm_cache_omnifunc=1	" 禁止缓存匹配项,每次都重新生成匹配项
-		let g:ycm_seed_identifiers_with_syntax=1	" 语法关键字补全
-		" nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>	"force recomile with syntastic
-		"nnoremap <leader>lo :lopen<CR>	"open locationlist
-		"nnoremap <leader>lc :lclose<CR>	"close locationlist
-		" inoremap <leader><leader> <C-x><C-o>
-		"在注释输入中也能补全
-		let g:ycm_complete_in_comments = 1
-		" "在字符串输入中也能补全
-		let g:ycm_complete_in_strings = 1
-		" "注释和字符串中的文字也会被收入补全
-		let g:ycm_collect_identifiers_from_comments_and_strings = 0
-		let g:ycm_server_python_interpreter=$HOME . '/Environment/env_rootfs/bin/python'
-		let g:ycm_python_binary_path = 'python'
-		let g:ycm_global_ycm_extra_conf=$HOME . '/.ycm_extra_conf.py'
+			let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
+			let g:ycm_collect_identifiers_from_tags_files=1	" 开启 YCM 基于标签引擎
+			let g:ycm_min_num_of_chars_for_completion=2	" 从第2个键入字符就开始罗列匹配项
+			let g:ycm_cache_omnifunc=1	" 禁止缓存匹配项,每次都重新生成匹配项
+			let g:ycm_seed_identifiers_with_syntax=1	" 语法关键字补全
+			" nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>	"force recomile with syntastic
+			"nnoremap <leader>lo :lopen<CR>	"open locationlist
+			"nnoremap <leader>lc :lclose<CR>	"close locationlist
+			" inoremap <leader><leader> <C-x><C-o>
+			"在注释输入中也能补全
+			let g:ycm_complete_in_comments = 1
+			" "在字符串输入中也能补全
+			let g:ycm_complete_in_strings = 1
+			" "注释和字符串中的文字也会被收入补全
+			let g:ycm_collect_identifiers_from_comments_and_strings = 0
+			let g:ycm_server_python_interpreter=$HOME . '/Environment/env_rootfs/bin/python'
+			let g:ycm_python_binary_path = 'python'
+			let g:ycm_global_ycm_extra_conf=$HOME . '/.ycm_extra_conf.py'
 
-		let g:ycm_autoclose_preview_window_after_completion = 1
-		let g:ycm_autoclose_preview_window_after_insertion = 1
-		let g:ycm_use_ultisnips_completer = 1
-		" nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
-		nnoremap <leader>gf :YcmCompleter GoToDefinitionElseDeclaration<CR>
+			let g:ycm_autoclose_preview_window_after_completion = 1
+			let g:ycm_autoclose_preview_window_after_insertion = 1
+			let g:ycm_use_ultisnips_completer = 1
+			" nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+			nnoremap <leader>gf :YcmCompleter GoToDefinitionElseDeclaration<CR>
+		" }}}
 
 		Plug 'rdnetto/YCM-Generator'
+	" }}}
 	elseif g:use_complete_tool == "depolete"
+	" {{{
 		" "--------------------------- deoplete --------------------------"
 		Plug 'Shougo/deoplete.nvim'
 		let g:deoplete#enable_at_startup = 1
@@ -433,7 +480,9 @@
 		" Plugin 'sebastianmarkow/deoplete-rust'
 		" Plugin 'carlitux/deoplete-ternjs'
 		" Plugin 'mhartington/nvim-typescript'
+	" }}}
 	elseif g:use_complete_tool == "clang_complete"
+	" {{{
 		" "--------------------------- Clang Complete --------------------------"
 		Plug 'Rip-Rip/clang_complete'
 		" "open quick fix window false
@@ -465,6 +514,7 @@
 		let g:clang_complete_patterns=1
 		" autocmd FileType c setlocal omnifunc=ccomplete#Complete
 		" autocmd FileType cpp setlocal omnifunc=ccomplete#Complete
+	" }}}
 	endif
 
 	"" automatic closing of quotes, parenthesis, brackets, etc.
@@ -477,14 +527,18 @@
 " "--- colorschemes"
 " "----------------------------------------------------------------------- "
 	" Bottom line
-	let g:vim_custom_status_line = "lightline"
-	" let g:vim_custom_status_line = "airline"
-	" let g:vim_custom_status_line = "powerline"
-	" let g:vim_custom_status_line = "bufferline"
-	" let g:vim_custom_status_line = "none"
+	" {{{
+		let g:vim_custom_status_line = "lightline"
+		" let g:vim_custom_status_line = "airline"
+		" let g:vim_custom_status_line = "powerline"
+		" let g:vim_custom_status_line = "bufferline"
+		" let g:vim_custom_status_line = "none"
+	" }}}
 
 	if g:vim_custom_status_line == "lightline"
+	" {{{
 		Plug 'itchyny/lightline.vim'
+		" {{{
 			" [ 'gitbranch', 'readonly', 'filename', 'modified', 'buffers' ] ]
 			let g:lightline = {
 					\ 'colorscheme': 'one',
@@ -523,8 +577,12 @@
 				let modified = &modified ? ' +' : ''
 				return filename . modified
 			endfunction
+		" }}}
+	" }}}
 	elseif g:vim_custom_status_line == "airline"
+	" {{{
 		Plug 'vim-airline/vim-airline'
+		" {{{
 			" highlight bufferline_selected gui=bold cterm=bold term=bold guibg=#c678dd guifg=#273074
 			let g:airline#extensions#tabline#enabled = 1 " NOTE: When you open lots of buffers and typing text, it is so slow.
 			let g:airline#extensions#tabline#left_sep = ''
@@ -536,9 +594,12 @@
 			let g:airline#extensions#tabline#fnametruncate = 16
 			let g:airline#extensions#tabline#fnamecollapse = 2
 			let g:airline#extensions#tabline#buffer_idx_mode = 1
+		" }}}
 
 		Plug 'vim-airline/vim-airline-themes'
+	" }}}
 	elseif g:vim_custom_status_line == "powerline"
+	" {{{
 		if (!has("nvim"))
 			let vim_plugins_enable_powerline=1
 			if (vim_plugins_enable_powerline)
@@ -547,10 +608,13 @@
 		else
 			Plug 'itchyny/lightline.vim'
 		endif
+	" }}}
 	elseif g:vim_custom_status_line == "bufferline"
+	" {{{
 		Plug 'bling/vim-bufferline'
 			" let g:bufferline_echo = 1
 			" let g:bufferline_show_bufnr = 0
+	" }}}
 	endif
 	Plug 'upsuper/vim-colorschemes'
 	Plug 'rakr/vim-one'
@@ -572,22 +636,27 @@
 	Plug 'romainl/flattened'
 	Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
 	Plug 'jaxbot/semantic-highlight.vim'
+	" {{{
 		nnoremap <Leader>s :SemanticHighlightToggle<cr>
 		let s:semanticGUIColors = [ '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80', '#ffab91', '#bcaaa4', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb', '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#c5cae9', '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8' , '#f0f4c3', '#ffb74d' ]
 		let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,19]
+	" }}}
 	Plug 'mhinz/vim-startify'
 
 	" Plug 'ryanoasis/vim-devicons'
 	"     set encoding=UTF-8
 
 	Plug 'rubberduck203/aosp-vim'
+" }}}
 
 
 " "----------------------------------------------------------------------- "
 " "--- Actions"
 " "----------------------------------------------------------------------- "
+" {{{
 	Plug 'tpope/vim-repeat'
 	Plug 'ntpeters/vim-better-whitespace'
+	" {{{
 		"" remove end whitespace
 		"":s/\s\+$//
 		nnoremap <unique> <leader>w :s/\s\+$//<CR>
@@ -600,6 +669,7 @@
 		" nnoremap <unique> <leader>w :StripWhitespace<CR>
 		" Plugin 'bronson/vim-trailing-whitespace'
 		"nnoremap <unique> <leader>w :FixWhitespace<CR>
+	" }}}
 	" Plug 'yonchu/accelerated-smooth-scroll'
 	" Plug 'terryma/vim-smooth-scroll'
 	" Plug 'tpope/vim-surround'
@@ -609,6 +679,7 @@
 	" " Plug 'dhruvasagar/vim-table-mode'
 	" " Plug 'ervandew/supertab'
 	Plug 'MattesGroeger/vim-bookmarks'
+	" {{{
 		" let g:bookmark_no_default_key_mappings = 1
 		" highlight BookmarkSign ctermbg=NONE ctermfg=160
 		" highlight BookmarkLine ctermbg=194 ctermfg=NONE
@@ -619,17 +690,22 @@
 		let g:bookmark_auto_save = 1
 		let g:bookmark_annotation_sign = '>>'
 		let g:bookmark_auto_close = 1
+	" }}}
 	Plug 'Valloric/ListToggle'
+	" {{{
 		" <leader>l <leader>q
 		let g:lt_location_ulist_toggle_map = '<leader>l'
 		let g:lt_quickfix_list_toggle_map = '<leader>q'
 		let g:lt_height = 10
+	" }}}
 	Plug 'yonchu/accelerated-smooth-scroll'
+	" {{{
 		nmap <silent> <C-i> <Plug>(ac-smooth-scroll-c-d)
-
+	" }}}
 	Plug 'danro/rename.vim'
 		" :rename {xxx}
 	Plug 'gcmt/wildfire.vim'
+	" {{{
 		let g:wildfire_objects = ["i'", 'i"', "i)", "i]", "i}", "ip", "it"]
 		let g:wildfire_objects = {
 		    \ "*" : ["i'", 'i"', "i)", "i]", "i}"],
@@ -640,11 +716,15 @@
 		map <SPACE> <Plug>(wildfire-fuel)
 		" This selects the previous closest text object.
 		vmap <C-SPACE> <Plug>(wildfire-water)
+	" }}}
+" }}}
 
 " "----------------------------------------------------------------------- "
 " "--- commenter"
 " "----------------------------------------------------------------------- "
+" {{{
 	Plug 'scrooloose/nerdcommenter'
+	" {{{
 		let g:NERDSpaceDelims = 1
 		let g:NERDRemoveExtraSpaces = 1
 		let g:NERDCompactSexyComs = 1
@@ -656,23 +736,28 @@
 					\  }
 		map <unique> <F10> <plug>NERDCommenterToggle
 		map <unique> <F11> <plug>NERDCommenterToggle
+	" }}}
 	" Plug 'tpope/vim-commentary'
+" }}}
 
 
 " "----------------------------------------------------------------------- "
 " "--- command line"
 " "----------------------------------------------------------------------- "
+" {{{
 	Plug 'joonty/vim-do'
 	Plug 'osyo-manga/vim-over'
 	Plug 'Shougo/vimproc.vim'
 	Plug 'Shougo/vimshell.vim'
 	" Plug 'skywind3000/asyncrun.vim'
+" }}}
 
 
 
 " "----------------------------------------------------------------------- "
 " "--- filetype support"
 " "----------------------------------------------------------------------- "
+" {{{
 	Plug 'WolfgangMehner/bash-support'    , { 'tag': '*' }
 	Plug 'WolfgangMehner/c-support'       , { 'tag': '*' }
 	Plug 'WolfgangMehner/git-support'     , { 'tag': '*' }
@@ -689,7 +774,9 @@
 	let g:vim_custom_syntastic = "ale"
 
 	if g:vim_custom_syntastic == "syntastic"
+	" {{{
 		Plug 'vim-syntastic/syntastic'
+		" {{{
 			" this will make html file by Angular.js ignore errors
 			let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 			let g:syntastic_javascript_checkers = ['eslint']
@@ -706,8 +793,12 @@
 			let g:syntastic_cpp_compiler = 'clang++'
 			let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libstdc++'
 			let g:syntastic_enable_balloons = 1 "whether to show balloons
+		" }}}
+	" }}}
 	elseif g:vim_custom_syntastic == "ale"
+	" {{{
 		Plug 'w0rp/ale'
+		" {{{
 			" "in javascript.vim not here
 			" " Fix files with prettier, and then ESLint.
 			" let b:ale_fixers = ['prettier', 'eslint']
@@ -739,6 +830,8 @@
 			let g:ale_list_window_size = 5
 			let g:ale_keep_list_window_open = 1
 			let g:ale_open_list = 0
+		" }}}
+	" }}}
 	endif
 
 
@@ -763,10 +856,12 @@
 	" Plug 'groenewege/vim-less'
 	" "----For coljure
 	" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+" }}}
 
 " "----------------------------------------------------------------------- "
 " "--- VCS control"
 " "----------------------------------------------------------------------- "
+" {{{
 	Plug 'airblade/vim-gitgutter'
 		let g:gitgutter_max_signs=2048
 	Plug 'tpope/vim-fugitive'
@@ -783,17 +878,22 @@
 	" Plug 'mattn/webapi-vim'
 	" Plug 'mattn/gist-vim'
 	" Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+" }}}
 
 
 " "----------------------------------------------------------------------- "
 " "--- Custom"
 " "----------------------------------------------------------------------- "
+" {{{
+" }}}
 
 
 " "----------------------------------------------------------------------- "
 " "--- data collection"
 " "----------------------------------------------------------------------- "
+" {{{
 	Plug 'wakatime/vim-wakatime'
+" }}}
 
 " =======================================================
 
