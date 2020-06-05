@@ -143,9 +143,7 @@ elif [[ $ENABLE_POWERLINE == "powerline-sh" ]]; then
 	fi
 fi
 
-############# #Change origin PATH ##################
-if [[ $(pwd) == /mnt/sd* ]]
-then
-	cd $HOME
-fi
+export BASH_VERSION=$(help |grep -n 1)
+
+
 
