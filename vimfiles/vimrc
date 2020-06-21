@@ -1,10 +1,5 @@
 
 set nocompatible " be iMproved, required
-let g:vim_pm_path = $HOME."/.vim/"
-let g:vim_pm_plugins_path = g:vim_pm_path."base/"
-
-let g:vim_pm_vimrc_path = g:vim_pm_path
-" let g:vim_pm_custom_path = $HOME."byjames"
 
 function! OSX()
 	return has('macunix')
@@ -25,6 +20,17 @@ if !exists('g:vim_pm_custom_path')
 else
 	let g:vim_pm_vimrc_path = g:vim_pm_custom_path
 endif
+
+let g:vim_pm_path = $HOME."/.vim/"
+"" for Windows environment
+if WINDOWS()
+	let g:vim_pm_path = $VIM."/vimfiles/"
+endif
+let g:vim_pm_plugins_path = g:vim_pm_path."base/"
+
+let g:vim_pm_vimrc_path = g:vim_pm_path
+" let g:vim_pm_custom_path = $HOME."byjames"
+
 
 "/////////////////////////////////////////////////////////////////////////////
 " language and encoding setup
