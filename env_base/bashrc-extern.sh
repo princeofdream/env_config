@@ -50,7 +50,7 @@ common_PS1_env_setup ()
 # \[\e[48;5;236m\]\[\e[38;5;117m\] \[\e[38;5;140m\]\[\e[48;5;236m\]\j\
 # $(__git_ps1 "\[\e[48;5;236m\]\[\e[38;5;244m\] \[\e[38;5;120m\]\[\e[48;5;236m\] (%s)") \
 # \[\e[48;5;0m\]\[\e[38;5;236m\]\[\e[0m\]\[\e[0m\]\n'
-		if [[ $git_ps_ret == 0 ]]; then
+		if [[ ${git_ps_ret} == 0 ]]; then
 			PS1='\[\e[38;5;254m\]\[\e[48;5;31m\] \u \[\e[38;5;31m\]\[\e[48;5;237m\]\[\e[38;5;254m\]\[\e[48;5;237m\] \
 \w \[\e[38;5;237m\]\[\e[48;5;245m\]\[\e[38;5;232m\]\[\e[48;5;245m\] \
 \$ \[\e[38;5;245m\]\[\e[48;5;238m\]\[\e[38;5;39m\]\[\e[48;5;238m\] \
@@ -89,7 +89,7 @@ common_PS1_env_setup
 tmux_PS1_env_setup
 
 ############# #Powerline Environment ##################
-if [[ "$ENABLE_POWERLINE" == "powerline" ]]; then
+if [[ ${ENABLE_POWERLINE}"" == "powerline" ]]; then
 	## powerline for bash
 	powerline-daemon -q
 	POWERLINE_BASH_CONTINUATION=1
@@ -98,10 +98,10 @@ if [[ "$ENABLE_POWERLINE" == "powerline" ]]; then
 	if [ -f "$HOME/.exvim/bundle/powerline/powerline/bindings/bash/powerline.sh" ]; then
 		. $HOME/.exvim/bundle/powerline/powerline/bindings/bash/powerline.sh
 	fi
-elif [[ "$ENABLE_POWERLINE" == "powerline-shell" ]]; then
+elif [[ ${ENABLE_POWERLINE}"" == "powerline-shell" ]]; then
 	CHECK_CMD_STAT=`powerline-shell 2>/dev/null`
 	CMD_STAT=$?
-	if [[ $CMD_STAT == 0 ]]; then
+	if [[ ${CMD_STAT} == 0 ]]; then
 		function _update_ps1() {
 			# CHECK_CMD_STAT=`powerline-shell 2>/dev/null`
 			# CMD_STAT=$?
@@ -113,22 +113,22 @@ elif [[ "$ENABLE_POWERLINE" == "powerline-shell" ]]; then
 				# tmux_PS1_env_setup
 			# fi
 		}
-		if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+		if [[ ${TERM}"" != "linux" && ! ${PROMPT_COMMAND}"" =~ "_update_ps1" ]]; then
 			PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 		fi
 	fi
-elif [[ $ENABLE_POWERLINE == "powerline-sh" ]]; then
+elif [[ ${ENABLE_POWERLINE}"" == "powerline-sh" ]]; then
 	CHECK_CMD_STAT=`powerline-sh 2>/dev/null`
 	CMD_STAT=$?
-	if [[ $CMD_STAT == 0 ]]; then
+	if [[ ${CMD_STAT} == 0 ]]; then
 		function _update_ps1() {
 			PS1=$(powerline-sh $?)
 		}
-		if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+		if [[ ${TERM}"" != "linux" && ! ${PROMPT_COMMAND}"" =~ "_update_ps1" ]]; then
 			PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 		fi
 	else
-		if [[ $SYSTEM_TYPE == "mingw32" ]]; then
+		if [[ ${SYSTEM_TYPE}"" == "mingw32" ]]; then
 			CHECK_CMD_STAT=`powerline-sh32 2>/dev/null`
 			CMD_STAT=$?
 			if [[ $CMD_STAT == 0 ]]; then

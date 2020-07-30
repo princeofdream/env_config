@@ -38,6 +38,9 @@ USE_EXTERN_LD_PATH_USR_ENV=true
 USE_EXTERN_PKG_PATH_ENV=true
 USE_EXTERN_PKG_PATH_USR_ENV=true
 
+USE_SYSTEM_C_INCLUDE_PATH_ENV=false
+USE_EXTERN_C_INCLUDE_PATH_USR_ENV=true
+
 ############# !!!! ###############
 USE_SYSTEM_LD_PKG_CONFIG_FIRST=false
 
@@ -61,33 +64,33 @@ SYSTEM_NAME=`uname -a`
 SYSTEM_TYPE="linux"
 SUB_SYSTEM_TYPE=""
 
-if [[ $SYSTEM_NAME == "MSYS"* ]]; then
+if [[ ${SYSTEM_NAME}"" == "MSYS"* ]]; then
 	SYSTEM_TYPE="msys"
-elif [[ $SYSTEM_NAME == "MINGW64"* ]]; then
+elif [[ ${SYSTEM_NAME}"" == "MINGW64"* ]]; then
 	SYSTEM_TYPE="mingw64"
-elif [[ $SYSTEM_NAME == "MINGW32"* ]]; then
+elif [[ ${SYSTEM_NAME}"" == "MINGW32"* ]]; then
 	SYSTEM_TYPE="mingw32"
-elif [[ $SYSTEM_NAME == *"Microsoft"*"Linux"* ]]; then
+elif [[ ${SYSTEM_NAME}"" == *"Microsoft"*"Linux"* ]]; then
 	SYSTEM_TYPE="ms-linux"
-elif [[ $SYSTEM_NAME == *"Darwin"* ]]; then
+elif [[ ${SYSTEM_NAME}"" == *"Darwin"* ]]; then
 	SYSTEM_TYPE="mac"
-elif [[ $SYSTEM_NAME == *"Ubuntu"* || $SYSTEM_NAME == *"kylin"* ]]; then
+elif [[ ${SYSTEM_NAME}"" == *"Ubuntu"* || ${SYSTEM_NAME}"" == *"kylin"* ]]; then
 	SUB_SYSTEM_TYPE="ubuntu"
 fi
 
-if [[ $SYSTEM_TYPE == "linux" ]]; then
+if [[ ${SYSTEM_TYPE}"" == "linux" ]]; then
 	if [[ $DISPLAY == "" && $SSH_CONNECTION == "" ]]; then
 			USE_SIMPLE_COLOR=true
 	fi
-elif [[ $SYSTEM_TYPE == "mac" ]]; then
+elif [[ ${SYSTEM_TYPE}"" == "mac" ]]; then
 	USE_SIMPLE_COLOR=false
 else
-	if [[ $SYSTEM_TYPE == "msys" || $SYSTEM_TYPE == "mingw"* || $SYSTEM_TYPE == "ms-linux" ]]; then
+	if [[ ${SYSTEM_TYPE}"" == "msys" || ${SYSTEM_TYPE}"" == "mingw"* || ${SYSTEM_TYPE}"" == "ms-linux" ]]; then
 		USE_SIMPLE_COLOR=false
 	fi
 fi
 
-if [[ $USE_SIMPLE_COLOR == "true" ]]; then
+if [[ ${USE_SIMPLE_COLOR}"" == "true" ]]; then
 	ENABLE_POWERLINE="none"
 	ENABLE_TRUE_COLOR="false"
 fi
@@ -107,8 +110,8 @@ append_path_env ()
 {
 	add_path=$1
 	# str1 not contain str2
-	if [[ ! $ORIGIN_PATH =~ $add_path ]]; then
-		if [[ $PATH != "" ]]; then
+	if [[ ! ${ORIGIN_PATH}"" =~ ${add_path}"" ]]; then
+		if [[ ${PATH}"" != "" ]]; then
 			PATH+=":"
 		fi
 		PATH+="$add_path"
@@ -119,8 +122,8 @@ append_classpath_env ()
 {
 	add_path=$1
 	# str1 not contain str2
-	if [[ ! $ORIGIN_CLASSPATH =~ $add_path ]]; then
-		if [[ $CLASSPATH != "" ]]; then
+	if [[ ! ${ORIGIN_CLASSPATH}"" =~ ${add_path}"" ]]; then
+		if [[ ${CLASSPATH}"" != "" ]]; then
 			CLASSPATH+=":"
 		fi
 		CLASSPATH+="$add_path"
@@ -137,13 +140,13 @@ get_message_length ()
 ORIGIN_CLASSPATH=$CLASSPATH
 
 ORIGIN_PATH=$PATH:/sbin:/bin:/usr/bin:/usr/sbin:/usr/sbin:/usr/local/sbin
-if [[ $SYSTEM_TYPE == "mac" ]]; then
+if [[ ${SYSTEM_TYPE}"" == "mac" ]]; then
 	ORIGIN_PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
 PATH=""
 
 ############# #Jave Environment ##################
-if [[ "$USE_EXTERN_JAVA_ENV" == "true" ]]; then
+if [[ ${USE_EXTERN_JAVA_ENV}"" == "true" ]]; then
 	# JAVA_HOME="/usr/lib/jvm/default-java"
 	JAVA_HOME="$PATH_TOOLCHAIN_JDK_BASE/default-java"
 	JRE_HOME=$JAVA_HOME/jre
@@ -156,7 +159,7 @@ if [[ "$USE_EXTERN_JAVA_ENV" == "true" ]]; then
 fi
 
 ############# #ant Environment ##################
-if [[ "$USE_EXTERN_ANT_ENV" == "true" ]]; then
+if [[ ${USE_EXTERN_ANT_ENV}"" == "true" ]]; then
 	# ANT_HOME="$PATH_ENV_ROOTFS_BASE"
 	ANT_HOME="$PATH_TOOLCHAIN_JDK_BASE/apache-ant"
 
@@ -165,7 +168,7 @@ if [[ "$USE_EXTERN_ANT_ENV" == "true" ]]; then
 fi
 
 ############# #mvn Environment ##################
-if [[ "$USE_EXTERN_MAVEN_ENV" == "true" ]]; then
+if [[ ${USE_EXTERN_MAVEN_ENV}"" == "true" ]]; then
 	# M2_HOME="$PATH_ENV_ROOTFS_BASE"
 	M2_HOME="$PATH_TOOLCHAIN_JDK_BASE/apache-maven"
 
@@ -174,7 +177,7 @@ if [[ "$USE_EXTERN_MAVEN_ENV" == "true" ]]; then
 fi
 
 ############# #tomcat Environment ##################
-if [[ "$USE_EXTERN_TOMCAT_ENV" == "true" ]]; then
+if [[ ${USE_EXTERN_TOMCAT_ENV}"" == "true" ]]; then
 	CATALINA_BASE="$PATH_WEB_BASE/apache-tomcat"
 	CATALINA_HOME="$CATALINA_BASE/"
 	CATALINA_PID="$CATALINA_BASE/tomcat.pid"
@@ -184,7 +187,7 @@ if [[ "$USE_EXTERN_TOMCAT_ENV" == "true" ]]; then
 fi
 
 ############# #tomcat Environment ##################
-if [[ "$USE_EXTERN_OPENGROK_ENV" == "true" ]]; then
+if [[ ${USE_EXTERN_OPENGROK_ENV}"" == "true" ]]; then
 	export OPENGROK_TOMCAT_BASE=$CATALINA_BASE
 	export OPENGROK_APP_SERVER=Tomcat
 	export OPENGROK_INSTANCE_BASE=$PATH_WEB_BASE/opengrok
@@ -196,7 +199,7 @@ LLVM_ORIGIN_ROOT=$PATH_ENV_ROOTFS_BASE
 LLVMROOT=$LLVM_ARM_ROOT
 LLVMBIN=$LLVMROOT/bin
 
-if [[ "$USE_LLVM_FOR_ARM" == "true" ]]; then
+if [[ ${USE_LLVM_FOR_ARM}"" == "true" ]]; then
 	##### llvm runtime #####
 	append_path_env "$LLVM_ARM_ROOT/bin"
 fi
@@ -204,7 +207,7 @@ fi
 append_path_env "$HOME/.cargo/bin"
 
 ############# #Web_Base Environment ##################
-if [[ "$USE_EXTERN_WEB_BASE_ENV" == "true" ]]; then
+if [[ ${USE_EXTERN_WEB_BASE_ENV}"" == "true" ]]; then
 	##### web_base runtime #####
 	append_path_env "$PATH_WEB_BASE/bin"
 	append_path_env "$PATH_WEB_BASE/sbin"
@@ -212,7 +215,7 @@ if [[ "$USE_EXTERN_WEB_BASE_ENV" == "true" ]]; then
 fi
 
 ############# #Fake rootfs Environment ##################
-if [[ "$USE_EXTERN_ROOTFS_ENV" == "true" ]]; then
+if [[ ${USE_EXTERN_ROOTFS_ENV}"" == "true" ]]; then
 	##### env_rootfs runtime #####
 	append_path_env "$PATH_ENV_ROOTFS_BASE/bin"
 	append_path_env "$PATH_ENV_ROOTFS_BASE/sbin"
@@ -222,7 +225,7 @@ if [[ "$USE_EXTERN_ROOTFS_ENV" == "true" ]]; then
 fi
 
 ############# #Fake rootfs usr Environment ##################
-if [[ "$USE_EXTERN_ROOTFS_USR_ENV" == "true" ]]; then
+if [[ ${USE_EXTERN_ROOTFS_USR_ENV}"" == "true" ]]; then
 	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/bin"
 	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/sbin"
 	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/man"
@@ -231,7 +234,7 @@ if [[ "$USE_EXTERN_ROOTFS_USR_ENV" == "true" ]]; then
 fi
 
 ############# #Fake rootfs usr local Environment ##################
-if [[ "$USE_EXTERN_ROOTFS_USR_LOCAL_ENV" == "true" ]]; then
+if [[ ${USE_EXTERN_ROOTFS_USR_LOCAL_ENV}"" == "true" ]]; then
 	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/local/bin"
 	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/local/sbin"
 	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/local/man"
@@ -240,14 +243,14 @@ if [[ "$USE_EXTERN_ROOTFS_USR_LOCAL_ENV" == "true" ]]; then
 fi
 
 ############# #Origin PATH Environment ##################
-if [[ $PATH != "" ]]; then
+if [[ ${PATH}"" != "" ]]; then
 	PATH+=":"
 fi
 PATH+="$ORIGIN_PATH"
 CLASSPATH+="$ORIGIN_CLASSPATH"
 
 ############# #Extern toolchain Environment ##################
-if [[ "$USE_EXTERN_TOOLCHAIN_ENV" == "true" ]]; then
+if [[ ${USE_EXTERN_TOOLCHAIN_ENV}"" == "true" ]]; then
 	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/toolchain-openwrt-arm/bin"
 	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/toolchain-openwrt-aarch64/bin"
 	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/arm-linux-androideabi/bin"
@@ -262,7 +265,7 @@ if [[ "$USE_EXTERN_TOOLCHAIN_ENV" == "true" ]]; then
 fi
 
 ############# #Extern Android Environment ##################
-if [[ "$USE_EXTERN_ANDROID_ENV" == "true" ]]; then
+if [[ ${USE_EXTERN_ANDROID_ENV}"" == "true" ]]; then
 	# append_path_env "$PATH_TOOLCHAIN_GCC_BASE/arm-2010q1/bin"
 	append_path_env "$HOME/Environment/android/sdk/platform-tools"
 	append_path_env "$HOME/Environment/android/android-ndk"
@@ -270,17 +273,17 @@ if [[ "$USE_EXTERN_ANDROID_ENV" == "true" ]]; then
 fi
 
 ############# #Terminal Color Support ##################
-if [[ "$ENABLE_TRUE_COLOR" == "tmux-xterm" ]]; then
+if [[ ${ENABLE_TRUE_COLOR}"" == "tmux-xterm" ]]; then
 	alias tmux="env TERM=xterm-256color tmux"
 	# TERM="xterm-256color"
 	TERM="screen-256color"
-elif [[ "$ENABLE_TRUE_COLOR" == "tmux-screen" ]]; then
+elif [[ ${ENABLE_TRUE_COLOR}"" == "tmux-screen" ]]; then
 	TERM="screen-256color"
-elif [[ "$ENABLE_TRUE_COLOR" == "tmux-st" ]]; then
+elif [[ ${ENABLE_TRUE_COLOR}"" == "tmux-st" ]]; then
 	TERM="st-256color"
-elif [[ "$ENABLE_TRUE_COLOR" == "screen256" ]]; then
+elif [[ ${ENABLE_TRUE_COLOR}"" == "screen256" ]]; then
 	TERM="screen-256color"
-elif [[ "$ENABLE_TRUE_COLOR" == "false" ]]; then
+elif [[ ${ENABLE_TRUE_COLOR}"" == "false" ]]; then
 	TERM="xterm"
 else
 	TERM="screen-256color"
@@ -288,21 +291,21 @@ fi
 
 
 ############# #LD_LIBRARY_PATH Environment ##################
-if [[ "$LD_LIBRARY_PATH" == "" || $LD_LIBRARY_PATH == "/home"* ]]; then
+if [[ ${LD_LIBRARY_PATH}"" == "" || ${LD_LIBRARY_PATH}"" == "/home"* ]]; then
 	SYSTEM_LD_LIBRARY_PATH="/lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64"
-	if [[ $SUB_SYSTEM_TYPE"x" == "ubuntux" ]]; then
+	if [[ ${SUB_SYSTEM_TYPE}"" == "ubuntu" ]]; then
 		SYSTEM_ARCH=`uname -p`
 		SYSTEM_LD_LIBRARY_PATH="/lib/${SYSTEM_ARCH}-linux-gnu:"$SYSTEM_LD_LIBRARY_PATH
 	fi
 else
 	SYSTEM_LD_LIBRARY_PATH=$LD_LIBRARY_PATH
 fi
-if [[ "$USE_EXTERN_LD_PATH_ENV" == "true" ]]; then
+if [[ ${USE_EXTERN_LD_PATH_ENV}"" == "true" ]]; then
 	EXTERN_LD_LIBRARY_PATH="$PATH_ENV_ROOTFS_BASE/lib"
 	EXTERN_LD_LIBRARY_PATH+=":$PATH_ENV_ROOTFS_BASE/lib64"
 fi
-if [[ "$USE_EXTERN_LD_PATH_USR_ENV" == "true" ]]; then
-	if [[ "$EXTERN_LD_LIBRARY_PATH" == "" ]]; then
+if [[ ${USE_EXTERN_LD_PATH_USR_ENV}"" == "true" ]]; then
+	if [[ ${EXTERN_LD_LIBRARY_PATH}"" == "" ]]; then
 		EXTERN_LD_LIBRARY_PATH="$PATH_ENV_ROOTFS_BASE/usr/lib"
 	else
 		EXTERN_LD_LIBRARY_PATH+=":$PATH_ENV_ROOTFS_BASE/usr/lib"
@@ -315,32 +318,32 @@ fi
 ## Set LD_LIBRARY_PATH
 LD_LIBRARY_PATH_SYSTEM_FIRST="$SYSTEM_LD_LIBRARY_PATH"
 LD_LIBRARY_PATH_CUSTOM_FIRST="$SYSTEM_LD_LIBRARY_PATH"
-if [[ ! "$EXTERN_LD_LIBRARY_PATH" == "" ]]; then
+if [[ ! ${EXTERN_LD_LIBRARY_PATH}"" == "" ]]; then
 	LD_LIBRARY_PATH_SYSTEM_FIRST+=":$EXTERN_LD_LIBRARY_PATH"
 	LD_LIBRARY_PATH_CUSTOM_FIRST="$EXTERN_LD_LIBRARY_PATH:$LD_LIBRARY_PATH_CUSTOM_FIRST"
 fi
 
-if [[ "$USE_SYSTEM_LD_PKG_CONFIG_FIRST" == "true" ]]; then
+if [[ ${USE_SYSTEM_LD_PKG_CONFIG_FIRST}"" == "true" ]]; then
 	LD_LIBRARY_PATH="$LD_LIBRARY_PATH_SYSTEM_FIRST"
 else
 	LD_LIBRARY_PATH="$LD_LIBRARY_PATH_CUSTOM_FIRST"
 fi
 
 ############# #PKG_CONFIG_PATH Environment ##################
-if [[ "$PKG_CONFIG_PATH" == "" || $PKG_CONFIG_PATH == "/home"* ]]; then
+if [[ ${PKG_CONFIG_PATH}"" == "" || ${PKG_CONFIG_PATH} == "/home"* ]]; then
 	SYSTEM_PKG_CONFIG_PATH="/lib:/lib64:/usr/lib:/usr/lib64"
 	SYSTEM_PKG_CONFIG_PATH+=":/lib/pkgconfig:/lib64/pkgconfig:/usr/lib/pkgconfig:/usr/lib64/pkgconfig:/usr/local/lib/pkgconfig"
 else
 	SYSTEM_PKG_CONFIG_PATH=$PKG_CONFIG_PATH
 fi
-if [[ "$USE_EXTERN_PKG_PATH_ENV" == "true" ]]; then
+if [[ ${USE_EXTERN_PKG_PATH_ENV}"" == "true" ]]; then
 	EXTERN_PKG_CONFIG_PATH="$PATH_ENV_ROOTFS_BASE/lib"
 	EXTERN_PKG_CONFIG_PATH+=":$PATH_ENV_ROOTFS_BASE/lib64"
 	EXTERN_PKG_CONFIG_PATH+=":$PATH_ENV_ROOTFS_BASE/lib/pkgconfig"
 	EXTERN_PKG_CONFIG_PATH+=":$PATH_ENV_ROOTFS_BASE/lib64/pkgconfig"
 fi
-if [[ "$USE_EXTERN_PKG_PATH_USR_ENV" == "true" ]]; then
-	if [[ "$EXTERN_PKG_CONFIG_PATH" == "" ]]; then
+if [[ ${USE_EXTERN_PKG_PATH_USR_ENV}"" == "true" ]]; then
+	if [[ ${EXTERN_PKG_CONFIG_PATH}"" == "" ]]; then
 		EXTERN_PKG_CONFIG_PATH="$PATH_ENV_ROOTFS_BASE/usr/lib"
 	else
 		EXTERN_PKG_CONFIG_PATH+=":$PATH_ENV_ROOTFS_BASE/usr/lib"
@@ -357,11 +360,11 @@ fi
 ## Set PKG_CONFIG_PATH
 PKG_CONFIG_PATH_SYSTEM_FIRST="$SYSTEM_PKG_CONFIG_PATH"
 PKG_CONFIG_PATH_CUSTOM_FIRST="$SYSTEM_PKG_CONFIG_PATH"
-if [[ ! "$EXTERN_PKG_CONFIG_PATH" == "" ]]; then
+if [[ ! ${EXTERN_PKG_CONFIG_PATH}"" == "" ]]; then
 	PKG_CONFIG_PATH_SYSTEM_FIRST+=":$EXTERN_PKG_CONFIG_PATH"
 	PKG_CONFIG_PATH_CUSTOM_FIRST="$EXTERN_PKG_CONFIG_PATH:$PKG_CONFIG_PATH_CUSTOM_FIRST"
 fi
-if [[ "$USE_SYSTEM_LD_PKG_CONFIG_FIRST" == "true" ]]; then
+if [[ ${USE_SYSTEM_LD_PKG_CONFIG_FIRST}"" == "true" ]]; then
 	PKG_CONFIG_PATH="$PKG_CONFIG_PATH_SYSTEM_FIRST"
 else
 	PKG_CONFIG_PATH="$PKG_CONFIG_PATH_CUSTOM_FIRST"
@@ -370,6 +373,42 @@ fi
 ORIGIN_PATH=$PATH
 ORIGIN_CLASSPATH=$CLASSPATH
 SNAPDRAGON_PATH=$PATH_TOOLCHAIN_GCC_BASE/snapdragon-llvm/bin:$PATH
+
+############# #C_INCLUDE_PATH Environment ##################
+if [[ ${C_INCLUDE_PATH}"" != "" ]]; then
+	SYSTEM_C_INCLUDE_PATH=$C_INCLUDE_PATH
+fi
+if [[ ${USE_SYSTEM_C_INCLUDE_PATH_ENV}"" == "true" ]]; then
+	if [[ ${EXTERN_C_INCLUDE_PATH}"" == "" ]]; then
+		EXTERN_C_INCLUDE_PATH="/usr/include"
+	else
+		EXTERN_C_INCLUDE_PATH+=":/usr/include"
+	fi
+
+	EXTERN_C_INCLUDE_PATH+=":/usr/local/include"
+fi
+if [[ ${USE_EXTERN_C_INCLUDE_PATH_USR_ENV}"" == "true" ]]; then
+	if [[ ${EXTERN_C_INCLUDE_PATH}"" == "" ]]; then
+		EXTERN_C_INCLUDE_PATH="./include"
+	else
+		EXTERN_C_INCLUDE_PATH+=":./include"
+	fi
+
+	EXTERN_C_INCLUDE_PATH+=":../include"
+fi
+
+## Set C_INCLUDE_PATH
+if [[ ${SYSTEM_C_INCLUDE_PATH}"" == "" ]]; then
+	C_INCLUDE_PATH="${EXTERN_C_INCLUDE_PATH}"
+else
+	C_INCLUDE_PATH="${SYSTEM_C_INCLUDE_PATH}"
+	C_INCLUDE_PATH+=":${EXTERN_C_INCLUDE_PATH}"
+fi
+
+## Set CPLUS_INCLUDE_PATH
+CPLUS_INCLUDE_PATH="${C_INCLUDE_PATH}"
+
+
 
 ############# #sudo Environment ##################
 alias sudo='sudo env PATH=$PATH LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SYSTEM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_SYSTEM_FIRST'
@@ -401,7 +440,7 @@ alias f_sh='find -type f -iname "*.sh" -o -iname "*.bash"'
 alias f_tf='find -type f'
 alias vv='env DISPLAY="" vim -p'
 alias a2='echo "aria2c --conf-path=$HOME/.config/aria2/aria2.conf" && aria2c --conf-path=$HOME/.config/aria2/aria2.conf'
-if [[ $SYSTEM_TYPE == "mac" ]]; then
+if [[ ${SYSTEM_TYPE}"" == "mac" ]]; then
 	ls --color >/dev/null 2>/dev/null
 	if [[ $? == 0 ]]; then
 		alias ls='ls --color'
@@ -412,7 +451,7 @@ fi
 
 ####################################################################
 
-if [[ $SYSTEM_TYPE == "msys" || $SYSTEM_TYPE == "mingw"* || $SYSTEM_TYPE == "ms-linux" ]]; then
+if [[ ${SYSTEM_TYPE}"" == "msys" || ${SYSTEM_TYPE}"" == "mingw"* || ${SYSTEM_TYPE}"" == "ms-linux" ]]; then
 	PATH=${PATH//\ /_}
 fi
 
@@ -443,5 +482,8 @@ export LLVMBIN
 export ANT_HOME
 export PSH_LEFT=true
 export NAME_COLOR_SSH=true
+
+export C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH
 
 
