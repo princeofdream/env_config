@@ -344,7 +344,12 @@
 " "--- auto complete"
 " "----------------------------------------------------------------------- "
 " {{{
-	let g:vim_custom_snippets = "UltiSnips"
+	" let g:vim_custom_snippets = "UltiSnips"
+	if has('python')
+		let g:vim_custom_snippets = "snipmate"
+	else
+		let g:vim_custom_snippets = "UltiSnips"
+	endif
 	if g:vim_custom_snippets == "UltiSnips"
 		" {{{
 		Plug 'SirVer/UltiSnips' | Plug 'honza/vim-snippets'
@@ -358,6 +363,8 @@
 			let g:UltiSnipsEditSplit="vertical"
 		" }}}
 	" }}}
+	elseif g:vim_custom_snippets == "snipmate"
+		Plug 'msanders/snipmate.vim'
 	endif
 	" {{{
 		" Plug 'tenfyzhong/CompleteParameter.vim'
@@ -372,12 +379,7 @@
 		" Plug 'johnzeng/vim-erlang-omnicomplete'
 
 		" " vim snippets selete one of it
-		" " 1. neosnippet
-		" " Plug 'Shougo/neosnippet-snippets'
-		" " Plug 'honza/vim-snippets'
-		" " Plug 'Shougo/neosnippet.vim'
 		" " 2.
-		" " Plug 'msanders/snipmate.vim'
 		" " 3.
 		" Plug 'MarcWeber/vim-addon-mw-utils'
 		" Plug 'tomtom/tlib_vim'
