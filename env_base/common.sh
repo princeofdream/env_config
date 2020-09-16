@@ -38,7 +38,7 @@ USE_EXTERN_LD_PATH_USR_ENV=true
 USE_EXTERN_PKG_PATH_ENV=true
 USE_EXTERN_PKG_PATH_USR_ENV=true
 
-USE_SYSTEM_C_INCLUDE_PATH_ENV=false
+USE_SYSTEM_C_INCLUDE_PATH_ENV=true
 USE_EXTERN_C_INCLUDE_PATH_USR_ENV=true
 
 ############# !!!! ###############
@@ -439,6 +439,7 @@ alias f_mk='find -type f -iname "*.mk" -o -iname "Android.bp" -o -iname "Makefil
 alias f_sh='find -type f -iname "*.sh" -o -iname "*.bash"'
 alias f_tf='find -type f'
 alias vv='env DISPLAY="" vim -p'
+alias vvp='env DISPLAY="" C_INCLUDE_PATH=${C_INCLUDE_PATH} CPLUS_INCLUDE_PATH=${CPLUS_INCLUDE_PATH} vim -p'
 alias a2='echo "aria2c --conf-path=$HOME/.config/aria2/aria2.conf" && aria2c --conf-path=$HOME/.config/aria2/aria2.conf'
 if [[ ${SYSTEM_TYPE}"" == "mac" ]]; then
 	ls --color >/dev/null 2>/dev/null
@@ -483,7 +484,10 @@ export ANT_HOME
 export PSH_LEFT=true
 export NAME_COLOR_SSH=true
 
-export C_INCLUDE_PATH
-export CPLUS_INCLUDE_PATH
+#### WARNING
+#### Can not set this
+#### because makefile will use local include instead of /usr/include
+# export C_INCLUDE_PATH
+# export CPLUS_INCLUDE_PATH
 
 
