@@ -259,6 +259,7 @@ if [[ ${USE_EXTERN_TOOLCHAIN_ENV}"" == "true" ]]; then
 	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-arm-linux-gnueabihf/bin"
 	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-aarch64-linux-gnu/bin"
 	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-aarch64-none-elf/bin"
+	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-arm-aarch64-none-elf/bin"
 	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/devkitA64/bin"
 	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/devkitPPC/bin"
 	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/devkitARM/bin"
