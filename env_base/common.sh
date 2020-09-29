@@ -470,6 +470,7 @@ export JRE_HOME
 export CLASSPATH
 export LD_LIBRARY_PATH
 export PKG_CONFIG_PATH
+export LC_ALL=C
 # export LANG="en_US.UTF-8"
 export LANG="zh_CN.UTF-8"
 # export LANG="zh_CN.GBK"
