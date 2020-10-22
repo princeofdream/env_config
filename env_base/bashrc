@@ -155,5 +155,5 @@ else
 	fi
 fi
 
-
+umask 0022
 

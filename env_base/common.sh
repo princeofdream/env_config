@@ -450,6 +450,8 @@ if [[ ${SYSTEM_TYPE}"" == "mac" ]]; then
 		alias ls='ls -G'
 	fi
 fi
+alias lls='ls -l --time-style=+%Y-%m-%d_%H:%M:%S'
+alias llsc='ls -l --time-style=+%Y-%m-%d_%H:%M:%S --quoting-style=locale'
 
 ####################################################################
 
