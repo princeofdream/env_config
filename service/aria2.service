@@ -1,0 +1,26 @@
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published by
+#  the Free Software Foundation; either version 2.1 of the License, or
+#  (at your option) any later version.
+
+
+[Unit]
+Description=Aria2c Darmon
+Wants=network.target
+After=network-pre.service
+After=network.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+# Type=oneshot
+# ExecStartPre=-/bin/sh -c 'ls /sys/class/net'
+ExecStart=/usr/bin/aria2c -D --conf-path /etc/aria2/aria2.conf -l /var/log/aria2.log
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+Restart=always
+RemainAfterExit=true
+TimeoutStartSec=5min
