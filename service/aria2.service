@@ -16,11 +16,13 @@ After=network.target
 WantedBy=multi-user.target
 
 [Service]
-# Type=oneshot
+Type=oneshot
 # ExecStartPre=-/bin/sh -c 'ls /sys/class/net'
-ExecStart=/usr/bin/aria2c -D --conf-path /etc/aria2/aria2.conf -l /var/log/aria2.log
-ExecReload=/bin/kill -HUP $MAINPID
-KillMode=process
-Restart=always
+ExecStart=/usr/bin/aria2c -D --conf-path /etc/aria2/aria2.conf
+#-l /var/log/aria2.log
+ExecStop=-/bin/bash -c 'ps -aux |grep "/usr/bin/aria2c\>"|grep -v "grep"|awk '{print $2}'|sudo xargs kill'
+# ExecReload=/bin/kill -HUP $MAINPID
+# KillMode=process
+# Restart=always
 RemainAfterExit=true
-TimeoutStartSec=5min
+TimeoutStartSec=10sec
