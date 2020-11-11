@@ -1,0 +1,12 @@
+[Unit]
+Description=MQTT Broker mosquitto
+After=network.target sshd-keygen.service
+
+[Service]
+Type=forking
+ExecStart=/home/nginx/lijin/fake_root/usr/local/sbin/mosquitto -d -c /home/nginx/lijin/fake_root/etc/mosquitto.conf
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
