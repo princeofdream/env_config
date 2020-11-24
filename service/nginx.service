@@ -1,0 +1,63 @@
+; [Unit]
+; Description=Nginx web service
+; ; Documentation=man:sshd(8) man:sshd_config(5)
+; After=network.target
+; ; Wants=network.target
+
+; [Service]
+; Type=notify
+; ; Type=forking
+; PIDFile=$HOME/Environment/web_base/logs/nginx.pid
+; ; EnvironmentFile=$HOME/Environment/web_base/conf/nginx.conf
+; ; ExecStart=$HOME/Environment/web_base/sbin/nginx -C $OPTIONS
+; ExecStart=$HOME/Environment/web_base/sbin/nginx -c $HOME/Environment/web_base/conf/nginx.conf
+; ExecReload=/bin/kill -HUP $MAINPID
+; KillMode=process
+; ; Restart=on-failure
+; ; RestartSec=42s
+
+; [Install]
+; WantedBy=multi-user.target
+;
+
+; [Unit]
+; Description=The NGINX HTTP and reverse proxy server
+; After=syslog.target network.target remote-fs.target nss-lookup.target
+
+; [Service]
+; Type=forking
+; PIDFile=$HOME/Environment/web_base/logs/nginx.pid
+; ExecStartPre=$HOME/Environment/web_base/sbin/nginx -t -q -g 'daemon on; master_process on;'
+; ExecStart=$HOME/Environment/web_base/sbin/nginx -g 'daemon on; master_process on;'
+; ExecReload=$HOME/Environment/web_base/sbin/nginx -g 'daemon on; master_process on;' -s reload
+; ; ExecStop=-/sbin/start-stop-daemon --quiet --stop --retry QUIT/5 --pidfile /var/run/nginx.pid TimeoutStopSec=5
+; KillMode=mixed
+
+; [Install]
+; WantedBy=multi-user.target
+
+
+[Unit]
+Description=The nginx HTTP and reverse proxy server
+After=network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=forking
+PIDFile=$HOME/Environment/web_base/logs/nginx.pid
+# Nginx will fail to start if /run/nginx.pid already exists but has the wrong
+# SELinux context. This might happen when running `nginx -t` from the cmdline.
+# https://bugzilla.redhat.com/show_bug.cgi?id=1268621
+; ExecStartPre=/usr/bin/rm -f /run/nginx.pid
+; ExecStartPre=$HOME/Environment/web_base/sbin/nginx -t -q -g 'daemon on; master_process on;'
+ExecStartPre=$HOME/Environment/web_base/sbin/nginx -t
+ExecStart=$HOME/Environment/web_base/sbin/nginx -c $HOME/Environment/web_base/conf/nginx.conf
+ExecReload=/bin/kill -s HUP $MAINPID
+KillSignal=SIGQUIT
+TimeoutStopSec=5
+KillMode=process
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+
+

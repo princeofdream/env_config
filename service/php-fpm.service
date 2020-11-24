@@ -1,0 +1,24 @@
+[Unit]
+Description=The PHP FastCGI Process Manager
+After=syslog.target network.target
+
+[Service]
+User=$WHO_AM_I
+Group=$WHO_AM_I
+Type=forking
+; Type=notify
+; PIDFile=$HOME/Environment/web_base/var/run/php-fpm/php-fpm.pid
+
+# Execute pre and post scripts as root
+PermissionsStartOnly=true
+
+; EnvironmentFile=$HOME/Environment/web_base/etc/sysconfig/php-fpm
+; EnvironmentFile=$HOME/Environment/web_base/etc/php-fpm.conf
+ExecStart=$HOME/Environment/web_base/sbin/php-fpm -c $HOME/Environment/web_base/etc/php-fpm.d/php.ini
+; ExecStart=$HOME/Environment/web_base/sbin/php-fpm --nodaemonize
+ExecReload=kill -USR2 $MAINPID
+ExecStop=kill -s -QUIT $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
