@@ -215,6 +215,9 @@
 		" <leader>`	Open a new tab	:tabnew
 		" <leader>1	Go to tab #1	1gt
 	" }}}
+	" file encoding auto detect
+	Plug 's3rvac/AutoFenc'
+	" Plug 'mbbill/fencview'
 " }}}
 
 
@@ -630,9 +633,6 @@
 		let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,19]
 	" }}}
 	Plug 'mhinz/vim-startify'
-
-	" Plug 'ryanoasis/vim-devicons'
-	"     set encoding=UTF-8
 
 	Plug 'rubberduck203/aosp-vim'
 " }}}
