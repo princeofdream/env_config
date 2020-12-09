@@ -76,7 +76,7 @@
 " "--- Buffer and files"
 " "----------------------------------------------------------------------- "
 " {{{
-	" Plug 'kien/ctrlp.vim'
+	" Plug 'ctrlpvim/ctrlp.vim'
 	"" {{{
 	"     nmap <unique> <leader>bf :CtrlPBuffer<CR>
 	"     let g:ctrlp_map = '<c-p>'

@@ -273,6 +273,9 @@ if [[ ${USE_EXTERN_ANDROID_ENV}"" == "true" ]]; then
 	ANDROID_HOME="$HOME/Environment/android/sdk"
 fi
 
+append_path_env "$HOME/.local/bin"
+append_path_env "$HOME/.local/sbin"
+
 ############# #Terminal Color Support ##################
 if [[ ${ENABLE_TRUE_COLOR}"" == "tmux-xterm" ]]; then
 	alias tmux="env TERM=xterm-256color tmux"
