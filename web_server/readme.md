@@ -51,5 +51,17 @@ perl-cgi-fast \
 perl-cgi-session \
 ```
 
+六、gitolite
+```
+	######## Warning ########
+	# make sure $HOME permission is 755 or less,
+	# group write permission will not allow ssh authorized_keys works
+```
+
+
+
+
+
+
 
 

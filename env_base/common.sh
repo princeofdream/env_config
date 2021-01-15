@@ -482,6 +482,9 @@ export LANG="zh_CN.UTF-8"
 # export LANG="zh_CN.GBK"
 # export LANG="en_US.UTF-8"
 # export LANG='C'
+if [[ ${USE_SIMPLE_COLOR}"" == "true" ]]; then
+	export LANG="en_US.UTF-8"
+fi
 # unset CLASSPATH
 # unset JAVA_HOME
 export VISUAL=vim
