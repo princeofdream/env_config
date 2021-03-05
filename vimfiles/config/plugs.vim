@@ -348,10 +348,10 @@
 " "----------------------------------------------------------------------- "
 " {{{
 	" let g:vim_custom_snippets = "UltiSnips"
-	if has('python')
-		let g:vim_custom_snippets = "snipmate"
-	else
+	if has('python3')
 		let g:vim_custom_snippets = "UltiSnips"
+	else
+		let g:vim_custom_snippets = "snipmate"
 	endif
 	if g:vim_custom_snippets == "UltiSnips"
 		" {{{

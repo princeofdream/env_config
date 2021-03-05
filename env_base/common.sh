@@ -433,6 +433,120 @@ alias s_path_origin='export PATH=$ORIGIN_PATH'
 alias s_classpath_origin='export CLASSPATH=$ORIGIN_CLASSPATH'
 alias s_path_snapdragon='export PATH=$SNAPDRAGON_PATH && export LLVMROOT=$LLVM_ARM_ROOT && export LLVMBIN=$LLVMROOT/bin'
 
+utils_find_c ()
+{
+	f_param=$@
+
+	k_param="-iname \"*.c\""
+	k_param=${k_param}" -o -iname \"*.h\""
+	k_param=${k_param}" -type f"
+
+	if [[ ${f_param}"" == *-name* || ${f_param}"" == *-iname* ]]; then
+		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		eval find ${f_param} "-o" ${k_param}
+	else
+		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		eval find ${f_param} ${k_param}
+	fi
+	return $?
+}	# ----------  end of function utils_find_c  ----------
+
+utils_find_cxx ()
+{
+	f_param=$@
+
+	k_param="-iname \"*.c\""
+	k_param=${k_param}" -o -iname \"*.h\""
+	k_param=${k_param}" -o -iname \"*.cpp\""
+	k_param=${k_param}" -o -iname \"*.hpp\""
+	k_param=${k_param}" -type f"
+
+	if [[ ${f_param}"" == *-name* || ${f_param}"" == *-iname* ]]; then
+		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		eval find ${f_param} "-o" ${k_param}
+	else
+		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		eval find ${f_param} ${k_param}
+	fi
+	return $?
+}	# ----------  end of function utils_find_cxx  ----------
+
+utils_find_cpp ()
+{
+	f_param=$@
+
+	k_param="-iname \"*.cpp\""
+	k_param=${k_param}" -o -iname \"*.hpp\""
+	k_param=${k_param}" -type f"
+
+	if [[ ${f_param}"" == *-name* || ${f_param}"" == *-iname* ]]; then
+		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		eval find ${f_param} "-o" ${k_param}
+	else
+		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		eval find ${f_param} ${k_param}
+	fi
+	return $?
+}	# ----------  end of function utils_find_cpp  ----------
+
+utils_find_java ()
+{
+	f_param=$@
+
+	k_param="-iname \"*.java\""
+	k_param=${k_param}" -type f"
+
+	if [[ ${f_param}"" == *-name* || ${f_param}"" == *-iname* ]]; then
+		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		eval find ${f_param} "-o" ${k_param}
+	else
+		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		eval find ${f_param} ${k_param}
+	fi
+	return $?
+}	# ----------  end of function utils_find_java  ----------
+
+utils_find_sh ()
+{
+	f_param=$@
+
+	k_param="-iname \"*.sh\""
+	k_param=${k_param}" -o -iname \"*.bash\""
+	k_param=${k_param}" -type f"
+
+	if [[ ${f_param}"" == *-name* || ${f_param}"" == *-iname* ]]; then
+		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		eval find ${f_param} "-o" ${k_param}
+	else
+		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		eval find ${f_param} ${k_param}
+	fi
+	return $?
+}	# ----------  end of function utils_find_sh  ----------
+
+utils_find_gz ()
+{
+	f_param=$@
+
+	k_param="-iname \"*.gz\""
+	k_param=${k_param}" -o -iname \"*.tar\""
+	k_param=${k_param}" -o -iname \"*.tar.*\""
+	k_param=${k_param}" -o -iname \"*.bz2\""
+	k_param=${k_param}" -o -iname \"*.xz\""
+	k_param=${k_param}" -o -iname \"*.cpio\""
+	k_param=${k_param}" -type f"
+
+	if [[ ${f_param}"" == *-name* || ${f_param}"" == *-iname* ]]; then
+		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m-o ${k_param} [0m"
+		eval find ${f_param} "-o" ${k_param}
+	else
+		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		eval find ${f_param} ${k_param}
+	fi
+	return $?
+}	# ----------  end of function utils_find_sh  ----------
+
+
 alias ncdu='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
 alias a_brackets="awk '{print \"\\\"\"\$0\"\\\"\"}'"
 alias f_c='find -type f -iname "*.c" -o -iname "*.h"'
