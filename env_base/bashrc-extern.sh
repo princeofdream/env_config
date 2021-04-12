@@ -74,8 +74,8 @@ $(__git_ps1 " (%s)") \[\e[0m\]\[\e[38;5;148m\]\[\e[0m\]\[\e[0m\]
 tmux_PS1_env_setup ()
 {
 	############# #Tmux Environment ##################
-	if [ -n $TMUX ]; then
-		if [ ! -z $TMUX ]; then
+	if [[ -n $TMUX ]]; then
+		if [[ ! -z $TMUX ]]; then
 			ret=`tmux -V 2>/dev/null`
 			if [[ $ret == 0 ]]; then
 				PS1="$PS1"'$(tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
@@ -143,7 +143,7 @@ elif [[ ${ENABLE_POWERLINE}"" == "powerline-sh" ]]; then
 	fi
 fi
 
-export BASH_VERSION=$(help |grep -n 1)
+# export BASH_VERSION=$(help |grep -n 1)
 
 
 

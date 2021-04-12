@@ -56,6 +56,7 @@ PATH_ENV_ROOTFS_BASE=$HOME/Environment/env_rootfs
 
 ############# #Select  Terminal Color support ##################
 # Select --> tmux / tmux-xterm / tmux-screen / tmux-st / none
+# ENABLE_TRUE_COLOR="tmux-xterm"
 ENABLE_TRUE_COLOR="tmux-screen"
 # ENABLE_TRUE_COLOR="screen256"
 # ENABLE_TRUE_COLOR="false"
@@ -277,11 +278,13 @@ append_path_env "$HOME/.local/bin"
 append_path_env "$HOME/.local/sbin"
 
 ############# #Terminal Color Support ##################
+TERM_ORG=${TERM}
 if [[ ${ENABLE_TRUE_COLOR}"" == "tmux-xterm" ]]; then
 	alias tmux="env TERM=xterm-256color tmux"
 	# TERM="xterm-256color"
 	TERM="screen-256color"
 elif [[ ${ENABLE_TRUE_COLOR}"" == "tmux-screen" ]]; then
+	alias tmux="env TERM=screen-256color tmux"
 	TERM="screen-256color"
 elif [[ ${ENABLE_TRUE_COLOR}"" == "tmux-st" ]]; then
 	TERM="st-256color"
@@ -293,6 +296,9 @@ else
 	TERM="screen-256color"
 fi
 
+if [[ ! -n ${TMUX}"" ]]; then
+	TERM=${TERM_ORG}
+fi
 
 ############# #LD_LIBRARY_PATH Environment ##################
 if [[ ${LD_LIBRARY_PATH}"" == "" || ${LD_LIBRARY_PATH}"" == "/home"* ]]; then
