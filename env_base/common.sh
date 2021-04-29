@@ -576,6 +576,7 @@ if [[ ${SYSTEM_TYPE}"" == "mac" ]]; then
 fi
 alias lls='ls -l --time-style=+%Y-%m-%d_%H:%M:%S'
 alias llsc='ls -l --time-style=+%Y-%m-%d_%H:%M:%S --quoting-style=locale'
+alias lsdu="du -sBM *|awk -F : '{printf(\"%08dM %s\n\", \$1, \$0)}'|sort | cut -f 2- -d M"
 
 ####################################################################
 
