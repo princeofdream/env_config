@@ -624,7 +624,10 @@
 	endif
 	Plug 'upsuper/vim-colorschemes'
 	Plug 'rakr/vim-one'
+	" Plug 'joshdick/onedark.vim'
 	Plug 'morhetz/gruvbox'
+	Plug 'princeofdream/gruvcase'
+		let g:gruvbox_contrast_dark = 'soft'
 	" Plug 'jeaye/color_coded'
 	" Plug 'nathanaelkane/vim-indent-guides' "Display tab and space in front of a line
 	" Plug 'Yggdroot/indentLine' "Display tab and space with |

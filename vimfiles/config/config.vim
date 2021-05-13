@@ -59,7 +59,10 @@ function! s:vim_set_custom_colorscheme(vim_theme)
 		" hi CursorLine guibg=#434837 guifg=NONE
 		" let s:one_visual_bg='87FFFF'
 		" let s:one_visual_bg='5FD7FF'
-		let s:one_visual_bg='878777'
+		let s:one_visual_bg = '878777'
+		let s:one_syntax_fg     = ['bcbcbc', '23']
+		let s:one_syntax_cursor = ['323232', '235']
+		let s:one_syntax_cursor_bg = ['3f3f3f', '235']
 		call one#highlight('TabLineFill'  , ''       , s:one_visual_bg , 'none')
 		call one#highlight('Visual'       , ''       , s:one_visual_bg , 'none')
 		call one#highlight('VisualNOS'    , ''       , s:one_visual_bg , 'none')
@@ -67,12 +70,25 @@ function! s:vim_set_custom_colorscheme(vim_theme)
 		call one#highlight('CursorLineNr' , 'AFFFD7' , '5F5F5F'        , 'none')
 		" call one#highlight('PMenu'      , ''       , '333841'        , 'none')
 		call one#highlight('PMenuSel'     , '4E4E4E' , '87AFAF'        , 'none')
+		if empty($TMUX)
+			if ! has('gui_running')
+				" seperate line
+				call one#highlight('VertSplit' , s:one_syntax_fg[0] , s:one_syntax_cursor[0] , 'none')
+				" normal bg
+				call one#highlight('Normal' , s:one_syntax_fg[0] , s:one_syntax_cursor[0] , '')
+				" cursorline
+				call one#highlight('CursorLine' , '' , s:one_syntax_cursor_bg[0] , 'none')
+				call one#highlight('CursorLineNr' , 'ececec' , '5F5F5F'        , 'none')
+			endif
+		endif
 	elseif a:vim_theme == "solarized"
 		let g:solarized_termcolors = 256
 		colorscheme solarized
 	elseif a:vim_theme == "ayu_light"
 		let g:ayucolor="light"  " for light version of theme
 		colorscheme ayu
+	elseif a:vim_theme == "onedark"
+		colorscheme onedark
 	elseif a:vim_theme == "ayu_mirage"
 		let g:ayucolor="mirage" " for mirage version of theme
 		colorscheme ayu
@@ -87,6 +103,8 @@ function! s:vim_set_custom_colorscheme(vim_theme)
 		colorscheme OceanicNextLight
 	elseif a:vim_theme == "gruvbox"
 		colorscheme gruvbox
+	elseif a:vim_theme == "gruvcase"
+		colorscheme gruvcase
 	elseif a:vim_theme == "flattened_dark"
 		colorscheme flattened_dark
 	elseif a:vim_theme == "flattened_light"
@@ -99,12 +117,18 @@ call s:vim_set_custom_cursorline()
 
 if empty($TMUX)
 	if ! has('gui_running')
-		call s:vim_set_custom_colorscheme("gruvbox")
+		call s:vim_set_custom_colorscheme("gruvcase")
+		" call s:vim_set_custom_colorscheme("gruvbox")
+		" call s:vim_set_custom_colorscheme("one")
 	else
-		call s:vim_set_custom_colorscheme("one")
+		call s:vim_set_custom_colorscheme("gruvcase")
+		" call s:vim_set_custom_colorscheme("gruvbox")
+		" call s:vim_set_custom_colorscheme("one")
 	endif
 else
-	call s:vim_set_custom_colorscheme("one")
+	call s:vim_set_custom_colorscheme("gruvcase")
+	" call s:vim_set_custom_colorscheme("gruvbox")
+	" call s:vim_set_custom_colorscheme("one")
 endif
 
 set pastetoggle=<F4>
