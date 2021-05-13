@@ -1,0 +1,34 @@
+
+[Unit]
+Description=dnsmasq dhcp service for br-wan
+Documentation=man:dnsmasq(8)
+After=network.target
+Wants=nss-lookup.target
+
+[Service]
+Type=dbus
+; BusName=uk.org.thekelleys.dnsmasq
+BusName=james.dnsmasq
+ExecStartPre=/usr/bin/dnsmasq --test
+; ExecStart=/usr/bin/dnsmasq -k --enable-dbus --user=dnsmasq --pid-file
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+PrivateDevices=true
+ProtectSystem=full
+
+
+; PIDFile=/var/run/dhcp_brwan.pid
+; Type=forking
+ExecStart=/usr/bin/dnsmasq --conf-file=/home/james/Environment/my_c_program/env_config/service/dhcpd.conf -k --enable-dbus --user=dnsmasq --pid-file
+; KillSignal=SIGQUIT
+; TimeoutStopSec=5
+; KillMode=process
+; PrivateTmp=true
+; Restart=on-failure
+; PrivateDevices=true
+; ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target
+
+
