@@ -505,7 +505,7 @@ if filereadable(expand(vimrc_config_path))
 	exec 'source ' . fnameescape(vimrc_config_path)
 endif
 
-hi VertSplit guibg=grey guifg=#181A1F
+" hi VertSplit guibg=grey guifg=#181A1F
 
 set tabpagemax=50
 
