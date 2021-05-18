@@ -421,8 +421,8 @@ CPLUS_INCLUDE_PATH="${C_INCLUDE_PATH}"
 
 
 ############# #sudo Environment ##################
-alias sudo='sudo env PATH=$PATH LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SYSTEM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_SYSTEM_FIRST'
-alias sdo='sudo env PATH=$PATH LD_LIBRARY_PATH=$LD_LIBRARY_PATH_CUSTOM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_CUSTOM_FIRST'
+alias sudo='sudo env PATH=$PATH LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SYSTEM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_SYSTEM_FIRST TERM=xterm'
+alias sdo='sudo env PATH=$PATH LD_LIBRARY_PATH=$LD_LIBRARY_PATH_CUSTOM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_CUSTOM_FIRST TERM=xterm'
 alias yum='env LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SYSTEM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_SYSTEM_FIRST yum'
 
 alias rq='PROMPT_COMMAND="_update_ps1"'
@@ -552,6 +552,7 @@ utils_find_gz ()
 	return $?
 }	# ----------  end of function utils_find_sh  ----------
 
+alias bash='TERM=xterm bash'
 
 alias ncdu='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
 alias a_brackets="awk '{print \"\\\"\"\$0\"\\\"\"}'"
