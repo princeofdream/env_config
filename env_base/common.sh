@@ -296,9 +296,9 @@ else
 	TERM="screen-256color"
 fi
 
-if [[ ! -n ${TMUX}"" ]]; then
-	TERM=${TERM_ORG}
-fi
+# if [[ ! -n ${TMUX}"" ]]; then
+#     TERM=${TERM_ORG}
+# fi
 
 ############# #LD_LIBRARY_PATH Environment ##################
 if [[ ${LD_LIBRARY_PATH}"" == "" || ${LD_LIBRARY_PATH}"" == "/home"* ]]; then

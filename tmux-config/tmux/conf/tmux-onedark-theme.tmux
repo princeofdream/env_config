@@ -11,6 +11,7 @@ onedark_visual_grey="#3e4452"
 onedark_light_blue="#5f87af"
 onedark_light_grey="#747495"
 onedark_comment_grey="#5c6370"
+onedark_dark_grey="#858585"
 
 get() {
    local option=$1
@@ -62,7 +63,7 @@ setw "window-status-activity-attr" "none"
 
 setw "window-status-separator" ""
 
-set "window-style" "fg=$onedark_comment_grey"
+set "window-style" "fg=$onedark_dark_grey"
 set "window-active-style" "fg=$onedark_white"
 
 set "pane-border-fg" "$onedark_white"
