@@ -160,6 +160,41 @@ tmux_setup_env ()
 	tmux_install_tpm_plugins
 }	# ----------  end of function setup_tmux_env  ----------
 
+zsh_cleanup_env ()
+{
+	# rm -rf $HOME/.oh-my-zsh $HOME/.zshrc*
+
+	return 0;
+}	# ----------  end of function zsh_cleanup_env  ----------
+
+zsh_setup_env ()
+{
+	zsh_setup_action=""
+	if [[ "${zsh_setup_action}" == "patch" ]]; then
+		cd $top_dir/env_base/base/ohmyzsh/
+		ohmyzsh_git_info=$(git remote -v | grep https://github.com/ohmyzsh/ohmyzsh.git)
+		cur_dir=$(pwd)
+		if [[ "${cur_dir}" == "${top_dir}/env_base/base/ohmyzsh" &&
+			${ohmyzsh_git_info}"" != "" ]]; then
+			git checkout .
+			patch -p1 < ${top_dir}/env_base/patch/0*-zsh-*.patch
+		fi
+	fi
+
+	replace_config $top_dir/env_base/base/ohmyzsh $HOME/.oh-my-zsh
+
+	# eval $top_dir/env_base/base/ohmyzsh/tools/install.sh
+
+	replace_config $top_dir/env_base/zshrc $HOME/.zshrc
+	replace_config $top_dir/env_base/zshrc-extern.sh $HOME/.zshrc-extern.sh
+
+	replace_config $top_dir/env_base/jamesl.zsh-theme $HOME/.oh-my-zsh/themes/jamesl.zsh-theme
+	replace_config $top_dir/env_base/base/spaceship-prompt $HOME/.oh-my-zsh/themes/spaceship-prompt
+	replace_config $top_dir/env_base/base/spaceship-prompt/spaceship.zsh-theme $HOME/.oh-my-zsh/themes/spaceship.zsh-theme
+
+	return 0
+}	# ----------  end of function zsh_setup_env  ----------
+
 env_base_install_config()
 {
 	echo "=========== install_env_config ==============="
@@ -167,13 +202,9 @@ env_base_install_config()
 	replace_config $top_dir/env_base/env_tools.sh $HOME/.env_tools.sh
 	replace_config $top_dir/env_base/bashrc $HOME/.bashrc
 	replace_config $top_dir/env_base/bashrc-extern.sh $HOME/.bashrc-extern.sh
-	replace_config $top_dir/env_base/zshrc $HOME/.zshrc
-	replace_config $top_dir/env_base/zshrc-extern.sh $HOME/.zshrc-extern.sh
-	replace_config $top_dir/env_base/jamesl.zsh-theme $HOME/.oh-my-zsh/themes/jamesl.zsh-theme
-	replace_config $top_dir/env_base/base/spaceship-prompt $HOME/.oh-my-zsh/themes/spaceship-prompt
-	replace_config $top_dir/env_base/base/spaceship-prompt/spaceship.zsh-theme $HOME/.oh-my-zsh/themes/spaceship.zsh-theme
 
-	replace_config $top_dir/env_base/base/oh-my-zsh $HOME/.oh-my-zsh
+	zsh_setup_env
+
 	## for ubuntu fonts
 	replace_config $top_dir/env_base/base/fonts $HOME/.fonts/truetype
 	## for powerline segment config
@@ -192,6 +223,8 @@ env_base_install_config()
 env_base_setup_env ()
 {
 	should_quite=$1
+
+	zsh_cleanup_env
 
 	vim_plug_get_packages $env_base_dest_path ${should_quite}
 
