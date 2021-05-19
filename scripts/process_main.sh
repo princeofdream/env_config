@@ -188,7 +188,8 @@ zsh_setup_env ()
 	replace_config $top_dir/env_base/zshrc $HOME/.zshrc
 	replace_config $top_dir/env_base/zshrc-extern.sh $HOME/.zshrc-extern.sh
 
-	replace_config $top_dir/env_base/jamesl.zsh-theme $HOME/.oh-my-zsh/themes/jamesl.zsh-theme
+	replace_config $top_dir/env_base/jamesl_dual_side.zsh $HOME/.oh-my-zsh/themes/jamesl_dual_side.zsh-theme
+	replace_config $top_dir/env_base/jamesl_left_only.zsh $HOME/.oh-my-zsh/themes/jamesl_left_only.zsh-theme
 	replace_config $top_dir/env_base/base/spaceship-prompt $HOME/.oh-my-zsh/themes/spaceship-prompt
 	replace_config $top_dir/env_base/base/spaceship-prompt/spaceship.zsh-theme $HOME/.oh-my-zsh/themes/spaceship.zsh-theme
 

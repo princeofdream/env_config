@@ -39,7 +39,7 @@ fi
 # powerline and powerline-shell powerline-sh
 # ENABLE_POWERLINE="powerline"
 # ENABLE_POWERLINE="powerline-shell"
-ENABLE_POWERLINE="powerline-sh"
+ENABLE_POWERLINE="powerline-sh----"
 
 if [[ "$ENABLE_POWERLINE" = "powerline" ]]; then
 	powerline-daemon -q

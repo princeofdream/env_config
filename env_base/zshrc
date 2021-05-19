@@ -12,8 +12,11 @@
 # ZSH_THEME="ys"
 # ZSH_THEME="agnoster"
 ZSH_THEME="robbyrussell"
-if [[ -f "$HOME/.oh-my-zsh/themes/jamesl.zsh-theme" ]]; then
-	ZSH_THEME="jamesl"
+if [[ -f "$HOME/.oh-my-zsh/themes/jamesl_dual_side.zsh-theme" ]]; then
+	ZSH_THEME="jamesl_dual_side"
+fi
+if [[ -f "$HOME/.oh-my-zsh/themes/jamesl_dual_side.zsh-theme" ]]; then
+	ZSH_THEME="jamesl_left_only"
 fi
 # ZSH_THEME="spaceship"
 # ZSH_THEME="dracula"
