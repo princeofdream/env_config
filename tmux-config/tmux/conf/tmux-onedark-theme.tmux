@@ -105,7 +105,9 @@ set "status-right" "#[fg=$onedark_white,bg=$onedark_black,nounderscore,noitalics
 	#[fg=$onedark_black,bg=$onedark_green,bold]${status_widgets_green_bg}\
 	#[fg=$onedark_yellow, bg=$onedark_green]\
 	#[fg=$onedark_red,bg=$onedark_yellow]\
-	#{prefix_highlight}#([ $(tmux show-option -qv key-table) = 'off' ] && echo 'OFF')#{?window_zoomed_flag,[Z],}\
+	#{prefix_highlight}\
+	#[fg=$onedark_black,bg=$onedark_yellow]\
+	#([ $(tmux show-option -qv key-table) = 'off' ] && echo 'OFF')#{?window_zoomed_flag,[Z],}\
 	#[fg=$onedark_red,bg=$onedark_yellow,bold]${status_widgets_green_bg}"
 # set "status-right" "#[fg=$onedark_white,bg=$onedark_black,nounderscore,noitalics]${time_format}  ${date_format} #[fg=$onedark_visual_grey,bg=$onedark_black]#[fg=$onedark_visual_grey,bg=$onedark_visual_grey]#[fg=$onedark_white, bg=$onedark_visual_grey]${status_widgets} #[fg=$onedark_green,bg=$onedark_visual_grey,nobold,nounderscore,noitalics]#[fg=$onedark_black,bg=$onedark_green,bold] #h #[fg=$onedark_yellow, bg=$onedark_green]#[fg=$onedark_red,bg=$onedark_yellow]"
 set "status-left" "#[fg=$onedark_black,bg=$onedark_green,bold] #S #[fg=$onedark_green,bg=$onedark_black,nobold,nounderscore,noitalics]"
