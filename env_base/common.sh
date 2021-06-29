@@ -575,9 +575,39 @@ if [[ ${SYSTEM_TYPE}"" == "mac" ]]; then
 		alias ls='ls -G'
 	fi
 fi
+
 alias lls='ls -l --time-style=+%Y-%m-%d_%H:%M:%S'
 alias llsc='ls -l --time-style=+%Y-%m-%d_%H:%M:%S --quoting-style=locale'
-alias lsdu="du -sBM *|awk -F : '{printf(\"%08dM %s\n\", \$1, \$0)}'|sort | cut -f 2- -d M"
+
+# alias lsdu="du -sBM *|awk -F : '{printf(\"%08dM %s\n\", \$1, \$0)}'|sort | cut -f 2- -d M"
+lsdu ()
+{
+	local lsdu_check_path=""
+	local lsdu_param=""
+
+	if [[ "$1" == "-k" || "$1" == "-K" ]]; then
+		lsdu_param=K
+		shift;
+	elif [[ "$1" == "-m" || "$1" == "-M" ]]; then
+		lsdu_param=M
+		shift;
+	else
+		lsdu_param=M
+	fi
+
+	if [[ "$1" == "" ]]; then
+		lsdu_check_path="*"
+	else
+		lsdu_check_path="$*"
+	fi
+
+	if [[ $lsdu_param == "K" ]]; then
+		eval du -sBK ${lsdu_check_path} |awk -F : '{printf("%08dM %s\n", $1, $0)}' |sort |cut -f 2- -d M
+	else
+		eval du -sBM ${lsdu_check_path} |awk -F : '{printf("%08dM %s\n", $1, $0)}' |sort |cut -f 2- -d M
+	fi
+	return $?
+}	# ----------  end of function lsdu  ----------
 
 ####################################################################
 
