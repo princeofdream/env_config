@@ -204,6 +204,8 @@ env_base_install_config()
 	replace_config $top_dir/env_base/bashrc $HOME/.bashrc
 	replace_config $top_dir/env_base/bashrc-extern.sh $HOME/.bashrc-extern.sh
 
+	replace_config $top_dir/env_base/pam_environment $HOME/.pam_environment
+
 	zsh_setup_env
 
 	## for ubuntu fonts
