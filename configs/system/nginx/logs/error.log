@@ -1,0 +1,156 @@
+2021/07/06 20:08:49 [notice] 96136#96136: using the "epoll" event method
+2021/07/06 20:08:49 [notice] 96136#96136: using the "epoll" event method
+2021/07/06 20:08:49 [notice] 96136#96136: nginx/1.20.1
+2021/07/06 20:08:49 [notice] 96136#96136: nginx/1.20.1
+2021/07/06 20:08:49 [notice] 96136#96136: OS: Linux 5.10.47-1-lts
+2021/07/06 20:08:49 [notice] 96136#96136: OS: Linux 5.10.47-1-lts
+2021/07/06 20:08:49 [notice] 96136#96136: getrlimit(RLIMIT_NOFILE): 1024:524288
+2021/07/06 20:08:49 [notice] 96136#96136: getrlimit(RLIMIT_NOFILE): 1024:524288
+2021/07/06 20:08:49 [notice] 96137#96137: start worker processes
+2021/07/06 20:08:49 [notice] 96137#96137: start worker processes
+2021/07/06 20:08:49 [notice] 96137#96137: start worker process 96138
+2021/07/06 20:08:49 [notice] 96137#96137: start worker process 96138
+2021/07/06 20:08:58 [error] 96138#96138: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "127.0.0.1"
+2021/07/06 20:08:58 [error] 96138#96138: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "127.0.0.1"
+2021/07/06 20:08:58 [error] 96138#96138: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "127.0.0.1"
+2021/07/06 20:09:19 [notice] 96137#96137: signal 15 (SIGTERM) received from 1, exiting
+2021/07/06 20:09:19 [notice] 96137#96137: signal 15 (SIGTERM) received from 1, exiting
+2021/07/06 20:09:19 [notice] 96138#96138: exiting
+2021/07/06 20:09:19 [notice] 96138#96138: exiting
+2021/07/06 20:09:19 [notice] 96138#96138: exit
+2021/07/06 20:09:20 [notice] 96137#96137: signal 14 (SIGALRM) received
+2021/07/06 20:09:20 [notice] 96137#96137: signal 14 (SIGALRM) received
+2021/07/06 20:09:20 [notice] 96137#96137: signal 14 (SIGALRM) received
+2021/07/06 20:09:20 [notice] 96137#96137: signal 14 (SIGALRM) received
+2021/07/06 20:09:20 [notice] 96137#96137: signal 17 (SIGCHLD) received from 96138
+2021/07/06 20:09:20 [notice] 96137#96137: signal 17 (SIGCHLD) received from 96138
+2021/07/06 20:09:20 [notice] 96137#96137: worker process 96138 exited with code 0
+2021/07/06 20:09:20 [notice] 96137#96137: worker process 96138 exited with code 0
+2021/07/06 20:09:20 [notice] 96137#96137: exit
+2021/07/06 20:09:20 [notice] 96137#96137: exit
+2021/07/06 20:09:20 [notice] 101062#101062: using the "epoll" event method
+2021/07/06 20:09:20 [notice] 101062#101062: using the "epoll" event method
+2021/07/06 20:09:20 [notice] 101062#101062: nginx/1.20.1
+2021/07/06 20:09:20 [notice] 101062#101062: nginx/1.20.1
+2021/07/06 20:09:20 [notice] 101062#101062: OS: Linux 5.10.47-1-lts
+2021/07/06 20:09:20 [notice] 101062#101062: OS: Linux 5.10.47-1-lts
+2021/07/06 20:09:20 [notice] 101062#101062: getrlimit(RLIMIT_NOFILE): 1024:524288
+2021/07/06 20:09:20 [notice] 101062#101062: getrlimit(RLIMIT_NOFILE): 1024:524288
+2021/07/06 20:09:20 [notice] 101063#101063: start worker processes
+2021/07/06 20:09:20 [notice] 101063#101063: start worker processes
+2021/07/06 20:09:20 [notice] 101063#101063: start worker process 101064
+2021/07/06 20:09:20 [notice] 101063#101063: start worker process 101064
+2021/07/06 20:12:48 [notice] 101063#101063: signal 15 (SIGTERM) received from 1, exiting
+2021/07/06 20:12:48 [notice] 101063#101063: signal 15 (SIGTERM) received from 1, exiting
+2021/07/06 20:12:48 [notice] 101064#101064: exiting
+2021/07/06 20:12:48 [notice] 101064#101064: exiting
+2021/07/06 20:12:48 [notice] 101064#101064: exit
+2021/07/06 20:12:48 [notice] 101063#101063: signal 14 (SIGALRM) received
+2021/07/06 20:12:48 [notice] 101063#101063: signal 14 (SIGALRM) received
+2021/07/06 20:12:48 [notice] 101063#101063: signal 14 (SIGALRM) received
+2021/07/06 20:12:48 [notice] 101063#101063: signal 14 (SIGALRM) received
+2021/07/06 20:12:48 [notice] 101063#101063: signal 17 (SIGCHLD) received from 101064
+2021/07/06 20:12:48 [notice] 101063#101063: signal 17 (SIGCHLD) received from 101064
+2021/07/06 20:12:48 [notice] 101063#101063: worker process 101064 exited with code 0
+2021/07/06 20:12:48 [notice] 101063#101063: worker process 101064 exited with code 0
+2021/07/06 20:12:48 [notice] 101063#101063: exit
+2021/07/06 20:12:48 [notice] 101063#101063: exit
+2021/07/06 20:12:48 [notice] 134905#134905: using the "epoll" event method
+2021/07/06 20:12:48 [notice] 134905#134905: using the "epoll" event method
+2021/07/06 20:12:48 [notice] 134905#134905: nginx/1.20.1
+2021/07/06 20:12:48 [notice] 134905#134905: nginx/1.20.1
+2021/07/06 20:12:48 [notice] 134905#134905: OS: Linux 5.10.47-1-lts
+2021/07/06 20:12:48 [notice] 134905#134905: OS: Linux 5.10.47-1-lts
+2021/07/06 20:12:48 [notice] 134905#134905: getrlimit(RLIMIT_NOFILE): 1024:524288
+2021/07/06 20:12:48 [notice] 134905#134905: getrlimit(RLIMIT_NOFILE): 1024:524288
+2021/07/06 20:12:48 [notice] 134906#134906: start worker processes
+2021/07/06 20:12:48 [notice] 134906#134906: start worker processes
+2021/07/06 20:12:48 [notice] 134906#134906: start worker process 134907
+2021/07/06 20:12:48 [notice] 134906#134906: start worker process 134907
+2021/07/06 20:12:53 [crit] 134907#134907: *1 connect() to unix:/run/php-fpm/php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://unix:/run/php-fpm/php-fpm.sock:", host: "127.0.0.1"
+2021/07/06 20:12:53 [crit] 134907#134907: *1 connect() to unix:/run/php-fpm/php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://unix:/run/php-fpm/php-fpm.sock:", host: "127.0.0.1"
+2021/07/06 20:12:53 [crit] 134907#134907: *1 connect() to unix:/run/php-fpm/php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://unix:/run/php-fpm/php-fpm.sock:", host: "127.0.0.1"
+2021/07/06 20:12:54 [error] 134907#134907: *1 open() "/home/www/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1", referrer: "http://127.0.0.1/james.php"
+2021/07/06 20:12:54 [error] 134907#134907: *1 open() "/home/www/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1", referrer: "http://127.0.0.1/james.php"
+2021/07/06 20:12:54 [error] 134907#134907: *1 open() "/home/www/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1", referrer: "http://127.0.0.1/james.php"
+2021/07/06 20:12:55 [info] 134907#134907: *1 client 127.0.0.1 closed keepalive connection
+2021/07/06 20:12:55 [crit] 134907#134907: *3 connect() to unix:/run/php-fpm/php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://unix:/run/php-fpm/php-fpm.sock:", host: "127.0.0.1"
+2021/07/06 20:12:55 [crit] 134907#134907: *3 connect() to unix:/run/php-fpm/php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://unix:/run/php-fpm/php-fpm.sock:", host: "127.0.0.1"
+2021/07/06 20:12:55 [crit] 134907#134907: *3 connect() to unix:/run/php-fpm/php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://unix:/run/php-fpm/php-fpm.sock:", host: "127.0.0.1"
+2021/07/06 20:12:55 [error] 134907#134907: *3 open() "/home/www/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1", referrer: "http://127.0.0.1/james.php"
+2021/07/06 20:12:55 [error] 134907#134907: *3 open() "/home/www/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1", referrer: "http://127.0.0.1/james.php"
+2021/07/06 20:12:55 [error] 134907#134907: *3 open() "/home/www/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1", referrer: "http://127.0.0.1/james.php"
+2021/07/06 20:41:32 [notice] 134906#134906: signal 15 (SIGTERM) received from 1, exiting
+2021/07/06 20:41:32 [notice] 134906#134906: signal 15 (SIGTERM) received from 1, exiting
+2021/07/06 20:41:32 [notice] 134907#134907: exiting
+2021/07/06 20:41:32 [notice] 134907#134907: exiting
+2021/07/06 20:41:32 [notice] 134907#134907: exit
+2021/07/06 20:41:32 [notice] 134906#134906: signal 14 (SIGALRM) received
+2021/07/06 20:41:32 [notice] 134906#134906: signal 14 (SIGALRM) received
+2021/07/06 20:41:32 [notice] 134906#134906: signal 14 (SIGALRM) received
+2021/07/06 20:41:32 [notice] 134906#134906: signal 14 (SIGALRM) received
+2021/07/06 20:41:32 [notice] 134906#134906: signal 17 (SIGCHLD) received from 134907
+2021/07/06 20:41:32 [notice] 134906#134906: signal 17 (SIGCHLD) received from 134907
+2021/07/06 20:41:32 [notice] 134906#134906: worker process 134907 exited with code 0
+2021/07/06 20:41:32 [notice] 134906#134906: worker process 134907 exited with code 0
+2021/07/06 20:41:32 [notice] 134906#134906: exit
+2021/07/06 20:41:32 [notice] 134906#134906: exit
+2021/07/06 20:41:32 [notice] 403872#403872: using the "epoll" event method
+2021/07/06 20:41:32 [notice] 403872#403872: using the "epoll" event method
+2021/07/06 20:41:32 [notice] 403872#403872: nginx/1.20.1
+2021/07/06 20:41:32 [notice] 403872#403872: nginx/1.20.1
+2021/07/06 20:41:32 [notice] 403872#403872: OS: Linux 5.10.47-1-lts
+2021/07/06 20:41:32 [notice] 403872#403872: OS: Linux 5.10.47-1-lts
+2021/07/06 20:41:32 [notice] 403872#403872: getrlimit(RLIMIT_NOFILE): 1024:524288
+2021/07/06 20:41:32 [notice] 403872#403872: getrlimit(RLIMIT_NOFILE): 1024:524288
+2021/07/06 20:41:32 [notice] 403873#403873: start worker processes
+2021/07/06 20:41:32 [notice] 403873#403873: start worker processes
+2021/07/06 20:41:32 [notice] 403873#403873: start worker process 403874
+2021/07/06 20:41:32 [notice] 403873#403873: start worker process 403874
+2021/07/06 20:41:43 [crit] 403874#403874: *1 connect() to unix:/run/php-fpm/php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://unix:/run/php-fpm/php-fpm.sock:", host: "127.0.0.1"
+2021/07/06 20:41:43 [crit] 403874#403874: *1 connect() to unix:/run/php-fpm/php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://unix:/run/php-fpm/php-fpm.sock:", host: "127.0.0.1"
+2021/07/06 20:41:43 [crit] 403874#403874: *1 connect() to unix:/run/php-fpm/php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://unix:/run/php-fpm/php-fpm.sock:", host: "127.0.0.1"
+2021/07/06 20:41:43 [error] 403874#403874: *1 open() "/home/www/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1", referrer: "http://127.0.0.1/james.php"
+2021/07/06 20:41:43 [error] 403874#403874: *1 open() "/home/www/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1", referrer: "http://127.0.0.1/james.php"
+2021/07/06 20:41:43 [error] 403874#403874: *1 open() "/home/www/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1", referrer: "http://127.0.0.1/james.php"
+2021/07/06 20:41:45 [info] 403874#403874: *1 client 127.0.0.1 closed keepalive connection
+2021/07/06 20:41:45 [crit] 403874#403874: *3 connect() to unix:/run/php-fpm/php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://unix:/run/php-fpm/php-fpm.sock:", host: "127.0.0.1"
+2021/07/06 20:41:45 [crit] 403874#403874: *3 connect() to unix:/run/php-fpm/php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://unix:/run/php-fpm/php-fpm.sock:", host: "127.0.0.1"
+2021/07/06 20:41:45 [crit] 403874#403874: *3 connect() to unix:/run/php-fpm/php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://unix:/run/php-fpm/php-fpm.sock:", host: "127.0.0.1"
+2021/07/06 20:41:45 [error] 403874#403874: *3 open() "/home/www/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1", referrer: "http://127.0.0.1/james.php"
+2021/07/06 20:41:45 [error] 403874#403874: *3 open() "/home/www/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1", referrer: "http://127.0.0.1/james.php"
+2021/07/06 20:41:45 [error] 403874#403874: *3 open() "/home/www/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1", referrer: "http://127.0.0.1/james.php"
+2021/07/06 20:42:42 [info] 403874#403874: *3 client 127.0.0.1 closed keepalive connection
+2021/07/06 20:51:34 [notice] 403873#403873: signal 15 (SIGTERM) received from 1, exiting
+2021/07/06 20:51:34 [notice] 403873#403873: signal 15 (SIGTERM) received from 1, exiting
+2021/07/06 20:51:34 [notice] 403874#403874: exiting
+2021/07/06 20:51:34 [notice] 403874#403874: exiting
+2021/07/06 20:51:34 [notice] 403874#403874: exit
+2021/07/06 20:51:34 [notice] 403873#403873: signal 14 (SIGALRM) received
+2021/07/06 20:51:34 [notice] 403873#403873: signal 14 (SIGALRM) received
+2021/07/06 20:51:34 [notice] 403873#403873: signal 14 (SIGALRM) received
+2021/07/06 20:51:34 [notice] 403873#403873: signal 14 (SIGALRM) received
+2021/07/06 20:51:34 [notice] 403873#403873: signal 17 (SIGCHLD) received from 403874
+2021/07/06 20:51:34 [notice] 403873#403873: signal 17 (SIGCHLD) received from 403874
+2021/07/06 20:51:34 [notice] 403873#403873: worker process 403874 exited with code 0
+2021/07/06 20:51:34 [notice] 403873#403873: worker process 403874 exited with code 0
+2021/07/06 20:51:34 [notice] 403873#403873: exit
+2021/07/06 20:51:34 [notice] 403873#403873: exit
+2021/07/06 20:51:34 [notice] 502689#502689: using the "epoll" event method
+2021/07/06 20:51:34 [notice] 502689#502689: using the "epoll" event method
+2021/07/06 20:51:34 [notice] 502689#502689: nginx/1.20.1
+2021/07/06 20:51:34 [notice] 502689#502689: nginx/1.20.1
+2021/07/06 20:51:34 [notice] 502689#502689: OS: Linux 5.10.47-1-lts
+2021/07/06 20:51:34 [notice] 502689#502689: OS: Linux 5.10.47-1-lts
+2021/07/06 20:51:34 [notice] 502689#502689: getrlimit(RLIMIT_NOFILE): 1024:524288
+2021/07/06 20:51:34 [notice] 502689#502689: getrlimit(RLIMIT_NOFILE): 1024:524288
+2021/07/06 20:51:34 [notice] 502690#502690: start worker processes
+2021/07/06 20:51:34 [notice] 502690#502690: start worker processes
+2021/07/06 20:51:34 [notice] 502690#502690: start worker process 502691
+2021/07/06 20:51:34 [notice] 502690#502690: start worker process 502691
+2021/07/06 20:51:44 [error] 502691#502691: *1 FastCGI sent in stderr: "PHP message: PHP Warning:  [snuffleupagus][0.0.0.0][config][log] No configuration specificed via sp.configuration_file in Unknown on line 0" while reading response header from upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://unix:/run/php-fpm/php-fpm.sock:", host: "127.0.0.1"
+2021/07/06 20:51:44 [error] 502691#502691: *1 FastCGI sent in stderr: "PHP message: PHP Warning:  [snuffleupagus][0.0.0.0][config][log] No configuration specificed via sp.configuration_file in Unknown on line 0" while reading response header from upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://unix:/run/php-fpm/php-fpm.sock:", host: "127.0.0.1"
+2021/07/06 20:51:44 [error] 502691#502691: *1 FastCGI sent in stderr: "PHP message: PHP Warning:  [snuffleupagus][0.0.0.0][config][log] No configuration specificed via sp.configuration_file in Unknown on line 0" while reading response header from upstream, client: 127.0.0.1, server: localhost, request: "GET /james.php HTTP/1.1", upstream: "fastcgi://unix:/run/php-fpm/php-fpm.sock:", host: "127.0.0.1"
+2021/07/06 20:51:45 [error] 502691#502691: *1 open() "/home/www/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1", referrer: "http://127.0.0.1/james.php"
+2021/07/06 20:51:45 [error] 502691#502691: *1 open() "/home/www/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1", referrer: "http://127.0.0.1/james.php"
+2021/07/06 20:51:45 [error] 502691#502691: *1 open() "/home/www/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1", referrer: "http://127.0.0.1/james.php"
