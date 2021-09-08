@@ -803,7 +803,7 @@
 	" }}}
 	elseif g:vim_custom_syntastic == "ale"
 	" {{{
-		Plug 'w0rp/ale'
+		Plug 'dense-analysis/ale'
 		" {{{
 			" "in javascript.vim not here
 			" " Fix files with prettier, and then ESLint.
