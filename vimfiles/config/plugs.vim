@@ -772,9 +772,14 @@
 	Plug 'WolfgangMehner/latex-support'
 	Plug 'WolfgangMehner/perl-support'
 	Plug 'WolfgangMehner/awk-support'
-	Plug 'WolfgangMehner/python-support'
+	" Plug 'WolfgangMehner/python-support'
 	Plug 'WolfgangMehner/matlab-support'
 	Plug 'WolfgangMehner/verilog-support'
+	Plug 'vim-python/python-syntax'
+
+	" Plug 'python-mode/python-mode'
+	" Plug 'isnowfy/python-vim-instant-markdown'
+	" Plug 'rkulla/pydiction'
 
 	" syntastic check
 	let g:vim_custom_syntastic = "ale"
