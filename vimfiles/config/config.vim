@@ -131,6 +131,12 @@ else
 	" call s:vim_set_custom_colorscheme("one")
 endif
 
+if isdirectory('./include')
+	set path+=include
+elseif isdirectory('./src/include')
+	set path+=src/include
+endif
+
 set pastetoggle=<F4>
 
 
