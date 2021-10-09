@@ -23,17 +23,20 @@ Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 " Plug 'SirVer/UltiSnips' | Plug 'honza/vim-snippets'
 
 " On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle', 'tag':'5.0.0' }
+" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle', 'tag':'5.0.0' }
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle', 'tag' : '*' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " Using a non-master branch
 " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-Plug 'fatih/vim-go', { 'tag': 'v1.18' }
+" Plug 'fatih/vim-go', { 'tag': 'v1.18' }
+Plug 'fatih/vim-go', {'tag' : '*'}
 
 " Plugin options
-Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+" Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+Plug 'nsf/gocode', { 'rtp': 'vim'}
 
 " Plugin outside ~/.vim/plugged with post-update hook
 let g:fzf_install = 'yes | ./install'
@@ -129,7 +132,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 Plug 'Rip-Rip/clang_complete'
 Plug 'artur-shaik/vim-javacomplete2'
 " Plug 'SirVer/UltiSnips' , {'tag': '3.1'}
-Plug 'SirVer/UltiSnips'  ", {'tag': '3.1'}
+Plug 'SirVer/UltiSnips' , {'tag': '*'}
 Plug 'honza/vim-snippets'
 Plug 'tenfyzhong/CompleteParameter.vim'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
@@ -178,7 +181,7 @@ Plug 'chase/focuspoint-vim'
 Plug 'tomasr/molokai'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ayu-theme/ayu-vim'
-Plug 'arcticicestudio/nord-vim' , {'tag': 'v0.9.0'}
+Plug 'arcticicestudio/nord-vim', {'tag' : '*'}
 Plug 'mhartington/oceanic-next'
 Plug 'romainl/flattened'
 Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
@@ -230,14 +233,14 @@ Plug 'skywind3000/asyncrun.vim'
 " "----------------------------------------------------------------------- "
 " "--- filetype support"
 " "----------------------------------------------------------------------- "
-Plug 'WolfgangMehner/bash-support'    ", { 'tag': 'version-4.3' }
-Plug 'WolfgangMehner/c-support'       ", { 'tag': 'version-6.2' }
-Plug 'WolfgangMehner/git-support'     ", { 'tag': 'version-0.9.3' }
-Plug 'WolfgangMehner/lua-support'     ", { 'tag': 'version-1.0' }
-Plug 'WolfgangMehner/vim-support'     ", { 'tag': 'version-2.4' }
-Plug 'WolfgangMehner/latex-support'   ", { 'tag': 'version-1.2' }
-Plug 'WolfgangMehner/perl-support'    ", { 'tag': 'version-5.4' }
-Plug 'WolfgangMehner/awk-support'     ", { 'tag': 'version-1.3' }
+Plug 'WolfgangMehner/bash-support'
+Plug 'WolfgangMehner/c-support'
+Plug 'WolfgangMehner/git-support'
+Plug 'WolfgangMehner/lua-support'
+Plug 'WolfgangMehner/vim-support'
+Plug 'WolfgangMehner/latex-support'
+Plug 'WolfgangMehner/perl-support'
+Plug 'WolfgangMehner/awk-support'
 Plug 'WolfgangMehner/python-support'
 Plug 'WolfgangMehner/matlab-support'
 Plug 'WolfgangMehner/verilog-support'
@@ -254,7 +257,8 @@ Plug 'davidhalter/jedi'
 Plug 'davidhalter/jedi-vim'
 Plug 'ivanov/vim-ipython'
 Plug 'vim-syntastic/syntastic'
-Plug 'dense-analysis/ale', {'tag':'v2.6.0'}
+" Plug 'dense-analysis/ale', {'tag':'v2.6.0'}
+Plug 'dense-analysis/ale', {'tag' : '*'}
 Plug 'hail2u/vim-css3-syntax'
 Plug 'digitaltoad/vim-jade'
 Plug 'wavded/vim-stylus'

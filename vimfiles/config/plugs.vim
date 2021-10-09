@@ -127,7 +127,7 @@
 	" }}}
 
 
-	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle', 'tag': '*' }
+	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 	" {{{
 		map <unique> <F2> :NERDTreeToggle<CR>
 		map <C-n> :NERDTreeToggle<CR>
@@ -389,7 +389,7 @@
 		" " Plug 'Shougo/neocomplete.vim'
 		" Plug 'Shougo/deoplete.nvim'
 		" Plug 'zchee/deoplete-clang'
-		" Plug 'fatih/vim-go', { 'tag': '*', 'for': ['go', 'golang'] }
+		" Plug 'fatih/vim-go', { 'for': ['go', 'golang'] }
 		" Plug 'zchee/deoplete-jedi'
 		" Plug 'sebastianmarkow/deoplete-rust'
 		" Plug 'carlitux/deoplete-ternjs'
@@ -525,7 +525,7 @@
 
 	"" automatic closing of quotes, parenthesis, brackets, etc.
 	" Plug 'Raimondi/delimitMate'
-	" Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' , 'for': ['go', 'golang']}
+	" Plug 'nsf/gocode', { 'rtp': 'vim' , 'for': ['go', 'golang']}
 	Plug 'Shougo/echodoc.vim'
 
 
@@ -640,7 +640,7 @@
 		" let g:rehash256 = 1
 	Plug 'drewtempelmeyer/palenight.vim'
 	Plug 'ayu-theme/ayu-vim'
-	Plug 'arcticicestudio/nord-vim' , {'tag': '*'}
+	Plug 'arcticicestudio/nord-vim'
 	Plug 'mhartington/oceanic-next'
 	Plug 'romainl/flattened'
 	Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
@@ -764,14 +764,14 @@
 " "--- filetype support"
 " "----------------------------------------------------------------------- "
 " {{{
-	Plug 'WolfgangMehner/bash-support'    , { 'tag': '*' }
-	Plug 'WolfgangMehner/c-support'       , { 'tag': '*' }
-	Plug 'WolfgangMehner/git-support'     , { 'tag': '*' }
-	Plug 'WolfgangMehner/lua-support'     , { 'tag': '*' }
-	Plug 'WolfgangMehner/vim-support'     , { 'tag': '*' }
-	Plug 'WolfgangMehner/latex-support'   , { 'tag': '*' }
-	Plug 'WolfgangMehner/perl-support'    , { 'tag': '*' }
-	Plug 'WolfgangMehner/awk-support'     , { 'tag': '*' }
+	Plug 'WolfgangMehner/bash-support'
+	Plug 'WolfgangMehner/c-support'
+	Plug 'WolfgangMehner/git-support'
+	Plug 'WolfgangMehner/lua-support'
+	Plug 'WolfgangMehner/vim-support'
+	Plug 'WolfgangMehner/latex-support'
+	Plug 'WolfgangMehner/perl-support'
+	Plug 'WolfgangMehner/awk-support'
 	Plug 'WolfgangMehner/python-support'
 	Plug 'WolfgangMehner/matlab-support'
 	Plug 'WolfgangMehner/verilog-support'
