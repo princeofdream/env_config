@@ -65,31 +65,46 @@ SYSTEM_NAME=`uname -a`
 SYSTEM_TYPE="linux"
 SUB_SYSTEM_TYPE=""
 
-if [[ ${SYSTEM_NAME}"" == "MSYS"* ]]; then
-	SYSTEM_TYPE="msys"
-elif [[ ${SYSTEM_NAME}"" == "MINGW64"* ]]; then
-	SYSTEM_TYPE="mingw64"
-elif [[ ${SYSTEM_NAME}"" == "MINGW32"* ]]; then
-	SYSTEM_TYPE="mingw32"
-elif [[ ${SYSTEM_NAME}"" == *"Microsoft"*"Linux"* ]]; then
-	SYSTEM_TYPE="ms-linux"
-elif [[ ${SYSTEM_NAME}"" == *"Darwin"* ]]; then
-	SYSTEM_TYPE="mac"
-elif [[ ${SYSTEM_NAME}"" == *"Ubuntu"* || ${SYSTEM_NAME}"" == *"kylin"* ]]; then
-	SUB_SYSTEM_TYPE="ubuntu"
-fi
+case "${SYSTEM_NAME}" in
+	"MSYS"* )
+		SYSTEM_TYPE="msys";
+		;;
+	"MINGW64"* )
+		SYSTEM_TYPE="mingw64"
+		;;
+	"MINGW32"* )
+		SYSTEM_TYPE="mingw32"
+		;;
+	*"Microsoft"*"Linux"* )
+		SYSTEM_TYPE="ms-linux"
+		;;
+	*"microsoft"*"WSL2"*"Linux"* )
+		SYSTEM_TYPE="ms-linux"
+		;;
+	*"Darwin"* )
+		SYSTEM_TYPE="mac"
+		;;
+	*"Ubuntu"* | *"kylin"* )
+		SUB_SYSTEM_TYPE="ubuntu"
+		;;
+esac
 
-if [[ ${SYSTEM_TYPE}"" == "linux" ]]; then
-	if [[ $DISPLAY == "" && $SSH_CONNECTION == "" ]]; then
-			USE_SIMPLE_COLOR=true
-	fi
-elif [[ ${SYSTEM_TYPE}"" == "mac" ]]; then
-	USE_SIMPLE_COLOR=false
-else
-	if [[ ${SYSTEM_TYPE}"" == "msys" || ${SYSTEM_TYPE}"" == "mingw"* || ${SYSTEM_TYPE}"" == "ms-linux" ]]; then
+case "${SYSTEM_TYPE}" in
+	linux )
+		if [[ $DISPLAY == "" && $SSH_CONNECTION == "" ]]; then
+				USE_SIMPLE_COLOR=true
+		fi
+		;;
+	mac )
 		USE_SIMPLE_COLOR=false
-	fi
-fi
+		;;
+	msys | "mingw"* )
+		USE_SIMPLE_COLOR=false
+		;;
+	"ms-linux" )
+		USE_SIMPLE_COLOR=false
+		;;
+esac
 
 if [[ ${USE_SIMPLE_COLOR}"" == "true" ]]; then
 	ENABLE_POWERLINE="none"
@@ -144,6 +159,12 @@ ORIGIN_PATH=$PATH:/sbin:/bin:/usr/bin:/usr/sbin:/usr/sbin:/usr/local/sbin
 if [[ ${SYSTEM_TYPE}"" == "mac" ]]; then
 	ORIGIN_PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
+case "${SYSTEM_TYPE}" in
+	msys | "mingw"* | "ms-linux" )
+		ORIGIN_PATH=${ORIGIN_PATH//\ /_}
+		ORIGIN_PATH=${ORIGIN_PATH// /_}
+		;;
+esac
 PATH=""
 
 ############# #Jave Environment ##################
@@ -610,10 +631,6 @@ lsdu ()
 }	# ----------  end of function lsdu  ----------
 
 ####################################################################
-
-if [[ ${SYSTEM_TYPE}"" == "msys" || ${SYSTEM_TYPE}"" == "mingw"* || ${SYSTEM_TYPE}"" == "ms-linux" ]]; then
-	PATH=${PATH//\ /_}
-fi
 
 export PATH
 export TERM
