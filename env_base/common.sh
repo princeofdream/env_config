@@ -439,7 +439,47 @@ fi
 ## Set CPLUS_INCLUDE_PATH
 CPLUS_INCLUDE_PATH="${C_INCLUDE_PATH}"
 
+usage_shell ()
+{
+	printf "custom usage:\n
+	sudo='sudo env PATH=\$PATH LD_LIBRARY_PATH=\$LD_LIBRARY_PATH_SYSTEM_FIRST PKG_CONFIG_PATH=\$PKG_CONFIG_PATH_SYSTEM_FIRST TERM=xterm'
+	sdo='sudo env PATH=\$PATH LD_LIBRARY_PATH=\$LD_LIBRARY_PATH_CUSTOM_FIRST PKG_CONFIG_PATH=\$PKG_CONFIG_PATH_CUSTOM_FIRST TERM=xterm'
+	yum='env LD_LIBRARY_PATH=\$LD_LIBRARY_PATH_SYSTEM_FIRST PKG_CONFIG_PATH=\$PKG_CONFIG_PATH_SYSTEM_FIRST yum'
 
+	rq='PROMPT_COMMAND=\"_update_ps1\"'
+	s.openjdk_6='echo \"switch_java_sdk openjdk 6\" ;switch_java_sdk \"openjdk\" \"6\"'
+	s.openjdk_7='echo \"switch_java_sdk openjdk 7\" ;switch_java_sdk \"openjdk\" \"7\"'
+	s.openjdk_8='echo \"switch_java_sdk openjdk 8\" ;switch_java_sdk \"openjdk\" \"8\"'
+	s.openjdk_9='echo \"switch_java_sdk openjdk 9\" ;switch_java_sdk \"openjdk\" \"9\"'
+	s.jdk_6='echo \"switch_java_sdk jdk 6\" ; switch_java_sdk \"jdk\" \"6\"'
+	s.jdk_7='echo \"switch_java_sdk jdk 7\" ; switch_java_sdk \"jdk\" \"7\"'
+	s.jdk_8='echo \"switch_java_sdk jdk 8\" ; switch_java_sdk \"jdk\" \"8\"'
+	s.jdk_9='echo \"switch_java_sdk jdk 9\" ; switch_java_sdk \"jdk\" \"9\"'
+
+	s.py2
+	s.py3
+	\n"
+	return 0;
+}	# ----------  end of function shell_usage  ----------
+
+
+s_py2 ()
+{
+	if [[ ! -d "$HOME/Environment/pyenv/py2env" ]]; then
+		virtualenv -p /usr/bin/python2 $HOME/Environment/pyenv/py2env
+	fi
+	source $HOME/Environment/pyenv/py2env/bin/activate
+	return 0;
+}	# ----------  end of function s_py2  ----------
+
+s_py3 ()
+{
+	if [[ ! -d "$HOME/Environment/pyenv/py3env" ]]; then
+		virtualenv -p /usr/bin/python3 $HOME/Environment/pyenv/py3env
+	fi
+	source $HOME/Environment/pyenv/py3env/bin/activate
+	return 0;
+}	# ----------  end of function s_py3  ----------
 
 ############# #sudo Environment ##################
 alias sudo='sudo env PATH=$PATH LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SYSTEM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_SYSTEM_FIRST TERM=xterm'
@@ -447,18 +487,21 @@ alias sdo='sudo env PATH=$PATH LD_LIBRARY_PATH=$LD_LIBRARY_PATH_CUSTOM_FIRST PKG
 alias yum='env LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SYSTEM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_SYSTEM_FIRST yum'
 
 alias rq='PROMPT_COMMAND="_update_ps1"'
-alias s_openjdk_6='echo "switch_java_sdk openjdk 6" ;switch_java_sdk "openjdk" "6"'
-alias s_openjdk_7='echo "switch_java_sdk openjdk 7" ;switch_java_sdk "openjdk" "7"'
-alias s_openjdk_8='echo "switch_java_sdk openjdk 8" ;switch_java_sdk "openjdk" "8"'
-alias s_openjdk_9='echo "switch_java_sdk openjdk 9" ;switch_java_sdk "openjdk" "9"'
-alias s_jdk_6='echo "switch_java_sdk jdk 6" ; switch_java_sdk "jdk" "6"'
-alias s_jdk_7='echo "switch_java_sdk jdk 7" ; switch_java_sdk "jdk" "7"'
-alias s_jdk_8='echo "switch_java_sdk jdk 8" ; switch_java_sdk "jdk" "8"'
-alias s_jdk_9='echo "switch_java_sdk jdk 9" ; switch_java_sdk "jdk" "9"'
+alias s.openjdk_6='echo "switch_java_sdk openjdk 6" ;switch_java_sdk "openjdk" "6"'
+alias s.openjdk_7='echo "switch_java_sdk openjdk 7" ;switch_java_sdk "openjdk" "7"'
+alias s.openjdk_8='echo "switch_java_sdk openjdk 8" ;switch_java_sdk "openjdk" "8"'
+alias s.openjdk_9='echo "switch_java_sdk openjdk 9" ;switch_java_sdk "openjdk" "9"'
+alias s.jdk_6='echo "switch_java_sdk jdk 6" ; switch_java_sdk "jdk" "6"'
+alias s.jdk_7='echo "switch_java_sdk jdk 7" ; switch_java_sdk "jdk" "7"'
+alias s.jdk_8='echo "switch_java_sdk jdk 8" ; switch_java_sdk "jdk" "8"'
+alias s.jdk_9='echo "switch_java_sdk jdk 9" ; switch_java_sdk "jdk" "9"'
 
-alias s_path_origin='export PATH=$ORIGIN_PATH'
-alias s_classpath_origin='export CLASSPATH=$ORIGIN_CLASSPATH'
-alias s_path_snapdragon='export PATH=$SNAPDRAGON_PATH && export LLVMROOT=$LLVM_ARM_ROOT && export LLVMBIN=$LLVMROOT/bin'
+alias s.path_origin='export PATH=$ORIGIN_PATH'
+alias s.classpath_origin='export CLASSPATH=$ORIGIN_CLASSPATH'
+alias s.path_snapdragon='export PATH=$SNAPDRAGON_PATH && export LLVMROOT=$LLVM_ARM_ROOT && export LLVMBIN=$LLVMROOT/bin'
+
+alias s.py2='s_py2'
+alias s.py3='s_py3'
 
 utils_find_c ()
 {
