@@ -53,6 +53,9 @@ PATH_TOOLCHAIN_JDK_BASE=$PATH_TOOLCHAIN_BASE/jdk
 PATH_WEB_BASE=$HOME/Environment/web_base
 
 PATH_ENV_ROOTFS_BASE=$HOME/Environment/env_rootfs
+if [[ -f "$HOME/.bashrc-conf" ]]; then
+	PATH_ENV_ROOTFS_BASE=$HOME/Environment/env_rootfs_$(cat $HOME/.bashrc-conf)
+fi
 
 ############# #Select  Terminal Color support ##################
 # Select --> tmux / tmux-xterm / tmux-screen / tmux-st / none
@@ -648,28 +651,53 @@ lsdu ()
 {
 	local lsdu_check_path=""
 	local lsdu_param=""
+	local lsdu_ret=0
 
-	if [[ "$1" == "-k" || "$1" == "-K" ]]; then
-		lsdu_param=K
-		shift;
-	elif [[ "$1" == "-m" || "$1" == "-M" ]]; then
-		lsdu_param=M
-		shift;
-	else
-		lsdu_param=M
-	fi
+	while getopts "kKmMrh" arg
+	do
+		case $arg in
+			k | K)
+				lsdu_param=K
+				;;
+			m | M)
+				lsdu_param=M
+				;;
+			r )
+				lsdu_param=M
+				lsdu_ext_param=h
+				;;
+			h )
+				echo "lsdu -m /path/*"
+				echo "args: [k|K|m|M|r]"
+				return 0;
+				;;
+			? )
+				lsdu_param=M
+				lsdu_ext_param=h
+				;;
+		esac
+	done
 
 	if [[ "$1" == "" ]]; then
+		lsdu_check_path="*"
+	elif [[ "$1" == "" ]]; then
 		lsdu_check_path="*"
 	else
 		lsdu_check_path="$*"
 	fi
 
 	if [[ $lsdu_param == "K" ]]; then
-		eval du -sBK ${lsdu_check_path} |awk -F : '{printf("%08dM %s\n", $1, $0)}' |sort |cut -f 2- -d M
+		eval du -sBK "${lsdu_check_path}" |awk -F : '{printf("%08dM %s\n", $1, $0)}' |sort |cut -f 2- -d M
+		lsdu_ret=$?
+	elif [[ "${lsdu_ext_param}" == "h" ]]; then
+		# eval du -sBM ${lsdu_check_path} |awk -F : '{printf("%08dM %s\n", $1, $0)}' |sort |cut -f 2- -d M |awk '{print $2 $3 $4 $5 $6 $7 $8 $9}'|xargs du -sh
+		eval du -sBM "${lsdu_check_path}" |awk -F : '{printf("%08dM %s\n", $1, $0)}' |sort |cut -f 2- -d M |awk '{printf("%08dM %s\n", $1, $0)}'|xargs du -sh
+		lsdu_ret=$?
 	else
-		eval du -sBM ${lsdu_check_path} |awk -F : '{printf("%08dM %s\n", $1, $0)}' |sort |cut -f 2- -d M
+		eval du -sBM "${lsdu_check_path}" |awk -F : '{printf("%08dM %s\n", $1, $0)}' |sort |cut -f 2- -d M
+		lsdu_ret=$?
 	fi
+
 	return $?
 }	# ----------  end of function lsdu  ----------
 
