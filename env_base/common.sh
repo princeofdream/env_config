@@ -53,8 +53,12 @@ PATH_TOOLCHAIN_JDK_BASE=$PATH_TOOLCHAIN_BASE/jdk
 PATH_WEB_BASE=$HOME/Environment/web_base
 
 PATH_ENV_ROOTFS_BASE=$HOME/Environment/env_rootfs
-if [[ -f "$HOME/.bashrc-conf" ]]; then
-	PATH_ENV_ROOTFS_BASE=$HOME/Environment/env_rootfs_$(cat $HOME/.bashrc-conf)
+CONFIG_LSB_RELEASE=$(lsb_release -i 2>/dev/null |awk -F ':' '{print $2}'| sed -e 's/^[ \t]*//g')
+
+if [[ "${CONFIG_LSB_RELEASE}" == "" || "${CONFIG_LSB_RELEASE}" == "Arch" ]]; then
+	PATH_ENV_ROOTFS_BASE=$HOME/Environment/env_rootfs
+else
+	PATH_ENV_ROOTFS_BASE=$HOME/Environment/env_rootfs_${CONFIG_LSB_RELEASE,,}
 fi
 
 ############# #Select  Terminal Color support ##################
