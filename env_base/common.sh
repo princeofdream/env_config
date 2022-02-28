@@ -16,6 +16,101 @@
 #      REVISION:  ---
 #===============================================================================
 
+debug=0
+log_count=0
+log_color="true"
+log_path="${script_path}"
+log_name="log_bash.log"
+## default script_log_path is null, we not log it
+script_log_path=""
+logd ()
+{
+	if [[ $debug == 0 ]]; then
+		return 0
+	fi
+
+	local current_time="$(date +%H:%M:%S)"
+
+	if [[ "$log_color" == "true" ]]; then
+		echo -e "[0;31;1m[ ${current_time} ] [dbg]\t[0m[0;34;1m$* [0m"
+	else
+		echo -e "[ ${current_time} ] [dbg]\t$* "
+	fi
+
+	if [[ $script_log_path"x" != "x" ]]; then
+		if [[ $log_count == 0 ]]; then
+			echo -e "[ ${current_time} ] [dbg]\t$* " > $script_log_path
+		else
+			echo -e "[ ${current_time} ] [dbg]\t$* " >> $script_log_path
+		fi
+	fi
+	log_count=$((log_count+1))
+	return 0
+}	# ----------  end of function logd  ----------
+
+log ()
+{
+	local current_time="$(date +%H:%M:%S)"
+
+	if [[ "$log_color" == "true" ]]; then
+		echo -e "[0;31;1m[ ${current_time} ] [log]\t[0m[0;32;1m$* [0m"
+	else
+		echo -e "[ ${current_time} ] [log]\t$* "
+	fi
+
+	if [[ $script_log_path"x" != "x" ]]; then
+		if [[ $log_count == 0 ]]; then
+			echo -e "[ ${current_time} ] [log]\t$* " > $script_log_path
+		else
+			echo -e "[ ${current_time} ] [log]\t$* " >> $script_log_path
+		fi
+	fi
+	log_count=$((log_count+1))
+	return 0
+}	# ----------  end of function logd  ----------
+
+logw ()
+{
+	local current_time="$(date +%H:%M:%S)"
+
+	if [[ "$log_color" == "true" ]]; then
+		echo -e "[0;31;1m[ ${current_time} ] [wrn]\t[0m[0;33;1m$* [0m"
+	else
+		echo -e "[ ${current_time} ] [wrn]\t$* "
+	fi
+
+	if [[ $script_log_path"x" != "x" ]]; then
+		if [[ $log_count == 0 ]]; then
+			echo -e "[ ${current_time} ] [wrn]\t$* " > $script_log_path
+		else
+			echo -e "[ ${current_time} ] [wrn]\t$* " >> $script_log_path
+		fi
+	fi
+	log_count=$((log_count+1))
+	return 0
+}	# ----------  end of function loge  ----------
+
+loge ()
+{
+	local current_time="$(date +%H:%M:%S)"
+
+	if [[ "$log_color" == "true" ]]; then
+		echo -e "[0;31;1m[ ${current_time} ] [err]\t[0m[0;33;1m$* [0m"
+	else
+		echo -e "[ ${current_time} ] [err]\t$* "
+	fi
+
+	if [[ $script_log_path"x" != "x" ]]; then
+		if [[ $log_count == 0 ]]; then
+			echo -e "[ ${current_time} ] [err]\t$* " > $script_log_path
+		else
+			echo -e "[ ${current_time} ] [err]\t$* " >> $script_log_path
+		fi
+	fi
+	log_count=$((log_count+1))
+	return 0
+}	# ----------  end of function loge  ----------
+
 
 
 USE_LLVM_FOR_ARM=false
@@ -623,6 +718,36 @@ utils_find_gz ()
 	return $?
 }	# ----------  end of function utils_find_sh  ----------
 
+utils_find_file ()
+{
+	f_param=$@
+
+	k_param="-iname \"*.sh\""
+	k_param=${k_param}" -o -iname \"*.bash\""
+	k_param=${k_param}" -type f"
+
+	if [[ ${f_param}"" == *-name* || ${f_param}"" == *-iname* ]]; then
+		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		eval find ${f_param} "-o" ${k_param}
+	else
+		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		eval find ${f_param} ${k_param}
+	fi
+	return $?
+}	# ----------  end of function utils_find_sh  ----------
+
+
+utils_while_loop ()
+{
+	local var_cmd="$@"
+	while true;
+	do
+		eval "${var_cmd}"
+		log "---------$(date +%Y%m%d_%H%M%S)----------"
+		sleep 1
+	done
+}	# ----------  end of function utils_while_loop  ----------
+
 alias bash='TERM=xterm bash'
 
 alias ncdu='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
@@ -633,7 +758,16 @@ alias f.cxx='find -type f -iname "*.c" -o -iname "*.cpp" -o -iname "*.h" -o -ina
 alias f.java='find -type f -iname "*.java"'
 alias f.mk='find -type f -iname "*.mk" -o -iname "Android.bp" -o -iname "Makefile" -o -iname "MakeConfig"'
 alias f.sh='find -type f -iname "*.sh" -o -iname "*.bash"'
+alias f.gz='find -type f -iname "*.tar" -o -iname "*.tar.*" -o -iname "*.bz2" -o -iname "*.xz" -o -iname "*.cpio"'
 alias f.f='find -type f'
+alias ff.c='utils_find_c $@'
+alias ff.cpp='utils_find_cpp $@'
+alias ff.cxx='utils_find_cxx $@'
+alias ff.java='utils_find_java $@'
+alias ff.mk='utils_find_mk $@'
+alias ff.sh='utils_find_sh $@'
+alias ff.gz='utils_find_gz $@'
+alias ff.f='utils_find_file $@'
 alias vv='env DISPLAY="" vim -p'
 alias vvc='env DISPLAY="" vim -p -c "e ++enc=GB18030"'
 alias vvp='env DISPLAY="" C_INCLUDE_PATH=${C_INCLUDE_PATH} CPLUS_INCLUDE_PATH=${CPLUS_INCLUDE_PATH} vim -p'
