@@ -149,11 +149,19 @@ PATH_WEB_BASE=$HOME/Environment/web_base
 
 PATH_ENV_ROOTFS_BASE=$HOME/Environment/env_rootfs
 CONFIG_LSB_RELEASE=$(lsb_release -i 2>/dev/null |awk -F ':' '{print $2}'| sed -e 's/^[ \t]*//g')
+CONFIG_LSB_RELEASE=${CONFIG_LSB_RELEASE,,}
 
-if [[ "${CONFIG_LSB_RELEASE}" == "" || "${CONFIG_LSB_RELEASE}" == "Arch" ]]; then
+if [[ "${CONFIG_LSB_RELEASE}" == "" || "${CONFIG_LSB_RELEASE}" == "arch" ]]; then
 	PATH_ENV_ROOTFS_BASE=$HOME/Environment/env_rootfs
 else
-	PATH_ENV_ROOTFS_BASE=$HOME/Environment/env_rootfs_${CONFIG_LSB_RELEASE,,}
+	PATH_ENV_ROOTFS_BASE=$HOME/Environment/env_rootfs_${CONFIG_LSB_RELEASE}
+fi
+CONFIG_WINE_LINK=$(ls $HOME/.wine -dl --time-style=+%Y|grep -i "${CONFIG_LSB_RELEASE}$")
+if [[ -h "${HOME}/.wine" ]]; then
+	if [[ "${CONFIG_WINE_LINK}" == "" ]]; then
+		rm ${HOME}/.wine
+		ln -s ${HOME}/.wine_${CONFIG_LSB_RELEASE} ${HOME}/.wine
+	fi
 fi
 
 ############# #Select  Terminal Color support ##################
