@@ -1,0 +1,74 @@
+diff --git a/base/c-support/c-support/templates/c.comments.template b/base/c-support/c-support/templates/c.comments.template
+index 0736dee..48bb9e3 100644
+--- a/base/c-support/c-support/templates/c.comments.template
++++ b/base/c-support/c-support/templates/c.comments.template
+@@ -16,7 +16,7 @@
+ /* 
+  * ===  FUNCTION  ======================================================================
+  *         Name:  |?FUNCTION_NAME|
+- *  Description:  <CURSOR>
++ *  Description:  TODO<CURSOR>
+  * =====================================================================================
+  */
+ == Comments.method == map:cme, shortcut:m  ==
+@@ -24,14 +24,14 @@
+  *--------------------------------------------------------------------------------------
+  *       Class:  |?CLASSNAME|
+  *      Method:  |?CLASSNAME| :: |?METHODNAME|
+- * Description:  <CURSOR>
++ * Description:  TODO<CURSOR>
+  *--------------------------------------------------------------------------------------
+  */
+ == Comments.class == map:ccl, shortcut:c  ==
+ /*
+  * =====================================================================================
+  *        Class:  |?CLASSNAME|
+- *  Description:  <CURSOR>
++ *  Description:  TODO<CURSOR>
+  * =====================================================================================
+  */
+ == ENDTEMPLATE ==
+@@ -48,7 +48,7 @@
+  *
+  *       Filename:  |FILENAME|
+  *
+- *    Description:  <CURSOR>
++ *    Description:  TODO<CURSOR>
+  *
+  *        Version:  1.0
+  *        Created:  |DATE| |TIME|
+@@ -67,7 +67,7 @@
+  *
+  *       Filename:  |FILENAME|
+  *
+- *    Description:  <CURSOR>
++ *    Description:  TODO<CURSOR>
+  *
+  *        Version:  1.0
+  *        Created:  |DATE| |TIME|
+diff --git a/base/bash-support/bash-support/templates/comments.templates b/base/bash-support/bash-support/templates/comments.templates
+index 18944aa..395197c 100644
+--- a/base/bash-support/bash-support/templates/comments.templates
++++ b/base/bash-support/bash-support/templates/comments.templates
+@@ -11,9 +11,9 @@
+ == Comments.function == map:cfu, sc:f ==
+ #---  FUNCTION  ----------------------------------------------------------------
+ #          NAME:  |?FUNCTION_NAME|
+-#   DESCRIPTION:  <CURSOR>
+-#    PARAMETERS:  
+-#       RETURNS:  
++#   DESCRIPTION:  TODO<CURSOR>
++#    PARAMETERS:  null
++#       RETURNS:  default
+ #-------------------------------------------------------------------------------
+ == Comments.file header == start, map:ch ==
+ #===============================================================================
+@@ -22,7 +22,7 @@
+ #
+ #         USAGE: ./|FILENAME|
+ #
+-#   DESCRIPTION: <CURSOR>
++#   DESCRIPTION: TODO<CURSOR>
+ #
+ #       OPTIONS: ---
+ #  REQUIREMENTS: ---
