@@ -573,10 +573,6 @@
 					\     'active': ['tabnum', 'filename', 'modified'],
 					\     'inactive': ['tabnum', 'filename', 'modified']
 					\ },
-					\ 'component_function': {
-					\     'gitbranch': 'fugitive#head',
-					\     'filestat': 'LightlineFilestat'
-					\ },
 			\ }
 			function! LightlineFilestat()
 				let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
