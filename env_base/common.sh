@@ -748,11 +748,24 @@ utils_find_file ()
 utils_while_loop ()
 {
 	local var_cmd="$@"
+	local var_delay=1;
+
+	if [[ "$1" == "-d" || "$1" == "--delay" ]]; then
+		echo "ssss"
+		var_delay=$2
+		shift;
+		shift;
+		var_cmd="$@"
+	fi
+
 	while true;
 	do
 		eval "${var_cmd}"
-		log "---------$(date +%Y%m%d_%H%M%S)----------"
-		sleep 1
+		log "---[$(date +%Y%m%d_%H%M%S): ${var_delay}s]->[${var_cmd}]---"
+		if [[ ${var_delay} -lt 1 ]]; then
+			var_delay=1
+		fi
+		sleep $var_delay
 	done
 }	# ----------  end of function utils_while_loop  ----------
 
