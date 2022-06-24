@@ -156,11 +156,13 @@ if [[ "${CONFIG_LSB_RELEASE}" == "" || "${CONFIG_LSB_RELEASE}" == "arch" ]]; the
 else
 	PATH_ENV_ROOTFS_BASE=$HOME/Environment/env_rootfs_${CONFIG_LSB_RELEASE}
 fi
-CONFIG_WINE_LINK=$(ls $HOME/.wine -dl --time-style=+%Y|grep -i "${CONFIG_LSB_RELEASE}$")
-if [[ -h "${HOME}/.wine" ]]; then
-	if [[ "${CONFIG_WINE_LINK}" == "" ]]; then
-		rm ${HOME}/.wine
-		ln -s ${HOME}/.wine_${CONFIG_LSB_RELEASE} ${HOME}/.wine
+if [[ -e "${HOME}/.wine" || -h "${HOME}/.wine" ]]; then
+	CONFIG_WINE_LINK=$(ls $HOME/.wine -dl --time-style=+%Y|grep -i "${CONFIG_LSB_RELEASE}$" 2>/dev/null)
+	if [[ -h "${HOME}/.wine" ]]; then
+		if [[ "${CONFIG_WINE_LINK}" == "" ]]; then
+			rm ${HOME}/.wine
+			ln -s ${HOME}/.wine_${CONFIG_LSB_RELEASE} ${HOME}/.wine
+		fi
 	fi
 fi
 
@@ -751,12 +753,12 @@ utils_while_loop ()
 	local var_delay=1;
 
 	if [[ "$1" == "-d" || "$1" == "--delay" ]]; then
-		echo "ssss"
 		var_delay=$2
 		shift;
 		shift;
 		var_cmd="$@"
 	fi
+	echo "delay [ ${var_delay}s ] for eatch loop."
 
 	while true;
 	do
