@@ -164,7 +164,7 @@ if [[ -e "${HOME}/.wine" || -h "${HOME}/.wine" ]]; then
 			ln -s ${HOME}/.wine_${CONFIG_LSB_RELEASE} ${HOME}/.wine
 		fi
 	elif [[ -d "${HOME}/.wine" ]]; then
-		CONFIG_WINE_DIR_LIST=$(ls -d ${HOME}/.wine_unknow*|tail -1)
+		CONFIG_WINE_DIR_LIST=$(ls -d ${HOME}/.wine_unknow* 2>/dev/null | tail -1)
 		CONFIG_WINE_DIR_COUNT=$(printf "%d" ${CONFIG_WINE_DIR_LIST:0-2})
 		CONFIG_WINE_DIR_COUNT=$(($CONFIG_WINE_DIR_COUNT + 1))
 		CONFIG_WINE_DIR_COUNT=$(printf "%02d" $CONFIG_WINE_DIR_COUNT)
