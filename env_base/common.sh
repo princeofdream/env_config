@@ -172,6 +172,10 @@ if [[ -e "${HOME}/.wine" || -h "${HOME}/.wine" ]]; then
 	fi
 fi
 
+if [[ ! -e "${HOME}/.wine" && ! -h "${HOME}/.wine" ]]; then
+	ln -s ${HOME}/.wine_${CONFIG_LSB_RELEASE} ${HOME}/.wine
+fi
+
 ############# #Select  Terminal Color support ##################
 # Select --> tmux / tmux-xterm / tmux-screen / tmux-st / none
 # ENABLE_TRUE_COLOR="tmux-xterm"
