@@ -7,6 +7,14 @@
 
 nnoremap <leader>rt :call ToggleTabExpand()<CR>
 
+" yank data to clipboard
+"# " means register.
+"# + specifies the system clipboard register.
+"# y is yank.
+nnoremap <leader>yy "+yy
+nnoremap <leader>dd "+dd
+vnoremap <leader>gg "+yy
+
 let s:toggletabexpand = 0
 function! ToggleTabExpand()
     if s:toggletabexpand
@@ -138,5 +146,30 @@ elseif isdirectory('./src/include')
 endif
 
 set pastetoggle=<F4>
+
+
+function! ToggleMouse()
+	" check if mouse is enabled
+	if &mouse == 'a'
+		" disable mouse
+		set mouse=
+	else
+		" enable mouse everywhere
+		set mouse=a
+	endif
+endfunc
+
+nnoremap <C-g> :call ToggleMouse()<CR>
+map <C-v> <C-a>
+" set clipboard=unnamed
+
+nnoremap <S-k> :tabp<CR>
+nnoremap <S-l> :tabn<CR>
+nnoremap <S-h> :bp<CR>
+nnoremap <S-j> :bn<CR>
+nnoremap t[ :tabp<CR>
+nnoremap t] :tabn<CR>
+nnoremap b[ :bp<CR>
+nnoremap b] :bn<CR>
 
 
