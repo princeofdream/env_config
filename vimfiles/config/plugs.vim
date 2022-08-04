@@ -36,8 +36,8 @@
 " {{{
 	Plug 'asenac/vim-opengrok'
 	" {{{
-		let g:opengrok_jar = $HOME . '/Environment/web_base/opengrok/lib/opengrok.jar'
-		" let g:opengrok_config_file = $HOME . '/Environment/web_base/opengrok/etc/configuration.xml'
+		let g:opengrok_jar = $HOME . '/envx/web_base/opengrok/lib/opengrok.jar'
+		" let g:opengrok_config_file = $HOME . '/envx/web_base/opengrok/etc/configuration.xml'
 		let g:opengrok_config_file = $HOME . '/.opengrok/conf.xml'
 		" let g:opengrok_ctags = '/path/to/ctags'
 	" }}}
@@ -462,7 +462,7 @@
 			let g:ycm_complete_in_strings = 1
 			" "注释和字符串中的文字也会被收入补全
 			let g:ycm_collect_identifiers_from_comments_and_strings = 0
-			let g:ycm_server_python_interpreter=$HOME . '/Environment/env_rootfs/bin/python'
+			" let g:ycm_server_python_interpreter=$HOME . '/envx/env_rootfs/bin/python'
 			let g:ycm_python_binary_path = 'python'
 			let g:ycm_global_ycm_extra_conf=$HOME . '/.ycm_extra_conf.py'
 
@@ -502,7 +502,7 @@
 
 		let g:clang_use_library=1
 		" let g:clang_library_path='/usr/lib64/llvm'
-		let g:clang_library_path=$HOME . '/Environment/env_rootfs/lib/libclang.so'
+		let g:clang_library_path=$HOME . '/envx/env_rootfs/lib/libclang.so'
 		" let g:clang_library_path="F:/clang/lib"
 
 		"" let g:clang_use_library=0
