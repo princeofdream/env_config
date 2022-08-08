@@ -107,7 +107,6 @@ elif [[ ${ENABLE_POWERLINE}"" == "powerline-shell" ]]; then
 			# CMD_STAT=$?
 			# if [[ $CMD_STAT == 0 ]]; then
 				PS1=$(powerline-shell $?)
-				# PS1=$(/home/james/env/my_c_program/powerline-sh/powerline-sh)
 			# else
 				# common_PS1_env_setup
 				# tmux_PS1_env_setup

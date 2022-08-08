@@ -19,10 +19,10 @@
 
 #set -o nounset                              # Treat unset variables as an error
 
-SRC_PATH=$HOME/Environment/my_c_program/debug_src_full/
-OPENGROK_JAR_PATH=$HOME/Environment/web_base/opengrok/lib/opengrok.jar
-OPENGROK_DATA_PATH=$HOME/Environment/web_base/opengrok/data/
-OPENGROK_CONF_PATH=$HOME/Environment/web_base/opengrok/etc/configuration.xml
+SRC_PATH=$HOME/envx/common_libx/debug_src_full/
+OPENGROK_JAR_PATH=$HOME/envx/web_base/opengrok/lib/opengrok.jar
+OPENGROK_DATA_PATH=$HOME/envx/web_base/opengrok/data/
+OPENGROK_CONF_PATH=$HOME/envx/web_base/opengrok/etc/configuration.xml
 
 if [[ $1 != "" ]]; then
 	SRC_PATH=$1
