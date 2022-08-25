@@ -16,100 +16,89 @@
 #      REVISION:  ---
 #===============================================================================
 
-debug=0
-log_count=0
-log_color="true"
-log_path="${script_path}"
-log_name="log_bash.log"
-## default script_log_path is null, we not log it
-script_log_path=""
-logd ()
+config_debug=0
+config_log_count=0
+config_log_color="true"
+config_log_dir="${script_path}"
+config_log_name="log_bash.log"
+config_log_path=""
+######### End Setup basic script env ############
+
+log_common ()
 {
-	if [[ $debug == 0 ]]; then
-		return 0
-	fi
+	local var_log_common_type="$1"
+	local var_log_common_current_time="$(date +%H:%M:%S)"
+	local var_log_common_fg_color=31
+	local var_log_common_bg_color=32
+	local var_log_common_label="log"
 
-	local current_time="$(date +%H:%M:%S)"
+	case ${var_log_common_type} in
+		debug | dbg )
+			var_log_common_fg_color=31;
+			var_log_common_bg_color=34;
+			var_log_common_label="dbg";
+			if [[ $config_debug == 0 ]]; then
+				return 0;
+			fi
+			shift;
+			;;
+		normal | nor | log )
+			var_log_common_fg_color=31;
+			var_log_common_bg_color=32;
+			var_log_common_label="log";
+			shift;
+			;;
+		warning | wrn )
+			var_log_common_fg_color=31;
+			var_log_common_bg_color=33;
+			var_log_common_label="wrn";
+			shift;
+			;;
+		error | err )
+			var_log_common_fg_color=31;
+			var_log_common_bg_color=31;
+			var_log_common_label="err";
+			shift;
+			;;
+	esac
 
-	if [[ "$log_color" == "true" ]]; then
-		echo -e "[0;31;1m[ ${current_time} ] [dbg]\t[0m[0;34;1m$* [0m"
+	if [[ "$config_log_color" == "true" ]]; then
+		echo -e "[0;${var_log_common_fg_color};1m[ ${var_log_common_current_time} ] [${var_log_common_label}]\t[0m[0;${var_log_common_bg_color};1m$* [0m"
 	else
-		echo -e "[ ${current_time} ] [dbg]\t$* "
+		echo -e "[ ${var_log_common_current_time} ] [${var_log_common_label}]\t$* "
 	fi
 
-	if [[ $script_log_path"x" != "x" ]]; then
-		if [[ $log_count == 0 ]]; then
-			echo -e "[ ${current_time} ] [dbg]\t$* " > $script_log_path
+	if [[ $config_log_path"x" != "x" ]]; then
+		if [[ $config_log_count == 0 ]]; then
+			echo -e "[ ${var_log_common_current_time} ] [${var_log_common_label}]\t$* " > $config_log_path
 		else
-			echo -e "[ ${current_time} ] [dbg]\t$* " >> $script_log_path
+			echo -e "[ ${var_log_common_current_time} ] [${var_log_common_label}]\t$* " >> $config_log_path
 		fi
 	fi
-	log_count=$((log_count+1))
+	config_log_count=$((config_log_count+1))
 	return 0
 }	# ----------  end of function logd  ----------
+
+logd ()
+{
+	log_common "dbg" "$@"
+}	# ----------  end of function loge  ----------
 
 log ()
 {
-	local current_time="$(date +%H:%M:%S)"
-
-	if [[ "$log_color" == "true" ]]; then
-		echo -e "[0;31;1m[ ${current_time} ] [log]\t[0m[0;32;1m$* [0m"
-	else
-		echo -e "[ ${current_time} ] [log]\t$* "
-	fi
-
-	if [[ $script_log_path"x" != "x" ]]; then
-		if [[ $log_count == 0 ]]; then
-			echo -e "[ ${current_time} ] [log]\t$* " > $script_log_path
-		else
-			echo -e "[ ${current_time} ] [log]\t$* " >> $script_log_path
-		fi
-	fi
-	log_count=$((log_count+1))
-	return 0
-}	# ----------  end of function logd  ----------
+	log_common "log" "$@"
+}	# ----------  end of function loge  ----------
 
 logw ()
 {
-	local current_time="$(date +%H:%M:%S)"
-
-	if [[ "$log_color" == "true" ]]; then
-		echo -e "[0;31;1m[ ${current_time} ] [wrn]\t[0m[0;33;1m$* [0m"
-	else
-		echo -e "[ ${current_time} ] [wrn]\t$* "
-	fi
-
-	if [[ $script_log_path"x" != "x" ]]; then
-		if [[ $log_count == 0 ]]; then
-			echo -e "[ ${current_time} ] [wrn]\t$* " > $script_log_path
-		else
-			echo -e "[ ${current_time} ] [wrn]\t$* " >> $script_log_path
-		fi
-	fi
-	log_count=$((log_count+1))
-	return 0
+	log_common "wrn" "$@"
 }	# ----------  end of function loge  ----------
 
 loge ()
 {
-	local current_time="$(date +%H:%M:%S)"
-
-	if [[ "$log_color" == "true" ]]; then
-		echo -e "[0;31;1m[ ${current_time} ] [err]\t[0m[0;33;1m$* [0m"
-	else
-		echo -e "[ ${current_time} ] [err]\t$* "
-	fi
-
-	if [[ $script_log_path"x" != "x" ]]; then
-		if [[ $log_count == 0 ]]; then
-			echo -e "[ ${current_time} ] [err]\t$* " > $script_log_path
-		else
-			echo -e "[ ${current_time} ] [err]\t$* " >> $script_log_path
-		fi
-	fi
-	log_count=$((log_count+1))
-	return 0
+	log_common "err" "$@"
 }	# ----------  end of function loge  ----------
+
 
 
 
@@ -148,20 +137,22 @@ PATH_TOOLCHAIN_JDK_BASE=$PATH_TOOLCHAIN_BASE/jdk
 PATH_WEB_BASE=$HOME/envx/web_base
 
 PATH_ENV_ROOTFS_BASE=$HOME/envx/env_rootfs
-CONFIG_LSB_RELEASE=$(lsb_release -i 2>/dev/null |awk -F ':' '{print $2}'| sed -e 's/^[ \t]*//g')
-CONFIG_LSB_RELEASE=${CONFIG_LSB_RELEASE,,}
+# config_lsb_release=$(lsb_release -i 2>/dev/null |awk -F ':' '{print $2}'| sed -e 's/^[ \t]*//g')
+# config_lsb_release=${config_lsb_release,,}
+config_lsb_release=$(cat /etc/os-release | grep -i "^NAME" 2>/dev/null |awk -F '=' '{print $2}'| tr '[A-Z]' '[a-z]' |xargs echo)
+config_lsb_release=${config_lsb_release%% *}
 
-if [[ "${CONFIG_LSB_RELEASE}" == "" ]]; then
+if [[ "${config_lsb_release}" == "" ]]; then
 	PATH_ENV_ROOTFS_BASE=$HOME/envx/env_rootfs
 else
-	PATH_ENV_ROOTFS_BASE=$HOME/envx/env_rootfs_${CONFIG_LSB_RELEASE}
+	PATH_ENV_ROOTFS_BASE=$HOME/envx/env_rootfs_${config_lsb_release}
 fi
 if [[ -e "${HOME}/.wine" || -h "${HOME}/.wine" ]]; then
-	CONFIG_WINE_LINK=$(ls $HOME/.wine -dl --time-style=+%Y|grep -i "${CONFIG_LSB_RELEASE}$" 2>/dev/null)
+	CONFIG_WINE_LINK=$(ls $HOME/.wine -dl --time-style=+%Y|grep -i "${config_lsb_release}$" 2>/dev/null)
 	if [[ -h "${HOME}/.wine" ]]; then
 		if [[ "${CONFIG_WINE_LINK}" == "" ]]; then
 			rm ${HOME}/.wine
-			ln -s ${HOME}/.wine_${CONFIG_LSB_RELEASE} ${HOME}/.wine
+			ln -s ${HOME}/.wine_${config_lsb_release} ${HOME}/.wine
 		fi
 	elif [[ -d "${HOME}/.wine" ]]; then
 		CONFIG_WINE_DIR_LIST=$(ls -d ${HOME}/.wine_unknow* 2>/dev/null | tail -1)
@@ -173,7 +164,7 @@ if [[ -e "${HOME}/.wine" || -h "${HOME}/.wine" ]]; then
 fi
 
 if [[ ! -e "${HOME}/.wine" && ! -h "${HOME}/.wine" ]]; then
-	ln -s ${HOME}/.wine_${CONFIG_LSB_RELEASE} ${HOME}/.wine
+	ln -s ${HOME}/.wine_${config_lsb_release} ${HOME}/.wine
 fi
 
 ############# #Select  Terminal Color support ##################
