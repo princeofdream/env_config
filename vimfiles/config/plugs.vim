@@ -626,6 +626,8 @@
 	Plug 'rakr/vim-one'
 	" Plug 'joshdick/onedark.vim'
 	Plug 'morhetz/gruvbox'
+	Plug 'sonph/onehalf', { 'rtp': 'vim' }
+	Plug 'ayu-theme/ayu-vim'
 	Plug 'princeofdream/gruvcase'
 		let g:gruvbox_contrast_dark = 'soft'
 	" Plug 'jeaye/color_coded'

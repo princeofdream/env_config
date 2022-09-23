@@ -113,6 +113,9 @@ function! s:vim_set_custom_colorscheme(vim_theme)
 		colorscheme gruvbox
 	elseif a:vim_theme == "gruvcase"
 		colorscheme gruvcase
+	elseif a:vim_theme == "onehalflight"
+		set background=light
+		colorscheme onehalflight
 	elseif a:vim_theme == "flattened_dark"
 		colorscheme flattened_dark
 	elseif a:vim_theme == "flattened_light"
@@ -126,15 +129,18 @@ call s:vim_set_custom_cursorline()
 if empty($TMUX)
 	if ! has('gui_running')
 		call s:vim_set_custom_colorscheme("gruvcase")
+		" call s:vim_set_custom_colorscheme("onehalflight")
 		" call s:vim_set_custom_colorscheme("gruvbox")
 		" call s:vim_set_custom_colorscheme("one")
 	else
 		call s:vim_set_custom_colorscheme("gruvcase")
+		" call s:vim_set_custom_colorscheme("onehalflight")
 		" call s:vim_set_custom_colorscheme("gruvbox")
 		" call s:vim_set_custom_colorscheme("one")
 	endif
 else
 	call s:vim_set_custom_colorscheme("gruvcase")
+	" call s:vim_set_custom_colorscheme("onehalflight")
 	" call s:vim_set_custom_colorscheme("gruvbox")
 	" call s:vim_set_custom_colorscheme("one")
 endif
