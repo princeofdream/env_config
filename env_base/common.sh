@@ -578,8 +578,15 @@ usage_shell ()
 
 s_py2 ()
 {
+	local var_python_path
+
+	var_python_path=/usr/bin/python2
+	if [[ ! -x /usr/bin/python2 ]]; then
+		var_python_path=$(whereis python2 |awk '{print $2}')
+	fi
+
 	if [[ ! -d "$HOME/envx/pyenv/py2env" ]]; then
-		virtualenv -p /usr/bin/python2 $HOME/envx/pyenv/py2env
+		virtualenv -p ${var_python_path} $HOME/envx/pyenv/py2env
 	fi
 	source $HOME/envx/pyenv/py2env/bin/activate
 	return 0;
@@ -587,8 +594,15 @@ s_py2 ()
 
 s_py3 ()
 {
+	local var_python_path
+
+	var_python_path=/usr/bin/python3
+	if [[ ! -x /usr/bin/python3 ]]; then
+		var_python_path=$(whereis python3 |awk '{print $2}')
+	fi
+
 	if [[ ! -d "$HOME/envx/pyenv/py3env" ]]; then
-		virtualenv -p /usr/bin/python3 $HOME/envx/pyenv/py3env
+		virtualenv -p ${var_python_path} $HOME/envx/pyenv/py3env
 	fi
 	source $HOME/envx/pyenv/py3env/bin/activate
 	return 0;
