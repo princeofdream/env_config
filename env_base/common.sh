@@ -588,14 +588,28 @@ usage_shell ()
 s_py2 ()
 {
 	local var_python_path
+	local var_cur_py_ver
 
 	var_python_path=/usr/bin/python2
 	if [[ ! -x /usr/bin/python2 ]]; then
 		var_python_path=$(whereis python2 |awk '{print $2}')
 	fi
 
+	var_cur_py_ver=$(python --version|awk '{print $2}'|awk -F"." '{print $1}' 2>/dev/null)
+	if [[ "${var_cur_py_ver}" == "2" ]]; then
+		return
+	fi
+
 	if [[ ! -d "$HOME/envx/pyenv/py2env" ]]; then
 		virtualenv -p ${var_python_path} $HOME/envx/pyenv/py2env
+	else
+		source $HOME/envx/pyenv/py2env/bin/activate
+		python --version 2>/dev/null
+		if [[ $? -ne 0 ]]; then
+			mv $HOME/envx/pyenv/py2env $HOME/envx/pyenv/py2env.$(date +%Y%m%d_%H%M%S)
+			virtualenv -p /usr/bin/python2 $HOME/envx/pyenv/py2env
+		fi
+		return 0
 	fi
 	source $HOME/envx/pyenv/py2env/bin/activate
 	return 0;
@@ -604,14 +618,28 @@ s_py2 ()
 s_py3 ()
 {
 	local var_python_path
+	local var_cur_py_ver
 
 	var_python_path=/usr/bin/python3
 	if [[ ! -x /usr/bin/python3 ]]; then
 		var_python_path=$(whereis python3 |awk '{print $2}')
 	fi
 
+	var_cur_py_ver=$(python --version|awk '{print $2}'|awk -F"." '{print $1}' 2>/dev/null)
+	if [[ "${var_cur_py_ver}" == "3" ]]; then
+		return 0
+	fi
+
 	if [[ ! -d "$HOME/envx/pyenv/py3env" ]]; then
 		virtualenv -p ${var_python_path} $HOME/envx/pyenv/py3env
+	else
+		source $HOME/envx/pyenv/py3env/bin/activate
+		python --version 2>/dev/null
+		if [[ $? -ne 0 ]]; then
+			mv $HOME/envx/pyenv/py3env $HOME/envx/pyenv/py3env.$(date +%Y%m%d_%H%M%S)
+			virtualenv -p /usr/bin/python3 $HOME/envx/pyenv/py3env
+		fi
+		return 0
 	fi
 	source $HOME/envx/pyenv/py3env/bin/activate
 	return 0;
