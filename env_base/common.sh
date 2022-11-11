@@ -589,14 +589,20 @@ s_py2 ()
 {
 	local var_python_path
 	local var_cur_py_ver
+	local var_force=$1
 
+	if [[ "${var_force}" == "-f" || "${var_force}" == "" ]]; then
+		var_force=true
+	else
+		var_force=false
+	fi
 	var_python_path=/usr/bin/python2
 	if [[ ! -x /usr/bin/python2 ]]; then
 		var_python_path=$(whereis python2 |awk '{print $2}')
 	fi
 
 	var_cur_py_ver=$(python --version 2>&1|awk '{print $2}'|awk -F"." '{print $1}' 2>/dev/null)
-	if [[ "${var_cur_py_ver}" == "2" ]]; then
+	if [[ "${var_cur_py_ver}" == "2" && "${var_force}" != "true" ]]; then
 		return
 	fi
 
@@ -619,6 +625,13 @@ s_py3 ()
 {
 	local var_python_path
 	local var_cur_py_ver
+	local var_force=$1
+
+	if [[ "${var_force}" == "-f" || "${var_force}" == "" ]]; then
+		var_force=true
+	else
+		var_force=false
+	fi
 
 	var_python_path=/usr/bin/python3
 	if [[ ! -x /usr/bin/python3 ]]; then
@@ -626,7 +639,7 @@ s_py3 ()
 	fi
 
 	var_cur_py_ver=$(python --version 2>&1 |awk '{print $2}'|awk -F"." '{print $1}' 2>/dev/null)
-	if [[ "${var_cur_py_ver}" == "3" ]]; then
+	if [[ "${var_cur_py_ver}" == "3" && "${var_force}" != "true" ]]; then
 		return 0
 	fi
 
