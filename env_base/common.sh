@@ -117,10 +117,10 @@ USE_EXTERN_ROOTFS_USR_LOCAL_ENV=true
 USE_EXTERN_TOOLCHAIN_ENV=true
 USE_EXTERN_ANDROID_ENV=true
 
-USE_EXTERN_LD_PATH_ENV=true
-USE_EXTERN_LD_PATH_USR_ENV=true
-USE_EXTERN_PKG_PATH_ENV=true
-USE_EXTERN_PKG_PATH_USR_ENV=true
+USE_EXTERN_LD_PATH_ENV=false
+USE_EXTERN_LD_PATH_USR_ENV=false
+USE_EXTERN_PKG_PATH_ENV=false
+USE_EXTERN_PKG_PATH_USR_ENV=false
 
 USE_SYSTEM_C_INCLUDE_PATH_ENV=true
 USE_EXTERN_C_INCLUDE_PATH_USR_ENV=true
@@ -679,6 +679,7 @@ alias s.path_snapdragon='export PATH=$SNAPDRAGON_PATH && export LLVMROOT=$LLVM_A
 
 alias s.py2='s_py2'
 alias s.py3='s_py3'
+alias tmux='pmux'
 
 utils_find_c ()
 {
@@ -689,10 +690,14 @@ utils_find_c ()
 	k_param=${k_param}" -type f"
 
 	if [[ ${f_param}"" == *-name* || ${f_param}"" == *-iname* ]]; then
-		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		if [[ "${log_debug}" != "" ]]; then
+			echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		fi
 		eval find ${f_param} "-o" ${k_param}
 	else
-		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		if [[ "${log_debug}" != "" ]]; then
+			echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		fi
 		eval find ${f_param} ${k_param}
 	fi
 	return $?
@@ -709,10 +714,14 @@ utils_find_cxx ()
 	k_param=${k_param}" -type f"
 
 	if [[ ${f_param}"" == *-name* || ${f_param}"" == *-iname* ]]; then
-		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		if [[ "${log_debug}" != "" ]]; then
+			echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		fi
 		eval find ${f_param} "-o" ${k_param}
 	else
-		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		if [[ "${log_debug}" != "" ]]; then
+			echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		fi
 		eval find ${f_param} ${k_param}
 	fi
 	return $?
@@ -727,10 +736,14 @@ utils_find_cpp ()
 	k_param=${k_param}" -type f"
 
 	if [[ ${f_param}"" == *-name* || ${f_param}"" == *-iname* ]]; then
-		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		if [[ "${log_debug}" != "" ]]; then
+			echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		fi
 		eval find ${f_param} "-o" ${k_param}
 	else
-		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		if [[ "${log_debug}" != "" ]]; then
+			echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		fi
 		eval find ${f_param} ${k_param}
 	fi
 	return $?
@@ -744,10 +757,14 @@ utils_find_java ()
 	k_param=${k_param}" -type f"
 
 	if [[ ${f_param}"" == *-name* || ${f_param}"" == *-iname* ]]; then
-		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		if [[ "${log_debug}" != "" ]]; then
+			echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		fi
 		eval find ${f_param} "-o" ${k_param}
 	else
-		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		if [[ "${log_debug}" != "" ]]; then
+			echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		fi
 		eval find ${f_param} ${k_param}
 	fi
 	return $?
@@ -762,10 +779,14 @@ utils_find_sh ()
 	k_param=${k_param}" -type f"
 
 	if [[ ${f_param}"" == *-name* || ${f_param}"" == *-iname* ]]; then
-		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		if [[ "${log_debug}" != "" ]]; then
+			echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		fi
 		eval find ${f_param} "-o" ${k_param}
 	else
-		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		if [[ "${log_debug}" != "" ]]; then
+			echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		fi
 		eval find ${f_param} ${k_param}
 	fi
 	return $?
@@ -784,10 +805,14 @@ utils_find_gz ()
 	k_param=${k_param}" -type f"
 
 	if [[ ${f_param}"" == *-name* || ${f_param}"" == *-iname* ]]; then
-		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m-o ${k_param} [0m"
+		if [[ "${log_debug}" != "" ]]; then
+			echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m-o ${k_param} [0m"
+		fi
 		eval find ${f_param} "-o" ${k_param}
 	else
-		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		if [[ "${log_debug}" != "" ]]; then
+			echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		fi
 		eval find ${f_param} ${k_param}
 	fi
 	return $?
@@ -797,15 +822,19 @@ utils_find_file ()
 {
 	f_param=$@
 
-	k_param="-iname \"*.sh\""
-	k_param=${k_param}" -o -iname \"*.bash\""
-	k_param=${k_param}" -type f"
+	# k_param="-iname \"*.sh\""
+	# k_param=${k_param}" -o -iname \"*.bash\""
+	k_param="-type f"
 
 	if [[ ${f_param}"" == *-name* || ${f_param}"" == *-iname* ]]; then
-		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		if [[ "${log_debug}" != "" ]]; then
+			echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		fi
 		eval find ${f_param} "-o" ${k_param}
 	else
-		echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		if [[ "${log_debug}" != "" ]]; then
+			echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		fi
 		eval find ${f_param} ${k_param}
 	fi
 	return $?
