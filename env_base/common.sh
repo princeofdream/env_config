@@ -679,7 +679,7 @@ alias s.path_snapdragon='export PATH=$SNAPDRAGON_PATH && export LLVMROOT=$LLVM_A
 
 alias s.py2='s_py2'
 alias s.py3='s_py3'
-alias tmux='pmux'
+# alias tmux='pmux'
 
 utils_find_c ()
 {
