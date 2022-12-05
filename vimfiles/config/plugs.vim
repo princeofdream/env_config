@@ -390,7 +390,7 @@
 		" Plug 'Shougo/deoplete.nvim'
 		" Plug 'zchee/deoplete-clang'
 		" Plug 'fatih/vim-go', { 'for': ['go', 'golang'] }
-		" Plug 'zchee/deoplete-jedi'
+		" Plug 'deoplete-plugins/deoplete-jedi'
 		" Plug 'sebastianmarkow/deoplete-rust'
 		" Plug 'carlitux/deoplete-ternjs'
 		" Plug 'mhartington/nvim-typescript'
@@ -425,7 +425,7 @@
 
 
 	" Plug 'Valloric/YouCompleteMe'
-	" Plug 'Rip-Rip/clang_complete'
+	" Plug 'xavierd/clang_complete'
 	" Plug 'artur-shaik/vim-javacomplete2'
 	" {{{
 		" autocmd FileType java setlocal omnifunc=javacomplete#Complete
@@ -482,7 +482,7 @@
 		let g:deoplete#enable_at_startup = 1
 		" Plugin 'zchee/deoplete-clang'
 		" Plugin 'fatih/vim-go'
-		" Plugin 'zchee/deoplete-jedi'
+		" Plugin 'deoplete-plugins/deoplete-jedi'
 		" Plugin 'sebastianmarkow/deoplete-rust'
 		" Plugin 'carlitux/deoplete-ternjs'
 		" Plugin 'mhartington/nvim-typescript'
@@ -490,7 +490,7 @@
 	elseif g:use_complete_tool == "clang_complete"
 	" {{{
 		" "--------------------------- Clang Complete --------------------------"
-		Plug 'Rip-Rip/clang_complete'
+		Plug 'xavierd/clang_complete'
 		" "open quick fix window false
 		" let g:clang_debug=1
 		let g:clang_periodic_quickfix=0
@@ -868,7 +868,7 @@
 	" Plug 'ivanov/vim-ipython'
 	" Plug 'hail2u/vim-css3-syntax'
 	" Plug 'digitaltoad/vim-jade'
-	" Plug 'wavded/vim-stylus'
+	" Plug 'iloginow/vim-stylus'
 	" Plug 'groenewege/vim-less'
 	" "----For coljure
 	" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
