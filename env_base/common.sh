@@ -792,7 +792,37 @@ utils_find_sh ()
 	return $?
 }	# ----------  end of function utils_find_sh  ----------
 
-utils_find_gz ()
+utils_find_grep_common ()
+{
+	local var_param_type=$1
+	local var_param_var=$2
+	local var_debug=false
+
+	if [[ "${var_param_type}" == "" ]]; then
+		var_param_type=file
+	else
+		shift
+	fi
+
+	if [[ "${var_param_var}" == "-d" ]]; then
+		var_debug=true
+		shift
+	fi
+
+	if [[ "$@" == "" ]]; then
+		if [[ "${var_debug}" == "true" ]]; then
+			echo "utils_find_${var_param_type} |awk \'{print \"\\\"\"$0\"\"\\\"\"}\'"
+		fi
+		eval utils_find_${var_param_type} |awk '{print "\""$0"\""}'
+	else
+		if [[ "${var_debug}" == "true" ]]; then
+			echo "utils_find_${var_param_type} |awk \'{print \"\\\"\"$0\"\\\"\"}\' |xargs grep $@"
+		fi
+		eval utils_find_${var_param_type} |awk '{print "\""$0"\""}' | xargs grep $@
+	fi
+}
+
+utils_find_tar ()
 {
 	f_param=$@
 
@@ -871,22 +901,21 @@ alias bash='TERM=xterm bash'
 
 alias ncdu='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
 alias a_brackets="awk '{print \"\\\"\"\$0\"\\\"\"}'"
-alias f.c='find -type f -iname "*.c" -o -iname "*.h"'
-alias f.cpp='find -type f -iname "*.cpp" -o -iname "*.h" -o -iname "*.hpp"'
-alias f.cxx='find -type f -iname "*.c" -o -iname "*.cpp" -o -iname "*.h" -o -iname "*.hpp" -o -iname "*.cc"'
-alias f.java='find -type f -iname "*.java"'
-alias f.mk='find -type f -iname "*.mk" -o -iname "Android.bp" -o -iname "Makefile" -o -iname "MakeConfig"'
-alias f.sh='find -type f -iname "*.sh" -o -iname "*.bash"'
-alias f.gz='find -type f -iname "*.tar" -o -iname "*.tar.*" -o -iname "*.bz2" -o -iname "*.xz" -o -iname "*.cpio"'
-alias f.f='find -type f'
 alias ff.c='utils_find_c $@'
 alias ff.cpp='utils_find_cpp $@'
 alias ff.cxx='utils_find_cxx $@'
 alias ff.java='utils_find_java $@'
 alias ff.mk='utils_find_mk $@'
 alias ff.sh='utils_find_sh $@'
-alias ff.gz='utils_find_gz $@'
+alias ff.tar='utils_find_tar $@'
 alias ff.f='utils_find_file $@'
+alias ff.g.cxx='utils_find_grep_common cxx $@'
+alias ff.g.java='utils_find_grep_common java $@'
+alias ff.g.file='utils_find_grep_common file $@'
+alias ff.g.f='utils_find_grep_common file $@'
+alias ff.g.mk='utils_find_grep_common mk $@'
+alias ff.g.tar='utils_find_grep_common tar $@'
+alias ff.g.sh='utils_find_grep_common sh $@'
 alias vv='env DISPLAY="" vim -p'
 alias vvc='env DISPLAY="" vim -p -c "e ++enc=GB18030"'
 alias vvp='env DISPLAY="" C_INCLUDE_PATH=${C_INCLUDE_PATH} CPLUS_INCLUDE_PATH=${CPLUS_INCLUDE_PATH} vim -p'
