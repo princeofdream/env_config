@@ -1,0 +1,46 @@
+fix[soa]:
+    rootcause:
+    solution:
+product: A02
+build: not
+test: not
+bugid: noid
+
+
+# Header部分
+#   feat：新功能（feature）
+#   fix：修补bug
+#   docs：文档（documentation）
+#   style： 格式（不影响代码运行的变动）
+#   refactor：重构（即不是新增功能，也不是修改bug的代码变动）
+#   test：增加测试
+#   chore：构建过程或辅助工具的变动
+#   patch： 合入非内部提交
+#   scope 字段用于说明commit 影响的范围，比如Audio,vehicle.
+#   subject 字段是commit 目的的简短描述，不超过50个字符（不可缺省）
+#
+# Footer部分
+#        rootcause字段为描述问题根本原因
+#        solution字段为描述问题的解决方法
+#
+# Body部分是对本次 commit 的详细描述，可以分成多行（可缺省）
+#    product字段为提交验证项目和需要延展的项目以“-”进行分隔：
+#        延展的多个项目使用/隔开（不可缺省）
+#              A58-A79/A21:提交验证项目为A58,需要延展的项目为A79和
+#              A21
+#               A58-None:提交验证项目为A58,无法判断需要延展的项目，需
+#        与FO讨论
+#               A58-Platform:提交验证项目为A58,平台化提交，需要延展到所有项目
+#    build字段为编译验证结果：（不可缺省）
+#       mpass：模块编译验证成功
+#       apass：全编验证成功
+#       not：没有验证
+#    test字段为自测验证结果：（不可缺省）
+#       upass：单元测试通过
+#       ipass：集成测试通过
+#       not：没有验证
+#    BugID字段为对应的解决bugid（bugID）：
+#       noid
+#       禅道4746
+#       jira467289
+
