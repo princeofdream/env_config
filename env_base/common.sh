@@ -710,6 +710,7 @@ utils_find_cxx ()
 	k_param="-iname \"*.c\""
 	k_param=${k_param}" -o -iname \"*.h\""
 	k_param=${k_param}" -o -iname \"*.cpp\""
+	k_param=${k_param}" -o -iname \"*.cc\""
 	k_param=${k_param}" -o -iname \"*.hpp\""
 	k_param=${k_param}" -type f"
 
@@ -1019,6 +1020,9 @@ export LLVMBIN
 export ANT_HOME
 export PSH_LEFT=true
 export NAME_COLOR_SSH=true
+
+# # wine
+# WINEARCH=win32
 
 #### WARNING
 #### Can not set this
