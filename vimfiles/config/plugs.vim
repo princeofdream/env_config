@@ -917,8 +917,21 @@
 " "---"
 " "----------------------------------------------------------------------- "
 " {{{
+Plug 'github/copilot.vim'
 Plug 'neoclide/coc.nvim'
 " }}}
+" use <tab> to trigger completion and navigate to the next complete item
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <C-n>
+	\ coc#pum#visible() ? coc#pum#next(1):
+	\ CheckBackSpace() ? "\<C-n>" :
+	\ coc#refresh()
+
+inoremap <silent><expr> <C-f> coc#pum#visible() ? coc#pum#insert() : "\<C-n>"
 
 " =======================================================
 

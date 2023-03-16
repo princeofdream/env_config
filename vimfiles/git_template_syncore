@@ -1,6 +1,7 @@
 fix[soa]:
     rootcause:
     solution:
+description:
 product: A02
 build: not
 test: not

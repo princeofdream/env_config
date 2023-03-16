@@ -22,7 +22,7 @@
 §== Comments.function == map:cfu, sc:f ==
 §"===  FUNCTION  ================================================================
 §"          NAME:  |?FUNCTION_NAME|     {{{1
-§"   DESCRIPTION:  <CURSOR>
+§"   DESCRIPTION:  TODO
 §"    PARAMETERS:  -|PARAMETERS:EMPTY|
 §"    PARAMETERS:  |PARAMETERS:FIRST| - {+DESCRIPTION+}
 §"                 |PARAMETERS:ENTRY| - {+DESCRIPTION+}
