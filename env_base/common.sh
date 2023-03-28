@@ -147,25 +147,26 @@ if [[ "${config_lsb_release}" == "" ]]; then
 else
 	PATH_ENV_ROOTFS_BASE=$HOME/envx/env_rootfs_${config_lsb_release}
 fi
-if [[ -e "${HOME}/.wine" || -h "${HOME}/.wine" ]]; then
-	CONFIG_WINE_LINK=$(ls $HOME/.wine -dl --time-style=+%Y|grep -i "${config_lsb_release}$" 2>/dev/null)
-	if [[ -h "${HOME}/.wine" ]]; then
-		if [[ "${CONFIG_WINE_LINK}" == "" ]]; then
-			rm ${HOME}/.wine
-			ln -s ${HOME}/.wine_${config_lsb_release} ${HOME}/.wine
-		fi
-	elif [[ -d "${HOME}/.wine" ]]; then
-		CONFIG_WINE_DIR_LIST=$(ls -d ${HOME}/.wine_unknow* 2>/dev/null | tail -1)
-		CONFIG_WINE_DIR_COUNT=$(printf "%d" ${CONFIG_WINE_DIR_LIST:0-2})
-		CONFIG_WINE_DIR_COUNT=$(($CONFIG_WINE_DIR_COUNT + 1))
-		CONFIG_WINE_DIR_COUNT=$(printf "%02d" $CONFIG_WINE_DIR_COUNT)
-		mv ${HOME}/.wine ${HOME}/.wine_unknow_${CONFIG_WINE_DIR_COUNT}
-	fi
-fi
 
-if [[ ! -e "${HOME}/.wine" && ! -h "${HOME}/.wine" ]]; then
-	ln -s ${HOME}/.wine_${config_lsb_release} ${HOME}/.wine
-fi
+# if [[ -e "${HOME}/.wine" || -h "${HOME}/.wine" ]]; then
+#     CONFIG_WINE_LINK=$(ls $HOME/.wine -dl --time-style=+%Y|grep -i "${config_lsb_release}$" 2>/dev/null)
+#     if [[ -h "${HOME}/.wine" ]]; then
+#         if [[ "${CONFIG_WINE_LINK}" == "" ]]; then
+#             rm ${HOME}/.wine
+#             ln -s ${HOME}/.wine_${config_lsb_release} ${HOME}/.wine
+#         fi
+#     elif [[ -d "${HOME}/.wine" ]]; then
+#         CONFIG_WINE_DIR_LIST=$(ls -d ${HOME}/.wine_unknow* 2>/dev/null | tail -1)
+#         CONFIG_WINE_DIR_COUNT=$(printf "%d" ${CONFIG_WINE_DIR_LIST:0-2})
+#         CONFIG_WINE_DIR_COUNT=$(($CONFIG_WINE_DIR_COUNT + 1))
+#         CONFIG_WINE_DIR_COUNT=$(printf "%02d" $CONFIG_WINE_DIR_COUNT)
+#         mv ${HOME}/.wine ${HOME}/.wine_unknow_${CONFIG_WINE_DIR_COUNT}
+#     fi
+# fi
+
+# if [[ ! -e "${HOME}/.wine" && ! -h "${HOME}/.wine" ]]; then
+#     ln -s ${HOME}/.wine_${config_lsb_release} ${HOME}/.wine
+# fi
 
 ############# #Select  Terminal Color support ##################
 # Select --> tmux / tmux-xterm / tmux-screen / tmux-st / none
@@ -917,6 +918,7 @@ alias ff.g.mk='utils_find_grep_common mk $@'
 alias ff.g.tar='utils_find_grep_common tar $@'
 alias ff.g.sh='utils_find_grep_common sh $@'
 alias vv='env DISPLAY="" vim -p'
+alias nn='env DISPLAY="" nvim -p'
 alias vvc='env DISPLAY="" vim -p -c "e ++enc=GB18030"'
 alias vvp='env DISPLAY="" C_INCLUDE_PATH=${C_INCLUDE_PATH} CPLUS_INCLUDE_PATH=${CPLUS_INCLUDE_PATH} vim -p'
 alias a2='echo "aria2c --conf-path=$HOME/.config/aria2/aria2.conf" && aria2c --conf-path=$HOME/.config/aria2/aria2.conf'
