@@ -421,6 +421,15 @@ fi
 append_path_env "$HOME/.local/bin"
 append_path_env "$HOME/.local/sbin"
 
+############# #Extern golang env ##################
+if [[ -x $HOME/envx/toolchain/go ]]; then
+	export GOROOT=$HOME/envx/toolchain/go
+	export GOPATH=$HOME/envx/toolchain/go_thirdpart
+	export GOPROXY='https://goproxy.cn'
+	append_path_env ${GOROOT}/bin
+	append_path_env ${GOPATH}/bin
+fi
+
 ############# #Terminal Color Support ##################
 TERM_ORG=${TERM}
 if [[ ${ENABLE_TRUE_COLOR}"" == "tmux-xterm" ]]; then
