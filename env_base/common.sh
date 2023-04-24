@@ -436,8 +436,8 @@ append_path_env "$HOME/.local/sbin"
 
 ############# #Extern golang env ##################
 if [[ -x $HOME/envx/toolchain/go ]]; then
-	export GOROOT=$HOME/envx/toolchain/go
-	export GOPATH=$HOME/envx/toolchain/go/thirdpart
+	export GOROOT=$HOME/envx/toolchain/go/go
+	export GOPATH=$HOME/envx/toolchain/go/go/thirdpart
 	export GOPROXY='https://goproxy.cn,direct'
 	append_path_env ${GOROOT}/bin
 	append_path_env ${GOPATH}/bin
@@ -684,7 +684,7 @@ s_py3 ()
 s_go ()
 {
 	local var_go_ver=$1
-	local var_go_path="$HOME/envx/toolchain"
+	local var_go_path="$HOME/envx/toolchain/go"
 	local var_go_info=""
 
 	if [[ "${var_go_ver}" == "" ]]; then
