@@ -257,6 +257,19 @@ append_path_env ()
 	fi
 }	# ----------  end of function append_path_env  ----------
 
+append_path_priority_env ()
+{
+	add_path=$1
+	# str1 not contain str2
+	if [[ ! ${ORIGIN_PATH}"" =~ ${add_path}"" ]]; then
+		if [[ "${PATH}" != "" ]]; then
+			PATH="${add_path}:$PATH"
+		else
+			PATH="${add_path}${PATH}"
+		fi
+	fi
+}	# ----------  end of function append_path_env  ----------
+
 append_classpath_env ()
 {
 	add_path=$1
@@ -424,8 +437,8 @@ append_path_env "$HOME/.local/sbin"
 ############# #Extern golang env ##################
 if [[ -x $HOME/envx/toolchain/go ]]; then
 	export GOROOT=$HOME/envx/toolchain/go
-	export GOPATH=$HOME/envx/toolchain/go_thirdpart
-	export GOPROXY='https://goproxy.cn'
+	export GOPATH=$HOME/envx/toolchain/go/thirdpart
+	export GOPROXY='https://goproxy.cn,direct'
 	append_path_env ${GOROOT}/bin
 	append_path_env ${GOPATH}/bin
 fi
@@ -668,6 +681,37 @@ s_py3 ()
 	return 0;
 }	# ----------  end of function s_py3  ----------
 
+s_go ()
+{
+	local var_go_ver=$1
+	local var_go_path="$HOME/envx/toolchain"
+	local var_go_info=""
+
+	if [[ "${var_go_ver}" == "" ]]; then
+		logw "usage: s_go 1.20"
+		return 100;
+	fi
+	if [[ ! -e "${var_go_path}/go.${var_go_ver}" ]]; then
+		logw "go ${var_go_ver}/go.${var_go_ver} not exist!"
+
+		var_go_info=$(ls ${var_go_path}|grep "go.${var_go_ver}"|tail -1)
+		if [[ "${var_go_info}" == "" ]]; then
+			logw "no extra version for go.${var_go_ver}"
+			return 100
+		fi
+		logw "try set to [${var_go_info}]"
+		var_go_ver=${var_go_info#*.}
+	fi
+
+	log "switch go to ${var_go_ver}"
+	export GOROOT=${var_go_path}/go.${var_go_ver}
+	export GOPATH=${GOROOT}/thirdpart
+	export GOPROXY='https://goproxy.cn,direct'
+	append_path_priority_env ${GOROOT}/bin
+	append_path_priority_env ${GOPATH}/bin
+
+}	# ----------  end of function s_go  ----------
+
 ############# #sudo env ##################
 alias sudo='sudo env PATH=$PATH SIMPLE_COLOR=${SIMPLE_COLOR} LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SYSTEM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_SYSTEM_FIRST TERM=xterm'
 alias sdo='sudo env PATH=$PATH SIMPLE_COLOR=${SIMPLE_COLOR} LD_LIBRARY_PATH=$LD_LIBRARY_PATH_CUSTOM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_CUSTOM_FIRST TERM=xterm'
@@ -689,6 +733,7 @@ alias s.path_snapdragon='export PATH=$SNAPDRAGON_PATH && export LLVMROOT=$LLVM_A
 
 alias s.py2='s_py2'
 alias s.py3='s_py3'
+alias s.go='s_go'
 # alias tmux='pmux'
 
 utils_find_c ()
