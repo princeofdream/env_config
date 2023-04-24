@@ -655,6 +655,7 @@
 	Plug 'mhinz/vim-startify'
 
 	Plug 'rubberduck203/aosp-vim'
+	Plug 'simrat39/inlay-hints.nvim'
 " }}}
 
 
@@ -828,6 +829,7 @@
 			\}
 			let g:ale_linters = {
 			\   'c++': ['clang'],
+			\   'cpp': ['clang'],
 			\   'c': ['clang'],
 			\   'python': ['pylint'],
 			\}

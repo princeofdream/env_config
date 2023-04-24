@@ -848,6 +848,29 @@ utils_find_sh ()
 	return $?
 }	# ----------  end of function utils_find_sh  ----------
 
+utils_find_mk ()
+{
+	f_param=$@
+
+	k_param="-iname \"*.mk\""
+	k_param=${k_param}" -o -iname \"Makefile\""
+	k_param=${k_param}" -o -iname \"Android.bp\""
+	k_param=${k_param}" -type f"
+
+	if [[ ${f_param}"" == *-name* || ${f_param}"" == *-iname* ]]; then
+		if [[ "${log_debug}" != "" ]]; then
+			echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		fi
+		eval find ${f_param} "-o" ${k_param}
+	else
+		if [[ "${log_debug}" != "" ]]; then
+			echo -e "[0;34;1mfind [0m[0;32;1m${f_param} [0m[0;33;1m${k_param} [0m"
+		fi
+		eval find ${f_param} ${k_param}
+	fi
+	return $?
+}	# ----------  end of function utils_find_sh  ----------
+
 utils_find_grep_common ()
 {
 	local var_param_type=$1
