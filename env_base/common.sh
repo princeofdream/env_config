@@ -435,12 +435,21 @@ append_path_env "$HOME/.local/bin"
 append_path_env "$HOME/.local/sbin"
 
 ############# #Extern golang env ##################
-if [[ -x $HOME/envx/toolchain/go ]]; then
+if [[ -e $HOME/envx/toolchain/go ]]; then
 	export GOROOT=$HOME/envx/toolchain/go/go
 	export GOPATH=$HOME/envx/toolchain/go/go/thirdpart
 	export GOPROXY='https://goproxy.cn,direct'
 	append_path_env ${GOROOT}/bin
 	append_path_env ${GOPATH}/bin
+fi
+
+############# #Extern ndk env ##################
+ndk_path=$HOME/envx/toolchain/ndk/android-ndk
+ndk_llvm_path=${ndk_path}/toolchains/llvm/prebuilt/linux-x86_64
+if [[ -e ${ndk_path} ]]; then
+	export NDK=${ndk_path}
+	append_path_env ${ndk_llvm_path}/bin
+	append_path_env ${ndk_llvm_path}/bin
 fi
 
 ############# #Terminal Color Support ##################
