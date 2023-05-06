@@ -761,6 +761,7 @@
 	Plug 'osyo-manga/vim-over'
 	Plug 'Shougo/vimproc.vim'
 	Plug 'Shougo/vimshell.vim'
+	Plug 'Shougo/unite.vim'
 	" Plug 'skywind3000/asyncrun.vim'
 " }}}
 
@@ -921,8 +922,7 @@
 " {{{
 Plug 'github/copilot.vim'
 Plug 'neoclide/coc.nvim'
-" }}}
-" use <tab> to trigger completion and navigate to the next complete item
+" " use <tab> to trigger completion and navigate to the next complete item
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -930,10 +930,12 @@ endfunction
 
 inoremap <silent><expr> <C-n>
 	\ coc#pum#visible() ? coc#pum#next(1):
-	\ CheckBackSpace() ? "\<C-n>" :
+	\ CheckBackSpace() ? "\<C-l>" :
 	\ coc#refresh()
 
-inoremap <silent><expr> <C-f> coc#pum#visible() ? coc#pum#insert() : "\<C-n>"
+inoremap <silent><expr> <C-l> coc#pum#visible() ? coc#pum#insert() : "\<C-l>"
+
+" }}}
 
 " =======================================================
 
