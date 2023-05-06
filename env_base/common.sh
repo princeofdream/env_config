@@ -249,6 +249,12 @@ append_path_env ()
 {
 	add_path=$1
 	# str1 not contain str2
+	# log "adding [ ${add_path} ]"
+	if [[ ! -e "${add_path}" ]]; then
+		# logw "[ ${add_path} ] not exist"
+		return 0
+	fi
+
 	if [[ ! ${ORIGIN_PATH}"" =~ ${add_path}"" ]]; then
 		if [[ ${PATH}"" != "" ]]; then
 			PATH+=":"
@@ -261,6 +267,12 @@ append_path_priority_env ()
 {
 	add_path=$1
 	# str1 not contain str2
+	# log "adding [ ${add_path} ]"
+	if [[ ! -e "${add_path}" ]]; then
+		# logw "[ ${add_path} ] not exist"
+		return 0
+	fi
+
 	if [[ ! ${ORIGIN_PATH}"" =~ ${add_path}"" ]]; then
 		if [[ "${PATH}" != "" ]]; then
 			PATH="${add_path}:$PATH"
@@ -268,7 +280,7 @@ append_path_priority_env ()
 			PATH="${add_path}${PATH}"
 		fi
 	fi
-}	# ----------  end of function append_path_env  ----------
+}	# ----------  end of function append_path_priority_env  ----------
 
 append_classpath_env ()
 {
@@ -280,7 +292,7 @@ append_classpath_env ()
 		fi
 		CLASSPATH+="$add_path"
 	fi
-}	# ----------  end of function append_path_env  ----------
+}	# ----------  end of function append_classpath_env  ----------
 
 get_message_length ()
 {
@@ -301,7 +313,6 @@ case "${SYSTEM_TYPE}" in
 		ORIGIN_PATH=${ORIGIN_PATH// /_}
 		;;
 esac
-PATH=""
 
 ############# #Jave env ##################
 if [[ ${USE_EXTERN_JAVA_ENV}"" == "true" ]]; then
@@ -310,10 +321,12 @@ if [[ ${USE_EXTERN_JAVA_ENV}"" == "true" ]]; then
 	JRE_HOME=$JAVA_HOME/jre
 
 	append_classpath_env "."
-	append_classpath_env "$JAVA_HOME/lib:$JRE_HOME/lib"
+	append_classpath_env "$JAVA_HOME/lib"
+	append_classpath_env "$JRE_HOME/lib"
 	append_classpath_env "$PATH_ENV_ROOTFS_BASE/lib"
 
-	append_path_env "$JAVA_HOME/bin:$JAVA_HOME/jre/bin"
+	append_path_priority_env "$JAVA_HOME/bin"
+	append_path_priority_env "$JAVA_HOME/jre/bin"
 fi
 
 ############# #ant env ##################
@@ -322,7 +335,7 @@ if [[ ${USE_EXTERN_ANT_ENV}"" == "true" ]]; then
 	ANT_HOME="$PATH_TOOLCHAIN_JDK_BASE/apache-ant"
 
 	append_classpath_env "$ANT_HOME/lib"
-	append_path_env "$ANT_HOME/bin"
+	append_path_priority_env "$ANT_HOME/bin"
 fi
 
 ############# #mvn env ##################
@@ -331,7 +344,7 @@ if [[ ${USE_EXTERN_MAVEN_ENV}"" == "true" ]]; then
 	M2_HOME="$PATH_TOOLCHAIN_JDK_BASE/apache-maven"
 
 	append_classpath_env "$M2_HOME/lib"
-	append_path_env "$M2_HOME/bin"
+	append_path_priority_env "$M2_HOME/bin"
 fi
 
 ############# #tomcat env ##################
@@ -341,7 +354,7 @@ if [[ ${USE_EXTERN_TOMCAT_ENV}"" == "true" ]]; then
 	CATALINA_PID="$CATALINA_BASE/tomcat.pid"
 
 	append_classpath_env "$CATALINA_BASE/lib"
-	append_path_env "$CATALINA_BASE/bin"
+	append_path_priority_env "$CATALINA_BASE/bin"
 fi
 
 ############# #tomcat env ##################
@@ -359,88 +372,98 @@ LLVMBIN=$LLVMROOT/bin
 
 if [[ ${USE_LLVM_FOR_ARM}"" == "true" ]]; then
 	##### llvm runtime #####
-	append_path_env "$LLVM_ARM_ROOT/bin"
+	append_path_priority_env "$LLVM_ARM_ROOT/bin"
 fi
 
-append_path_env "$HOME/.cargo/bin"
+append_path_priority_env "$HOME/.cargo/bin"
 
 ############# #Web_Base env ##################
 if [[ ${USE_EXTERN_WEB_BASE_ENV}"" == "true" ]]; then
 	##### web_base runtime #####
-	append_path_env "$PATH_WEB_BASE/bin"
-	append_path_env "$PATH_WEB_BASE/sbin"
-	append_path_env "$PATH_WEB_BASE/man"
+	append_path_priority_env "$PATH_WEB_BASE/bin"
+	append_path_priority_env "$PATH_WEB_BASE/sbin"
+	append_path_priority_env "$PATH_WEB_BASE/man"
 fi
 
 ############# #Fake rootfs env ##################
 if [[ ${USE_EXTERN_ROOTFS_ENV}"" == "true" ]]; then
 	##### env_rootfs runtime #####
-	append_path_env "$PATH_ENV_ROOTFS_BASE/bin"
-	append_path_env "$PATH_ENV_ROOTFS_BASE/sbin"
-	append_path_env "$PATH_ENV_ROOTFS_BASE/man"
-	append_path_env "$PATH_ENV_ROOTFS_BASE/libexec"
-	append_path_env "$PATH_ENV_ROOTFS_BASE/libexec/git-core"
+	append_path_priority_env "$PATH_ENV_ROOTFS_BASE/bin"
+	append_path_priority_env "$PATH_ENV_ROOTFS_BASE/sbin"
+	append_path_priority_env "$PATH_ENV_ROOTFS_BASE/man"
+	append_path_priority_env "$PATH_ENV_ROOTFS_BASE/libexec"
+	append_path_priority_env "$PATH_ENV_ROOTFS_BASE/libexec/git-core"
 fi
 
 ############# #Fake rootfs usr env ##################
 if [[ ${USE_EXTERN_ROOTFS_USR_ENV}"" == "true" ]]; then
-	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/bin"
-	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/sbin"
-	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/man"
-	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/libexec"
-	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/libexec/git-core"
+	append_path_priority_env "$PATH_ENV_ROOTFS_BASE/usr/bin"
+	append_path_priority_env "$PATH_ENV_ROOTFS_BASE/usr/sbin"
+	append_path_priority_env "$PATH_ENV_ROOTFS_BASE/usr/man"
+	append_path_priority_env "$PATH_ENV_ROOTFS_BASE/usr/libexec"
+	append_path_priority_env "$PATH_ENV_ROOTFS_BASE/usr/libexec/git-core"
 fi
 
 ############# #Fake rootfs usr local env ##################
 if [[ ${USE_EXTERN_ROOTFS_USR_LOCAL_ENV}"" == "true" ]]; then
-	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/local/bin"
-	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/local/sbin"
-	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/local/man"
-	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/local/libexec"
-	append_path_env "$PATH_ENV_ROOTFS_BASE/usr/local/libexec/git-core"
+	append_path_priority_env "$PATH_ENV_ROOTFS_BASE/usr/local/bin"
+	append_path_priority_env "$PATH_ENV_ROOTFS_BASE/usr/local/sbin"
+	append_path_priority_env "$PATH_ENV_ROOTFS_BASE/usr/local/man"
+	append_path_priority_env "$PATH_ENV_ROOTFS_BASE/usr/local/libexec"
+	append_path_priority_env "$PATH_ENV_ROOTFS_BASE/usr/local/libexec/git-core"
 fi
 
 ############# #Origin PATH env ##################
-if [[ ${PATH}"" != "" ]]; then
-	PATH+=":"
-fi
-PATH+="$ORIGIN_PATH"
+# if [[ ${PATH}"" != "" ]]; then
+#     PATH+=":"
+# fi
+# PATH+="$ORIGIN_PATH"
 CLASSPATH+="$ORIGIN_CLASSPATH"
 
 ############# #Extern toolchain env ##################
 if [[ ${USE_EXTERN_TOOLCHAIN_ENV}"" == "true" ]]; then
-	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/toolchain-openwrt-arm/bin"
-	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/toolchain-openwrt-aarch64/bin"
-	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/arm-linux-androideabi/bin"
-	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-arm-eabi/bin"
-	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-arm-linux-gnueabi/bin"
-	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-arm-linux-gnueabihf/bin"
-	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-aarch64-linux-gnu/bin"
-	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-aarch64-none-elf/bin"
-	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-arm-aarch64-none-elf/bin"
-	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/devkitA64/bin"
-	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/devkitPPC/bin"
-	append_path_env "$PATH_TOOLCHAIN_GCC_BASE/devkitARM/bin"
+	append_path_priority_env "$PATH_TOOLCHAIN_GCC_BASE/toolchain-openwrt-arm/bin"
+	append_path_priority_env "$PATH_TOOLCHAIN_GCC_BASE/toolchain-openwrt-aarch64/bin"
+	append_path_priority_env "$PATH_TOOLCHAIN_GCC_BASE/arm-linux-androideabi/bin"
+	append_path_priority_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-arm-eabi/bin"
+	append_path_priority_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-arm-linux-gnueabi/bin"
+	append_path_priority_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-arm-linux-gnueabihf/bin"
+	append_path_priority_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-aarch64-linux-gnu/bin"
+	append_path_priority_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-linaro-aarch64-none-elf/bin"
+	append_path_priority_env "$PATH_TOOLCHAIN_GCC_BASE/gcc-arm-aarch64-none-elf/bin"
+	append_path_priority_env "$PATH_TOOLCHAIN_GCC_BASE/devkitA64/bin"
+	append_path_priority_env "$PATH_TOOLCHAIN_GCC_BASE/devkitPPC/bin"
+	append_path_priority_env "$PATH_TOOLCHAIN_GCC_BASE/devkitARM/bin"
 fi
 
 ############# #Extern Android env ##################
 if [[ ${USE_EXTERN_ANDROID_ENV}"" == "true" ]]; then
-	# append_path_env "$PATH_TOOLCHAIN_GCC_BASE/arm-2010q1/bin"
-	append_path_env "$HOME/envx/android/sdk/platform-tools"
-	append_path_env "$HOME/envx/android/android-ndk"
+	# append_path_priority_env "$PATH_TOOLCHAIN_GCC_BASE/arm-2010q1/bin"
+	append_path_priority_env "$HOME/envx/android/sdk/platform-tools"
+	append_path_priority_env "$HOME/envx/android/android-ndk"
 	ANDROID_HOME="$HOME/envx/android/sdk"
 fi
 
-append_path_env "$HOME/.local/bin"
-append_path_env "$HOME/.local/sbin"
+if [[ -e "$HOME/.local/bin" ]]; then
+	append_path_priority_env "$HOME/.local/bin"
+fi
+if [[ -e "$HOME/.local/sbin" ]]; then
+	append_path_priority_env "$HOME/.local/sbin"
+fi
+
+############# #Extern gcc env ##################
+if [[ -e $PATH_TOOLCHAIN_GCC_BASE/gcc ]]; then
+	append_path_priority_env ${PATH_TOOLCHAIN_GCC_BASE}/gcc/bin
+fi
+
 
 ############# #Extern golang env ##################
 if [[ -e $HOME/envx/toolchain/go ]]; then
 	export GOROOT=$HOME/envx/toolchain/go/go
 	export GOPATH=$HOME/envx/toolchain/go/go/thirdpart
 	export GOPROXY='https://goproxy.cn,direct'
-	append_path_env ${GOROOT}/bin
-	append_path_env ${GOPATH}/bin
+	append_path_priority_env ${GOROOT}/bin
+	append_path_priority_env ${GOPATH}/bin
 fi
 
 ############# #Extern ndk env ##################
@@ -448,8 +471,8 @@ ndk_path=$HOME/envx/toolchain/ndk/android-ndk
 ndk_llvm_path=${ndk_path}/toolchains/llvm/prebuilt/linux-x86_64
 if [[ -e ${ndk_path} ]]; then
 	export NDK=${ndk_path}
-	append_path_env ${ndk_llvm_path}/bin
-	append_path_env ${ndk_llvm_path}/bin
+	append_path_priority_env ${ndk_llvm_path}/bin
+	append_path_priority_env ${ndk_llvm_path}/bin
 fi
 
 ############# #Terminal Color Support ##################
