@@ -6,7 +6,7 @@
 " "----------------------------------------------------------------------- "
 " "--- Basic library"
 " "----------------------------------------------------------------------- "
-	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+	Plug 'junegunn/fzf'
 	Plug 'junegunn/fzf.vim'
 	" {{{
 		" Mapping selecting mappings
