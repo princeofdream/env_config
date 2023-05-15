@@ -1010,7 +1010,10 @@ utils_while_loop ()
 
 alias bash='TERM=xterm bash'
 
-alias ncdu='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
+ncdu --color dark 2>/dev/null >/dev/null
+if [[ $? -eq 0 ]]; then
+	alias ncdu='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
+fi
 alias a_brackets="awk '{print \"\\\"\"\$0\"\\\"\"}'"
 alias ff.c='utils_find_c $@'
 alias ff.cpp='utils_find_cpp $@'
