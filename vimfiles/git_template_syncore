@@ -1,10 +1,9 @@
-fix[soa]:
+fix[]:
     rootcause:
     solution:
-description:
-product: A02
-build: not
-test: not
+product:
+build: mpass
+test: upass
 bugid: noid
 
 

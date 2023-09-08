@@ -15,7 +15,9 @@ nnoremap <leader>yy "+yy
 nnoremap <leader>dd "+dd
 vnoremap <leader>gg "+yy
 
-let s:toggletabexpand = 0
+set expandtab
+let s:toggletabexpand = 1
+
 function! ToggleTabExpand()
     if s:toggletabexpand
         set noexpandtab
