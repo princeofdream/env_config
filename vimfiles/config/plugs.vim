@@ -118,6 +118,7 @@
 	"     let g:ctrlp_extensions = ['funky']
 	" }}}
 
+	" if has("python3")
 	Plug 'Yggdroot/LeaderF'
 	" {{{
 		let g:Lf_CommandMap = {'<Tab>': ['<ESC>']}
@@ -125,6 +126,7 @@
 		highlight Lf_hl_matchRefine  gui=bold guifg=Magenta cterm=bold ctermfg=201
 		let g:Lf_ShortcutF = '<C-P>'
 	" }}}
+	" endif
 
 
 	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
