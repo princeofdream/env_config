@@ -1,10 +1,33 @@
 fix[]:
     rootcause:
     solution:
-product:
-build: mpass
-test: upass
-bugid: noid
+    product:
+    span:
+    build: pass
+    test: pass
+    fid: noid
+    level: none
+
+
+
+# type[module]:提交类型[模块名]
+# rootcause:问题根本原因
+# solution:问题的解决方法
+# product:项目名
+# span:横展项目
+# build:编译验证结果
+# test:自测验证结果
+# fid:bugID或者需求ID
+# level:BUG的等级和需求优先级
+
+
+# fix[]:
+#     rootcause:
+#     solution:
+# product:
+# build: mpass
+# test: upass
+# bugid: noid
 
 
 # Header部分
