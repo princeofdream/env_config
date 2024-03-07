@@ -20,6 +20,10 @@ snippet un "unsigned ..."
 unsigned ${1:int} ${2:value}
 endsnippet
 
+snippet incc "incl ..."
+#include "${1:stdio.h}"
+endsnippet
+
 # snippet st "struct"
 # struct ${1:`!p snip.rv = (snip.basename or "name") + "_t"`} {
 #     ${0:/* data */}
