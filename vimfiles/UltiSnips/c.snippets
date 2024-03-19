@@ -34,6 +34,28 @@ endsnippet
 # };
 # endsnippet
 
+snippet op "op" b
+fd = open(${1:"file_path"}, ${2:O_RDONLY | O_RDWR | O_APPEND | O_CREAT} ${3:, S_IRWXU | S_IRGRP| S_IWGRP|S_IROTH|S_IWOTH});
+endsnippet
+
+snippet open "open" b
+fd = open(${1:"file_path"}, ${2:O_RDONLY | O_RDWR | O_APPEND | O_CREAT} ${3:, S_IRWXU | S_IRGRP| S_IWGRP|S_IROTH|S_IWOTH});
+endsnippet
+
+snippet acc "access" b
+ret = access(${1:"file_path"}, ${2:F_OK});
+if (ret == 0) {
+	printf("File Access Okay!");
+}
+endsnippet
+
+snippet access "access" b
+ret = access(${1:"file_path"}, ${2:F_OK});
+if (ret == 0) {
+	printf("File Access Okay!");
+}
+endsnippet
+
 snippet func "function" b
 /*
  * ===  FUNCTION  ======================================================================
