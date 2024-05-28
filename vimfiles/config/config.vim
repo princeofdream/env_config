@@ -168,7 +168,9 @@ function! ToggleMouse()
 endfunc
 
 nnoremap <C-g> :call ToggleMouse()<CR>
-map <C-v> <C-a>
+" map <C-v> <C-a>
+" C-x to decrease and C-a/C-s to increase num
+map <C-s> <C-a>
 " set clipboard=unnamed
 
 nnoremap <S-k> :tabp<CR>
