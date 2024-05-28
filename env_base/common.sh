@@ -1010,7 +1010,7 @@ utils_while_loop ()
 
 alias bash='TERM=xterm bash'
 
-ncdu --color dark 2>/dev/null >/dev/null
+ncdu --color dark --version 2>/dev/null >/dev/null
 if [[ $? -eq 0 ]]; then
 	alias ncdu='ncdu --color dark -rr -x --exclude .git --exclude node_modules'
 fi

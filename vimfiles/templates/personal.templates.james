@@ -2,11 +2,11 @@
 §  Personal Information
 § =============================================================
 
-SetMacro( 'AUTHOR',       'James Lee' )
-SetMacro( 'AUTHORREF',    'JamesL' )
-SetMacro( 'EMAIL',        'princeofdream@outlook.com' )
-SetMacro( 'ORGANIZATION', 'BookCL' )
-SetMacro( 'COMPANY',      'BookCL' )
+SetMacro( 'AUTHOR',       'lijin' )
+SetMacro( 'AUTHORREF',    'jin' )
+SetMacro( 'EMAIL',        'jinli@syncore.space' )
+SetMacro( 'ORGANIZATION', 'SYNCORE' )
+SetMacro( 'COMPANY',      'SYNCORE' )
 SetMacro( 'COPYRIGHT',    'Copyright (c) |YEAR|, |AUTHOR|' )
 SetMacro( 'LICENSE',      'GNU General Public License' )
 
