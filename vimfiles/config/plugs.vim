@@ -922,7 +922,7 @@
 " "---"
 " "----------------------------------------------------------------------- "
 " {{{
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 Plug 'neoclide/coc.nvim'
 " " use <tab> to trigger completion and navigate to the next complete item
 function! CheckBackspace() abort

@@ -142,7 +142,7 @@ elif [[ ${ENABLE_POWERLINE}"" == "powerline-sh" ]]; then
 	fi
 fi
 
-export BASH_VERSION=$(help |grep -n [0-9]|grep bash)
+export BASH_VERSION=$(help |grep -n "[0-9]"|grep bash)
 
 
 
