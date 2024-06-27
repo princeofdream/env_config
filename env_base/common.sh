@@ -139,34 +139,6 @@ PATH_WEB_BASE=$HOME/envx/web_base
 PATH_ENV_ROOTFS_BASE=$HOME/envx/env_rootfs
 # config_lsb_release=$(lsb_release -i 2>/dev/null |awk -F ':' '{print $2}'| sed -e 's/^[ \t]*//g')
 # config_lsb_release=${config_lsb_release,,}
-config_lsb_release=$(cat /etc/os-release | grep -i "^NAME" 2>/dev/null |awk -F '=' '{print $2}'| tr '[A-Z]' '[a-z]' |xargs echo)
-config_lsb_release=${config_lsb_release%% *}
-
-if [[ "${config_lsb_release}" == "" ]]; then
-	PATH_ENV_ROOTFS_BASE=$HOME/envx/env_rootfs
-else
-	PATH_ENV_ROOTFS_BASE=$HOME/envx/env_rootfs_${config_lsb_release}
-fi
-
-# if [[ -e "${HOME}/.wine" || -h "${HOME}/.wine" ]]; then
-#     CONFIG_WINE_LINK=$(ls $HOME/.wine -dl --time-style=+%Y|grep -i "${config_lsb_release}$" 2>/dev/null)
-#     if [[ -h "${HOME}/.wine" ]]; then
-#         if [[ "${CONFIG_WINE_LINK}" == "" ]]; then
-#             rm ${HOME}/.wine
-#             ln -s ${HOME}/.wine_${config_lsb_release} ${HOME}/.wine
-#         fi
-#     elif [[ -d "${HOME}/.wine" ]]; then
-#         CONFIG_WINE_DIR_LIST=$(ls -d ${HOME}/.wine_unknow* 2>/dev/null | tail -1)
-#         CONFIG_WINE_DIR_COUNT=$(printf "%d" ${CONFIG_WINE_DIR_LIST:0-2})
-#         CONFIG_WINE_DIR_COUNT=$(($CONFIG_WINE_DIR_COUNT + 1))
-#         CONFIG_WINE_DIR_COUNT=$(printf "%02d" $CONFIG_WINE_DIR_COUNT)
-#         mv ${HOME}/.wine ${HOME}/.wine_unknow_${CONFIG_WINE_DIR_COUNT}
-#     fi
-# fi
-
-# if [[ ! -e "${HOME}/.wine" && ! -h "${HOME}/.wine" ]]; then
-#     ln -s ${HOME}/.wine_${config_lsb_release} ${HOME}/.wine
-# fi
 
 ############# #Select  Terminal Color support ##################
 # Select --> tmux / tmux-xterm / tmux-screen / tmux-st / none
@@ -175,37 +147,48 @@ ENABLE_TRUE_COLOR="tmux-screen"
 # ENABLE_TRUE_COLOR="screen256"
 # ENABLE_TRUE_COLOR="false"
 
-SYSTEM_NAME=`uname -a`
-SYSTEM_TYPE="linux"
-SUB_SYSTEM_TYPE=""
+config_system_name=`uname -a`
+config_system_type="linux"
 
-case "${SYSTEM_NAME}" in
+config_lsb_release=$(cat /etc/os-release 2>/dev/null| grep -i "^NAME" 2>/dev/null |awk -F '=' '{print $2}'| tr '[A-Z]' '[a-z]' |xargs echo)
+config_lsb_release=${config_lsb_release%% *}
+
+case "${config_system_name}" in
 	"MSYS"* )
-		SYSTEM_TYPE="msys";
+		config_system_type="msys";
+		# config_lsb_release="win"
 		;;
 	"MINGW64"* )
-		SYSTEM_TYPE="mingw64"
+		config_system_type="mingw64"
+		# config_lsb_release="win"
 		;;
 	"MINGW32"* )
-		SYSTEM_TYPE="mingw32"
+		config_system_type="mingw32"
+		# config_lsb_release="win"
 		;;
 	*"Microsoft"*"Linux"* )
-		SYSTEM_TYPE="ms-linux"
+		config_system_type="ms-linux"
 		;;
 	*"microsoft"*"WSL2"*"Linux"* )
-		SYSTEM_TYPE="ms-linux"
+		config_system_type="ms-linux"
 		;;
 	*"Darwin"* )
-		SYSTEM_TYPE="mac"
+		config_system_type="mac"
 		;;
 	*"Ubuntu"* | *"kylin"* )
-		SUB_SYSTEM_TYPE="ubuntu"
+		config_lsb_release="ubuntu"
 		;;
 esac
 
 SIMPLE_COLOR="${SIMPLE_COLOR}"
 
-case "${SYSTEM_TYPE}" in
+if [[ "${config_lsb_release}" == "" ]]; then
+	PATH_ENV_ROOTFS_BASE=$HOME/envx/env_rootfs
+else
+	PATH_ENV_ROOTFS_BASE=$HOME/envx/env_rootfs_${config_lsb_release}
+fi
+
+case "${config_system_type}" in
 	linux )
 		if [[ $DISPLAY == "" && $SSH_CONNECTION == "" ]]; then
 				USE_SIMPLE_COLOR=true
@@ -304,10 +287,10 @@ get_message_length ()
 ORIGIN_CLASSPATH=$CLASSPATH
 
 ORIGIN_PATH=$PATH:/sbin:/bin:/usr/bin:/usr/sbin:/usr/sbin:/usr/local/sbin
-if [[ ${SYSTEM_TYPE}"" == "mac" ]]; then
+if [[ ${config_system_type}"" == "mac" ]]; then
 	ORIGIN_PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 fi
-case "${SYSTEM_TYPE}" in
+case "${config_system_type}" in
 	msys | "mingw"* | "ms-linux" )
 		ORIGIN_PATH=${ORIGIN_PATH//\ /_}
 		ORIGIN_PATH=${ORIGIN_PATH// /_}
@@ -501,7 +484,7 @@ fi
 ############# #LD_LIBRARY_PATH env ##################
 if [[ ${LD_LIBRARY_PATH}"" == "" || ${LD_LIBRARY_PATH}"" == "/home"* ]]; then
 	SYSTEM_LD_LIBRARY_PATH="/lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64"
-	if [[ ${SUB_SYSTEM_TYPE}"" == "ubuntu" ]]; then
+	if [[ ${config_lsb_release}"" == "ubuntu" ]]; then
 		SYSTEM_ARCH=`uname -p`
 		SYSTEM_LD_LIBRARY_PATH="/lib/${SYSTEM_ARCH}-linux-gnu:"$SYSTEM_LD_LIBRARY_PATH
 	fi
@@ -1034,7 +1017,7 @@ alias nn='env DISPLAY="" nvim -p'
 alias vvc='env DISPLAY="" vim -p -c "e ++enc=GB18030"'
 alias vvp='env DISPLAY="" C_INCLUDE_PATH=${C_INCLUDE_PATH} CPLUS_INCLUDE_PATH=${CPLUS_INCLUDE_PATH} vim -p'
 alias a2='echo "aria2c --conf-path=$HOME/.config/aria2/aria2.conf" && aria2c --conf-path=$HOME/.config/aria2/aria2.conf'
-if [[ ${SYSTEM_TYPE}"" == "mac" ]]; then
+if [[ ${config_system_type}"" == "mac" ]]; then
 	ls --color >/dev/null 2>/dev/null
 	if [[ $? == 0 ]]; then
 		alias ls='ls --color'
