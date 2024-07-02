@@ -28,6 +28,11 @@ if WINDOWS()
 endif
 let g:vim_pm_plugins_path = g:vim_pm_path."base/"
 
+"" for windows git_bash/msys/mingw64 etc.
+if filereadable("/c/Python311/python311.dll")
+    set pythonthreedll=/c/Python311/python311.dll
+endif
+
 let g:vim_pm_vimrc_path = g:vim_pm_path
 " let g:vim_pm_custom_path = $HOME."byjames"
 
