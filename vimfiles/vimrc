@@ -29,8 +29,8 @@ endif
 let g:vim_pm_plugins_path = g:vim_pm_path."base/"
 
 "" for windows git_bash/msys/mingw64 etc.
-if filereadable("/c/Python311/python311.dll")
-    set pythonthreedll=/c/Python311/python311.dll
+if filereadable("/c/Python312/python312.dll")
+    set pythonthreedll=/c/Python312/python312.dll
 endif
 
 let g:vim_pm_vimrc_path = g:vim_pm_path

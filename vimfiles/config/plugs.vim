@@ -925,6 +925,7 @@
 " Plug 'github/copilot.vim'
 Plug 'neoclide/coc.nvim'
 " " use <tab> to trigger completion and navigate to the next complete item
+let g:coc_disable_startup_warning = 1
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
