@@ -365,8 +365,13 @@
 " "----------------------------------------------------------------------- "
 " {{{
 	" let g:vim_custom_snippets = "UltiSnips"
+
 	if has('python3')
-		let g:vim_custom_snippets = "UltiSnips"
+        if ( has('win32unix') && !has('nvim') )
+            let g:vim_custom_snippets = "snipmate"
+        else
+            let g:vim_custom_snippets = "UltiSnips"
+        endif
 	else
 		let g:vim_custom_snippets = "snipmate"
 	endif

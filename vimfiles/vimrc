@@ -10,6 +10,9 @@ endfunction
 function! WINDOWS()
 	return  (has('win16') || has('win32') || has('win64'))
 endfunction
+function! WINUNIX()
+	return  (has('win32unix'))
+endfunction
 
 " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
 " across (heterogeneous) systems easier.
