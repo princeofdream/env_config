@@ -720,6 +720,9 @@
 	Plug 'yonchu/accelerated-smooth-scroll'
 	" {{{
 		nmap <silent> <C-i> <Plug>(ac-smooth-scroll-c-d)
+        if (! exists(":nmap <C-d>"))
+            nmap <silent> <C-d> <Plug>(ac-smooth-scroll-c-d)
+        endif
 	" }}}
 	Plug 'danro/rename.vim'
 		" :rename {xxx}
