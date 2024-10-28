@@ -1,12 +1,12 @@
 fix[]:
-    rootcause:
-    solution:
-    product:
-    span:
-    build: pass
-    test: pass
-    fid: noid
-    level: none
+rootcause:
+solution:
+product:
+span: Platform_3.0
+build: pass
+test: pass
+fid: noid
+level: none
 
 
 
