@@ -642,7 +642,7 @@
 	" Plug 'Yggdroot/indentLine' "Display tab and space with |
 	Plug 'kien/rainbow_parentheses.vim' " Rainbow pair () [] {} etc
 
-	Plug 'powerline/fonts'
+	" Plug 'princeofdream/fonts'
 	Plug 'chase/focuspoint-vim'
 	Plug 'tomasr/molokai'
 		" let g:molokai_original = 1
