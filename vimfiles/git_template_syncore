@@ -3,11 +3,11 @@ rootcause:
 solution:
 product:
 span: Platform_3.0
-build: pass
-test: pass
+build: apass
+test: upass
 fid: noid
 level: none
-
+influence: none
 
 
 # type[module]:提交类型[模块名]
