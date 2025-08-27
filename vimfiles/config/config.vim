@@ -153,8 +153,10 @@ elseif isdirectory('./src/include')
 	set path+=src/include
 endif
 
+if has('nvim')
+else
 set pastetoggle=<F4>
-
+endif
 
 function! ToggleMouse()
 	" check if mouse is enabled

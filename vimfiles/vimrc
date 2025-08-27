@@ -18,7 +18,13 @@ endfunction
 " across (heterogeneous) systems easier.
 if !exists('g:vim_pm_custom_path')
 	if WINDOWS()
-		set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+        if has('nvim')
+            let g:vimfiler_dir = '~/AppData/Local/nvim'
+            set runtimepath=$HOME/.vim,$HOME/vimfiles,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after,$HOME/vimfiles/after
+            set runtimepath+=,~\AppData\Local\nvim,~\AppData\Local\nvim\after
+        else
+            set runtimepath=$HOME/.vim,$HOME/vimfiles,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after,$HOME/vimfiles/after
+        endif
 	endif
 else
 	let g:vim_pm_vimrc_path = g:vim_pm_custom_path
@@ -31,12 +37,15 @@ if WINDOWS()
 endif
 let g:vim_pm_plugins_path = g:vim_pm_path."base/"
 
-"" for windows git_bash/msys/mingw64 etc.
-if filereadable("C:/Python312/python312.dll")
-    " set pythonthreedll=/c/Python312/python312.dll
-    set pythonthreedll=C:\\Python312\\python312.dll
-elseif filereadable("C:/Python312/python312.dll")
-    set pythonthreedll=C:\\Python312\\python312.dll
+if has('nvim')
+else
+    "" for windows git_bash/msys/mingw64 etc.
+    if filereadable("C:/Python312/python312.dll")
+        " set pythonthreedll=/c/Python312/python312.dll
+        set pythonthreedll=C:\\Python312\\python312.dll
+    elseif filereadable("C:/Python312/python312.dll")
+        set pythonthreedll=C:\\Python312\\python312.dll
+    endif
 endif
 
 let g:vim_pm_vimrc_path = g:vim_pm_path
@@ -74,7 +83,10 @@ if WINDOWS()
 	if has('multi_byte')
 		" Windows cmd.exe still uses cp850. If Windows ever moved to
 		" Powershell as the primary terminal, this would be utf-8
-		set termencoding=cp850
+        " if has('nvim')
+        " else
+        "     set termencoding=cp850
+        " endif
 		" Let Vim use utf-8 internally, because many scripts require this
 		set encoding=utf-8
 		setglobal fileencoding=utf-8
@@ -282,10 +294,12 @@ endif
 set showfulltag " show tag with function protype.
 set guioptions-=b " present the bottom scrollbar when the longest visible line exceed the window
 
-" disable menu & toolbar
-set guioptions+=m
-set guioptions-=T
-
+if has('nvim')
+else
+    " disable menu & toolbar
+    set guioptions+=m
+    set guioptions-=T
+endif
 " ------------------------------------------------------------------
 " Desc: Text edit
 " ------------------------------------------------------------------
