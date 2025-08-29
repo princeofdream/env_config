@@ -7,6 +7,7 @@ set /a comPortBaud=115200
 
 set "b_arg="
 set "c_arg="
+set "d_arg="
 
 :parse_args
     if "%~1"=="" goto end_parse_args
@@ -16,14 +17,16 @@ set "c_arg="
     ) else if "%~1"=="-c" (
         set "c_arg=%~2"
         shift
+    ) else if "%~1"=="-d" (
+        set "d_arg=debug"
     )
     shift
     goto parse_args
 
     :end_parse_args
 
-    echo -b 参数值：!b_arg!
-    echo -c 参数值：!c_arg!
+    echo -b bitrate: !b_arg!
+    echo -c comport: !c_arg!
 
     if "%b_arg%"=="" (
         echo "default Baud : %comPortBaud%"
@@ -44,12 +47,17 @@ set "c_arg="
 exit /b
 
 :auto_detect_com
-    set /a counter=5
+    set /a counter=1
+    set /a getCom=0
 
     :while_loop
-        mode COM%counter% /STATUS
+        mode COM%counter% /STATUS >nul 2>&1
         if %errorlevel%==0 (
-            goto loop_end
+            echo "Found COM%counter%"
+            if %getCom%==0 (
+                set /a getCom=%counter%
+            )
+            @REM goto loop_end
         )
 
         if %counter% LSS 50 (
@@ -59,11 +67,11 @@ exit /b
         )
     :loop_end
 
-    if %counter%==50 (
+    if %getCom%==0 (
         echo "Get COM Failed"
-    ) else (   
-        echo "get COM%counter%"
-        set /a comPortNum=%counter%
+    ) else (
+        echo "Use COM%getCom% by default"
+        set /a comPortNum=%getCom%
     )
 
 exit /b
@@ -72,6 +80,11 @@ exit /b
 :main_func
     echo "===========Start COM%comPortNum% with Baud %comPortBaud%=========="
     @REM plink -v -serial COM%counter% -sercfg 921600,8,1,n,N
+    echo "ss -com:%comPortNum% -baud:%comPortBaud%"
+    if "%d_arg%"=="debug" (
+        echo "===========debug only, not start=========="
+        exit /b
+    )
     ss -com:%comPortNum% -baud:%comPortBaud%
     exit /b
 
