@@ -148,6 +148,9 @@ ENABLE_TRUE_COLOR="tmux-screen"
 # ENABLE_TRUE_COLOR="false"
 
 config_system_name=`uname -a`
+if [[ -e /.dockerenv ]]; then
+    config_system_name=docker
+fi
 config_system_type="linux"
 
 config_lsb_release=$(cat /etc/os-release 2>/dev/null| grep -i "^NAME" 2>/dev/null |awk -F '=' '{print $2}'| tr '[A-Z]' '[a-z]' |xargs echo)
@@ -177,6 +180,9 @@ case "${config_system_name}" in
 		;;
 	*"Ubuntu"* | *"kylin"* )
 		config_lsb_release="ubuntu"
+		;;
+	*"docker"* )
+		config_lsb_release="docker"
 		;;
 esac
 
