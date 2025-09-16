@@ -949,9 +949,14 @@ inoremap <silent><expr> <C-l> coc#pum#visible() ? coc#pum#insert() : "\<C-l>"
 
 " {{{
 
-Plug 'chenxuan520/vim-ai-doubao'
+Plug 'madox2/vim-ai'
+" let g:vim_ai_token_file_path = '~/.config/openai.token'
+let g:vim_ai_debug = 1
+let g:vim_ai_debug_log_file = "/data01/lijin/logs/ai/vim-ai.log"
 " let g:vim_ai_config_file_path = '~/.config/vim-ai-token.json'
-let g:vim_ai_name="zhipu" " xinhuo ,doubao ,tongyi ,openai
+" Plug 'chenxuan520/vim-ai-doubao'
+" let g:vim_ai_name="zhipu" " xinhuo ,doubao ,tongyi ,openai
+" let g:vim_ai_config_file_path = '~/.config/vim-ai-token.json'
 "" "zhipu":{"token":"097138e27fe1524f38320929f46d1b52.SmjU0iynPItmo4Z1","endpoint_url":"https://open.bigmodel.cn/api/paas/v4/chat/completions","model":"glm-4-flash"},
 " let g:vim_ai_name="tongyi" " xinhuo ,doubao ,tongyi ,openai
 

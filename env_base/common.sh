@@ -678,6 +678,11 @@ s_py3 ()
 	fi
 
 	var_python_path=/usr/bin/python3
+    if [[ -x ${PATH_ENV_ROOTFS_BASE}/usr/bin/python3 ]]; then
+        var_python_path=${PATH_ENV_ROOTFS_BASE}/usr/bin/python3
+    else
+        var_python_path=/usr/bin/python3
+    fi
 	if [[ ! -x /usr/bin/python3 ]]; then
 		var_python_path=$(whereis python3 |awk '{print $2}')
 	fi
@@ -688,7 +693,11 @@ s_py3 ()
 	fi
 
 	if [[ ! -d "$HOME/envx/pyenv/py3env" ]]; then
-		virtualenv -p ${var_python_path} $HOME/envx/pyenv/py3env
+		virtualenv -p ${var_python_path} $HOME/envx/pyenv/py3env >/dev/null 2>/dev/null
+        ret=$?
+        if [[ $ret -ne 0 ]]; then
+            ${var_python_path} -m venv $HOME/envx/pyenv/py3env
+        fi
 	else
 		source $HOME/envx/pyenv/py3env/bin/activate
 		python --version >/dev/null 2>/dev/null
