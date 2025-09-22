@@ -31,6 +31,30 @@ function ToggleTabExpand()
     end
 end
 
+vim.o.expandtab = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+
+-- 根据文件类型设置不同的缩进
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"python", "javascript", "typescript", "html", "css", "json", "yaml"},
+  callback = function()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.softtabstop = 4
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"c", "cpp", "java", "go"},
+  callback = function()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.softtabstop = 4
+  end,
+})
+
 -- Default colorscheme setup
 
 if vim.env.TMUX ~= nil then
@@ -60,20 +84,7 @@ local function vim_set_custom_cursorline()
     -- vim.api.nvim_set_hl(0, "CursorColumn", { cterm = NONE, ctermbg = "darkred", ctermfg = "white", guibg = "darkred", guifg = "white" })
 end
 
-local function vim_set_custom_colorscheme(vim_theme)
-    if vim_theme == "one" then
-        vim.cmd("colorscheme one")
-        -- call one#highlight('vimLineComment', 'cc00cc', '', 'none')
-        -- vim.api.nvim_set_hl(0, "CursorLine", { guibg = "#202727", guifg = NONE })
-        -- vim.api.nvim_set_hl(0, "CursorLine", { guibg = "#FFFFAF", guifg = NONE })
-        -- vim.api.nvim_set_hl(0, "CursorLine", { guibg = "#5c624b", guifg = NONE })
-        -- vim.api.nvim_set_hl(0, "CursorLine", { guibg = "#434837", guifg = NONE })
-        local one_visual_bg = '878777'
-        local one_syntax_fg = {'bcbcbc', '23'}
-        -- local one_syntax_cursor =23', ''}
-        -- one_syntax_bg {'33ff',235'}
-    end
-end
+vim.cmd("colorscheme gruvcase")
 
 -- Toggle mouse function
 function ToggleMouse()
