@@ -6,6 +6,7 @@
   "focuspoint-vim": { "branch": "master", "commit": "72b6634d234c75b1213dd7b379b6405621a83a01" },
   "gist-vim": { "branch": "master", "commit": "5bfbb5450d9eff248f6c074de0b7800392439304" },
   "github-nvim-theme": { "branch": "main", "commit": "c106c9472154d6b2c74b74565616b877ae8ed31d" },
+  "gitsigns.nvim": { "branch": "main", "commit": "f780609807eca1f783a36a8a31c30a48fbe150c5" },
   "gruvbox": { "branch": "master", "commit": "697c00291db857ca0af00ec154e5bd514a79191f" },
   "gruvcase": { "branch": "master", "commit": "e26cfd7e7d5655e01476fb53ac0d241006ed11ed" },
   "gv.vim": { "branch": "master", "commit": "b6bb6664e2c95aa584059f195eb3a9f3cb133994" },
