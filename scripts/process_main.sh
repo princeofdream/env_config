@@ -90,8 +90,8 @@ vim_install_config()
 	replace_config $top_dir/ycm_extra_conf.py $HOME/.ycm_extra_conf.py
 	replace_config $top_dir/configs/vim/ctags_lang $HOME/.ctags
 
-	## for nvim
-	replace_config $top_dir/vimfiles/init.vim $HOME/.config/nvim/init.vim
+	# ## for nvim
+	# replace_config $top_dir/vimfiles/init.vim $HOME/.config/nvim/init.vim
 }
 
 vim_setup_vundle_env ()
@@ -131,6 +131,29 @@ vim_setup_env ()
 
 	vim_install_config
 }	# ----------  end of function setup_vim_plug_env  ----------
+
+nvim_install_config()
+{
+	echo "=========== vim_install_config ==============="
+
+	# replace_config $top_dir/ycm_extra_conf.py $HOME/.ycm_extra_conf.py
+	# replace_config $top_dir/configs/vim/ctags_lang $HOME/.ctags
+
+    # replace_config $top_dir/nvim/init.vim $HOME/.config/nvim/init.vim
+    replace_config $top_dir/nvim $HOME/.config/nvim
+    if [[ -e ${top_dir}/nvim/local_nvim ]]; then
+        replace_config $top_dir/nvim/local_nvim $HOME/.local/share/nvim
+    fi
+}
+
+nvim_setup_env ()
+{
+	should_quite=$1
+
+	nvim_dest_path=$top_dir/nvim
+
+	nvim_install_config
+}	# ----------  end of function setup_nvim_plug_env  ----------
 
 
 tmux_install_config()
