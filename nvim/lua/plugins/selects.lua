@@ -48,6 +48,6 @@ return {
                 mode = "v",
                 desc = "Wildfire select previous",
             },
-        }
-    }
+        },
+    },
 }
