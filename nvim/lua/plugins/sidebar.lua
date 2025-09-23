@@ -57,4 +57,20 @@ return {
             })
         end,
     },
+    {
+        "preservim/tagbar",
+        keys = {
+            { "<F3>", "<cmd>TagbarToggle<cr>", desc = "Toggle tagbar Tree" },
+        }
+    },
+    {
+        "mbbill/undotree",
+        keys = {
+            { "<F6>", "<cmd>UndotreeToggle<cr>", desc = "Toggle Undo Tree" },
+        },
+        config = function()
+            vim.g.undotree_SetFocusWhenToggle=1
+            vim.g.undotree_WindowLayout = 4
+        end,
+    },
 }
