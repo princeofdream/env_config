@@ -113,3 +113,7 @@ vim.keymap.set("n", "t[", ":tabp<CR>")
 vim.keymap.set("n", "t]", ":tabn<CR>")
 vim.keymap.set("n", "b[", ":bp<CR>")
 vim.keymap.set("n", "b]", ":bn<CR>")
+
+vim.opt.ignorecase = true   -- 搜索时默认忽略大小写
+vim.opt.smartcase = true    -- 如果搜索模式包含大写字母，则变为大小写敏感
+vim.opt.wildignorecase = true -- 命令行补全时忽略大小写
