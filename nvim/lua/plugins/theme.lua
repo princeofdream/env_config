@@ -22,15 +22,48 @@
 
 return {
     {
+        "princeofdream/gruvcase",
+        config = function()
+            vim.g.gruvbox_contrast_dark = "soft"
+        end,
+    },
+    {
+        "projekt0n/github-nvim-theme",
+    },
+    {
         "morhetz/gruvbox",
     },
     {
-        "upsuper/vim-colorschemes",
+        "navarasu/onedark.nvim",
+        config = function()
+            require('lualine').setup {
+                style = 'darker',
+                transparent = false,
+                term_colors = true,
+                ending_tildes = false,
+                cmp_itemkind_reverse = false,
+                toggle_style_key = nil,
+                toggle_style_list = {'dark', 'darker', 'cool', 'deep', 'warm', 'warmer', 'light'},
+                code_style = {
+                comments = 'italic',
+                keywords = 'none',
+                functions = 'none',
+                strings = 'none',
+                variables = 'none'
+                },
+                lualine = {
+                    transparent = false,
+                },
+                colors = {},
+                highlights = {},
+                diagnostics = {
+                    darker = true,
+                    undercurl = true,
+                    background = true,
+                },
+            }
+        end,
     },
-    {
-        "rakr/vim-one",
-    },
-    -- {joshdick/onedark.vim},
     {
         "morhetz/gruvbox",
     },
@@ -40,15 +73,7 @@ return {
     {
         "ayu-theme/ayu-vim",
     },
-    {
-        "princeofdream/gruvcase",
-        config = function()
-            vim.g.gruvbox_contrast_dark = "soft"
-        end,
-    },
-    {
-        "projekt0n/github-nvim-theme",
-    },
+
     {
         "kien/rainbow_parentheses.vim",
         event = "BufRead",
@@ -84,7 +109,7 @@ return {
         lazy = false,
         priority = 1000,
     },
-    
+
     -- Ayu 主题
     {
         "ayu-theme/ayu-vim",
@@ -135,10 +160,10 @@ return {
         config = function()
             -- 定义颜色
             local semanticGUIColors = {
-                '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80', 
-                '#ffab91', '#bcaaa4', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb', 
-                '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#c5cae9', 
-                '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8', 
+                '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80',
+                '#ffab91', '#bcaaa4', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb',
+                '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#c5cae9',
+                '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8',
                 '#f0f4c3', '#ffb74d'
             }
 
@@ -183,6 +208,86 @@ return {
         event = "LspAttach",
         config = function()
             require("inlay-hints").setup()
+        end,
+    },
+    {
+        "nvim-tree/nvim-web-devicons"
+    },
+    {
+        'nvim-lualine/lualine.nvim',
+        event = 'VeryLazy',
+        config = function()
+            require('lualine').setup {
+                options = {
+                    icons_enabled = true,
+                    theme = 'auto',
+                    component_separators = { left = '', right = ''},
+                    section_separators = { left = '', right = ''},
+                    disabled_filetypes = {
+                        statusline = {},
+                        winbar = {},
+                    },
+                    ignore_focus = {},
+                    always_divide_middle = true,
+                    always_show_tabline = true,
+                    globalstatus = false,
+                    refresh = {
+                    statusline = 1000,
+                    tabline = 1000,
+                    winbar = 1000,
+                    refresh_time = 16, -- ~60fps
+                    events = {
+                        'WinEnter',
+                        'BufEnter',
+                        'BufWritePost',
+                        'SessionLoadPost',
+                        'FileChangedShellPost',
+                        'VimResized',
+                        'Filetype',
+                        'CursorMoved',
+                        'CursorMovedI',
+                        'ModeChanged',
+                    },
+                    }
+                },
+                sections = {
+                    lualine_a = {'mode'},
+                    lualine_b = {'branch', 'diff', 'diagnostics'},
+                    lualine_c = {'filename'},
+                    lualine_x = {'encoding', 'fileformat', 'filetype'},
+                    lualine_y = {'progress'},
+                    lualine_z = {'location'}
+                },
+                -- sections = {
+                --     lualine_a = {
+                --         {
+                --             'mode',
+                --             icons_enabled = true, -- Enables the display of icons alongside the component.
+                --             icon = nil,
+                --             separator = nil,      -- Determines what separator to use for the component.
+                --             cond = nil,           -- Condition function, the component is loaded when the function returns `true`.
+                --             draw_empty = false,   -- Whether to draw component even if it's empty.
+                --             color = nil, -- The default is your theme's color for that section and mode.
+                --             type = nil,
+                --             padding = 1, -- Adds padding to the left and right of components.
+                --             fmt = nil,   -- Format function, formats the component's output.
+                --             on_click = nil, -- takes a function that is called when component is clicked with mouse.
+                --         },
+                --     },
+                -- },
+                inactive_sections = {
+                    lualine_a = {"mode"},
+                    lualine_b = {},
+                    lualine_c = {'filename'},
+                    lualine_x = {'location'},
+                    lualine_y = {},
+                    lualine_z = {}
+                },
+                tabline = {},
+                winbar = {},
+                inactive_winbar = {},
+                extensions = {}
+            }
         end,
     },
 }
