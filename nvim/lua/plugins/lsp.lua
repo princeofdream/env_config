@@ -130,6 +130,14 @@ return {
                             fallback()
                         end
                     end, { "i", "s" }),
+
+                    ["<CR>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.confirm({ select = true })
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
                 },
                 sources = {
                     { name = "nvim_lsp" },
