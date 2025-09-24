@@ -1,11 +1,5 @@
 return {
     {
-        'ahmedkhalf/project.nvim',
-        config = function()
-            require('project_nvim').setup {}
-        end
-    },
-    {
         "danro/rename.vim",
     },
     {
@@ -33,6 +27,20 @@ return {
         end
     },
     {
+        'nvim-telescope/telescope-project.nvim',
+        dependencies = {
+            'nvim-telescope/telescope.nvim',
+        },
+        config = function()
+            vim.api.nvim_set_keymap(
+                'n',
+                'tt',
+                ":lua require'telescope'.extensions.project.project{}<CR>",
+                {noremap = true, silent = true}
+            )
+        end,
+    },
+    {
         "folke/trouble.nvim",
         dependencies = "nvim-tree/nvim-web-devicons",
         config = function()
@@ -43,5 +51,33 @@ return {
     },
     {
         "vim-scripts/a.vim",
+    },
+
+    {
+        "WolfgangMehner/bash-support",
+    },
+    {
+        "WolfgangMehner/c-support",
+    },
+    {
+        "WolfgangMehner/git-support",
+    },
+    {
+        "WolfgangMehner/vim-support",
+    },
+    {
+        "WolfgangMehner/latex-support",
+    },
+    {
+        "WolfgangMehner/perl-support",
+    },
+    {
+        "WolfgangMehner/awk-support",
+    },
+    {
+        "WolfgangMehner/python-support",
+    },
+    {
+        "WolfgangMehner/verilog-support",
     },
 }
