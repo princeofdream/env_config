@@ -1,7 +1,7 @@
 return
 {
     {
-        "scrooloose/nerdcommenter",
+        "preservim/nerdcommenter",
         event = "VeryLazy",  -- 在需要时加载，而不是在启动时
         config = function()
             -- 设置 NERDCommenter 的选项
@@ -27,6 +27,8 @@ return
             -- 你也可以为其他模式添加映射
             vim.keymap.set("v", "<F10>", "<plug>NERDCommenterToggle<gv>", { desc = "Toggle comment" })
             vim.keymap.set("v", "<F11>", "<plug>NERDCommenterToggle<gv>", { desc = "Toggle comment" })
+            vim.keymap.del("n", "<Leader>cb")
+            vim.keymap.del("v", "<Leader>cb")
         end,
     },
 }
