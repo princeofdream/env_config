@@ -51,6 +51,10 @@ return {
     },
     {
         "vim-scripts/a.vim",
+        config = function()
+            vim.keymap.del('n', '<leader>is')
+            vim.keymap.del('i', '<leader>is')
+        end,
     },
 
     {

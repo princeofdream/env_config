@@ -78,7 +78,7 @@ return {
                     vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>(ale_next_wrap)", true, true, true))
                 end, { desc = "ALE next wrap" }
             )
-            
+
             -- 可以添加更多键映射
             vim.keymap.set("n", "[v",
                 function()
