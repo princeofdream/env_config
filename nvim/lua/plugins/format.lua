@@ -37,18 +37,19 @@ return {
     {
         'dense-analysis/ale',
         config = function()
-            vim.g.ale_sign_column_always = 1
-            vim.g.ale_set_highlights = 1
+            -- vim.g.ale_sign_column_always = 1
+            -- vim.g.ale_set_highlights = 1
 
             -- 自定义错误和警告的显示文本
             vim.g.ale_echo_msg_error_str = '✗'  -- 错误符号
             vim.g.ale_echo_msg_warning_str = '⚠'  -- 警告符号
             vim.g.ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
+            vim.g.ale_use_neovim_diagnostics_api=0
             vim.g.ale_sign_error = '✗'
             vim.g.ale_sign_warning = '⚠'
             vim.g.ale_statusline_format = {'✗ %d', '⚠ %d', '✔ OK'}
-            -- vim.g.ale_statusline_format = {'%d error(s)', '%d warning(s)', 'OK'}
+            vim.g.ale_statusline_format = {'%d error(s)', '%d warning(s)', 'OK'}
 
             vim.g.ale_ruby_rubocop_auto_correct_all = 1
             vim.g.ale_keep_list_window_open = 1
@@ -57,8 +58,6 @@ return {
             vim.g.ale_set_quickfix = 1
             vim.g.ale_set_loclist_kind = 0
             vim.g.ale_keep_list_window_open = 1
-
-            vim.g.ale_use_neovim_diagnostics_api = 1
 
             vim.g.ale_linters = {
                 ruby = {'rubocop', 'ruby'},
@@ -78,14 +77,12 @@ return {
                     vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>(ale_next_wrap)", true, true, true))
                 end, { desc = "ALE next wrap" }
             )
-
-            -- 可以添加更多键映射
             vim.keymap.set("n", "[v",
                 function()
                     vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>(ale_previous_wrap)", true, true, true))
                 end, { desc = "ALE previous wrap" }
             )
-            vim.cmd("ALEDisable")
+            -- vim.cmd("ALEDisable")
         end,
     },
 }
