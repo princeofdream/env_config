@@ -144,5 +144,7 @@ fi
 
 export BASH_VERSION=$(help |grep -n "[0-9]"|grep bash)
 
+export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
+export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
 
 

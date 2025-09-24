@@ -117,8 +117,8 @@ USE_EXTERN_ROOTFS_USR_LOCAL_ENV=true
 USE_EXTERN_TOOLCHAIN_ENV=true
 USE_EXTERN_ANDROID_ENV=true
 
-USE_EXTERN_LD_PATH_ENV=false
-USE_EXTERN_LD_PATH_USR_ENV=false
+USE_EXTERN_LD_PATH_ENV=true
+USE_EXTERN_LD_PATH_USR_ENV=true
 USE_EXTERN_PKG_PATH_ENV=false
 USE_EXTERN_PKG_PATH_USR_ENV=false
 
@@ -183,6 +183,9 @@ case "${config_system_name}" in
 		;;
 	*"docker"* )
 		config_lsb_release="docker"
+		;;
+	*"Debian"* )
+		config_lsb_release="debian"
 		;;
 esac
 
@@ -490,7 +493,7 @@ fi
 ############# #LD_LIBRARY_PATH env ##################
 if [[ ${LD_LIBRARY_PATH}"" == "" || ${LD_LIBRARY_PATH}"" == "/home"* ]]; then
 	SYSTEM_LD_LIBRARY_PATH="/lib:/lib64:/usr/lib:/usr/lib64:/usr/local/lib:/usr/local/lib64"
-	if [[ ${config_lsb_release}"" == "ubuntu" ]]; then
+	if [[ ${config_lsb_release}"" == "ubuntu" || ${config_lsb_release} == "debian" ]]; then
 		SYSTEM_ARCH=`uname -p`
 		SYSTEM_LD_LIBRARY_PATH="/lib/${SYSTEM_ARCH}-linux-gnu:"$SYSTEM_LD_LIBRARY_PATH
 	fi
