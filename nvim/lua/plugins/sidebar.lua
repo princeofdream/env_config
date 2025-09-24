@@ -4,7 +4,8 @@ return {
         dependencies = { "kyazdani42/nvim-web-devicons" },
         keys = {
             { "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "Toggle File Tree" },
-            { "<F2>", "<cmd>NvimTreeToggle<cr>", desc = "Toggle File Tree" },
+            { "<F2>", "<cmd>NvimTreeFindFileToggle<cr>", desc = "Toggle File Tree" },
+            { "tf", "<cmd>:tabnew<cr>:NvimTreeToggle<cr>", desc = "Toggle File Tree" },
         },
         config = function()
             vim.g.loaded_netrw = 1
@@ -29,6 +30,8 @@ return {
                     enable = true,
                 },
             })
+            local api = require "nvim-tree.api"
+            -- vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
         end,
     },
     -- {
@@ -120,3 +123,4 @@ return {
         end
     }
 }
+
