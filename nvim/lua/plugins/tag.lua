@@ -25,4 +25,11 @@ return {
     --         }
     --     end,
     -- },
+    {
+        -- requires exuberant-ctags to be installed
+        "linrongbin16/gentags.nvim",
+        config = function()
+            require('gentags').setup()
+        end,
+    },
 }

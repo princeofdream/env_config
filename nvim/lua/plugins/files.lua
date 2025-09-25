@@ -63,22 +63,22 @@ return {
     {
         "WolfgangMehner/c-support",
     },
-    {
-        "WolfgangMehner/git-support",
-    },
+    -- {
+    --     "WolfgangMehner/git-support",
+    -- },
     {
         "WolfgangMehner/vim-support",
     },
     {
         "WolfgangMehner/latex-support",
     },
-    {
-        "WolfgangMehner/perl-support",
-    },
+    -- {
+    --     "WolfgangMehner/perl-support",
+    -- },
     {
         "WolfgangMehner/awk-support",
     },
-    {
-        "WolfgangMehner/verilog-support",
-    },
+    -- {
+    --     "WolfgangMehner/verilog-support",
+    -- },
 }
