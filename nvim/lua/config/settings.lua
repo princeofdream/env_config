@@ -48,16 +48,9 @@ else
 end
 
 -- Set encoding to utf-8
-if is_windows() then
-  if vim.fn.has('multi_byte') == 1 then
-    vim.opt.encoding = "utf-8"
-    vim.opt.global.fileencoding = "utf-8"
-    vim.opt.fileencodings = "ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15"
-  end
-else
-  vim.opt.encoding = "utf-8"
-  -- vim.opt.termencoding = "utf-8"
-end
+vim.opt.encoding = "utf-8"
+vim.opt.fileencodings = "ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15"
+-- vim.opt.termencoding = "utf-8"
 -- vim.opt.scriptencoding = "utf-8"
 
 vim.opt.filetype.plugin = "on"
