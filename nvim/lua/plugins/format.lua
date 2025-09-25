@@ -59,18 +59,23 @@ return {
             vim.g.ale_set_loclist_kind = 0
             vim.g.ale_keep_list_window_open = 1
 
+            -- ALE 配置
             vim.g.ale_linters = {
-                ruby = {'rubocop', 'ruby'},
-                lua = {'lua_language_server'},
-                python = {'flake8'},
-                javascript = {'eslint'},
-                c = {"clang"},
-                cxx = {"clang"},
+                c = {'gcc'},
+                cpp = {'clang'},
             }
-            vim.g.ale_fixers = {
-                ['*'] = {'remove_trailing_lines', 'trim_whitespace'},
-                python = {'autopep8', 'isort'},
-            }
+
+            vim.g.ale_c_gcc_options = '-Wno-undef'
+            vim.g.ale_c_clang_options = '-Wno-undef'
+
+            -- vim.g.ale_fixers = {
+            --     c = {'gcc'},
+            --     cpp = {'clang'},
+            -- }
+            -- vim.g.ale_fixers = {
+            --     ['*'] = {'remove_trailing_lines', 'trim_whitespace'},
+            --     python = {'autopep8', 'isort'},
+            -- }
 
             vim.keymap.set("n", "]v",
                 function()
