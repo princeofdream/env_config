@@ -90,5 +90,53 @@ return {
             -- vim.cmd("ALEDisable")
         end,
     },
+    {
+        'Vonr/align.nvim',
+        branch = "v2",
+        lazy = true,
+        init = function()
+            local NS = { noremap = true, silent = true }
+
+            -- vim.keymap.set(
+            --     'x',
+            --     '<leader>,',
+            --     function()
+            --         require'align'.align_to_char({
+            --             length = 1,
+            --         })
+            --     end,
+            --     NS
+            -- )
+            -- Aligns to a string with previews
+            vim.keymap.set(
+                'x',
+                '<leader>=',
+                function()
+                    require'align'.align_to_string({
+                        preview = true,
+                        regex = false,
+                    })
+                end,
+                NS
+            )
+            -- Example gawip to align a paragraph to a string with previews
+            -- vim.keymap.set(
+            --     'n',
+            --     '<leader>]',
+            --     function()
+            --         local a = require'align'
+            --         a.operator(
+            --             a.align_to_string,
+            --             {
+            --                 regex = false,
+            --                 preview = true,
+            --             }
+            --         )
+            --     end,
+            --     NS
+            -- )
+
+        end
+    },
 }
 
