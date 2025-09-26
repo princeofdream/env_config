@@ -59,23 +59,29 @@ return {
             vim.g.ale_set_loclist_kind = 0
             vim.g.ale_keep_list_window_open = 1
 
-            -- ALE 配置
+            -- ALE Config
             vim.g.ale_linters = {
                 c = {'gcc'},
                 cpp = {'clang'},
+                python = {'flake8', 'mypy', 'pylint'},
+                sh = {'shellcheck'},
+                lua = {'luacheck'},
+                -- javascript = {'eslint'},
+                -- typescript = {'eslint'},
+                -- typescriptreact = {'eslint'},
             }
 
-            vim.g.ale_c_gcc_options = '-Wno-undef'
-            vim.g.ale_c_clang_options = '-Wno-undef'
+            vim.g.ale_c_gcc_options     = '-std=c14 -Wno-undef -Wextra -I./include -I./src/include -I./source/include -I./parser/'
+            vim.g.ale_c_clang_options   = '-std=c14 -Wno-undef -Wextra -I./include -I./src/include -I./source/include -I./parser/'
+            vim.g.ale_cpp_gcc_options   = '-std=c14 -Wno-undef -Wextra -I./include -I./src/include -I./source/include -I./parser/'
+            vim.g.ale_cpp_clang_options = '-std=c14 -Wno-undef -Wextra -I./include -I./src/include -I./source/include -I./parser/'
 
-            -- vim.g.ale_fixers = {
-            --     c = {'gcc'},
-            --     cpp = {'clang'},
-            -- }
-            -- vim.g.ale_fixers = {
-            --     ['*'] = {'remove_trailing_lines', 'trim_whitespace'},
-            --     python = {'autopep8', 'isort'},
-            -- }
+            vim.g.ale_fixers = {
+                c = {'gcc'},
+                cpp = {'clang'},
+                ['*'] = {'remove_trailing_lines', 'trim_whitespace'},
+                python = {'autopep8', 'isort'},
+            }
 
             vim.keymap.set("n", "]v",
                 function()
