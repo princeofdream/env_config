@@ -75,18 +75,30 @@ return {
     },
 
     {
-        "kien/rainbow_parentheses.vim",
-        event = "BufRead",
-        config = function()
-            -- vim.g.rainbow#max_file_lines = 1000
-            -- vim.g.rainbow#max_level = 16
-            -- vim.g.rainbow#pairs = { { '(', ')' }, { '[', ']' }, { '{', '}' } }
-            vim.cmd("RainbowParenthesesActivate")
-            vim.cmd("autocmd BufEnter * RainbowParenthesesLoadRound")
-            vim.cmd("autocmd BufEnter * RainbowParenthesesLoadSquare")
-            vim.cmd("autocmd BufEnter * RainbowParenthesesLoadBraces")
-        end,
+        "jiangmiao/auto-pairs",
     },
+    {
+        'HiPhish/rainbow-delimiters.nvim',
+        lazy = false,
+        main = 'rainbow-delimiters.setup',
+        -- opts = {
+        --     blacklist = {'cmake'},
+        -- },
+    },
+    -- {
+    --     "kien/rainbow_parentheses.vim",
+    --     event = "BufRead",
+    --     config = function()
+    --         -- vim.g.rainbow#max_file_lines = 1000
+    --         -- vim.g.rainbow#max_level = 16
+    --         -- vim.g.rainbow#pairs = { { '(', ')' }, { '[', ']' }, { '{', '}' } }
+    --         vim.cmd("RainbowParenthesesActivate")
+    --         -- vim.cmd("autocmd BufEnter * RainbowParenthesesLoadRound")
+    --         vim.cmd("autocmd BufEnter * RainbowParenthesesLoadSquare")
+    --         vim.cmd("autocmd BufEnter * RainbowParenthesesLoadBraces")
+    --     end,
+    -- },
+
     -- Focuspoint
     {
         "chase/focuspoint-vim",
