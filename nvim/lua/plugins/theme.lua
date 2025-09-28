@@ -22,6 +22,25 @@
 
 return {
     {
+        "nvim-treesitter/nvim-treesitter",
+        branch = 'master',
+        lazy = false,
+        build = ":TSUpdate",
+        config = function()
+            require("nvim-treesitter.configs").setup({
+                ensure_installed = { "c", "cpp", "lua", "python", "rust", "javascript", "typescript", "html", "css", "json", "bash", "yaml", "markdown", "markdown_inline" },
+                indent = {
+                    enable = true,
+                },
+                rainbow = {
+                    enable = true,
+                    extended_mode = true,
+                    max_file_lines = nil,
+                },
+            })
+        end,
+    },
+    {
         "princeofdream/gruvcase",
         config = function()
             vim.g.gruvbox_contrast_dark = "soft"
@@ -80,10 +99,23 @@ return {
     {
         'HiPhish/rainbow-delimiters.nvim',
         lazy = false,
-        main = 'rainbow-delimiters.setup',
         -- opts = {
         --     blacklist = {'cmake'},
         -- },
+        config = function()
+            vim.g.rainbow_delimiters = {
+                highlight = {
+                    'RainbowDelimiterRed',
+                    -- 'RainbowDelimiterViolet',
+                    'RainbowDelimiterOrange',
+                    'RainbowDelimiterYellow',
+                    'RainbowDelimiterGreen',
+                    'RainbowDelimiterCyan',
+                    'RainbowDelimiterBlue',
+                    'RainbowDelimiterPurple',
+                },
+            }
+        end,
     },
     -- {
     --     "kien/rainbow_parentheses.vim",
