@@ -30,7 +30,7 @@ return {
             require("nvim-treesitter.configs").setup({
                 ensure_installed = { "c", "cpp", "lua", "python", "rust", "javascript", "typescript", "html", "css", "json", "bash", "yaml", "markdown", "markdown_inline" },
                 indent = {
-                    enable = true,
+                    enable = false,
                 },
                 rainbow = {
                     enable = true,
