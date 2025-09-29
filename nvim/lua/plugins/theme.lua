@@ -331,32 +331,57 @@ return {
                     lualine_a = {
                         {
                             'tabs',
-                            mode = 2,  -- 显示 tab 编号 + 名称
+                            -- mode = 2,  -- 显示 tab 编号 + 名称
+                            mode = 4,
                             tabs_color = {
                                 active = { fg = '#2b2e34', bg = '#c77adb', gui = 'bold' },
                                 inactive = { fg = '#acb3be', bg = '#404652' },
                             },
+                            symbols = {
+                                modified = ' ●',     -- 修改过的缓冲区标记
+                                alternate_file = '#', -- 替代文件标记
+                                directory = '',     -- 目录标记
+                            },
+                            max_length = vim.o.columns * 9 / 10, -- 最大长度，防止 tab 太多时溢出
+                            fmt = function(name)
+                                -- 截断过长的 tab 名称
+                                if #name > 20 then
+                                    return name:sub(1, 17) .. '...'
+                                else
+                                    return name
+                                end
+                            end,
+                            -- padding = 2, -- 左右各加 2 个空格
+                            -- separator = { left = '', right = ''
                         }
 
                     },
                     lualine_b = {},
                     lualine_c = {},
                     lualine_x = {},
-                    lualine_y = {},
-                    lualine_z = {
+                    lualine_y = {
                         {
-                            'buffers',
-                            mode = 4,  -- 显示缓冲区编号 + 名称
-                            symbols = {
-                                modified = ' ●',     -- 修改过的缓冲区标记
-                                alternate_file = '#', -- 替代文件标记
-                                directory = '',     -- 目录标记
-                            },
-                            buffers_color = {
-                                active = { fg = '#2b2e34', bg = '#c77adb', gui = 'bold' },
-                                inactive = { fg = '#acb3be', bg = '#404652' },
-                            },
+                            'filetype',
+                            colored = true, -- Displays filetype icon in color if set to true
+                            icon_only = false, -- Display only an icon for filetype
+                            separator = nil,
+                            padding = { left = 1, right = 0 },
                         }
+                    },
+                    lualine_z = {
+                        -- {
+                        --     'buffers',
+                        --     mode = 4,  -- 显示缓冲区编号 + 名称
+                        --     symbols = {
+                        --         modified = ' ●',     -- 修改过的缓冲区标记
+                        --         alternate_file = '#', -- 替代文件标记
+                        --         directory = '',     -- 目录标记
+                        --     },
+                        --     buffers_color = {
+                        --         active = { fg = '#2b2e34', bg = '#c77adb', gui = 'bold' },
+                        --         inactive = { fg = '#acb3be', bg = '#404652' },
+                        --     },
+                        -- }
                     },
                 },
                 winbar = {
