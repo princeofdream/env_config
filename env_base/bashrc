@@ -173,7 +173,8 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 export SDL_IM_MODULE=fcitx
-
+export ANTHROPIC_AUTH_TOKEN=cr_ff7611b39b10330012e0fe345e555b418c91d26112fe568b8a931f824e3fa0f3
+export ANTHROPIC_BASE_URL="https://us023mawewtpuvtlh.imds.ai/api"
 
 . "$HOME/.cargo/env"
 
