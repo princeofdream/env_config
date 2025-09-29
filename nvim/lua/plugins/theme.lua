@@ -322,12 +322,43 @@ return {
                 inactive_sections = {
                     lualine_a = {"mode"},
                     lualine_b = {},
-                    lualine_c = {'filename'},
+                    lualine_c = {{'filename', path = 1}},
                     lualine_x = {'location'},
                     lualine_y = {},
                     lualine_z = {}
                 },
-                tabline = {},
+                tabline = {
+                    lualine_a = {
+                        {
+                            'tabs',
+                            mode = 2,  -- 显示 tab 编号 + 名称
+                            tabs_color = {
+                                active = { fg = '#2b2e34', bg = '#c77adb', gui = 'bold' },
+                                inactive = { fg = '#acb3be', bg = '#404652' },
+                            },
+                        }
+
+                    },
+                    lualine_b = {},
+                    lualine_c = {},
+                    lualine_x = {},
+                    lualine_y = {},
+                    lualine_z = {
+                        {
+                            'buffers',
+                            mode = 4,  -- 显示缓冲区编号 + 名称
+                            symbols = {
+                                modified = ' ●',     -- 修改过的缓冲区标记
+                                alternate_file = '#', -- 替代文件标记
+                                directory = '',     -- 目录标记
+                            },
+                            buffers_color = {
+                                active = { fg = '#2b2e34', bg = '#c77adb', gui = 'bold' },
+                                inactive = { fg = '#acb3be', bg = '#404652' },
+                            },
+                        }
+                    },
+                },
                 winbar = {},
                 inactive_winbar = {},
                 extensions = {}
