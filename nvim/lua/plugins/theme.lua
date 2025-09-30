@@ -336,6 +336,8 @@ return {
                             tabs_color = {
                                 active = { fg = '#2b2e34', bg = '#c77adb', gui = 'bold' },
                                 inactive = { fg = '#acb3be', bg = '#404652' },
+                                -- active = 'lualine_{section}_normal',     -- Color for active tab.
+                                -- inactive = 'lualine_{section}_inactive', -- Color for inactive tab.
                             },
                             symbols = {
                                 modified = ' ●',     -- 修改过的缓冲区标记
@@ -390,7 +392,22 @@ return {
                     lualine_c = {{'filename', path = 1}},
                     lualine_x = {},
                     lualine_y = {},
-                    lualine_z = {'location'}
+                    lualine_z = {
+                        {
+                            'buffers',
+                            mode = 4,  -- 显示缓冲区编号 + 名称
+                            symbols = {
+                                modified = ' ●',     -- 修改过的缓冲区标记
+                                alternate_file = '#', -- 替代文件标记
+                                directory = '',     -- 目录标记
+                            },
+                            buffers_color = {
+                                active = { fg = '#2b2e34', bg = '#c77adb', gui = 'bold' },
+                                inactive = { fg = '#acb3be', bg = '#404652' },
+                            },
+                            max_length = vim.o.columns * 2 / 5,
+                        }
+                    }
                 },
                 inactive_winbar = {
                     lualine_a = {},
@@ -398,7 +415,8 @@ return {
                     lualine_c = {{'filename', path = 1}},
                     lualine_x = {},
                     lualine_y = {},
-                    lualine_z = {'location'}
+                    lualine_z = {
+                    }
                 },
                 extensions = {}
             }
