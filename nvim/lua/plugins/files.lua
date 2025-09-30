@@ -22,6 +22,14 @@ return {
                             ["<C-u>"] = false,
                         },
                     },
+                    mappings = {
+                        i = {
+                            ["<C-d>"] = "delete_buffer",  -- 在插入模式下按 Ctrl+w 删除 buffer
+                        },
+                        n = {
+                            ["<C-d>"] = "delete_buffer",  -- 在普通模式下按 Ctrl+w 删除 buffer
+                        },
+                    },
                 },
             }
         end
