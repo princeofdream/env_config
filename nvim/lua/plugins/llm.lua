@@ -19,6 +19,35 @@ return {
         config = function()
             -- vim.g.vim_ai_debug = 1
             -- vim.g.vim_ai_debug_log_file = vim.env.HOME .. "/.config/nvim/logs/ai/vim-ai.log"
+            vim.g.vim_ai_chat = {
+                provider = "openai",
+                prompt = "you are a professional code assistant, help me write code and explain code",
+                options = {
+                    model = "gpt-4o",
+                    endpoint_url = "http://chat.gxatek.com/api/azure/deployments/gpt-4o/chat/completions",
+                    max_tokens = 0,
+                    max_completion_tokens = 0,
+                    temperature = 0.1,
+                    request_timeout = 20,
+                    stream = 1,
+                    auth_type = "bearer",
+                    token_file_path = "",
+                    token_load_fn = "",
+                    selection_boundary = "#####",
+                    frequency_penalty = "",
+                    logit_bias = "",
+                    logprobs = "",
+                    presence_penalty = "",
+                    reasoning_effort = "",
+                    seed = "",
+                    stop = "",
+                    top_logprobs = "",
+                    top_p = "",
+                },
+                ui = {
+                    paste_mode = 1,
+                },
+            }
         end,
     },
     {
