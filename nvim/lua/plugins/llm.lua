@@ -30,7 +30,7 @@ return {
                     temperature = 0.1,
                     request_timeout = 20,
                     stream = 1,
-                    auth_type = "bearer",
+                    auth_type = "none",
                     token_file_path = "",
                     token_load_fn = "",
                     selection_boundary = "#####",
