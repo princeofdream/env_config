@@ -31,5 +31,9 @@ require("lazy").setup({
   -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
-  checker = { enabled = true },
+  checker = {
+      enabled = true,
+      notify = true, -- get a notification when new updates are found
+      frequency = 86400 * 30, -- check for updates every month
+  },
 })
