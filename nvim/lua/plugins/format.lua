@@ -164,5 +164,43 @@ return {
         config = function()
         end
     },
+    {
+        "davidhalter/jedi-vim",
+        init = function()
+            vim.g.jedi_completions_enabled = 1
+            vim.g.jedi_use_tabs_not_buffers = 1
+            vim.g.jedi_show_call_signatures = "1"
+            vim.g.jedi_popup_on_dot = 1
+            vim.g.jedi_popup_select_first = 0
+            vim.g.jedi_auto_initialization = 1
+            vim.g.jedi_goto_command = "<leader>j"
+            vim.g.jedi_goto_assignments_command = "<leader>J"
+            vim.g.jedi_goto_definition_command = "<leader>gd"
+            vim.g.jedi_goto_definition_split_command = "<leader>gD"
+            vim.g.jedi_goto_definition_tab_command = "<leader>gt"
+            vim.g.jedi_goto_assignments_split_command = "<leader>gS"
+            vim.g.jedi_goto_assignments_tab_command = "<leader>gT"
+            vim.g.jedi_goto_assignments_first_command = "<leader>gA"
+            vim.g.jedi_goto_assignments_first_split_command = "<leader>gF"
+            vim.g.jedi_goto_assignments_first_tab_command = "<leader>gH"
+            vim.g.jedi_rename_command = "<leader>r"
+            vim.g.jedi_usages_command = "<leader>u"
+            vim.g.jedi_usages_split_command = "<leader>U"
+            vim.g.jedi_usages_tab_command = "<leader>v"
+            vim.g.jedi_show_documentation_command = "<leader>K"
+            vim.g.jedi_show_documentation_split_command = "<leader>k"
+            vim.g.jedi_show_documentation_tab_command = "<leader>l"
+            vim.g.jedi_show_help_command = "<leader>?"
+            vim.g.jedi_show_help_split_command = "<leader>/"
+            vim.g.jedi_show_help_tab_command = "<leader>!"
+        end
+    },
+    {
+        "lepture/vim-jinja",
+        ft = { "jinja", "jinja.html", "html.jinja", "htmldjango" },
+        init = function()
+            vim.g.jinja_syntax_conceal = 0
+        end
+    }
 }
 
