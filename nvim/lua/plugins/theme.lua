@@ -347,8 +347,8 @@ return {
                             max_length = vim.o.columns * 9 / 10, -- 最大长度，防止 tab 太多时溢出
                             fmt = function(name)
                                 -- 截断过长的 tab 名称
-                                if #name > 20 then
-                                    return name:sub(1, 17) .. '...'
+                                if #name > 30 then
+                                    return name:sub(1, 27) .. '...'
                                 else
                                     return name
                                 end
