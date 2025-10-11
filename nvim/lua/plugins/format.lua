@@ -164,30 +164,43 @@ return {
         config = function()
         end
     },
-    -- {
-    --     "davidhalter/jedi-vim",
-    --     config = function()
-    --         -- 禁用jedi-vim的文档快捷键
-    --         vim.g.jedi_documentation_command = ""
-    --         -- 禁用所有jedi-vim的快捷键
-    --         vim.g.jedi_auto_initialization = 1
-    --         vim.g.jedi_completions_enabled = 0
-    --         vim.g.jedi_show_call_signatures = "1"
-    --         vim.g.jedi_smart_auto_mappings = 0
-    --         vim.g.jedi_popup_on_dot = 0
-    --         vim.g.jedi_popup_select_first = 0
-    --         vim.g.jedi_no_mappings = 1
-    --         vim.g.jedi_no_auto_start = 1
-    --         vim.g.jedi_no_auto_start = 1
-    --         vim.g.jedi_no_auto_start = 1
-    --         vim.g.jedi_no_auto_start = 1
-    --     end
-    -- },
-    -- {
-    --     "davidhalter/jedi",
-    --     build = "python -m pip install --upgrade .",
-    --     ft = { "python" },
-    -- },
+    {
+        "davidhalter/jedi-vim",
+        config = function()
+            -- 禁用jedi-vim的文档快捷键
+            vim.g["jedi#documentation_command"] = ""
+            vim.g["jede#use_tabs_not_buffers"] = 1
+            vim.g["jede#show_call_signatures"] = "1"
+            vim.g["jede#popup_on_dot"] = 1
+            vim.g["jede#popup_select_first"] = 0
+            vim.g["jede#auto_initialization"] = 1
+            vim.g["jede#goto_command"] = "<leader>j"
+            vim.g["jede#goto_assignments_command"] = "<leader>J"
+            vim.g["jede#goto_definition_command"] = "<leader>gd"
+            vim.g["jede#goto_definition_split_command"] = "<leader>gD"
+            vim.g["jede#goto_definition_tab_command"] = "<leader>gt"
+            vim.g["jede#goto_assignments_split_command"] = "<leader>gS"
+            vim.g["jede#goto_assignments_tab_command"] = "<leader>gT"
+            vim.g["jede#goto_assignments_first_command"] = "<leader>gA"
+            vim.g["jede#goto_assignments_first_split_command"] = "<leader>gF"
+            vim.g["jede#goto_assignments_first_tab_command"] = "<leader>gH"
+            vim.g["jede#rename_command"] = "<leader>r"
+            vim.g["jede#usages_command"] = "<leader>u"
+            vim.g["jede#usages_split_command"] = "<leader>U"
+            vim.g["jede#usages_tab_command"] = "<leader>v"
+            vim.g["jede#show_documentation_command"] = "<leader>K"
+            vim.g["jede#show_documentation_split_command"] = "<leader>k"
+            vim.g["jede#show_documentation_tab_command"] = "<leader>l"
+            vim.g["jede#show_help_command"] = "<leader>?"
+            vim.g["jede#show_help_split_command"] = "<leader>/"
+            vim.g["jede#show_help_tab_command"] = "<leader>!"
+        end
+    },
+    {
+        "davidhalter/jedi",
+        build = "python -m pip install --upgrade .",
+        ft = { "python" },
+    },
     {
         "ivanov/vim-ipython",
         ft = { "python" },
