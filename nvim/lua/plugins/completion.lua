@@ -49,7 +49,6 @@ return {
     -- lua/plugins/leaderf.lua
     {
         "Yggdroot/LeaderF",
-        -- dependencies = { "Yggdroot/LeaderF-Coc" },
         keys = {
             { "<C-p>"     , "<cmd>Leaderf file<cr>", desc = "Find file" },
             { "<leader>ff", "<cmd>Leaderf file<cr>", desc = "Find file" },
