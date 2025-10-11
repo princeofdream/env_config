@@ -262,52 +262,94 @@ return {
         event = 'VeryLazy',
         config = function()
             local colors = {
-                blue   = '#80a0ff',
+                -- blue   = '#80a0ff',
+                blue   = '#63b0ed',
                 cyan   = '#79dac8',
                 black  = '#080808',
                 white  = '#c6c6c6',
                 red    = '#ff5189',
                 violet = '#d183e8',
                 grey   = '#303030',
+                gray       = '#44475a',
+                lightgray  = '#5f6a8e',
+                orange     = '#ffb86c',
+                purple     = '#bd93f9',
+                yellow     = '#f1fa8c',
+                green      = '#50fa7b',
+                -- lightgreen = '#a6e22e',
+                lightgreen = '#baed63',
+                lightyellow = '#ffffa5',
+                -- red        = '#ff5555',
+                -- white      = '#f8f8f2',
+                -- black      = '#282a36',
             }
 
-            local bubbles_theme = {
-                normal = {
-                    a = { fg = colors.black, bg = colors.violet },
-                    b = { fg = colors.white, bg = colors.grey },
-                    c = { fg = colors.white },
-                },
-
-                insert = { a = { fg = colors.black, bg = colors.blue } },
-                visual = { a = { fg = colors.black, bg = colors.cyan } },
-                replace = { a = { fg = colors.black, bg = colors.red } },
-
-                inactive = {
-                    a = { fg = colors.white, bg = colors.black },
-                    b = { fg = colors.white, bg = colors.black },
-                    c = { fg = colors.white },
-                },
-            }
             local gruvcase = {
                 normal = {
-                    a = { fg = colors.black, bg = colors.violet },
-                    b = { fg = colors.white, bg = colors.grey },
-                    c = { fg = colors.white },
+                    a = { bg = colors.purple, fg = colors.black, gui = 'bold' },
+                    b = { bg = colors.lightyellow, fg = colors.black },
+                    c = { bg = colors.gray, fg = colors.white },
+                },
+                insert = {
+                    a = { bg = colors.lightgreen, fg = colors.black, gui = 'bold' },
+                    b = { bg = colors.lightgray, fg = colors.white },
+                    c = { bg = colors.gray, fg = colors.white },
+                },
+                visual = {
+                    a = { bg = colors.yellow, fg = colors.black, gui = 'bold' },
+                    b = { bg = colors.lightgray, fg = colors.white },
+                    c = { bg = colors.gray, fg = colors.white },
+                },
+                replace = {
+                    a = { bg = colors.red, fg = colors.black, gui = 'bold' },
+                    b = { bg = colors.lightgray, fg = colors.white },
+                    c = { bg = colors.gray, fg = colors.white },
+                },
+                command = {
+                    a = { bg = colors.orange, fg = colors.black, gui = 'bold' },
+                    b = { bg = colors.lightgray, fg = colors.white },
+                    c = { bg = colors.gray, fg = colors.white },
+                },
+                inactive = {
+                    a = { bg = colors.gray, fg = colors.white, gui = 'bold' },
+                    b = { bg = colors.gray, fg = colors.white },
+                    c = { bg = colors.gray, fg = colors.white },
                 },
             }
 
             require('lualine').setup {
                 options = {
-                    icons_enabled = true,
-                    -- theme = 'auto',
+                    -- theme = 'codedark',
+                    -- theme = 'dracula',
+                    -- theme = 'everforest',
+                    -- theme = 'gruvbox_dark',
+                    -- theme = 'gruvbox_light',
                     -- theme = 'gruvbox',
-                    theme = 'dracula',
-                    -- theme = 'onedark',
-                    -- theme = bubbles_theme,
-                    -- theme = gruvcase,
+                    -- theme = 'gruvbox-material',
+                    -- -- theme = 'horizon',
+                    -- theme = 'iceberg_dark',
+                    -- theme = 'iceberg_light',
+                    -- theme = 'iceberg',
+                    -- theme = 'jellybeans',
+                    -- theme = 'material',
+                    -- theme = 'modus-vivendi',
+                    -- theme = 'moonfly',
+                    -- theme = 'OceanicNext',
+                    -- theme = 'palenight',
+                    -- theme = 'solarized_dark',
+                    -- theme = 'solarized_light',
+                    -- theme = 'solarized',
+                    -- theme = 'Tomorrow',
+                    -- theme = 'tomorrow_night',
+                    -- theme = 'wombat',
+
+                    -- theme = 'dracula',
+                    theme = gruvcase,
                     -- component_separators = '',
                     section_separators = { left = '', right = '' },
                     component_separators = { left = '', right = ''},
+                     icons_enabled = true,
+
                     -- section_separators = { left = '', right = ''},
                     -- disabled_filetypes = {
                     --     statusline = {},
@@ -408,8 +450,8 @@ return {
                     lualine_y = {
                         {
                             'filetype',
-                            colored = true, -- Displays filetype icon in color if set to true
-                            icon_only = false, -- Display only an icon for filetype
+                            colored = true,
+                            icon_only = false,
                             separator = nil,
                             padding = { left = 1, right = 0 },
                         }
@@ -441,6 +483,7 @@ return {
                     lualine_b = {
                         {
                             'filetype',
+                            colored = true,
                             icon_only = false,
                             -- color = { bg = 'grey'},
                             -- color = { bg = '#63b0ed'},
