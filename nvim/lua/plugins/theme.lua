@@ -318,22 +318,22 @@ return {
                     always_show_tabline = true,
                     globalstatus = false,
                     refresh = {
-                    statusline = 1000,
-                    tabline = 1000,
-                    winbar = 1000,
-                    refresh_time = 16, -- ~60fps
-                    events = {
-                        'WinEnter',
-                        'BufEnter',
-                        'BufWritePost',
-                        'SessionLoadPost',
-                        'FileChangedShellPost',
-                        'VimResized',
-                        'Filetype',
-                        'CursorMoved',
-                        'CursorMovedI',
-                        'ModeChanged',
-                    },
+                        statusline = 1000,
+                        tabline = 1000,
+                        winbar = 1000,
+                        refresh_time = 16, -- ~60fps
+                        events = {
+                            'WinEnter',
+                            'BufEnter',
+                            'BufWritePost',
+                            'SessionLoadPost',
+                            'FileChangedShellPost',
+                            'VimResized',
+                            'Filetype',
+                            'CursorMoved',
+                            'CursorMovedI',
+                            'ModeChanged',
+                        },
                     }
                 },
                 sections = {
@@ -386,7 +386,9 @@ return {
                                 alternate_file = '#', -- 替代文件标记
                                 directory = '',     -- 目录标记
                             },
-                            max_length = vim.o.columns * 9 / 10, -- 最大长度，防止 tab 太多时溢出
+                            max_length = function()
+                                return vim.o.columns * 9 / 10
+                            end,
                             fmt = function(name)
                                 -- 截断过长的 tab 名称
                                 if #name > 30 then
@@ -462,7 +464,10 @@ return {
                             --     active = { fg = '#2b2e34', bg = '#cccccc', gui = 'bold' },
                             --     inactive = { fg = '#acb3be', bg = '#404652' },
                             -- },
-                            max_length = vim.o.columns * 2 / 5,
+                            -- max_length = vim.o.columns * 1 / 4,
+                            max_length = function()
+                                return vim.api.nvim_win_get_width(0) * 3 / 5
+                            end,
                         },
                     },
                     lualine_z = {
