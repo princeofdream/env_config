@@ -267,10 +267,10 @@ return {
                     theme = 'auto',
                     component_separators = { left = '', right = ''},
                     section_separators = { left = '', right = ''},
-                    disabled_filetypes = {
-                        statusline = {},
-                        winbar = {},
-                    },
+                    -- disabled_filetypes = {
+                    --     statusline = {},
+                    --     winbar = {},
+                    -- },
                     ignore_focus = {},
                     always_divide_middle = true,
                     always_show_tabline = true,
@@ -387,9 +387,25 @@ return {
                     },
                 },
                 winbar = {
-                    lualine_a = {},
-                    lualine_b = {},
-                    lualine_c = {{'filename', path = 1}},
+                    lualine_a = {
+                        {
+                            'filename', path = 1,
+                            -- color = { fg = '#323232', bg = '#63b0ed'},
+                            -- color = { bg = '#63b0ed'},
+                        }
+                    },
+                    lualine_b = {
+                        {
+                            'filetype',
+                            icon_only = false,
+                            -- color = { bg = 'grey'},
+                            -- color = { bg = '#63b0ed'},
+                            -- separator = nil,
+                            padding = { left = 1, right = 1 },
+                        }
+                    },
+                    lualine_c = {
+                    },
                     lualine_x = {},
                     lualine_y = {},
                     lualine_z = {
@@ -402,17 +418,26 @@ return {
                                 directory = '',     -- 目录标记
                             },
                             buffers_color = {
-                                active = { fg = '#2b2e34', bg = '#c77adb', gui = 'bold' },
+                                active = { fg = '#2b2e34', bg = '#cccccc', gui = 'bold' },
                                 inactive = { fg = '#acb3be', bg = '#404652' },
                             },
                             max_length = vim.o.columns * 2 / 5,
+                        },
+                        {
+                            'mode',
+                            icons_enabled = true,
+                            -- color = { fg = '#ffffff', bg = '#cccc00', gui = 'bold' },
                         }
                     }
                 },
                 inactive_winbar = {
                     lualine_a = {},
                     lualine_b = {},
-                    lualine_c = {{'filename', path = 1}},
+                    lualine_c = {
+                        {
+                            'filename', path = 1,
+                        }
+                    },
                     lualine_x = {},
                     lualine_y = {},
                     lualine_z = {
