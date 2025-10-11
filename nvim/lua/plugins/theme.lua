@@ -261,12 +261,54 @@ return {
         'nvim-lualine/lualine.nvim',
         event = 'VeryLazy',
         config = function()
+            local colors = {
+                blue   = '#80a0ff',
+                cyan   = '#79dac8',
+                black  = '#080808',
+                white  = '#c6c6c6',
+                red    = '#ff5189',
+                violet = '#d183e8',
+                grey   = '#303030',
+            }
+
+            local bubbles_theme = {
+                normal = {
+                    a = { fg = colors.black, bg = colors.violet },
+                    b = { fg = colors.white, bg = colors.grey },
+                    c = { fg = colors.white },
+                },
+
+                insert = { a = { fg = colors.black, bg = colors.blue } },
+                visual = { a = { fg = colors.black, bg = colors.cyan } },
+                replace = { a = { fg = colors.black, bg = colors.red } },
+
+                inactive = {
+                    a = { fg = colors.white, bg = colors.black },
+                    b = { fg = colors.white, bg = colors.black },
+                    c = { fg = colors.white },
+                },
+            }
+            local gruvcase = {
+                normal = {
+                    a = { fg = colors.black, bg = colors.violet },
+                    b = { fg = colors.white, bg = colors.grey },
+                    c = { fg = colors.white },
+                },
+            }
+
             require('lualine').setup {
                 options = {
                     icons_enabled = true,
-                    theme = 'auto',
+                    -- theme = 'auto',
+                    -- theme = 'gruvbox',
+                    theme = 'dracula',
+                    -- theme = 'onedark',
+                    -- theme = bubbles_theme,
+                    -- theme = gruvcase,
+                    -- component_separators = '',
+                    section_separators = { left = '', right = '' },
                     component_separators = { left = '', right = ''},
-                    section_separators = { left = '', right = ''},
+                    -- section_separators = { left = '', right = ''},
                     -- disabled_filetypes = {
                     --     statusline = {},
                     --     winbar = {},
@@ -333,12 +375,12 @@ return {
                             'tabs',
                             -- mode = 2,  -- 显示 tab 编号 + 名称
                             mode = 4,
-                            tabs_color = {
-                                active = { fg = '#2b2e34', bg = '#c77adb', gui = 'bold' },
-                                inactive = { fg = '#acb3be', bg = '#404652' },
-                                -- active = 'lualine_{section}_normal',     -- Color for active tab.
-                                -- inactive = 'lualine_{section}_inactive', -- Color for inactive tab.
-                            },
+                            -- tabs_color = {
+                            --     active = { fg = '#2b2e34', bg = '#c77adb', gui = 'bold' },
+                            --     inactive = { fg = '#acb3be', bg = '#404652' },
+                            --     -- active = 'lualine_{section}_normal',     -- Color for active tab.
+                            --     -- inactive = 'lualine_{section}_inactive', -- Color for inactive tab.
+                            -- },
                             symbols = {
                                 modified = ' ●',     -- 修改过的缓冲区标记
                                 alternate_file = '#', -- 替代文件标记
@@ -407,8 +449,7 @@ return {
                     lualine_c = {
                     },
                     lualine_x = {},
-                    lualine_y = {},
-                    lualine_z = {
+                    lualine_y = {
                         {
                             'buffers',
                             mode = 4,  -- 显示缓冲区编号 + 名称
@@ -417,12 +458,14 @@ return {
                                 alternate_file = '#', -- 替代文件标记
                                 directory = '',     -- 目录标记
                             },
-                            buffers_color = {
-                                active = { fg = '#2b2e34', bg = '#cccccc', gui = 'bold' },
-                                inactive = { fg = '#acb3be', bg = '#404652' },
-                            },
+                            -- buffers_color = {
+                            --     active = { fg = '#2b2e34', bg = '#cccccc', gui = 'bold' },
+                            --     inactive = { fg = '#acb3be', bg = '#404652' },
+                            -- },
                             max_length = vim.o.columns * 2 / 5,
                         },
+                    },
+                    lualine_z = {
                         {
                             'mode',
                             icons_enabled = true,
