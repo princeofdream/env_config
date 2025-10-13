@@ -84,8 +84,6 @@ local function vim_set_custom_cursorline()
     -- vim.api.nvim_set_hl(0, "CursorColumn", { cterm = NONE, ctermbg = "darkred", ctermfg = "white", guibg = "darkred", guifg = "white" })
 end
 
-vim.cmd("colorscheme gruvcase")
-
 -- Toggle mouse function
 function ToggleMouse()
     -- check if mouse is enabled
