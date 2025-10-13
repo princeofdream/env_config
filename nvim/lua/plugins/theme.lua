@@ -22,25 +22,6 @@
 
 return {
     {
-        "nvim-treesitter/nvim-treesitter",
-        branch = 'master',
-        lazy = false,
-        build = ":TSUpdate",
-        config = function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = { "c", "cpp", "lua", "python", "rust", "javascript", "typescript", "html", "css", "json", "bash", "yaml", "markdown", "markdown_inline" },
-                indent = {
-                    enable = false,
-                },
-                rainbow = {
-                    enable = true,
-                    extended_mode = true,
-                    max_file_lines = nil,
-                },
-            })
-        end,
-    },
-    {
         "princeofdream/gruvcase",
         config = function()
             vim.g.gruvbox_contrast_dark = "soft"

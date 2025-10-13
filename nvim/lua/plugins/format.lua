@@ -214,13 +214,39 @@ return {
         --     }
         -- end
     },
-    -- {
-    --     "lepture/vim-jinja",
-    --     ft = { "jinja", "jinja.html", "html.jinja", "htmldjango" },
-    --     init = function()
-    --         vim.g.jinja_syntax_conceal = 0
-    --     end
-    -- },
+    {
+        "nvim-treesitter/nvim-treesitter",
+        branch = 'master',
+        lazy = false,
+        build = ":TSUpdate",
+        config = function()
+            require("nvim-treesitter.configs").setup({
+                ensure_installed = {
+                    "c", "cpp", "lua", "python", "rust",
+                    "javascript", "typescript",
+                    "html", "css", "json",
+                    "bash", "yaml",
+                    "markdown", "markdown_inline",
+                    "vim", "vimdoc",
+                    "diff", "gitignore", "gitattributes", "gitcommit",
+                    "java", "go", "cmake", "make", "dockerfile",
+                    "regex", "jinja", "toml", "ini", "jinja_inline",
+                },
+                indent = {
+                    enable = false,
+                },
+                rainbow = {
+                    enable = true,
+                    extended_mode = true,
+                    max_file_lines = nil,
+                },
+                highlight = {
+                    enable = false,
+                    additional_vim_regex_highlighting = false,
+                },
+            })
+        end,
+    },
     {
         "sheerun/vim-polyglot",
         init = function()
