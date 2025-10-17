@@ -1,20 +1,5 @@
 return {
     {
-        "Kurama622/llm.nvim",
-        dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim"},
-        cmd = { "LLMSessionToggle", "LLMSelectedTextHandler", "LLMAppHandler" },
-        config = function()
-            require("llm").setup({
-            url = "http://chat.gxatek.com/api/azure/deployments/gpt-4o/chat/completions",
-            model = "gpt-4o",
-            api_type = "openai"
-            })
-        end,
-        keys = {
-            { "<leader>ac", mode = "n", "<cmd>LLMSessionToggle<cr>" },
-        },
-    },
-    {
         "madox2/vim-ai",
         config = function()
             -- vim.g.vim_ai_debug = 1
@@ -85,8 +70,28 @@ return {
         end,
     },
     {
+        "Kurama622/llm.nvim",
+        dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim"},
+        cmd = { "LLMSessionToggle", "LLMSelectedTextHandler", "LLMAppHandler" },
+        config = function()
+            require("llm").setup({
+            url = "http://chat.gxatek.com/api/azure/deployments/gpt-4o/chat/completions",
+            model = "gpt-4o",
+            api_type = "openai"
+            })
+        end,
+        keys = {
+            { "<leader>ac", mode = "n", "<cmd>LLMSessionToggle<cr>" },
+        },
+    },
+    {
         "github/copilot.vim",
         config = function()
         end,
-    }
+    },
+    {
+        "ggml-org/llama.vim",
+        config = function()
+        end,
+    },
 }
