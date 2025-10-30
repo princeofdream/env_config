@@ -463,6 +463,7 @@ ndk_path=$HOME/envx/toolchain/ndk/android-ndk
 ndk_llvm_path=${ndk_path}/toolchains/llvm/prebuilt/linux-x86_64
 if [[ -e ${ndk_path} ]]; then
 	export NDK=${ndk_path}
+	export ANDROID_NDK=${ndk_path}
 	append_path_priority_env ${ndk_llvm_path}/bin
 	append_path_priority_env ${ndk_llvm_path}/bin
 fi
