@@ -134,8 +134,6 @@ PATH_TOOLCHAIN_BASE=$HOME/envx/toolchain
 PATH_TOOLCHAIN_GCC_BASE=$PATH_TOOLCHAIN_BASE/gcc
 PATH_TOOLCHAIN_JDK_BASE=$PATH_TOOLCHAIN_BASE/jdk
 
-PATH_WEB_BASE=$HOME/envx/web_base
-
 PATH_ENV_ROOTFS_BASE=$HOME/envx/env_rootfs
 # config_lsb_release=$(lsb_release -i 2>/dev/null |awk -F ':' '{print $2}'| sed -e 's/^[ \t]*//g')
 # config_lsb_release=${config_lsb_release,,}
@@ -196,6 +194,7 @@ if [[ "${config_lsb_release}" == "" ]]; then
 else
 	PATH_ENV_ROOTFS_BASE=$HOME/envx/env_rootfs_${config_lsb_release}
 fi
+PATH_WEB_BASE=${PATH_ENV_ROOTFS_BASE}/webbase
 
 case "${config_system_type}" in
 	linux )
