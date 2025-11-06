@@ -151,6 +151,10 @@ return {
         "APZelos/blamer.nvim",
         dependencies = "nvim-lua/plenary.nvim",
         event = "BufReadPost",  -- 在缓冲区读取后加载
+        init = function()
+            vim.g.blamer_date_format = "%Y-%m-%d %H:%M"
+            vim.g.blamer_template = '<author>, <author-time> • <summary>'  -- 设置显示模板
+        end,
         config = function()
             -- 配置 blamer.nvim
             vim.g.blamer_enabled = 0  -- 启用插件
