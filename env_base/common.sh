@@ -773,6 +773,10 @@ alias s.py3='s_py3'
 alias s.go='s_go'
 # alias tmux='pmux'
 
+function gerrit.push() {
+    git push origin HEAD:refs/for/$@
+}
+
 utils_find_c ()
 {
 	f_param=$@
