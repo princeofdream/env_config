@@ -774,6 +774,25 @@ alias s.go='s_go'
 # alias tmux='pmux'
 
 function gerrit.push() {
+    if [[ "$#" -lt 1 ]]; then
+        git_branch=$(git rev-parse --abbrev-ref HEAD)
+        if [[ $? -ne 0 ]]; then
+            echo "Not a git repository."
+            return 1
+        elif [[ "$git_branch" == "HEAD" ]]; then
+            echo "You are in a detached HEAD state. Please specify the target branch."
+            return 1
+        elif [[ "$git_branch" == "" ]]; then
+            echo "Could not determine the current branch. Please specify the target branch."
+            return 1
+        else
+            echo "git push origin HEAD:refs/for/$git_branch"
+            git push origin HEAD:refs/for/$git_branch
+            return $?
+        fi
+    fi
+
+    echo "git push origin HEAD:refs/for/$@"
     git push origin HEAD:refs/for/$@
 }
 
