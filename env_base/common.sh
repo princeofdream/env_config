@@ -302,6 +302,7 @@ case "${config_system_type}" in
 	msys | "mingw"* | "ms-linux" )
 		ORIGIN_PATH=${ORIGIN_PATH//\ /_}
 		ORIGIN_PATH=${ORIGIN_PATH// /_}
+		PATH=${PATH// /\\ }
 		;;
 esac
 
@@ -750,8 +751,8 @@ s_go ()
 }	# ----------  end of function s_go  ----------
 
 ############# #sudo env ##################
-alias sudo='sudo env PATH=$PATH SIMPLE_COLOR=${SIMPLE_COLOR} LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SYSTEM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_SYSTEM_FIRST TERM=xterm'
-alias sdo='sudo env PATH=$PATH SIMPLE_COLOR=${SIMPLE_COLOR} LD_LIBRARY_PATH=$LD_LIBRARY_PATH_CUSTOM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_CUSTOM_FIRST TERM=xterm'
+alias sudo='sudo env PATH=${PATH// /\_} SIMPLE_COLOR=${SIMPLE_COLOR} LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SYSTEM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_SYSTEM_FIRST TERM=xterm'
+alias sdo='sudo env PATH=${PATH// /\_} SIMPLE_COLOR=${SIMPLE_COLOR} LD_LIBRARY_PATH=$LD_LIBRARY_PATH_CUSTOM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_CUSTOM_FIRST TERM=xterm'
 alias yum='env LD_LIBRARY_PATH=$LD_LIBRARY_PATH_SYSTEM_FIRST PKG_CONFIG_PATH=$PKG_CONFIG_PATH_SYSTEM_FIRST yum'
 
 alias rq='PROMPT_COMMAND="_update_ps1"'
@@ -1173,5 +1174,4 @@ export LLM_KEY=NONE
 #### because makefile will use local include instead of /usr/include
 # export C_INCLUDE_PATH
 # export CPLUS_INCLUDE_PATH
-
 

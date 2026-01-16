@@ -199,3 +199,4 @@ esac
 # pnpm end
 
 export PATH="$PATH:/home/lijin/.local/bin"
+
