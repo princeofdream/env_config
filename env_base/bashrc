@@ -174,6 +174,24 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 export SDL_IM_MODULE=fcitx
 
+qt6_lib_path=$(ldconfig -p 2>/dev/null | grep "libQt6Core.so.6" | head -1 | awk '{print $NF}')
+if [ ! -f "$qt6_lib_path" ]; then
+	for qt6_path in "/usr/lib/x86_64-linux-gnu/libQt6Core.so.6" "/lib/x86_64-linux-gnu/libQt6Core.so.6" "/usr/lib/libQt6Core.so.6"; do
+		if [ -f "$qt6_path" ]; then
+			qt6_lib_path="$qt6_path"
+			break
+		fi
+	done
+fi
+if [ -f "$qt6_lib_path" ]; then
+	qt_version=$(strings "$qt6_lib_path" 2>/dev/null | grep -E "Qt [0-9]+\.[0-9]+\.[0-9]+" | head -1 | sed 's/.*Qt \([0-9]*\.[0-9]*\.[0-9]*\).*/\1/')
+    if [ ! -z "$qt_version" ]; then
+        if printf '%s\n' "6.8" "$qt_version" | sort -V -C; then
+            export QT_IM_MODULES="wayland;fcitx"
+        fi
+    fi
+fi
+
 if [[ -f $HOME/.cargo/env ]]; then
     source $HOME/.cargo/env
 fi
